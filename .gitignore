@@ -1,0 +1,13 @@
+datamover/production/sim/autowrap/
+datamover/production/sim/tv/
+datamover/production/sim/vhdl/
+datamover/production/sim/wrapc/
+datamover/production/sim/wrapc_pc/
+datamover/production/sim/.autosim.status
+datamover/production/sim/.sim.status
+datamover/production/impl/verilog/
+datamover/production/impl/vhdl/
+datamover/production/csim/build/
+datamover/production/csim/.lst_opt.tcl
+datamover/production/.autopilot
+datamover/production/.tcls
