@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'dataflow_in_loop'
 ================================================================
-* Date:           Mon Jun 11 00:35:21 2018
+* Date:           Mon Jun 11 01:13:34 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -20,27 +20,27 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      6.38|        2.00|
+    |ap_clk  |   6.50|      5.71|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
     * Summary: 
-    +------+------+------+------+----------+
-    |   Latency   |   Interval  | Pipeline |
-    |  min |  max |  min |  max |   Type   |
-    +------+------+------+------+----------+
-    |  4620|  4620|  4100|  4100| dataflow |
-    +------+------+------+------+----------+
+    +------+------+-----+-----+----------+
+    |   Latency   |  Interval | Pipeline |
+    |  min |  max | min | max |   Type   |
+    +------+------+-----+-----+----------+
+    |  1036|  1036|  521|  521| dataflow |
+    +------+------+-----+-----+----------+
 
     + Detail: 
         * Instance: 
-        +--------------------+-----------------+------+------+------+------+---------+
-        |                    |                 |   Latency   |   Interval  | Pipeline|
-        |      Instance      |      Module     |  min |  max |  min |  max |   Type  |
-        +--------------------+-----------------+------+------+------+------+---------+
-        |rx_axis_words25_U0  |rx_axis_words25  |  4099|  4099|  4099|  4099|   none  |
-        |write_burst_U0      |write_burst      |   520|   520|   520|   520|   none  |
-        +--------------------+-----------------+------+------+------+------+---------+
+        +--------------------+-----------------+-----+-----+-----+-----+---------+
+        |                    |                 |  Latency  |  Interval | Pipeline|
+        |      Instance      |      Module     | min | max | min | max |   Type  |
+        +--------------------+-----------------+-----+-----+-----+-----+---------+
+        |rx_axis_words25_U0  |rx_axis_words25  |  515|  515|  515|  515|   none  |
+        |write_burst_U0      |write_burst      |  520|  520|  520|  520|   none  |
+        +--------------------+-----------------+-----+-----+-----+-----+---------+
 
         * Loop: 
         N/A
@@ -57,16 +57,16 @@
 |DSP              |        -|      -|       -|      -|
 |Expression       |        -|      -|       0|     14|
 |FIFO             |        0|      -|       5|     41|
-|Instance         |        -|      -|     483|    903|
+|Instance         |        -|      -|     235|    441|
 |Memory           |        2|      -|       0|      0|
 |Multiplexer      |        -|      -|       -|     18|
 |Register         |        -|      -|       2|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        2|      0|     490|    976|
+|Total            |        2|      0|     242|    514|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
-|Utilization (%)  |    ~0   |      0|   ~0   |      1|
+|Utilization (%)  |    ~0   |      0|   ~0   |   ~0  |
 +-----------------+---------+-------+--------+-------+
 
 + Detail: 
@@ -74,10 +74,10 @@
     +--------------------+-----------------+---------+-------+-----+-----+
     |      Instance      |      Module     | BRAM_18K| DSP48E|  FF | LUT |
     +--------------------+-----------------+---------+-------+-----+-----+
-    |rx_axis_words25_U0  |rx_axis_words25  |        0|      0|  363|  692|
+    |rx_axis_words25_U0  |rx_axis_words25  |        0|      0|  115|  230|
     |write_burst_U0      |write_burst      |        0|      0|  120|  211|
     +--------------------+-----------------+---------+-------+-----+-----+
-    |Total               |                 |        0|      0|  483|  903|
+    |Total               |                 |        0|      0|  235|  441|
     +--------------------+-----------------+---------+-------+-----+-----+
 
     * DSP48: 
@@ -153,12 +153,12 @@
 |ap_ready                     | out |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
 |ap_idle                      | out |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
 |ap_continue                  |  in |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
-|axis_V_V_TDATA               |  in |    8|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TDATA               |  in |   64|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TVALID              |  in |    1|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TREADY              | out |    1|    axis    |       axis_V_V       |    pointer   |
 |loop_count_V                 |  in |   13|   ap_none  |     loop_count_V     |    scalar    |
 |loop_count_V_ap_vld          |  in |    1|   ap_none  |     loop_count_V     |    scalar    |
-|final_burst_length_V         |  in |   13|   ap_none  | final_burst_length_V |    scalar    |
+|final_burst_length_V         |  in |   10|   ap_none  | final_burst_length_V |    scalar    |
 |final_burst_length_V_ap_vld  |  in |    1|   ap_none  | final_burst_length_V |    scalar    |
 |val_assign                   |  in |   13|   ap_none  |      val_assign      |    scalar    |
 |val_assign_ap_vld            |  in |    1|   ap_none  |      val_assign      |    scalar    |

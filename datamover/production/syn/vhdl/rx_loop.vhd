@@ -11,9 +11,9 @@ use IEEE.numeric_std.all;
 
 entity rx_loop is
 port (
-    axis_V_V_TDATA : IN STD_LOGIC_VECTOR (7 downto 0);
+    axis_V_V_TDATA : IN STD_LOGIC_VECTOR (63 downto 0);
     loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-    final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
+    final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
     m_axi_rx_buffer_V_AWVALID : OUT STD_LOGIC;
     m_axi_rx_buffer_V_AWREADY : IN STD_LOGIC;
     m_axi_rx_buffer_V_AWADDR : OUT STD_LOGIC_VECTOR (31 downto 0);
@@ -143,9 +143,9 @@ architecture behav of rx_loop is
     port (
         ap_clk : IN STD_LOGIC;
         ap_rst : IN STD_LOGIC;
-        axis_V_V_TDATA : IN STD_LOGIC_VECTOR (7 downto 0);
+        axis_V_V_TDATA : IN STD_LOGIC_VECTOR (63 downto 0);
         loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-        final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
+        final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
         val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
         m_axi_rx_buffer_V_AWVALID : OUT STD_LOGIC;
         m_axi_rx_buffer_V_AWREADY : IN STD_LOGIC;

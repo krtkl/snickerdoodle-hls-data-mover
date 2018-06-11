@@ -26,7 +26,7 @@ module tx_axis_words (
 
 parameter    ap_ST_fsm_state1 = 3'd1;
 parameter    ap_ST_fsm_pp0_stage0 = 3'd2;
-parameter    ap_ST_fsm_state5 = 3'd4;
+parameter    ap_ST_fsm_state4 = 3'd4;
 
 input   ap_clk;
 input   ap_rst;
@@ -38,8 +38,8 @@ output   ap_ready;
 output  [8:0] cache_V_address0;
 output   cache_V_ce0;
 input  [63:0] cache_V_q0;
-input  [12:0] p_read;
-output  [7:0] axis_V_V_TDATA;
+input  [9:0] p_read;
+output  [63:0] axis_V_V_TDATA;
 output   axis_V_V_TVALID;
 input   axis_V_V_TREADY;
 
@@ -53,48 +53,37 @@ reg    ap_done_reg;
 (* fsm_encoding = "none" *) reg   [2:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
 reg    axis_V_V_TDATA_blk_n;
-reg    ap_enable_reg_pp0_iter2;
-wire    ap_block_pp0_stage0;
-reg   [0:0] exitcond_i_reg_142;
-reg   [0:0] exitcond_i_reg_142_pp0_iter1_reg;
-reg   [12:0] i_i_reg_75;
-reg    ap_block_state1;
-wire   [0:0] exitcond_i_fu_86_p2;
 wire    ap_CS_fsm_pp0_stage0;
+reg    ap_enable_reg_pp0_iter1;
+wire    ap_block_pp0_stage0;
+reg   [0:0] exitcond_i_reg_98;
+reg   [9:0] i_i_reg_66;
+reg    ap_block_state1;
+wire   [0:0] exitcond_i_fu_77_p2;
 wire    ap_block_state2_pp0_stage0_iter0;
 wire    ap_block_state3_pp0_stage0_iter1;
-wire    ap_block_state4_pp0_stage0_iter2;
 reg    ap_sig_ioackin_axis_V_V_TREADY;
-reg    ap_block_state4_io;
+reg    ap_block_state3_io;
 reg    ap_block_pp0_stage0_11001;
-wire   [12:0] i_fu_91_p2;
+wire   [9:0] i_fu_82_p2;
 reg    ap_enable_reg_pp0_iter0;
-wire   [2:0] tmp_fu_112_p1;
-reg   [2:0] tmp_reg_156;
-reg   [2:0] tmp_reg_156_pp0_iter1_reg;
-reg   [63:0] axi_word_V_reg_161;
 reg    ap_block_pp0_stage0_subdone;
 reg    ap_condition_pp0_exit_iter0_state2;
-reg    ap_enable_reg_pp0_iter1;
-wire   [63:0] tmp_4_i_fu_107_p1;
+wire   [63:0] tmp_5_i_fu_88_p1;
 wire    ap_block_pp0_stage0_01001;
 reg    ap_reg_ioackin_axis_V_V_TREADY;
-wire   [9:0] p_lshr_f_cast_i_fu_97_p4;
-wire   [5:0] op2_assign_fu_116_p3;
-wire   [63:0] tmp_7_i_fu_123_p1;
-wire   [63:0] tmp_8_i_fu_127_p2;
-wire    ap_CS_fsm_state5;
+wire    ap_CS_fsm_state4;
 reg   [2:0] ap_NS_fsm;
 reg    ap_idle_pp0;
 wire    ap_enable_pp0;
+reg    ap_condition_149;
 
 // power-on initialization
 initial begin
 #0 ap_done_reg = 1'b0;
 #0 ap_CS_fsm = 3'd1;
-#0 ap_enable_reg_pp0_iter2 = 1'b0;
-#0 ap_enable_reg_pp0_iter0 = 1'b0;
 #0 ap_enable_reg_pp0_iter1 = 1'b0;
+#0 ap_enable_reg_pp0_iter0 = 1'b0;
 #0 ap_reg_ioackin_axis_V_V_TREADY = 1'b0;
 end
 
@@ -112,7 +101,7 @@ always @ (posedge ap_clk) begin
     end else begin
         if ((ap_continue == 1'b1)) begin
             ap_done_reg <= 1'b0;
-        end else if ((1'b1 == ap_CS_fsm_state5)) begin
+        end else if ((1'b1 == ap_CS_fsm_state4)) begin
             ap_done_reg <= 1'b1;
         end
     end
@@ -122,7 +111,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         ap_enable_reg_pp0_iter0 <= 1'b0;
     end else begin
-        if (((1'b0 == ap_block_pp0_stage0_subdone) & (1'b1 == ap_CS_fsm_pp0_stage0) & (1'b1 == ap_condition_pp0_exit_iter0_state2))) begin
+        if (((1'b0 == ap_block_pp0_stage0_subdone) & (1'b1 == ap_condition_pp0_exit_iter0_state2) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
             ap_enable_reg_pp0_iter0 <= 1'b0;
         end else if ((~((ap_start == 1'b0) | (ap_done_reg == 1'b1)) & (1'b1 == ap_CS_fsm_state1))) begin
             ap_enable_reg_pp0_iter0 <= 1'b1;
@@ -134,24 +123,12 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         ap_enable_reg_pp0_iter1 <= 1'b0;
     end else begin
-        if ((1'b0 == ap_block_pp0_stage0_subdone)) begin
-            if ((1'b1 == ap_condition_pp0_exit_iter0_state2)) begin
-                ap_enable_reg_pp0_iter1 <= (1'b1 ^ ap_condition_pp0_exit_iter0_state2);
-            end else if ((1'b1 == 1'b1)) begin
-                ap_enable_reg_pp0_iter1 <= ap_enable_reg_pp0_iter0;
-            end
-        end
-    end
-end
-
-always @ (posedge ap_clk) begin
-    if (ap_rst == 1'b1) begin
-        ap_enable_reg_pp0_iter2 <= 1'b0;
-    end else begin
-        if ((1'b0 == ap_block_pp0_stage0_subdone)) begin
-            ap_enable_reg_pp0_iter2 <= ap_enable_reg_pp0_iter1;
+        if (((1'b0 == ap_block_pp0_stage0_subdone) & (1'b1 == ap_condition_pp0_exit_iter0_state2))) begin
+            ap_enable_reg_pp0_iter1 <= (1'b1 ^ ap_condition_pp0_exit_iter0_state2);
+        end else if ((1'b0 == ap_block_pp0_stage0_subdone)) begin
+            ap_enable_reg_pp0_iter1 <= ap_enable_reg_pp0_iter0;
         end else if ((~((ap_start == 1'b0) | (ap_done_reg == 1'b1)) & (1'b1 == ap_CS_fsm_state1))) begin
-            ap_enable_reg_pp0_iter2 <= 1'b0;
+            ap_enable_reg_pp0_iter1 <= 1'b0;
         end
     end
 end
@@ -160,7 +137,7 @@ always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
         ap_reg_ioackin_axis_V_V_TREADY <= 1'b0;
     end else begin
-        if (((exitcond_i_reg_142_pp0_iter1_reg == 1'd0) & (ap_enable_reg_pp0_iter2 == 1'b1))) begin
+        if ((1'b1 == ap_condition_149)) begin
             if ((1'b0 == ap_block_pp0_stage0_11001)) begin
                 ap_reg_ioackin_axis_V_V_TREADY <= 1'b0;
             end else if (((axis_V_V_TREADY == 1'b1) & (1'b0 == ap_block_pp0_stage0_01001))) begin
@@ -171,35 +148,21 @@ always @ (posedge ap_clk) begin
 end
 
 always @ (posedge ap_clk) begin
-    if (((1'b0 == ap_block_pp0_stage0_11001) & (exitcond_i_fu_86_p2 == 1'd0) & (ap_enable_reg_pp0_iter0 == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
-        i_i_reg_75 <= i_fu_91_p2;
+    if (((1'b0 == ap_block_pp0_stage0_11001) & (exitcond_i_fu_77_p2 == 1'd0) & (ap_enable_reg_pp0_iter0 == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
+        i_i_reg_66 <= i_fu_82_p2;
     end else if ((~((ap_start == 1'b0) | (ap_done_reg == 1'b1)) & (1'b1 == ap_CS_fsm_state1))) begin
-        i_i_reg_75 <= 13'd0;
-    end
-end
-
-always @ (posedge ap_clk) begin
-    if (((1'b0 == ap_block_pp0_stage0_11001) & (exitcond_i_reg_142 == 1'd0) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
-        axi_word_V_reg_161 <= cache_V_q0;
+        i_i_reg_66 <= 10'd0;
     end
 end
 
 always @ (posedge ap_clk) begin
     if (((1'b0 == ap_block_pp0_stage0_11001) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
-        exitcond_i_reg_142 <= exitcond_i_fu_86_p2;
-        exitcond_i_reg_142_pp0_iter1_reg <= exitcond_i_reg_142;
-        tmp_reg_156_pp0_iter1_reg <= tmp_reg_156;
-    end
-end
-
-always @ (posedge ap_clk) begin
-    if (((1'b0 == ap_block_pp0_stage0_11001) & (exitcond_i_fu_86_p2 == 1'd0) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
-        tmp_reg_156 <= tmp_fu_112_p1;
+        exitcond_i_reg_98 <= exitcond_i_fu_77_p2;
     end
 end
 
 always @ (*) begin
-    if ((exitcond_i_fu_86_p2 == 1'd1)) begin
+    if ((exitcond_i_fu_77_p2 == 1'd1)) begin
         ap_condition_pp0_exit_iter0_state2 = 1'b1;
     end else begin
         ap_condition_pp0_exit_iter0_state2 = 1'b0;
@@ -207,7 +170,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state5)) begin
+    if ((1'b1 == ap_CS_fsm_state4)) begin
         ap_done = 1'b1;
     end else begin
         ap_done = ap_done_reg;
@@ -223,7 +186,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((ap_enable_reg_pp0_iter0 == 1'b0) & (ap_enable_reg_pp0_iter2 == 1'b0) & (ap_enable_reg_pp0_iter1 == 1'b0))) begin
+    if (((ap_enable_reg_pp0_iter0 == 1'b0) & (ap_enable_reg_pp0_iter1 == 1'b0))) begin
         ap_idle_pp0 = 1'b1;
     end else begin
         ap_idle_pp0 = 1'b0;
@@ -231,7 +194,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if ((1'b1 == ap_CS_fsm_state5)) begin
+    if ((1'b1 == ap_CS_fsm_state4)) begin
         ap_ready = 1'b1;
     end else begin
         ap_ready = 1'b0;
@@ -247,7 +210,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((exitcond_i_reg_142_pp0_iter1_reg == 1'd0) & (1'b0 == ap_block_pp0_stage0) & (ap_enable_reg_pp0_iter2 == 1'b1))) begin
+    if (((exitcond_i_reg_98 == 1'd0) & (1'b0 == ap_block_pp0_stage0) & (ap_enable_reg_pp0_iter1 == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0))) begin
         axis_V_V_TDATA_blk_n = axis_V_V_TREADY;
     end else begin
         axis_V_V_TDATA_blk_n = 1'b1;
@@ -255,7 +218,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((exitcond_i_reg_142_pp0_iter1_reg == 1'd0) & (ap_reg_ioackin_axis_V_V_TREADY == 1'b0) & (ap_enable_reg_pp0_iter2 == 1'b1) & (1'b0 == ap_block_pp0_stage0_01001))) begin
+    if (((exitcond_i_reg_98 == 1'd0) & (ap_reg_ioackin_axis_V_V_TREADY == 1'b0) & (ap_enable_reg_pp0_iter1 == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0) & (1'b0 == ap_block_pp0_stage0_01001))) begin
         axis_V_V_TVALID = 1'b1;
     end else begin
         axis_V_V_TVALID = 1'b0;
@@ -280,15 +243,15 @@ always @ (*) begin
             end
         end
         ap_ST_fsm_pp0_stage0 : begin
-            if ((~((1'b0 == ap_block_pp0_stage0_subdone) & (exitcond_i_fu_86_p2 == 1'd1) & (ap_enable_reg_pp0_iter0 == 1'b1) & (ap_enable_reg_pp0_iter1 == 1'b0)) & ~((1'b0 == ap_block_pp0_stage0_subdone) & (ap_enable_reg_pp0_iter2 == 1'b1) & (ap_enable_reg_pp0_iter1 == 1'b0)))) begin
+            if (~((1'b0 == ap_block_pp0_stage0_subdone) & (exitcond_i_fu_77_p2 == 1'd1) & (ap_enable_reg_pp0_iter0 == 1'b1))) begin
                 ap_NS_fsm = ap_ST_fsm_pp0_stage0;
-            end else if ((((1'b0 == ap_block_pp0_stage0_subdone) & (exitcond_i_fu_86_p2 == 1'd1) & (ap_enable_reg_pp0_iter0 == 1'b1) & (ap_enable_reg_pp0_iter1 == 1'b0)) | ((1'b0 == ap_block_pp0_stage0_subdone) & (ap_enable_reg_pp0_iter2 == 1'b1) & (ap_enable_reg_pp0_iter1 == 1'b0)))) begin
-                ap_NS_fsm = ap_ST_fsm_state5;
+            end else if (((1'b0 == ap_block_pp0_stage0_subdone) & (exitcond_i_fu_77_p2 == 1'd1) & (ap_enable_reg_pp0_iter0 == 1'b1))) begin
+                ap_NS_fsm = ap_ST_fsm_state4;
             end else begin
                 ap_NS_fsm = ap_ST_fsm_pp0_stage0;
             end
         end
-        ap_ST_fsm_state5 : begin
+        ap_ST_fsm_state4 : begin
             ap_NS_fsm = ap_ST_fsm_state1;
         end
         default : begin
@@ -301,18 +264,18 @@ assign ap_CS_fsm_pp0_stage0 = ap_CS_fsm[32'd1];
 
 assign ap_CS_fsm_state1 = ap_CS_fsm[32'd0];
 
-assign ap_CS_fsm_state5 = ap_CS_fsm[32'd2];
+assign ap_CS_fsm_state4 = ap_CS_fsm[32'd2];
 
 assign ap_block_pp0_stage0 = ~(1'b1 == 1'b1);
 
 assign ap_block_pp0_stage0_01001 = ~(1'b1 == 1'b1);
 
 always @ (*) begin
-    ap_block_pp0_stage0_11001 = ((1'b1 == ap_block_state4_io) & (ap_enable_reg_pp0_iter2 == 1'b1));
+    ap_block_pp0_stage0_11001 = ((1'b1 == ap_block_state3_io) & (ap_enable_reg_pp0_iter1 == 1'b1));
 end
 
 always @ (*) begin
-    ap_block_pp0_stage0_subdone = ((1'b1 == ap_block_state4_io) & (ap_enable_reg_pp0_iter2 == 1'b1));
+    ap_block_pp0_stage0_subdone = ((1'b1 == ap_block_state3_io) & (ap_enable_reg_pp0_iter1 == 1'b1));
 end
 
 always @ (*) begin
@@ -321,34 +284,26 @@ end
 
 assign ap_block_state2_pp0_stage0_iter0 = ~(1'b1 == 1'b1);
 
+always @ (*) begin
+    ap_block_state3_io = ((exitcond_i_reg_98 == 1'd0) & (ap_sig_ioackin_axis_V_V_TREADY == 1'b0));
+end
+
 assign ap_block_state3_pp0_stage0_iter1 = ~(1'b1 == 1'b1);
 
 always @ (*) begin
-    ap_block_state4_io = ((exitcond_i_reg_142_pp0_iter1_reg == 1'd0) & (ap_sig_ioackin_axis_V_V_TREADY == 1'b0));
+    ap_condition_149 = ((exitcond_i_reg_98 == 1'd0) & (ap_enable_reg_pp0_iter1 == 1'b1) & (1'b1 == ap_CS_fsm_pp0_stage0));
 end
-
-assign ap_block_state4_pp0_stage0_iter2 = ~(1'b1 == 1'b1);
 
 assign ap_enable_pp0 = (ap_idle_pp0 ^ 1'b1);
 
-assign axis_V_V_TDATA = tmp_8_i_fu_127_p2[7:0];
+assign axis_V_V_TDATA = cache_V_q0;
 
-assign cache_V_address0 = tmp_4_i_fu_107_p1;
+assign cache_V_address0 = tmp_5_i_fu_88_p1;
 
-assign exitcond_i_fu_86_p2 = ((i_i_reg_75 == p_read) ? 1'b1 : 1'b0);
+assign exitcond_i_fu_77_p2 = ((i_i_reg_66 == p_read) ? 1'b1 : 1'b0);
 
-assign i_fu_91_p2 = (i_i_reg_75 + 13'd1);
+assign i_fu_82_p2 = (i_i_reg_66 + 10'd1);
 
-assign op2_assign_fu_116_p3 = {{tmp_reg_156_pp0_iter1_reg}, {3'd0}};
-
-assign p_lshr_f_cast_i_fu_97_p4 = {{i_i_reg_75[12:3]}};
-
-assign tmp_4_i_fu_107_p1 = p_lshr_f_cast_i_fu_97_p4;
-
-assign tmp_7_i_fu_123_p1 = op2_assign_fu_116_p3;
-
-assign tmp_8_i_fu_127_p2 = axi_word_V_reg_161 >> tmp_7_i_fu_123_p1;
-
-assign tmp_fu_112_p1 = i_i_reg_75[2:0];
+assign tmp_5_i_fu_88_p1 = i_i_reg_66;
 
 endmodule //tx_axis_words

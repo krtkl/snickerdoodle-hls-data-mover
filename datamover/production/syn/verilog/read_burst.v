@@ -137,12 +137,12 @@ input  [0:0] m_axi_tx_buffer_V_BUSER;
 input  [28:0] tx_buffer_V_offset;
 input  [12:0] val_assign;
 input  [12:0] loop_count_V;
-input  [12:0] final_burst_length_V;
+input  [9:0] final_burst_length_V;
 output  [8:0] cache_V_address0;
 output   cache_V_ce0;
 output   cache_V_we0;
 output  [63:0] cache_V_d0;
-output  [12:0] ap_return;
+output  [9:0] ap_return;
 
 reg ap_done;
 reg ap_idle;
@@ -151,7 +151,7 @@ reg m_axi_tx_buffer_V_ARVALID;
 reg m_axi_tx_buffer_V_RREADY;
 reg cache_V_ce0;
 reg cache_V_we0;
-reg[12:0] ap_return;
+reg[9:0] ap_return;
 
 reg    ap_done_reg;
 (* fsm_encoding = "none" *) reg   [9:0] ap_CS_fsm;
@@ -194,11 +194,11 @@ wire   [29:0] sext_cast_i_fu_148_p1;
 wire   [29:0] tmp_i_cast_i_fu_144_p1;
 wire    ap_CS_fsm_state12;
 wire   [13:0] lhs_V_cast_i_i_fu_185_p1;
-wire   [13:0] tmp_2_cast_i_i_fu_194_p1;
+wire   [13:0] tmp_6_cast_i_i_fu_194_p1;
 wire   [13:0] r_V_fu_188_p2;
-wire   [0:0] tmp_3_i_i_fu_197_p2;
-wire   [12:0] data_length_V_write_s_fu_203_p3;
-reg   [12:0] ap_return_preg;
+wire   [0:0] tmp_7_i_i_fu_197_p2;
+wire   [9:0] data_length_V_write_s_fu_203_p3;
+reg   [9:0] ap_return_preg;
 reg   [9:0] ap_NS_fsm;
 reg    ap_idle_pp0;
 wire    ap_enable_pp0;
@@ -211,7 +211,7 @@ initial begin
 #0 ap_enable_reg_pp0_iter0 = 1'b0;
 #0 ap_enable_reg_pp0_iter2 = 1'b0;
 #0 ap_reg_ioackin_m_axi_tx_buffer_V_ARREADY = 1'b0;
-#0 ap_return_preg = 13'd0;
+#0 ap_return_preg = 10'd0;
 end
 
 always @ (posedge ap_clk) begin
@@ -288,7 +288,7 @@ end
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
-        ap_return_preg <= 13'd0;
+        ap_return_preg <= 10'd0;
     end else begin
         if ((1'b1 == ap_CS_fsm_state12)) begin
             ap_return_preg <= data_length_V_write_s_fu_203_p3;
@@ -535,7 +535,7 @@ assign cache_V_address0 = indvar1_i_i_fu_180_p1;
 
 assign cache_V_d0 = tx_buffer_V_addr_rea_reg_245;
 
-assign data_length_V_write_s_fu_203_p3 = ((tmp_3_i_i_fu_197_p2[0:0] === 1'b1) ? final_burst_length_V : 13'd4096);
+assign data_length_V_write_s_fu_203_p3 = ((tmp_7_i_i_fu_197_p2[0:0] === 1'b1) ? final_burst_length_V : 10'd512);
 
 assign exitcond_i_i_fu_168_p2 = ((ap_phi_mux_indvar_i_i_phi_fu_124_p4 == 10'd512) ? 1'b1 : 1'b0);
 
@@ -613,9 +613,9 @@ assign sum_cast_i_fu_158_p1 = sum_i_reg_215;
 
 assign sum_i_fu_152_p2 = (sext_cast_i_fu_148_p1 + tmp_i_cast_i_fu_144_p1);
 
-assign tmp_2_cast_i_i_fu_194_p1 = tmp_reg_210;
+assign tmp_6_cast_i_i_fu_194_p1 = tmp_reg_210;
 
-assign tmp_3_i_i_fu_197_p2 = ((tmp_2_cast_i_i_fu_194_p1 == r_V_fu_188_p2) ? 1'b1 : 1'b0);
+assign tmp_7_i_i_fu_197_p2 = ((tmp_6_cast_i_i_fu_194_p1 == r_V_fu_188_p2) ? 1'b1 : 1'b0);
 
 assign tmp_fu_132_p1 = val_assign[11:0];
 

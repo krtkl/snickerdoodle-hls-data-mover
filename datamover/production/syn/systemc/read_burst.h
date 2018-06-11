@@ -71,12 +71,12 @@ struct read_burst : public sc_module {
     sc_in< sc_lv<29> > tx_buffer_V_offset;
     sc_in< sc_lv<13> > val_assign;
     sc_in< sc_lv<13> > loop_count_V;
-    sc_in< sc_lv<13> > final_burst_length_V;
+    sc_in< sc_lv<10> > final_burst_length_V;
     sc_out< sc_lv<9> > cache_V_address0;
     sc_out< sc_logic > cache_V_ce0;
     sc_out< sc_logic > cache_V_we0;
     sc_out< sc_lv<64> > cache_V_d0;
-    sc_out< sc_lv<13> > ap_return;
+    sc_out< sc_lv<10> > ap_return;
 
 
     // Module declarations
@@ -128,11 +128,11 @@ struct read_burst : public sc_module {
     sc_signal< sc_lv<30> > tmp_i_cast_i_fu_144_p1;
     sc_signal< sc_logic > ap_CS_fsm_state12;
     sc_signal< sc_lv<14> > lhs_V_cast_i_i_fu_185_p1;
-    sc_signal< sc_lv<14> > tmp_2_cast_i_i_fu_194_p1;
+    sc_signal< sc_lv<14> > tmp_6_cast_i_i_fu_194_p1;
     sc_signal< sc_lv<14> > r_V_fu_188_p2;
-    sc_signal< sc_lv<1> > tmp_3_i_i_fu_197_p2;
-    sc_signal< sc_lv<13> > data_length_V_write_s_fu_203_p3;
-    sc_signal< sc_lv<13> > ap_return_preg;
+    sc_signal< sc_lv<1> > tmp_7_i_i_fu_197_p2;
+    sc_signal< sc_lv<10> > data_length_V_write_s_fu_203_p3;
+    sc_signal< sc_lv<10> > ap_return_preg;
     sc_signal< sc_lv<10> > ap_NS_fsm;
     sc_signal< sc_logic > ap_idle_pp0;
     sc_signal< sc_logic > ap_enable_pp0;
@@ -168,8 +168,6 @@ struct read_burst : public sc_module {
     static const sc_lv<10> ap_const_lv10_1;
     static const sc_lv<32> ap_const_lv32_9;
     static const sc_lv<14> ap_const_lv14_3FFF;
-    static const sc_lv<13> ap_const_lv13_1000;
-    static const sc_lv<13> ap_const_lv13_0;
     // Thread declarations
     void thread_ap_clk_no_reset_();
     void thread_ap_CS_fsm_pp0_stage0();
@@ -239,8 +237,8 @@ struct read_burst : public sc_module {
     void thread_sext_cast_i_fu_148_p1();
     void thread_sum_cast_i_fu_158_p1();
     void thread_sum_i_fu_152_p2();
-    void thread_tmp_2_cast_i_i_fu_194_p1();
-    void thread_tmp_3_i_i_fu_197_p2();
+    void thread_tmp_6_cast_i_i_fu_194_p1();
+    void thread_tmp_7_i_i_fu_197_p2();
     void thread_tmp_fu_132_p1();
     void thread_tmp_i_cast_i_fu_144_p1();
     void thread_tx_buffer_V_blk_n_AR();

@@ -13,9 +13,9 @@ entity dataflow_in_loop is
 port (
     ap_clk : IN STD_LOGIC;
     ap_rst : IN STD_LOGIC;
-    axis_V_V_TDATA : IN STD_LOGIC_VECTOR (7 downto 0);
+    axis_V_V_TDATA : IN STD_LOGIC_VECTOR (63 downto 0);
     loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-    final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
+    final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
     val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
     m_axi_rx_buffer_V_AWVALID : OUT STD_LOGIC;
     m_axi_rx_buffer_V_AWREADY : IN STD_LOGIC;
@@ -178,11 +178,11 @@ architecture behav of dataflow_in_loop is
         ap_continue : IN STD_LOGIC;
         ap_idle : OUT STD_LOGIC;
         ap_ready : OUT STD_LOGIC;
-        axis_V_V_TDATA : IN STD_LOGIC_VECTOR (7 downto 0);
+        axis_V_V_TDATA : IN STD_LOGIC_VECTOR (63 downto 0);
         axis_V_V_TVALID : IN STD_LOGIC;
         axis_V_V_TREADY : OUT STD_LOGIC;
         loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-        final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
+        final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
         val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
         cache_V_address0 : OUT STD_LOGIC_VECTOR (8 downto 0);
         cache_V_ce0 : OUT STD_LOGIC;

@@ -7,7 +7,7 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="data_mover,hls_ip_2018_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=1,HLS_INPUT_PART=xc7z020clg400-3,HLS_INPUT_CLOCK=6.500000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.376250,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=8,HLS_SYN_DSP=0,HLS_SYN_FF=1707,HLS_SYN_LUT=2997}" *)
+(* CORE_GENERATION_INFO="data_mover,hls_ip_2018_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=1,HLS_INPUT_PART=xc7z020clg400-3,HLS_INPUT_CLOCK=6.500000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=5.714125,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=8,HLS_SYN_DSP=0,HLS_SYN_FF=1593,HLS_SYN_LUT=2328}" *)
 
 module data_mover (
         ap_clk,
@@ -155,10 +155,10 @@ output   m_axi_DMA_BREADY;
 input  [1:0] m_axi_DMA_BRESP;
 input  [C_M_AXI_DMA_ID_WIDTH - 1:0] m_axi_DMA_BID;
 input  [C_M_AXI_DMA_BUSER_WIDTH - 1:0] m_axi_DMA_BUSER;
-input  [7:0] data_rx_V_V_TDATA;
+input  [63:0] data_rx_V_V_TDATA;
 input   data_rx_V_V_TVALID;
 output   data_rx_V_V_TREADY;
-output  [7:0] data_tx_V_V_TDATA;
+output  [63:0] data_tx_V_V_TDATA;
 output   data_tx_V_V_TVALID;
 input   data_tx_V_V_TREADY;
 input   s_axi_control_AWVALID;
@@ -187,13 +187,13 @@ reg    ap_idle;
 (* fsm_encoding = "none" *) reg   [3:0] ap_CS_fsm;
 wire    ap_CS_fsm_state1;
 reg    ap_ready;
-reg   [7:0] data_rx_V_V_0_data_out;
+reg   [63:0] data_rx_V_V_0_data_out;
 wire    data_rx_V_V_0_vld_in;
 wire    data_rx_V_V_0_vld_out;
 wire    data_rx_V_V_0_ack_in;
 reg    data_rx_V_V_0_ack_out;
-reg   [7:0] data_rx_V_V_0_payload_A;
-reg   [7:0] data_rx_V_V_0_payload_B;
+reg   [63:0] data_rx_V_V_0_payload_A;
+reg   [63:0] data_rx_V_V_0_payload_B;
 reg    data_rx_V_V_0_sel_rd;
 reg    data_rx_V_V_0_sel_wr;
 wire    data_rx_V_V_0_sel;
@@ -201,13 +201,13 @@ wire    data_rx_V_V_0_load_A;
 wire    data_rx_V_V_0_load_B;
 reg   [1:0] data_rx_V_V_0_state;
 wire    data_rx_V_V_0_state_cmp_full;
-reg   [7:0] data_tx_V_V_1_data_out;
+reg   [63:0] data_tx_V_V_1_data_out;
 wire    data_tx_V_V_1_vld_in;
 wire    data_tx_V_V_1_vld_out;
 wire    data_tx_V_V_1_ack_in;
 wire    data_tx_V_V_1_ack_out;
-reg   [7:0] data_tx_V_V_1_payload_A;
-reg   [7:0] data_tx_V_V_1_payload_B;
+reg   [63:0] data_tx_V_V_1_payload_A;
+reg   [63:0] data_tx_V_V_1_payload_B;
 reg    data_tx_V_V_1_sel_rd;
 reg    data_tx_V_V_1_sel_wr;
 wire    data_tx_V_V_1_sel;
@@ -216,9 +216,9 @@ wire    data_tx_V_V_1_load_B;
 reg   [1:0] data_tx_V_V_1_state;
 wire    data_tx_V_V_1_state_cmp_full;
 wire   [31:0] tx_buffer_V;
-wire   [24:0] tx_buffer_length_V;
+wire   [21:0] tx_buffer_length_V;
 wire   [31:0] rx_buffer_V;
-wire   [24:0] rx_buffer_length_V;
+wire   [21:0] rx_buffer_length_V;
 reg    DMA_AWVALID;
 wire    DMA_AWREADY;
 reg    DMA_WVALID;
@@ -240,12 +240,12 @@ wire   [0:0] DMA_BUSER;
 reg   [28:0] rx_buffer_V3_reg_234;
 wire    ap_CS_fsm_state2;
 reg   [28:0] tx_buffer_V1_reg_239;
-wire   [12:0] tx_final_burst_lengt_fu_168_p3;
-reg   [12:0] tx_final_burst_lengt_reg_244;
+wire   [9:0] tx_final_burst_lengt_fu_168_p3;
+reg   [9:0] tx_final_burst_lengt_reg_244;
 wire   [12:0] tx_loop_count_V_fu_177_p3;
 reg   [12:0] tx_loop_count_V_reg_249;
-wire   [12:0] rx_final_burst_lengt_fu_216_p3;
-reg   [12:0] rx_final_burst_lengt_reg_254;
+wire   [9:0] rx_final_burst_lengt_fu_216_p3;
+reg   [9:0] rx_final_burst_lengt_reg_254;
 wire   [12:0] rx_loop_count_V_fu_225_p3;
 reg   [12:0] rx_loop_count_V_reg_259;
 wire    grp_rx_loop_fu_94_m_axi_rx_buffer_V_AWVALID;
@@ -287,7 +287,7 @@ wire    grp_rx_loop_fu_94_ap_start;
 wire    grp_rx_loop_fu_94_ap_ready;
 wire    grp_rx_loop_fu_94_ap_idle;
 reg    grp_rx_loop_fu_94_ap_continue;
-wire   [7:0] grp_tx_loop_fu_105_axis_V_V_TDATA;
+wire   [63:0] grp_tx_loop_fu_105_axis_V_V_TDATA;
 wire    grp_tx_loop_fu_105_m_axi_tx_buffer_V_AWVALID;
 wire   [31:0] grp_tx_loop_fu_105_m_axi_tx_buffer_V_AWADDR;
 wire   [0:0] grp_tx_loop_fu_105_m_axi_tx_buffer_V_AWID;
@@ -339,16 +339,16 @@ reg    ap_sync_reg_grp_rx_loop_fu_94_ap_done;
 reg    grp_tx_loop_fu_105_ap_start_reg;
 reg    ap_sync_reg_grp_tx_loop_fu_105_ap_ready;
 reg    ap_sync_reg_grp_tx_loop_fu_105_ap_done;
-wire   [11:0] r_V_fu_138_p1;
-wire   [12:0] tmp_4_i_fu_148_p4;
+wire   [8:0] r_V_fu_138_p1;
+wire   [12:0] tmp_8_i_fu_148_p4;
 wire   [0:0] tmp_i_fu_142_p2;
-wire   [12:0] tmp_6_i_cast_fu_158_p1;
-wire   [12:0] tmp_9_i_fu_162_p2;
-wire   [11:0] r_V_1_fu_186_p1;
-wire   [12:0] tmp_4_i1_fu_196_p4;
+wire   [9:0] tmp_1_i_cast_fu_158_p1;
+wire   [12:0] tmp_4_i_fu_162_p2;
+wire   [8:0] r_V_1_fu_186_p1;
+wire   [12:0] tmp_8_i1_fu_196_p4;
 wire   [0:0] tmp_i1_fu_190_p2;
-wire   [12:0] tmp_6_i16_cast_fu_206_p1;
-wire   [12:0] tmp_9_i1_fu_210_p2;
+wire   [9:0] tmp_1_i16_cast_fu_206_p1;
+wire   [12:0] tmp_4_i1_fu_210_p2;
 wire    ap_CS_fsm_state4;
 reg   [3:0] ap_NS_fsm;
 
@@ -1039,32 +1039,32 @@ assign grp_tx_loop_fu_105_ap_start = grp_tx_loop_fu_105_ap_start_reg;
 
 assign grp_tx_loop_fu_105_axis_V_V_TREADY = data_tx_V_V_1_state[1'd1];
 
-assign r_V_1_fu_186_p1 = rx_buffer_length_V[11:0];
+assign r_V_1_fu_186_p1 = rx_buffer_length_V[8:0];
 
-assign r_V_fu_138_p1 = tx_buffer_length_V[11:0];
+assign r_V_fu_138_p1 = tx_buffer_length_V[8:0];
 
-assign rx_final_burst_lengt_fu_216_p3 = ((tmp_i1_fu_190_p2[0:0] === 1'b1) ? 13'd4096 : tmp_6_i16_cast_fu_206_p1);
+assign rx_final_burst_lengt_fu_216_p3 = ((tmp_i1_fu_190_p2[0:0] === 1'b1) ? 10'd512 : tmp_1_i16_cast_fu_206_p1);
 
-assign rx_loop_count_V_fu_225_p3 = ((tmp_i1_fu_190_p2[0:0] === 1'b1) ? tmp_4_i1_fu_196_p4 : tmp_9_i1_fu_210_p2);
+assign rx_loop_count_V_fu_225_p3 = ((tmp_i1_fu_190_p2[0:0] === 1'b1) ? tmp_8_i1_fu_196_p4 : tmp_4_i1_fu_210_p2);
 
-assign tmp_4_i1_fu_196_p4 = {{rx_buffer_length_V[24:12]}};
+assign tmp_1_i16_cast_fu_206_p1 = r_V_1_fu_186_p1;
 
-assign tmp_4_i_fu_148_p4 = {{tx_buffer_length_V[24:12]}};
+assign tmp_1_i_cast_fu_158_p1 = r_V_fu_138_p1;
 
-assign tmp_6_i16_cast_fu_206_p1 = r_V_1_fu_186_p1;
+assign tmp_4_i1_fu_210_p2 = (13'd1 + tmp_8_i1_fu_196_p4);
 
-assign tmp_6_i_cast_fu_158_p1 = r_V_fu_138_p1;
+assign tmp_4_i_fu_162_p2 = (13'd1 + tmp_8_i_fu_148_p4);
 
-assign tmp_9_i1_fu_210_p2 = (13'd1 + tmp_4_i1_fu_196_p4);
+assign tmp_8_i1_fu_196_p4 = {{rx_buffer_length_V[21:9]}};
 
-assign tmp_9_i_fu_162_p2 = (13'd1 + tmp_4_i_fu_148_p4);
+assign tmp_8_i_fu_148_p4 = {{tx_buffer_length_V[21:9]}};
 
-assign tmp_i1_fu_190_p2 = ((r_V_1_fu_186_p1 == 12'd0) ? 1'b1 : 1'b0);
+assign tmp_i1_fu_190_p2 = ((r_V_1_fu_186_p1 == 9'd0) ? 1'b1 : 1'b0);
 
-assign tmp_i_fu_142_p2 = ((r_V_fu_138_p1 == 12'd0) ? 1'b1 : 1'b0);
+assign tmp_i_fu_142_p2 = ((r_V_fu_138_p1 == 9'd0) ? 1'b1 : 1'b0);
 
-assign tx_final_burst_lengt_fu_168_p3 = ((tmp_i_fu_142_p2[0:0] === 1'b1) ? 13'd4096 : tmp_6_i_cast_fu_158_p1);
+assign tx_final_burst_lengt_fu_168_p3 = ((tmp_i_fu_142_p2[0:0] === 1'b1) ? 10'd512 : tmp_1_i_cast_fu_158_p1);
 
-assign tx_loop_count_V_fu_177_p3 = ((tmp_i_fu_142_p2[0:0] === 1'b1) ? tmp_4_i_fu_148_p4 : tmp_9_i_fu_162_p2);
+assign tx_loop_count_V_fu_177_p3 = ((tmp_i_fu_142_p2[0:0] === 1'b1) ? tmp_8_i_fu_148_p4 : tmp_4_i_fu_162_p2);
 
 endmodule //data_mover

@@ -76,9 +76,9 @@ module dataflow_in_loop (
 
 input   ap_clk;
 input   ap_rst;
-input  [7:0] axis_V_V_TDATA;
+input  [63:0] axis_V_V_TDATA;
 input  [12:0] loop_count_V;
-input  [12:0] final_burst_length_V;
+input  [9:0] final_burst_length_V;
 input  [12:0] val_assign;
 output   m_axi_rx_buffer_V_AWVALID;
 input   m_axi_rx_buffer_V_AWREADY;

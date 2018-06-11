@@ -72,10 +72,10 @@ port (
     m_axi_DMA_BRESP : IN STD_LOGIC_VECTOR (1 downto 0);
     m_axi_DMA_BID : IN STD_LOGIC_VECTOR (C_M_AXI_DMA_ID_WIDTH-1 downto 0);
     m_axi_DMA_BUSER : IN STD_LOGIC_VECTOR (C_M_AXI_DMA_BUSER_WIDTH-1 downto 0);
-    data_rx_V_V_TDATA : IN STD_LOGIC_VECTOR (7 downto 0);
+    data_rx_V_V_TDATA : IN STD_LOGIC_VECTOR (63 downto 0);
     data_rx_V_V_TVALID : IN STD_LOGIC;
     data_rx_V_V_TREADY : OUT STD_LOGIC;
-    data_tx_V_V_TDATA : OUT STD_LOGIC_VECTOR (7 downto 0);
+    data_tx_V_V_TDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
     data_tx_V_V_TVALID : OUT STD_LOGIC;
     data_tx_V_V_TREADY : IN STD_LOGIC;
     s_axi_control_AWVALID : IN STD_LOGIC;
@@ -102,7 +102,7 @@ end;
 architecture behav of data_mover is 
     attribute CORE_GENERATION_INFO : STRING;
     attribute CORE_GENERATION_INFO of behav : architecture is
-    "data_mover,hls_ip_2018_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=1,HLS_INPUT_PART=xc7z020clg400-3,HLS_INPUT_CLOCK=6.500000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.376250,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=8,HLS_SYN_DSP=0,HLS_SYN_FF=1707,HLS_SYN_LUT=2997}";
+    "data_mover,hls_ip_2018_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=1,HLS_INPUT_PART=xc7z020clg400-3,HLS_INPUT_CLOCK=6.500000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=5.714125,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=8,HLS_SYN_DSP=0,HLS_SYN_FF=1593,HLS_SYN_LUT=2328}";
     constant ap_const_logic_1 : STD_LOGIC := '1';
     constant ap_const_logic_0 : STD_LOGIC := '0';
     constant ap_ST_fsm_state1 : STD_LOGIC_VECTOR (3 downto 0) := "0001";
@@ -123,11 +123,11 @@ architecture behav of data_mover is
     constant ap_const_boolean_0 : BOOLEAN := false;
     constant ap_const_lv32_3 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000011";
     constant ap_const_lv32_1F : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000011111";
-    constant ap_const_lv12_0 : STD_LOGIC_VECTOR (11 downto 0) := "000000000000";
-    constant ap_const_lv32_C : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000001100";
-    constant ap_const_lv32_18 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000011000";
+    constant ap_const_lv9_0 : STD_LOGIC_VECTOR (8 downto 0) := "000000000";
+    constant ap_const_lv32_9 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000001001";
+    constant ap_const_lv32_15 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000010101";
     constant ap_const_lv13_1 : STD_LOGIC_VECTOR (12 downto 0) := "0000000000001";
-    constant ap_const_lv13_1000 : STD_LOGIC_VECTOR (12 downto 0) := "1000000000000";
+    constant ap_const_lv10_200 : STD_LOGIC_VECTOR (9 downto 0) := "1000000000";
     constant ap_const_lv64_0 : STD_LOGIC_VECTOR (63 downto 0) := "0000000000000000000000000000000000000000000000000000000000000000";
     constant ap_const_boolean_1 : BOOLEAN := true;
 
@@ -141,13 +141,13 @@ architecture behav of data_mover is
     signal ap_CS_fsm_state1 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state1 : signal is "none";
     signal ap_ready : STD_LOGIC;
-    signal data_rx_V_V_0_data_out : STD_LOGIC_VECTOR (7 downto 0);
+    signal data_rx_V_V_0_data_out : STD_LOGIC_VECTOR (63 downto 0);
     signal data_rx_V_V_0_vld_in : STD_LOGIC;
     signal data_rx_V_V_0_vld_out : STD_LOGIC;
     signal data_rx_V_V_0_ack_in : STD_LOGIC;
     signal data_rx_V_V_0_ack_out : STD_LOGIC;
-    signal data_rx_V_V_0_payload_A : STD_LOGIC_VECTOR (7 downto 0);
-    signal data_rx_V_V_0_payload_B : STD_LOGIC_VECTOR (7 downto 0);
+    signal data_rx_V_V_0_payload_A : STD_LOGIC_VECTOR (63 downto 0);
+    signal data_rx_V_V_0_payload_B : STD_LOGIC_VECTOR (63 downto 0);
     signal data_rx_V_V_0_sel_rd : STD_LOGIC := '0';
     signal data_rx_V_V_0_sel_wr : STD_LOGIC := '0';
     signal data_rx_V_V_0_sel : STD_LOGIC;
@@ -155,13 +155,13 @@ architecture behav of data_mover is
     signal data_rx_V_V_0_load_B : STD_LOGIC;
     signal data_rx_V_V_0_state : STD_LOGIC_VECTOR (1 downto 0) := "00";
     signal data_rx_V_V_0_state_cmp_full : STD_LOGIC;
-    signal data_tx_V_V_1_data_out : STD_LOGIC_VECTOR (7 downto 0);
+    signal data_tx_V_V_1_data_out : STD_LOGIC_VECTOR (63 downto 0);
     signal data_tx_V_V_1_vld_in : STD_LOGIC;
     signal data_tx_V_V_1_vld_out : STD_LOGIC;
     signal data_tx_V_V_1_ack_in : STD_LOGIC;
     signal data_tx_V_V_1_ack_out : STD_LOGIC;
-    signal data_tx_V_V_1_payload_A : STD_LOGIC_VECTOR (7 downto 0);
-    signal data_tx_V_V_1_payload_B : STD_LOGIC_VECTOR (7 downto 0);
+    signal data_tx_V_V_1_payload_A : STD_LOGIC_VECTOR (63 downto 0);
+    signal data_tx_V_V_1_payload_B : STD_LOGIC_VECTOR (63 downto 0);
     signal data_tx_V_V_1_sel_rd : STD_LOGIC := '0';
     signal data_tx_V_V_1_sel_wr : STD_LOGIC := '0';
     signal data_tx_V_V_1_sel : STD_LOGIC;
@@ -170,9 +170,9 @@ architecture behav of data_mover is
     signal data_tx_V_V_1_state : STD_LOGIC_VECTOR (1 downto 0) := "00";
     signal data_tx_V_V_1_state_cmp_full : STD_LOGIC;
     signal tx_buffer_V : STD_LOGIC_VECTOR (31 downto 0);
-    signal tx_buffer_length_V : STD_LOGIC_VECTOR (24 downto 0);
+    signal tx_buffer_length_V : STD_LOGIC_VECTOR (21 downto 0);
     signal rx_buffer_V : STD_LOGIC_VECTOR (31 downto 0);
-    signal rx_buffer_length_V : STD_LOGIC_VECTOR (24 downto 0);
+    signal rx_buffer_length_V : STD_LOGIC_VECTOR (21 downto 0);
     signal DMA_AWVALID : STD_LOGIC;
     signal DMA_AWREADY : STD_LOGIC;
     signal DMA_WVALID : STD_LOGIC;
@@ -195,12 +195,12 @@ architecture behav of data_mover is
     signal ap_CS_fsm_state2 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state2 : signal is "none";
     signal tx_buffer_V1_reg_239 : STD_LOGIC_VECTOR (28 downto 0);
-    signal tx_final_burst_lengt_fu_168_p3 : STD_LOGIC_VECTOR (12 downto 0);
-    signal tx_final_burst_lengt_reg_244 : STD_LOGIC_VECTOR (12 downto 0);
+    signal tx_final_burst_lengt_fu_168_p3 : STD_LOGIC_VECTOR (9 downto 0);
+    signal tx_final_burst_lengt_reg_244 : STD_LOGIC_VECTOR (9 downto 0);
     signal tx_loop_count_V_fu_177_p3 : STD_LOGIC_VECTOR (12 downto 0);
     signal tx_loop_count_V_reg_249 : STD_LOGIC_VECTOR (12 downto 0);
-    signal rx_final_burst_lengt_fu_216_p3 : STD_LOGIC_VECTOR (12 downto 0);
-    signal rx_final_burst_lengt_reg_254 : STD_LOGIC_VECTOR (12 downto 0);
+    signal rx_final_burst_lengt_fu_216_p3 : STD_LOGIC_VECTOR (9 downto 0);
+    signal rx_final_burst_lengt_reg_254 : STD_LOGIC_VECTOR (9 downto 0);
     signal rx_loop_count_V_fu_225_p3 : STD_LOGIC_VECTOR (12 downto 0);
     signal rx_loop_count_V_reg_259 : STD_LOGIC_VECTOR (12 downto 0);
     signal grp_rx_loop_fu_94_m_axi_rx_buffer_V_AWVALID : STD_LOGIC;
@@ -242,7 +242,7 @@ architecture behav of data_mover is
     signal grp_rx_loop_fu_94_ap_ready : STD_LOGIC;
     signal grp_rx_loop_fu_94_ap_idle : STD_LOGIC;
     signal grp_rx_loop_fu_94_ap_continue : STD_LOGIC;
-    signal grp_tx_loop_fu_105_axis_V_V_TDATA : STD_LOGIC_VECTOR (7 downto 0);
+    signal grp_tx_loop_fu_105_axis_V_V_TDATA : STD_LOGIC_VECTOR (63 downto 0);
     signal grp_tx_loop_fu_105_m_axi_tx_buffer_V_AWVALID : STD_LOGIC;
     signal grp_tx_loop_fu_105_m_axi_tx_buffer_V_AWADDR : STD_LOGIC_VECTOR (31 downto 0);
     signal grp_tx_loop_fu_105_m_axi_tx_buffer_V_AWID : STD_LOGIC_VECTOR (0 downto 0);
@@ -295,25 +295,25 @@ architecture behav of data_mover is
     signal grp_tx_loop_fu_105_ap_start_reg : STD_LOGIC := '0';
     signal ap_sync_reg_grp_tx_loop_fu_105_ap_ready : STD_LOGIC := '0';
     signal ap_sync_reg_grp_tx_loop_fu_105_ap_done : STD_LOGIC := '0';
-    signal r_V_fu_138_p1 : STD_LOGIC_VECTOR (11 downto 0);
-    signal tmp_4_i_fu_148_p4 : STD_LOGIC_VECTOR (12 downto 0);
+    signal r_V_fu_138_p1 : STD_LOGIC_VECTOR (8 downto 0);
+    signal tmp_8_i_fu_148_p4 : STD_LOGIC_VECTOR (12 downto 0);
     signal tmp_i_fu_142_p2 : STD_LOGIC_VECTOR (0 downto 0);
-    signal tmp_6_i_cast_fu_158_p1 : STD_LOGIC_VECTOR (12 downto 0);
-    signal tmp_9_i_fu_162_p2 : STD_LOGIC_VECTOR (12 downto 0);
-    signal r_V_1_fu_186_p1 : STD_LOGIC_VECTOR (11 downto 0);
-    signal tmp_4_i1_fu_196_p4 : STD_LOGIC_VECTOR (12 downto 0);
+    signal tmp_1_i_cast_fu_158_p1 : STD_LOGIC_VECTOR (9 downto 0);
+    signal tmp_4_i_fu_162_p2 : STD_LOGIC_VECTOR (12 downto 0);
+    signal r_V_1_fu_186_p1 : STD_LOGIC_VECTOR (8 downto 0);
+    signal tmp_8_i1_fu_196_p4 : STD_LOGIC_VECTOR (12 downto 0);
     signal tmp_i1_fu_190_p2 : STD_LOGIC_VECTOR (0 downto 0);
-    signal tmp_6_i16_cast_fu_206_p1 : STD_LOGIC_VECTOR (12 downto 0);
-    signal tmp_9_i1_fu_210_p2 : STD_LOGIC_VECTOR (12 downto 0);
+    signal tmp_1_i16_cast_fu_206_p1 : STD_LOGIC_VECTOR (9 downto 0);
+    signal tmp_4_i1_fu_210_p2 : STD_LOGIC_VECTOR (12 downto 0);
     signal ap_CS_fsm_state4 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state4 : signal is "none";
     signal ap_NS_fsm : STD_LOGIC_VECTOR (3 downto 0);
 
     component rx_loop IS
     port (
-        axis_V_V_TDATA : IN STD_LOGIC_VECTOR (7 downto 0);
+        axis_V_V_TDATA : IN STD_LOGIC_VECTOR (63 downto 0);
         loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-        final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
+        final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
         m_axi_rx_buffer_V_AWVALID : OUT STD_LOGIC;
         m_axi_rx_buffer_V_AWREADY : IN STD_LOGIC;
         m_axi_rx_buffer_V_AWADDR : OUT STD_LOGIC_VECTOR (31 downto 0);
@@ -377,7 +377,7 @@ architecture behav of data_mover is
 
     component tx_loop IS
     port (
-        axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (7 downto 0);
+        axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
         m_axi_tx_buffer_V_AWVALID : OUT STD_LOGIC;
         m_axi_tx_buffer_V_AWREADY : IN STD_LOGIC;
         m_axi_tx_buffer_V_AWADDR : OUT STD_LOGIC_VECTOR (31 downto 0);
@@ -425,7 +425,7 @@ architecture behav of data_mover is
         m_axi_tx_buffer_V_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
         tx_buffer_V_offset : IN STD_LOGIC_VECTOR (28 downto 0);
         loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-        final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
+        final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
         ap_clk : IN STD_LOGIC;
         ap_rst : IN STD_LOGIC;
         tx_buffer_V_offset_ap_vld : IN STD_LOGIC;
@@ -472,9 +472,9 @@ architecture behav of data_mover is
         ap_done : IN STD_LOGIC;
         ap_idle : IN STD_LOGIC;
         tx_buffer_V : OUT STD_LOGIC_VECTOR (31 downto 0);
-        tx_buffer_length_V : OUT STD_LOGIC_VECTOR (24 downto 0);
+        tx_buffer_length_V : OUT STD_LOGIC_VECTOR (21 downto 0);
         rx_buffer_V : OUT STD_LOGIC_VECTOR (31 downto 0);
-        rx_buffer_length_V : OUT STD_LOGIC_VECTOR (24 downto 0) );
+        rx_buffer_length_V : OUT STD_LOGIC_VECTOR (21 downto 0) );
     end component;
 
 
@@ -1329,26 +1329,26 @@ begin
 
     grp_tx_loop_fu_105_ap_start <= grp_tx_loop_fu_105_ap_start_reg;
     grp_tx_loop_fu_105_axis_V_V_TREADY <= data_tx_V_V_1_state(1);
-    r_V_1_fu_186_p1 <= rx_buffer_length_V(12 - 1 downto 0);
-    r_V_fu_138_p1 <= tx_buffer_length_V(12 - 1 downto 0);
+    r_V_1_fu_186_p1 <= rx_buffer_length_V(9 - 1 downto 0);
+    r_V_fu_138_p1 <= tx_buffer_length_V(9 - 1 downto 0);
     rx_final_burst_lengt_fu_216_p3 <= 
-        ap_const_lv13_1000 when (tmp_i1_fu_190_p2(0) = '1') else 
-        tmp_6_i16_cast_fu_206_p1;
+        ap_const_lv10_200 when (tmp_i1_fu_190_p2(0) = '1') else 
+        tmp_1_i16_cast_fu_206_p1;
     rx_loop_count_V_fu_225_p3 <= 
-        tmp_4_i1_fu_196_p4 when (tmp_i1_fu_190_p2(0) = '1') else 
-        tmp_9_i1_fu_210_p2;
-    tmp_4_i1_fu_196_p4 <= rx_buffer_length_V(24 downto 12);
-    tmp_4_i_fu_148_p4 <= tx_buffer_length_V(24 downto 12);
-    tmp_6_i16_cast_fu_206_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(r_V_1_fu_186_p1),13));
-    tmp_6_i_cast_fu_158_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(r_V_fu_138_p1),13));
-    tmp_9_i1_fu_210_p2 <= std_logic_vector(unsigned(ap_const_lv13_1) + unsigned(tmp_4_i1_fu_196_p4));
-    tmp_9_i_fu_162_p2 <= std_logic_vector(unsigned(ap_const_lv13_1) + unsigned(tmp_4_i_fu_148_p4));
-    tmp_i1_fu_190_p2 <= "1" when (r_V_1_fu_186_p1 = ap_const_lv12_0) else "0";
-    tmp_i_fu_142_p2 <= "1" when (r_V_fu_138_p1 = ap_const_lv12_0) else "0";
+        tmp_8_i1_fu_196_p4 when (tmp_i1_fu_190_p2(0) = '1') else 
+        tmp_4_i1_fu_210_p2;
+    tmp_1_i16_cast_fu_206_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(r_V_1_fu_186_p1),10));
+    tmp_1_i_cast_fu_158_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(r_V_fu_138_p1),10));
+    tmp_4_i1_fu_210_p2 <= std_logic_vector(unsigned(ap_const_lv13_1) + unsigned(tmp_8_i1_fu_196_p4));
+    tmp_4_i_fu_162_p2 <= std_logic_vector(unsigned(ap_const_lv13_1) + unsigned(tmp_8_i_fu_148_p4));
+    tmp_8_i1_fu_196_p4 <= rx_buffer_length_V(21 downto 9);
+    tmp_8_i_fu_148_p4 <= tx_buffer_length_V(21 downto 9);
+    tmp_i1_fu_190_p2 <= "1" when (r_V_1_fu_186_p1 = ap_const_lv9_0) else "0";
+    tmp_i_fu_142_p2 <= "1" when (r_V_fu_138_p1 = ap_const_lv9_0) else "0";
     tx_final_burst_lengt_fu_168_p3 <= 
-        ap_const_lv13_1000 when (tmp_i_fu_142_p2(0) = '1') else 
-        tmp_6_i_cast_fu_158_p1;
+        ap_const_lv10_200 when (tmp_i_fu_142_p2(0) = '1') else 
+        tmp_1_i_cast_fu_158_p1;
     tx_loop_count_V_fu_177_p3 <= 
-        tmp_4_i_fu_148_p4 when (tmp_i_fu_142_p2(0) = '1') else 
-        tmp_9_i_fu_162_p2;
+        tmp_8_i_fu_148_p4 when (tmp_i_fu_142_p2(0) = '1') else 
+        tmp_4_i_fu_162_p2;
 end behav;

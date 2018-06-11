@@ -12,7 +12,7 @@ using namespace std;
 
 namespace ap_rtl {
 
-const sc_lv<8> tx_loop::ap_const_lv8_0 = "00000000";
+const sc_lv<64> tx_loop::ap_const_lv64_0 = "0000000000000000000000000000000000000000000000000000000000000000";
 const sc_logic tx_loop::ap_const_logic_0 = sc_dt::Log_0;
 const sc_logic tx_loop::ap_const_logic_1 = sc_dt::Log_1;
 const bool tx_loop::ap_const_boolean_1 = true;
@@ -25,7 +25,7 @@ const sc_lv<1> tx_loop::ap_const_lv1_1 = "1";
 const sc_lv<32> tx_loop::ap_const_lv32_0 = "00000000000000000000000000000000";
 const sc_lv<3> tx_loop::ap_const_lv3_0 = "000";
 const sc_lv<4> tx_loop::ap_const_lv4_0 = "0000";
-const sc_lv<64> tx_loop::ap_const_lv64_0 = "0000000000000000000000000000000000000000000000000000000000000000";
+const sc_lv<8> tx_loop::ap_const_lv8_0 = "00000000";
 
 tx_loop::tx_loop(sc_module_name name) : sc_module(name), mVcdFile(0) {
     dataflow_in_loop59_U0 = new dataflow_in_loop59("dataflow_in_loop59_U0");

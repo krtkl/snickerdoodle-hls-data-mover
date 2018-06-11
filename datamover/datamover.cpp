@@ -47,7 +47,7 @@ void read_burst (const axi_t tx_buffer[BUFFER_WORDS],
   buffer_offset = buffer_offset * CACHE_WORDS;
   memcpy(cache, &tx_buffer[buffer_offset], CACHE_SIZE); /* burst read a block of data into the transmit cache */
   if (n==loop_count-1) data_length = final_burst_length;
-  else data_length = CACHE_SIZE;
+  else data_length = CACHE_LENGTH;
 }
 
 
@@ -160,15 +160,15 @@ void get_loop_parameters (const ap_uint<BUFFER_LENGTH_BITS> data_length,
 		  	 	 	 	  ap_uint<LOOP_TRIP_COUNT_BITS> &loop_count,
 						  ap_uint<CACHE_LENGTH_BITS> &final_burst_length)
 {
-  if (data_length % CACHE_SIZE)
+  if (data_length % CACHE_LENGTH)
    {
-	 final_burst_length = data_length % CACHE_SIZE;
-	 loop_count = data_length/CACHE_SIZE + 1;
+	 final_burst_length = data_length % CACHE_LENGTH;
+	 loop_count = data_length/CACHE_LENGTH + 1;
    }
   else
    {
-	 final_burst_length = CACHE_SIZE;
-	 loop_count = data_length/CACHE_SIZE;
+	 final_burst_length = CACHE_LENGTH;
+	 loop_count = data_length/CACHE_LENGTH;
    }
 }
 

@@ -17,23 +17,23 @@
 <PipelineType>none</PipelineType>
 <SummaryOfTimingAnalysis>
 <unit>ns</unit>
-<EstimatedClockPeriod>6.38</EstimatedClockPeriod>
+<EstimatedClockPeriod>5.71</EstimatedClockPeriod>
 </SummaryOfTimingAnalysis>
 <SummaryOfOverallLatency>
 <unit>clock cycles</unit>
-<Best-caseLatency>525</Best-caseLatency>
+<Best-caseLatency>520</Best-caseLatency>
 <Average-caseLatency>undef</Average-caseLatency>
-<Worst-caseLatency>16794127</Worst-caseLatency>
-<Interval-min>526</Interval-min>
-<Interval-max>16794128</Interval-max>
+<Worst-caseLatency>2142727</Worst-caseLatency>
+<Interval-min>521</Interval-min>
+<Interval-max>2142728</Interval-max>
 </SummaryOfOverallLatency>
 </PerformanceEstimates>
 
 <AreaEstimates>
 <Resources>
 <BRAM_18K>8</BRAM_18K>
-<FF>1707</FF>
-<LUT>2997</LUT>
+<FF>1593</FF>
+<LUT>2328</LUT>
 <DSP48E>0</DSP48E>
 </Resources>
 <AvailableResources>
@@ -847,7 +847,7 @@
 <IOProtocol>axis</IOProtocol>
 <IOConfig>register, both mode</IOConfig>
 <Dir>in</Dir>
-<Bits>8</Bits>
+<Bits>64</Bits>
 <Attribute>data</Attribute>
 <CType>int</CType>
 </RtlPorts>
@@ -883,7 +883,7 @@
 <IOProtocol>axis</IOProtocol>
 <IOConfig>register, both mode</IOConfig>
 <Dir>out</Dir>
-<Bits>8</Bits>
+<Bits>64</Bits>
 <Attribute>data</Attribute>
 <CType>int</CType>
 </RtlPorts>

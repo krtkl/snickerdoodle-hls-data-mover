@@ -14,7 +14,7 @@
 #include "read_burst.h"
 #include "tx_axis_words.h"
 #include "dataflow_in_loop5bkb.h"
-#include "fifo_w13_d2_A.h"
+#include "fifo_w10_d2_A.h"
 
 namespace ap_rtl {
 
@@ -70,8 +70,8 @@ struct dataflow_in_loop59 : public sc_module {
     sc_in< sc_lv<29> > tx_buffer_V_offset;
     sc_in< sc_lv<13> > val_assign;
     sc_in< sc_lv<13> > loop_count_V;
-    sc_in< sc_lv<13> > final_burst_length_V;
-    sc_out< sc_lv<8> > axis_V_V_TDATA;
+    sc_in< sc_lv<10> > final_burst_length_V;
+    sc_out< sc_lv<64> > axis_V_V_TDATA;
     sc_in< sc_logic > tx_buffer_V_offset_ap_vld;
     sc_in< sc_logic > val_assign_ap_vld;
     sc_in< sc_logic > loop_count_V_ap_vld;
@@ -84,8 +84,8 @@ struct dataflow_in_loop59 : public sc_module {
     sc_out< sc_logic > ap_idle;
     sc_in< sc_logic > ap_continue;
     sc_signal< sc_logic > ap_var_for_const2;
-    sc_signal< sc_logic > ap_var_for_const0;
     sc_signal< sc_lv<64> > ap_var_for_const1;
+    sc_signal< sc_logic > ap_var_for_const0;
     sc_signal< sc_lv<2> > ap_var_for_const3;
     sc_signal< sc_lv<1> > ap_var_for_const4;
 
@@ -101,7 +101,7 @@ struct dataflow_in_loop59 : public sc_module {
     dataflow_in_loop5bkb* cache_V_U;
     read_burst* read_burst_U0;
     tx_axis_words* tx_axis_words_U0;
-    fifo_w13_d2_A* data_length_V_U;
+    fifo_w10_d2_A* data_length_V_U;
     sc_signal< sc_lv<64> > cache_V_i_q0;
     sc_signal< sc_lv<64> > cache_V_t_q0;
     sc_signal< sc_logic > read_burst_U0_ap_start;
@@ -145,7 +145,7 @@ struct dataflow_in_loop59 : public sc_module {
     sc_signal< sc_logic > read_burst_U0_cache_V_ce0;
     sc_signal< sc_logic > read_burst_U0_cache_V_we0;
     sc_signal< sc_lv<64> > read_burst_U0_cache_V_d0;
-    sc_signal< sc_lv<13> > read_burst_U0_ap_return;
+    sc_signal< sc_lv<10> > read_burst_U0_ap_return;
     sc_signal< sc_logic > ap_channel_done_data_length_V;
     sc_signal< sc_logic > data_length_V_full_n;
     sc_signal< sc_logic > ap_sync_reg_channel_write_data_length_V;
@@ -161,12 +161,12 @@ struct dataflow_in_loop59 : public sc_module {
     sc_signal< sc_logic > tx_axis_words_U0_ap_ready;
     sc_signal< sc_lv<9> > tx_axis_words_U0_cache_V_address0;
     sc_signal< sc_logic > tx_axis_words_U0_cache_V_ce0;
-    sc_signal< sc_lv<8> > tx_axis_words_U0_axis_V_V_TDATA;
+    sc_signal< sc_lv<64> > tx_axis_words_U0_axis_V_V_TDATA;
     sc_signal< sc_logic > tx_axis_words_U0_axis_V_V_TVALID;
     sc_signal< sc_logic > ap_sync_continue;
     sc_signal< sc_logic > cache_V_i_full_n;
     sc_signal< sc_logic > cache_V_t_empty_n;
-    sc_signal< sc_lv<13> > data_length_V_dout;
+    sc_signal< sc_lv<10> > data_length_V_dout;
     sc_signal< sc_logic > data_length_V_empty_n;
     sc_signal< sc_logic > ap_sync_done;
     sc_signal< sc_logic > ap_sync_ready;
@@ -175,9 +175,8 @@ struct dataflow_in_loop59 : public sc_module {
     sc_signal< sc_logic > tx_axis_words_U0_start_full_n;
     sc_signal< sc_logic > tx_axis_words_U0_start_write;
     static const sc_logic ap_const_logic_1;
-    static const sc_lv<8> ap_const_lv8_0;
-    static const sc_logic ap_const_logic_0;
     static const sc_lv<64> ap_const_lv64_0;
+    static const sc_logic ap_const_logic_0;
     static const sc_lv<2> ap_const_lv2_0;
     static const sc_lv<2> ap_const_lv2_1;
     static const sc_lv<1> ap_const_lv1_0;
@@ -185,11 +184,12 @@ struct dataflow_in_loop59 : public sc_module {
     static const sc_lv<32> ap_const_lv32_0;
     static const sc_lv<3> ap_const_lv3_0;
     static const sc_lv<4> ap_const_lv4_0;
+    static const sc_lv<8> ap_const_lv8_0;
     static const bool ap_const_boolean_1;
     // Thread declarations
     void thread_ap_var_for_const2();
-    void thread_ap_var_for_const0();
     void thread_ap_var_for_const1();
+    void thread_ap_var_for_const0();
     void thread_ap_var_for_const3();
     void thread_ap_var_for_const4();
     void thread_ap_clk_no_reset_();

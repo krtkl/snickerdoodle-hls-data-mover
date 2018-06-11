@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'tx_loop'
 ================================================================
-* Date:           Mon Jun 11 00:35:20 2018
+* Date:           Mon Jun 11 01:13:33 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -25,29 +25,29 @@
 
 + Latency (clock cycles): 
     * Summary: 
-    +-----+----------+-----+----------+---------+
-    |     Latency    |    Interval    | Pipeline|
-    | min |    max   | min |    max   |   Type  |
-    +-----+----------+-----+----------+---------+
-    |    4|  16794124|    4|  16794124|   none  |
-    +-----+----------+-----+----------+---------+
+    +-----+---------+-----+---------+---------+
+    |    Latency    |    Interval   | Pipeline|
+    | min |   max   | min |   max   |   Type  |
+    +-----+---------+-----+---------+---------+
+    |    4|  2142724|    4|  2142724|   none  |
+    +-----+---------+-----+---------+---------+
 
     + Detail: 
         * Instance: 
-        +-----------------------+--------------------+-----+------+-----+------+----------+
-        |                       |                    |   Latency  |  Interval  | Pipeline |
-        |        Instance       |       Module       | min |  max | min |  max |   Type   |
-        +-----------------------+--------------------+-----+------+-----+------+----------+
-        |dataflow_in_loop59_U0  |dataflow_in_loop59  |  525|  4622|  523|  4100| dataflow |
-        +-----------------------+--------------------+-----+------+-----+------+----------+
+        +-----------------------+--------------------+-----+------+-----+-----+----------+
+        |                       |                    |   Latency  |  Interval | Pipeline |
+        |        Instance       |       Module       | min |  max | min | max |   Type   |
+        +-----------------------+--------------------+-----+------+-----+-----+----------+
+        |dataflow_in_loop59_U0  |dataflow_in_loop59  |  525|  1037|  523|  523| dataflow |
+        +-----------------------+--------------------+-----+------+-----+-----+----------+
 
         * Loop: 
-        +----------+-----+----------+------------+-----------+-----------+----------+----------+
-        |          |     Latency    |  Iteration |  Initiation Interval  |   Trip   |          |
-        | Loop Name| min |    max   |   Latency  |  achieved |   target  |   Count  | Pipelined|
-        +----------+-----+----------+------------+-----------+-----------+----------+----------+
-        |- Loop 1  |    3|  16794123| 527 ~ 4624 |          -|          -| 0 ~ 4096 |    no    |
-        +----------+-----+----------+------------+-----------+-----------+----------+----------+
+        +----------+-----+---------+------------+-----------+-----------+----------+----------+
+        |          |    Latency    |  Iteration |  Initiation Interval  |   Trip   |          |
+        | Loop Name| min |   max   |   Latency  |  achieved |   target  |   Count  | Pipelined|
+        +----------+-----+---------+------------+-----------+-----------+----------+----------+
+        |- Loop 1  |    3|  2142723| 527 ~ 1039 |          -|          -| 0 ~ 4096 |    no    |
+        +----------+-----+---------+------------+-----------+-----------+----------+----------+
 
 
 
@@ -61,16 +61,16 @@
 |DSP              |        -|      -|       -|      -|
 |Expression       |        -|      -|       0|     40|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        2|      -|     261|    588|
+|Instance         |        2|      -|     183|    399|
 |Memory           |        -|      -|       -|      -|
 |Multiplexer      |        -|      -|       -|     18|
 |Register         |        -|      -|      28|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        2|      0|     289|    646|
+|Total            |        2|      0|     211|    457|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
-|Utilization (%)  |    ~0   |      0|   ~0   |      1|
+|Utilization (%)  |    ~0   |      0|   ~0   |   ~0  |
 +-----------------+---------+-------+--------+-------+
 
 + Detail: 
@@ -78,9 +78,9 @@
     +-----------------------+--------------------+---------+-------+-----+-----+
     |        Instance       |       Module       | BRAM_18K| DSP48E|  FF | LUT |
     +-----------------------+--------------------+---------+-------+-----+-----+
-    |dataflow_in_loop59_U0  |dataflow_in_loop59  |        2|      0|  261|  588|
+    |dataflow_in_loop59_U0  |dataflow_in_loop59  |        2|      0|  183|  399|
     +-----------------------+--------------------+---------+-------+-----+-----+
-    |Total                  |                    |        2|      0|  261|  588|
+    |Total                  |                    |        2|      0|  183|  399|
     +-----------------------+--------------------+---------+-------+-----+-----+
 
     * DSP48: 
@@ -133,7 +133,7 @@
 +-----------------------------+-----+-----+------------+----------------------+--------------+
 |          RTL Ports          | Dir | Bits|  Protocol  |     Source Object    |    C Type    |
 +-----------------------------+-----+-----+------------+----------------------+--------------+
-|axis_V_V_TDATA               | out |    8|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TDATA               | out |   64|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TVALID              | out |    1|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TREADY              |  in |    1|    axis    |       axis_V_V       |    pointer   |
 |m_axi_tx_buffer_V_AWVALID    | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
@@ -185,7 +185,7 @@
 |tx_buffer_V_offset_ap_vld    |  in |    1|   ap_none  |  tx_buffer_V_offset  |    scalar    |
 |loop_count_V                 |  in |   13|   ap_none  |     loop_count_V     |    scalar    |
 |loop_count_V_ap_vld          |  in |    1|   ap_none  |     loop_count_V     |    scalar    |
-|final_burst_length_V         |  in |   13|   ap_none  | final_burst_length_V |    scalar    |
+|final_burst_length_V         |  in |   10|   ap_none  | final_burst_length_V |    scalar    |
 |final_burst_length_V_ap_vld  |  in |    1|   ap_none  | final_burst_length_V |    scalar    |
 |ap_clk                       |  in |    1| ap_ctrl_hs |        tx_loop       | return value |
 |ap_rst                       |  in |    1| ap_ctrl_hs |        tx_loop       | return value |
