@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="data_mover" xd:componentRef="data_mover" xd:initiationInterval="16794128" xd:clockPeriod="6.500" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
+<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="data_mover_8b64b" xd:componentRef="data_mover_8b64b" xd:initiationInterval="16794128" xd:clockPeriod="6.500" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
   <xd:controlReg xd:name="control" xd:interfaceRef="s_axi_control" xd:busTypeRef="axilite" xd:type="generic_axi_lite" xd:offset="0x0"/>
   <xd:arg xd:name="tx_buffer[]" xd:originalName="tx_buffer" xd:direction="inout" xd:interfaceRef="m_axi_DMA" xd:busTypeRef="aximm" xd:dataPack="true" xd:bitMapping="63:0" xd:arraySize="2097152" xd:dataWidth="64" xd:bufferDirection="in"/>
   <xd:arg xd:name="rx_buffer[]" xd:originalName="rx_buffer" xd:direction="inout" xd:interfaceRef="m_axi_DMA" xd:busTypeRef="aximm" xd:dataPack="true" xd:bitMapping="63:0" xd:arraySize="2097152" xd:dataWidth="64" xd:bufferDirection="out"/>

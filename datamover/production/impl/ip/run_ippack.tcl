@@ -58,11 +58,11 @@ proc sort_file_names {files {top_name {}}} {
 ## IP Info
 set Vendor      "krtl"
 set Library     "snickerdoodle"
-set IPName      "data_mover"
-set Version     "1.05"
-set DisplayName "data mover"
-set Revision    "1806110208"
-set Description "data mover"
+set IPName      "data_mover_8b64b"
+set Version     "1.06"
+set DisplayName "8-bit AXIS to 64-bit AXI data mover"
+set Revision    "1806111210"
+set Description "8-bit AXIS to 64-bit AXI data mover"
 set Device      "zynq"
 set Taxonomy    "/VIVADO_HLS_IP"
 set has_xpm_memory "0"
@@ -71,7 +71,7 @@ set sdx_kernel_files {}
 set enable_xo_gen 0
 
 ## Variables
-set Top "data_mover"
+set Top "data_mover_8b64b"
 set VhdlFiles [sort_file_names [glob -nocomplain hdl/vhdl/*] ${Top}.vhd]
 set VerilogFiles [sort_file_names [glob -nocomplain hdl/verilog/*] ${Top}.v]
 set SWDriverFiles [sort_file_names [glob-r drivers]]

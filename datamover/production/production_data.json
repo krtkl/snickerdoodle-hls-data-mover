@@ -1,6 +1,6 @@
 {
-  "Top": "data_mover",
-  "RtlTop": "data_mover",
+  "Top": "data_mover_8b64b",
+  "RtlTop": "data_mover_8b64b",
   "RtlPrefix": "",
   "SourceLanguage": "cpp",
   "ResetStyle": "control",
@@ -27,18 +27,18 @@
   "Ipx": {
     "Vendor": "krtl",
     "Library": "snickerdoodle",
-    "Name": "data_mover",
-    "Version": "1.05",
-    "DisplayName": "data mover",
+    "Name": "data_mover_8b64b",
+    "Version": "1.06",
+    "DisplayName": "8-bit AXIS to 64-bit AXI data mover",
     "Revision": "",
-    "Description": "data mover",
+    "Description": "8-bit AXIS to 64-bit AXI data mover",
     "Taxonomy": "\/VIVADO_HLS_IP"
   },
   "Files": {
     "CSource": ["..\/datamover.cpp"],
     "Vhdl": [
-      "impl\/vhdl\/data_mover_control_s_axi.vhd",
-      "impl\/vhdl\/data_mover_DMA_m_axi.vhd",
+      "impl\/vhdl\/data_mover_8b64b_control_s_axi.vhd",
+      "impl\/vhdl\/data_mover_8b64b_DMA_m_axi.vhd",
       "impl\/vhdl\/dataflow_in_loop.vhd",
       "impl\/vhdl\/dataflow_in_loop5bkb.vhd",
       "impl\/vhdl\/dataflow_in_loop5bkb_memcore.vhd",
@@ -54,11 +54,11 @@
       "impl\/vhdl\/tx_axis_words.vhd",
       "impl\/vhdl\/tx_loop.vhd",
       "impl\/vhdl\/write_burst.vhd",
-      "impl\/vhdl\/data_mover.vhd"
+      "impl\/vhdl\/data_mover_8b64b.vhd"
     ],
     "Verilog": [
-      "impl\/verilog\/data_mover_control_s_axi.v",
-      "impl\/verilog\/data_mover_DMA_m_axi.v",
+      "impl\/verilog\/data_mover_8b64b_control_s_axi.v",
+      "impl\/verilog\/data_mover_8b64b_DMA_m_axi.v",
       "impl\/verilog\/dataflow_in_loop.v",
       "impl\/verilog\/dataflow_in_loop5bkb.v",
       "impl\/verilog\/dataflow_in_loop5bkb_memcore.v",
@@ -74,17 +74,17 @@
       "impl\/verilog\/tx_axis_words.v",
       "impl\/verilog\/tx_loop.v",
       "impl\/verilog\/write_burst.v",
-      "impl\/verilog\/data_mover.v"
+      "impl\/verilog\/data_mover_8b64b.v"
     ],
     "SwDriver": [
-      "impl\/misc\/drivers\/data_mover_v1_05\/data\/data_mover.mdd",
-      "impl\/misc\/drivers\/data_mover_v1_05\/data\/data_mover.tcl",
-      "impl\/misc\/drivers\/data_mover_v1_05\/src\/Makefile",
-      "impl\/misc\/drivers\/data_mover_v1_05\/src\/xdata_mover.c",
-      "impl\/misc\/drivers\/data_mover_v1_05\/src\/xdata_mover.h",
-      "impl\/misc\/drivers\/data_mover_v1_05\/src\/xdata_mover_hw.h",
-      "impl\/misc\/drivers\/data_mover_v1_05\/src\/xdata_mover_linux.c",
-      "impl\/misc\/drivers\/data_mover_v1_05\/src\/xdata_mover_sinit.c"
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/data\/data_mover_8b64b.mdd",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/data\/data_mover_8b64b.tcl",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/Makefile",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b.c",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b.h",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b_hw.h",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b_linux.c",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b_sinit.c"
     ],
     "Misc": ["impl\/misc\/logo.png"]
   },
@@ -969,7 +969,7 @@
   },
   "ModuleInfo": {
     "Hierarchy": {
-      "ModuleName": "data_mover",
+      "ModuleName": "data_mover_8b64b",
       "Instances": [
         {
           "ModuleName": "rx_loop",
@@ -1238,7 +1238,7 @@
           "DSP48E": "0"
         }
       },
-      "data_mover": {
+      "data_mover_8b64b": {
         "Latency": {
           "LatencyBest": "525",
           "LatencyAvg": "",
@@ -1265,7 +1265,7 @@
   },
   "GenData": {
     "DataVersion": "0.1",
-    "Time": "2018-06-11 02:08:05 -0700",
+    "Time": "2018-06-11 12:10:41 -0700",
     "ToolName": "vivado_hls",
     "ToolVersion": "2018.1"
   }

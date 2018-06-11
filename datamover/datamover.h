@@ -30,7 +30,7 @@
 /**
  * @description AXIS data mover header file
  * @author Jamil J. Weatherbee
- * @version 2018-06-11T08:18:22Z
+ * @version 2018-06-11T18:42:45Z
  */
 
 /* include data types needed */
@@ -72,9 +72,9 @@ typedef ap_uint<AXI_WORD_BITS> axi_t;
 typedef ap_uint<AXIS_WORD_BITS> axis_t;
 
 /* function declarations */
-void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
-				 hls::stream<axis_t> &data_tx, /* AXIS master interface */
-				 const axi_t tx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
-				 const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
-				 axi_t rx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
-				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length); /* number of AXIS words to write to the rx buffer */
+void data_mover_8b64b (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
+				       hls::stream<axis_t> &data_tx, /* AXIS master interface */
+				       const axi_t tx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
+				       const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
+				       axi_t rx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
+				       const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length); /* number of AXIS words to write to the rx buffer */
