@@ -1,5 +1,5 @@
 INFO: [HLS 200-10] Running 'C:/Xilinx/Vivado/2018.1/bin/unwrapped/win64.o/vivado_hls.exe'
-INFO: [HLS 200-10] For user 'Jamil J. Weatherbee' on host 'macula10' (Windows NT_amd64 version 6.2) on Sun Jun 10 19:45:29 -0700 2018
+INFO: [HLS 200-10] For user 'Jamil J. Weatherbee' on host 'macula10' (Windows NT_amd64 version 6.2) on Sun Jun 10 20:19:56 -0700 2018
 INFO: [HLS 200-10] In directory 'C:/git/snickerdoodle-hls-data-mover'
 INFO: [HLS 200-10] Opening project 'C:/git/snickerdoodle-hls-data-mover/datamover'.
 INFO: [HLS 200-10] Adding design file 'datamover/datamover.cpp' to the project
@@ -10,4 +10,171 @@ INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 2ns.
 INFO: [HLS 200-10] Setting target device to 'xc7z020clg400-3'
 INFO: [HLS 200-10] Analyzing design file 'datamover/datamover.cpp' ...
 INFO: [HLS 200-10] Validating synthesis directives ...
-INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:01 ; elapsed = 00:00:14 . Memory (MB): peak = 103.063 ; gain = 45.547
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:01 ; elapsed = 00:00:15 . Memory (MB): peak = 103.059 ; gain = 45.410
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:01 ; elapsed = 00:00:19 . Memory (MB): peak = 103.098 ; gain = 45.449
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:00:01 ; elapsed = 00:00:20 . Memory (MB): peak = 114.746 ; gain = 57.098
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [XFORM 203-602] Inlining function 'get_loop_parameters' into 'data_mover' (datamover/datamover.cpp:200) automatically.
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:00:01 ; elapsed = 00:00:20 . Memory (MB): peak = 121.949 ; gain = 64.301
+INFO: [XFORM 203-602] Inlining function 'get_loop_parameters' into 'data_mover' (datamover/datamover.cpp:200) automatically.
+INFO: [XFORM 203-721] Extract dataflow region from loop  (datamover/datamover.cpp:85)  of function 'tx_loop'.
+INFO: [XFORM 203-712] Applying dataflow to function 'dataflow_in_loop', detected/extracted 2 process function(s): 
+	 'read_burst'
+	 'tx_axis_words'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock to (datamover/datamover.cpp:208:1) in function 'data_mover'... converting 4 basic blocks.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:00:02 ; elapsed = 00:00:21 . Memory (MB): peak = 150.473 ; gain = 92.824
+INFO: [XFORM 203-811] Inferring multiple bus burst read of a total cumulative length 512 on port 'tx_buffer.V' (datamover/datamover.cpp:48:28). These data requests might be further partitioned to multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings.
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:00:02 ; elapsed = 00:00:21 . Memory (MB): peak = 183.398 ; gain = 125.750
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'data_mover' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'read_burst'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'memcpy.gep2.tx_buffer.V'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 3.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 21.585 seconds; current allocated memory: 139.272 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.141 seconds; current allocated memory: 139.427 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'tx_axis_words'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'Loop 1'.
+INFO: [SCHED 204-61] Pipelining result : Target II = 1, Final II = 1, Depth = 3.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.139 seconds; current allocated memory: 139.606 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.092 seconds; current allocated memory: 139.697 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'dataflow_in_loop'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.093 seconds; current allocated memory: 139.764 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.097 seconds; current allocated memory: 139.840 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'tx_loop'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.113 seconds; current allocated memory: 139.909 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.089 seconds; current allocated memory: 139.993 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'data_mover'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 0.128 seconds; current allocated memory: 140.046 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.096 seconds; current allocated memory: 140.204 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'read_burst'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'read_burst'.
+INFO: [HLS 200-111]  Elapsed time: 0.168 seconds; current allocated memory: 140.615 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'tx_axis_words'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'tx_axis_words'.
+INFO: [HLS 200-111]  Elapsed time: 0.259 seconds; current allocated memory: 141.000 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'dataflow_in_loop'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SYN 201-210] Renamed object name 'dataflow_in_loop_cache_V' to 'dataflow_in_loop_bkb' due to the length limit 20
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWUSER' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WDATA' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WSTRB' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WLAST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WUSER' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_BREADY' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'dataflow_in_loop'.
+INFO: [HLS 200-111]  Elapsed time: 0.959 seconds; current allocated memory: 141.529 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'tx_loop'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWUSER' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WDATA' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WSTRB' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WLAST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WUSER' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_BREADY' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'tx_loop'.
+INFO: [HLS 200-111]  Elapsed time: 0.887 seconds; current allocated memory: 141.948 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'data_mover'
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'data_mover/DMA' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'data_mover/data_rx_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'data_mover/data_tx_V_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'data_mover/tx_buffer_V' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'data_mover/tx_buffer_length_V' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'data_mover/rx_buffer_V' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'data_mover/rx_buffer_length_V' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'data_mover' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'return', 'tx_buffer_V', 'tx_buffer_length_V' and 'rx_buffer_length_V' to AXI-Lite port control.
+WARNING: [RTGEN 206-101] Port 'data_mover/data_rx_V_V_TDATA' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'data_mover/data_rx_V_V_TVALID' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+WARNING: [RTGEN 206-101] Port 'data_mover/data_rx_V_V_TREADY' has no fanin or fanout and is left dangling.
+               Please use C simulation to confirm this function argument can be read from or written to.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'data_mover'.
+INFO: [HLS 200-111]  Elapsed time: 1.08 seconds; current allocated memory: 142.849 MB.
+INFO: [RTMG 210-278] Implementing memory 'dataflow_in_loop_bkb_memcore_ram (RAM)' using block RAMs.
+INFO: [RTMG 210-285] Implementing FIFO 'fifo_w13_d2_A' using Shift Registers.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:00:04 ; elapsed = 00:00:28 . Memory (MB): peak = 198.918 ; gain = 141.270
+INFO: [SYSC 207-301] Generating SystemC RTL for data_mover.
+INFO: [VHDL 208-304] Generating VHDL RTL for data_mover.
+INFO: [VLOG 209-307] Generating Verilog RTL for data_mover.
+INFO: [HLS 200-112] Total elapsed time: 28.491 seconds; peak allocated memory: 142.849 MB.

@@ -11,7 +11,49 @@
   </errorLogs>
   <warningLogs>
     <logs>
-      <synLog/>
+      <synLog>
+        <logs message="WARNING: [RTGEN 206-101] Port 'data_mover/data_rx_V_V_TREADY' has no fanin or fanout and is left dangling.&#xD;&#xA;               Please use C simulation to confirm this function argument can be read from or written to." projectName="datamover" solutionName="production" date="2018-06-10T20:20:21.649-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Port 'data_mover/data_rx_V_V_TVALID' has no fanin or fanout and is left dangling.&#xD;&#xA;               Please use C simulation to confirm this function argument can be read from or written to." projectName="datamover" solutionName="production" date="2018-06-10T20:20:21.575-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Port 'data_mover/data_rx_V_V_TDATA' has no fanin or fanout and is left dangling.&#xD;&#xA;               Please use C simulation to confirm this function argument can be read from or written to." projectName="datamover" solutionName="production" date="2018-06-10T20:20:21.501-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_BREADY' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:21.133-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WUSER' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:21.074-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WID' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:21.030-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WLAST' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.986-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WSTRB' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.897-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WDATA' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.868-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_WVALID' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.853-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWUSER' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.838-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWREGION' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.794-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWQOS' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.735-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWPROT' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.720-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWCACHE' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.706-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWLOCK' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.691-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWBURST' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.647-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWSIZE' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.632-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWLEN' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.558-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWID' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.455-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWADDR' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.337-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'tx_loop/m_axi_tx_buffer_V_AWVALID' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:20.220-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_BREADY' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.895-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WUSER' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.836-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WID' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.807-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WLAST' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.748-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WSTRB' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.718-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WDATA' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.644-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_WVALID' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.571-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWUSER' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.527-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWREGION' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.497-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWQOS' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.468-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWPROT' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.438-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWCACHE' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.409-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWLOCK' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.335-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWBURST' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.320-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWSIZE' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.261-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWLEN' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.202-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWID' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.143-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWADDR' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.114-0700" type="Warning"/>
+        <logs message="WARNING: [RTGEN 206-101] Setting dangling out port 'dataflow_in_loop/m_axi_tx_buffer_V_AWVALID' to 0." projectName="datamover" solutionName="production" date="2018-06-10T20:20:19.084-0700" type="Warning"/>
+      </synLog>
       <simLog/>
       <mgLog/>
       <packageLog/>

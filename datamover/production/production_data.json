@@ -1061,10 +1061,10 @@
         "Latency": {
           "LatencyBest": "4",
           "LatencyAvg": "",
-          "LatencyWorst": "33583624",
+          "LatencyWorst": "16794124",
           "PipelineIIMin": "4",
-          "PipelineIIMax": "33583624",
-          "PipelineII": "4 ~ 33583624",
+          "PipelineIIMax": "16794124",
+          "PipelineII": "4 ~ 16794124",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
@@ -1077,12 +1077,12 @@
             "Name": "Loop 1",
             "TripCount": "",
             "LatencyMin": "3",
-            "LatencyMax": "33583623",
-            "Latency": "3 ~ 33583623",
+            "LatencyMax": "16794123",
+            "Latency": "3 ~ 16794123",
             "PipelineII": "",
             "PipelineDepthMin": "3",
-            "PipelineDepthMax": "33583623",
-            "PipelineDepth": "3 ~ 33583623"
+            "PipelineDepthMax": "16794123",
+            "PipelineDepth": "3 ~ 16794123"
           }],
         "Area": {
           "BRAM_18K": "2",
@@ -1095,10 +1095,10 @@
         "Latency": {
           "LatencyBest": "6",
           "LatencyAvg": "",
-          "LatencyWorst": "33583626",
+          "LatencyWorst": "16794126",
           "PipelineIIMin": "7",
-          "PipelineIIMax": "33583627",
-          "PipelineII": "7 ~ 33583627",
+          "PipelineIIMax": "16794127",
+          "PipelineII": "7 ~ 16794127",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
@@ -1118,7 +1118,7 @@
   },
   "GenData": {
     "DataVersion": "0.1",
-    "Time": "2018-06-10 19:42:22 -0700",
+    "Time": "2018-06-10 20:20:24 -0700",
     "ToolName": "vivado_hls",
     "ToolVersion": "2018.1"
   }

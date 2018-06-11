@@ -1,0 +1,212 @@
+
+
+================================================================
+== Vivado HLS Report for 'dataflow_in_loop'
+================================================================
+* Date:           Sun Jun 10 20:20:19 2018
+
+* Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
+* Project:        datamover
+* Solution:       production
+* Product family: zynq
+* Target device:  xc7z020clg400-3
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |   6.50|      4.50|        2.00|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+------+-----+------+----------+
+    |   Latency  |  Interval  | Pipeline |
+    | min |  max | min |  max |   Type   |
+    +-----+------+-----+------+----------+
+    |  525|  4622|  523|  4100| dataflow |
+    +-----+------+-----+------+----------+
+
+    + Detail: 
+        * Instance: 
+        +------------------+---------------+-----+------+-----+------+---------+
+        |                  |               |   Latency  |  Interval  | Pipeline|
+        |     Instance     |     Module    | min |  max | min |  max |   Type  |
+        +------------------+---------------+-----+------+-----+------+---------+
+        |read_burst_U0     |read_burst     |  522|   522|  522|   522|   none  |
+        |tx_axis_words_U0  |tx_axis_words  |    2|  4099|    2|  4099|   none  |
+        +------------------+---------------+-----+------+-----+------+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     14|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |        -|      -|     259|    556|
+|Memory           |        2|      -|       0|      0|
+|Multiplexer      |        -|      -|       -|     18|
+|Register         |        -|      -|       2|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        2|      0|     261|    588|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |    ~0   |      0|   ~0   |      1|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +------------------+---------------+---------+-------+-----+-----+
+    |     Instance     |     Module    | BRAM_18K| DSP48E|  FF | LUT |
+    +------------------+---------------+---------+-------+-----+-----+
+    |read_burst_U0     |read_burst     |        0|      0|  166|  256|
+    |tx_axis_words_U0  |tx_axis_words  |        0|      0|   93|  300|
+    +------------------+---------------+---------+-------+-----+-----+
+    |Total             |               |        0|      0|  259|  556|
+    +------------------+---------------+---------+-------+-----+-----+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    +-----------+----------------------+---------+---+----+------+-----+------+-------------+
+    |   Memory  |        Module        | BRAM_18K| FF| LUT| Words| Bits| Banks| W*Bits*Banks|
+    +-----------+----------------------+---------+---+----+------+-----+------+-------------+
+    |cache_V_U  |dataflow_in_loop_bkb  |        2|  0|   0|   512|   64|     2|        65536|
+    +-----------+----------------------+---------+---+----+------+-----+------+-------------+
+    |Total      |                      |        2|  0|   0|   512|   64|     2|        65536|
+    +-----------+----------------------+---------+---+----+------+-----+------+-------------+
+
+    * FIFO: 
+    +-----------------+---------+---+----+------+-----+---------+
+    |       Name      | BRAM_18K| FF| LUT| Depth| Bits| Size:D*B|
+    +-----------------+---------+---+----+------+-----+---------+
+    |data_length_V_U  |        0|  0|   0|     2|   13|       26|
+    +-----------------+---------+---+----+------+-----+---------+
+    |Total            |        0|  0|   0|     2|   13|       26|
+    +-----------------+---------+---+----+------+-----+---------+
+
+    * Expression: 
+    +-------------------------------------+----------+-------+---+----+------------+------------+
+    |            Variable Name            | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-------------------------------------+----------+-------+---+----+------------+------------+
+    |ap_channel_done_cache_V              |    and   |      0|  0|   2|           1|           1|
+    |ap_channel_done_data_length_V        |    and   |      0|  0|   2|           1|           1|
+    |ap_idle                              |    and   |      0|  0|   2|           1|           1|
+    |read_burst_U0_ap_continue            |    and   |      0|  0|   2|           1|           1|
+    |tx_axis_words_U0_ap_start            |    and   |      0|  0|   2|           1|           1|
+    |ap_sync_channel_write_cache_V        |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_channel_write_data_length_V  |    or    |      0|  0|   2|           1|           1|
+    +-------------------------------------+----------+-------+---+----+------------+------------+
+    |Total                                |          |      0|  0|  14|           7|           7|
+    +-------------------------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-----------------------------------------+----+-----------+-----+-----------+
+    |                   Name                  | LUT| Input Size| Bits| Total Bits|
+    +-----------------------------------------+----+-----------+-----+-----------+
+    |ap_sync_reg_channel_write_cache_V        |   9|          2|    1|          2|
+    |ap_sync_reg_channel_write_data_length_V  |   9|          2|    1|          2|
+    +-----------------------------------------+----+-----------+-----+-----------+
+    |Total                                    |  18|          4|    2|          4|
+    +-----------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-----------------------------------------+---+----+-----+-----------+
+    |                   Name                  | FF| LUT| Bits| Const Bits|
+    +-----------------------------------------+---+----+-----+-----------+
+    |ap_sync_reg_channel_write_cache_V        |  1|   0|    1|          0|
+    |ap_sync_reg_channel_write_data_length_V  |  1|   0|    1|          0|
+    +-----------------------------------------+---+----+-----+-----------+
+    |Total                                    |  2|   0|    2|          0|
+    +-----------------------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------------+-----+-----+------------+----------------------+--------------+
+|          RTL Ports          | Dir | Bits|  Protocol  |     Source Object    |    C Type    |
++-----------------------------+-----+-----+------------+----------------------+--------------+
+|ap_clk                       |  in |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
+|ap_rst                       |  in |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
+|ap_done                      | out |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
+|ap_start                     |  in |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
+|ap_ready                     | out |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
+|ap_idle                      | out |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
+|ap_continue                  |  in |    1| ap_ctrl_hs |   dataflow_in_loop   | return value |
+|m_axi_tx_buffer_V_AWVALID    | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWREADY    |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWADDR     | out |   32|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWID       | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWLEN      | out |   32|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWSIZE     | out |    3|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWBURST    | out |    2|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWLOCK     | out |    2|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWCACHE    | out |    4|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWPROT     | out |    3|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWQOS      | out |    4|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWREGION   | out |    4|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_AWUSER     | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_WVALID     | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_WREADY     |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_WDATA      | out |   64|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_WSTRB      | out |    8|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_WLAST      | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_WID        | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_WUSER      | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARVALID    | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARREADY    |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARADDR     | out |   32|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARID       | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARLEN      | out |   32|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARSIZE     | out |    3|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARBURST    | out |    2|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARLOCK     | out |    2|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARCACHE    | out |    4|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARPROT     | out |    3|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARQOS      | out |    4|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARREGION   | out |    4|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_ARUSER     | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_RVALID     |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_RREADY     | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_RDATA      |  in |   64|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_RLAST      |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_RID        |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_RUSER      |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_RRESP      |  in |    2|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_BVALID     |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_BREADY     | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_BRESP      |  in |    2|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_BID        |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|m_axi_tx_buffer_V_BUSER      |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
+|tx_buffer_V_offset           |  in |   29|   ap_none  |  tx_buffer_V_offset  |    scalar    |
+|tx_buffer_V_offset_ap_vld    |  in |    1|   ap_none  |  tx_buffer_V_offset  |    scalar    |
+|val_assign                   |  in |   13|   ap_none  |      val_assign      |    scalar    |
+|val_assign_ap_vld            |  in |    1|   ap_none  |      val_assign      |    scalar    |
+|loop_count_V                 |  in |   13|   ap_none  |     loop_count_V     |    scalar    |
+|loop_count_V_ap_vld          |  in |    1|   ap_none  |     loop_count_V     |    scalar    |
+|final_burst_length_V         |  in |   13|   ap_none  | final_burst_length_V |    scalar    |
+|final_burst_length_V_ap_vld  |  in |    1|   ap_none  | final_burst_length_V |    scalar    |
+|axis_V_V_TDATA               | out |    8|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TVALID              | out |    1|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TREADY              |  in |    1|    axis    |       axis_V_V       |    pointer   |
++-----------------------------+-----+-----+------------+----------------------+--------------+
+

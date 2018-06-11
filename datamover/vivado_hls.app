@@ -1,4 +1,4 @@
-<project xmlns="com.autoesl.autopilot.project" top="data_mover" name="datamover">
+<project xmlns="com.autoesl.autopilot.project" name="datamover" top="data_mover">
     <includePaths/>
     <libraryPaths/>
     <Simulation>
