@@ -9,11 +9,11 @@ OPTION psf_version = 2.1;
 
 BEGIN driver data_mover
 
- OPTION supported_peripherals = (data_mover_v1_0 );
+ OPTION supported_peripherals = (data_mover_v1_05 );
  OPTION driver_state = ACTIVE;
  OPTION copyfiles = all;
  OPTION name = data_mover;
- OPTION version = 1.0;
+ OPTION version = 1.05;
 
 END driver
 
