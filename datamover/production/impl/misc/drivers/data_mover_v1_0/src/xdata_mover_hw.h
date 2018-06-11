@@ -28,14 +28,14 @@
 //        bit 31~0 - tx_buffer_V[31:0] (Read/Write)
 // 0x14 : reserved
 // 0x18 : Data signal of tx_buffer_length_V
-//        bit 21~0 - tx_buffer_length_V[21:0] (Read/Write)
+//        bit 24~0 - tx_buffer_length_V[24:0] (Read/Write)
 //        others   - reserved
 // 0x1c : reserved
 // 0x20 : Data signal of rx_buffer_V
 //        bit 31~0 - rx_buffer_V[31:0] (Read/Write)
 // 0x24 : reserved
 // 0x28 : Data signal of rx_buffer_length_V
-//        bit 21~0 - rx_buffer_length_V[21:0] (Read/Write)
+//        bit 24~0 - rx_buffer_length_V[24:0] (Read/Write)
 //        others   - reserved
 // 0x2c : reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
@@ -47,9 +47,9 @@
 #define XDATA_MOVER_CONTROL_ADDR_TX_BUFFER_V_DATA        0x10
 #define XDATA_MOVER_CONTROL_BITS_TX_BUFFER_V_DATA        32
 #define XDATA_MOVER_CONTROL_ADDR_TX_BUFFER_LENGTH_V_DATA 0x18
-#define XDATA_MOVER_CONTROL_BITS_TX_BUFFER_LENGTH_V_DATA 22
+#define XDATA_MOVER_CONTROL_BITS_TX_BUFFER_LENGTH_V_DATA 25
 #define XDATA_MOVER_CONTROL_ADDR_RX_BUFFER_V_DATA        0x20
 #define XDATA_MOVER_CONTROL_BITS_RX_BUFFER_V_DATA        32
 #define XDATA_MOVER_CONTROL_ADDR_RX_BUFFER_LENGTH_V_DATA 0x28
-#define XDATA_MOVER_CONTROL_BITS_RX_BUFFER_LENGTH_V_DATA 22
+#define XDATA_MOVER_CONTROL_BITS_RX_BUFFER_LENGTH_V_DATA 25
 

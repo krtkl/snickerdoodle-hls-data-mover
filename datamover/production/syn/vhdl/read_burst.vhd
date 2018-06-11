@@ -66,12 +66,12 @@ port (
     tx_buffer_V_offset : IN STD_LOGIC_VECTOR (28 downto 0);
     val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
     loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-    final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
+    final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
     cache_V_address0 : OUT STD_LOGIC_VECTOR (8 downto 0);
     cache_V_ce0 : OUT STD_LOGIC;
     cache_V_we0 : OUT STD_LOGIC;
     cache_V_d0 : OUT STD_LOGIC_VECTOR (63 downto 0);
-    ap_return : OUT STD_LOGIC_VECTOR (9 downto 0) );
+    ap_return : OUT STD_LOGIC_VECTOR (12 downto 0) );
 end;
 
 
@@ -108,6 +108,8 @@ architecture behav of read_burst is
     constant ap_const_lv10_1 : STD_LOGIC_VECTOR (9 downto 0) := "0000000001";
     constant ap_const_lv32_9 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000001001";
     constant ap_const_lv14_3FFF : STD_LOGIC_VECTOR (13 downto 0) := "11111111111111";
+    constant ap_const_lv13_1000 : STD_LOGIC_VECTOR (12 downto 0) := "1000000000000";
+    constant ap_const_lv13_0 : STD_LOGIC_VECTOR (12 downto 0) := "0000000000000";
 
     signal ap_done_reg : STD_LOGIC := '0';
     signal ap_CS_fsm : STD_LOGIC_VECTOR (9 downto 0) := "0000000001";
@@ -157,11 +159,11 @@ architecture behav of read_burst is
     signal ap_CS_fsm_state12 : STD_LOGIC;
     attribute fsm_encoding of ap_CS_fsm_state12 : signal is "none";
     signal lhs_V_cast_i_i_fu_185_p1 : STD_LOGIC_VECTOR (13 downto 0);
-    signal tmp_6_cast_i_i_fu_194_p1 : STD_LOGIC_VECTOR (13 downto 0);
+    signal tmp_2_cast_i_i_fu_194_p1 : STD_LOGIC_VECTOR (13 downto 0);
     signal r_V_fu_188_p2 : STD_LOGIC_VECTOR (13 downto 0);
-    signal tmp_7_i_i_fu_197_p2 : STD_LOGIC_VECTOR (0 downto 0);
-    signal data_length_V_write_s_fu_203_p3 : STD_LOGIC_VECTOR (9 downto 0);
-    signal ap_return_preg : STD_LOGIC_VECTOR (9 downto 0) := "0000000000";
+    signal tmp_3_i_i_fu_197_p2 : STD_LOGIC_VECTOR (0 downto 0);
+    signal data_length_V_write_s_fu_203_p3 : STD_LOGIC_VECTOR (12 downto 0);
+    signal ap_return_preg : STD_LOGIC_VECTOR (12 downto 0) := "0000000000000";
     signal ap_NS_fsm : STD_LOGIC_VECTOR (9 downto 0);
     signal ap_idle_pp0 : STD_LOGIC;
     signal ap_enable_pp0 : STD_LOGIC;
@@ -272,7 +274,7 @@ begin
     begin
         if (ap_clk'event and ap_clk =  '1') then
             if (ap_rst = '1') then
-                ap_return_preg <= ap_const_lv10_0;
+                ap_return_preg <= ap_const_lv13_0;
             else
                 if ((ap_const_logic_1 = ap_CS_fsm_state12)) then 
                     ap_return_preg <= data_length_V_write_s_fu_203_p3;
@@ -506,8 +508,8 @@ begin
     end process;
 
     data_length_V_write_s_fu_203_p3 <= 
-        final_burst_length_V when (tmp_7_i_i_fu_197_p2(0) = '1') else 
-        ap_const_lv10_200;
+        final_burst_length_V when (tmp_3_i_i_fu_197_p2(0) = '1') else 
+        ap_const_lv13_1000;
     exitcond_i_i_fu_168_p2 <= "1" when (ap_phi_mux_indvar_i_i_phi_fu_124_p4 = ap_const_lv10_200) else "0";
     indvar1_i_i_fu_180_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(indvar_i_i_reg_120_pp0_iter1_reg),64));
     indvar_next_i_i_fu_174_p2 <= std_logic_vector(unsigned(ap_phi_mux_indvar_i_i_phi_fu_124_p4) + unsigned(ap_const_lv10_1));
@@ -566,8 +568,8 @@ begin
     sext_cast_i_fu_148_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(tx_buffer_V_offset),30));
     sum_cast_i_fu_158_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(sum_i_reg_215),64));
     sum_i_fu_152_p2 <= std_logic_vector(unsigned(sext_cast_i_fu_148_p1) + unsigned(tmp_i_cast_i_fu_144_p1));
-    tmp_6_cast_i_i_fu_194_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(tmp_reg_210),14));
-    tmp_7_i_i_fu_197_p2 <= "1" when (tmp_6_cast_i_i_fu_194_p1 = r_V_fu_188_p2) else "0";
+    tmp_2_cast_i_i_fu_194_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(tmp_reg_210),14));
+    tmp_3_i_i_fu_197_p2 <= "1" when (tmp_2_cast_i_i_fu_194_p1 = r_V_fu_188_p2) else "0";
     tmp_fu_132_p1 <= val_assign(12 - 1 downto 0);
     tmp_i_cast_i_fu_144_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(buffer_offset_V_fu_136_p3),30));
 

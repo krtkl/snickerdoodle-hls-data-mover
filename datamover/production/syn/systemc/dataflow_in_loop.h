@@ -23,9 +23,9 @@ struct dataflow_in_loop : public sc_module {
     // Port declarations 63
     sc_in_clk ap_clk;
     sc_in< sc_logic > ap_rst;
-    sc_in< sc_lv<64> > axis_V_V_TDATA;
+    sc_in< sc_lv<8> > axis_V_V_TDATA;
     sc_in< sc_lv<13> > loop_count_V;
-    sc_in< sc_lv<10> > final_burst_length_V;
+    sc_in< sc_lv<13> > final_burst_length_V;
     sc_in< sc_lv<13> > val_assign;
     sc_out< sc_logic > m_axi_rx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_rx_buffer_V_AWREADY;

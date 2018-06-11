@@ -39,9 +39,9 @@ module data_mover_control_s_axi
     input  wire                          ap_ready,
     input  wire                          ap_idle,
     output wire [31:0]                   tx_buffer_V,
-    output wire [21:0]                   tx_buffer_length_V,
+    output wire [24:0]                   tx_buffer_length_V,
     output wire [31:0]                   rx_buffer_V,
-    output wire [21:0]                   rx_buffer_length_V
+    output wire [24:0]                   rx_buffer_length_V
 );
 //------------------------Address Info-------------------
 // 0x00 : Control signals
@@ -66,14 +66,14 @@ module data_mover_control_s_axi
 //        bit 31~0 - tx_buffer_V[31:0] (Read/Write)
 // 0x14 : reserved
 // 0x18 : Data signal of tx_buffer_length_V
-//        bit 21~0 - tx_buffer_length_V[21:0] (Read/Write)
+//        bit 24~0 - tx_buffer_length_V[24:0] (Read/Write)
 //        others   - reserved
 // 0x1c : reserved
 // 0x20 : Data signal of rx_buffer_V
 //        bit 31~0 - rx_buffer_V[31:0] (Read/Write)
 // 0x24 : reserved
 // 0x28 : Data signal of rx_buffer_length_V
-//        bit 21~0 - rx_buffer_length_V[21:0] (Read/Write)
+//        bit 24~0 - rx_buffer_length_V[24:0] (Read/Write)
 //        others   - reserved
 // 0x2c : reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
@@ -123,9 +123,9 @@ localparam
     reg  [1:0]                    int_ier = 2'b0;
     reg  [1:0]                    int_isr = 2'b0;
     reg  [31:0]                   int_tx_buffer_V = 'b0;
-    reg  [21:0]                   int_tx_buffer_length_V = 'b0;
+    reg  [24:0]                   int_tx_buffer_length_V = 'b0;
     reg  [31:0]                   int_rx_buffer_V = 'b0;
-    reg  [21:0]                   int_rx_buffer_length_V = 'b0;
+    reg  [24:0]                   int_rx_buffer_length_V = 'b0;
 
 //------------------------Instantiation------------------
 
@@ -237,13 +237,13 @@ always @(posedge ACLK) begin
                     rdata <= int_tx_buffer_V[31:0];
                 end
                 ADDR_TX_BUFFER_LENGTH_V_DATA_0: begin
-                    rdata <= int_tx_buffer_length_V[21:0];
+                    rdata <= int_tx_buffer_length_V[24:0];
                 end
                 ADDR_RX_BUFFER_V_DATA_0: begin
                     rdata <= int_rx_buffer_V[31:0];
                 end
                 ADDR_RX_BUFFER_LENGTH_V_DATA_0: begin
-                    rdata <= int_rx_buffer_length_V[21:0];
+                    rdata <= int_rx_buffer_length_V[24:0];
                 end
             endcase
         end
@@ -364,13 +364,13 @@ always @(posedge ACLK) begin
     end
 end
 
-// int_tx_buffer_length_V[21:0]
+// int_tx_buffer_length_V[24:0]
 always @(posedge ACLK) begin
     if (ARESET)
-        int_tx_buffer_length_V[21:0] <= 0;
+        int_tx_buffer_length_V[24:0] <= 0;
     else if (ACLK_EN) begin
         if (w_hs && waddr == ADDR_TX_BUFFER_LENGTH_V_DATA_0)
-            int_tx_buffer_length_V[21:0] <= (WDATA[31:0] & wmask) | (int_tx_buffer_length_V[21:0] & ~wmask);
+            int_tx_buffer_length_V[24:0] <= (WDATA[31:0] & wmask) | (int_tx_buffer_length_V[24:0] & ~wmask);
     end
 end
 
@@ -384,13 +384,13 @@ always @(posedge ACLK) begin
     end
 end
 
-// int_rx_buffer_length_V[21:0]
+// int_rx_buffer_length_V[24:0]
 always @(posedge ACLK) begin
     if (ARESET)
-        int_rx_buffer_length_V[21:0] <= 0;
+        int_rx_buffer_length_V[24:0] <= 0;
     else if (ACLK_EN) begin
         if (w_hs && waddr == ADDR_RX_BUFFER_LENGTH_V_DATA_0)
-            int_rx_buffer_length_V[21:0] <= (WDATA[31:0] & wmask) | (int_rx_buffer_length_V[21:0] & ~wmask);
+            int_rx_buffer_length_V[24:0] <= (WDATA[31:0] & wmask) | (int_rx_buffer_length_V[24:0] & ~wmask);
     end
 end
 

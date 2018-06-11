@@ -30,7 +30,7 @@
 /**
  * @description AXIS data mover test bench
  * @author Jamil J. Weatherbee
- * @version 2018-06-11T07:32:32Z
+ * @version 2018-06-11T08:18:22Z
  */
 
 #include <stdlib.h>
@@ -103,6 +103,39 @@ int main (void)
   void *RAM;
   axi_t *tx_buffer;
   axi_t *rx_buffer;
+
+  std::cout << "Test Parameters:" << std::endl;
+
+  std::cout << "TX_PRBS_STATE=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << TX_PRBS_STATE << std::endl;
+  std::cout << "TX_TRANSFER_LENGTH=" << std::dec << TX_TRANSFER_LENGTH << std::endl;
+
+  std::cout << "RX_PRBS_STATE=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << RX_PRBS_STATE << std::endl;
+  std::cout << "RX_TRANSFER_LENGTH=" << std::dec << RX_TRANSFER_LENGTH << std::endl;
+
+  std::cout << "AXI_WORD_LOG2_BYTES=" << std::dec << AXI_WORD_LOG2_BYTES << std::endl;
+  std::cout << "AXI_WORD_SIZE=" << std::dec << AXI_WORD_SIZE << std::endl;
+  std::cout << "AXI_WORD_BITS=" << std::dec << AXI_WORD_BITS << std::endl;
+
+  std::cout << "AXIS_WORD_LOG2_BYTES=" << std::dec << AXIS_WORD_LOG2_BYTES << std::endl;
+  std::cout << "AXIS_WORD_SIZE=" << std::dec << AXIS_WORD_SIZE << std::endl;
+  std::cout << "AXIS_WORD_BITS=" << std::dec << AXIS_WORD_BITS << std::endl;
+
+  std::cout << "AXIS_WORDS_PER_AXI_WORD=" << std::dec << AXIS_WORDS_PER_AXI_WORD << std::endl;
+
+  std::cout << "CACHE_WORD_ADDRESS_BITS=" << std::dec << CACHE_WORD_ADDRESS_BITS << std::endl;
+  std::cout << "CACHE_WORDS=" << std::dec << CACHE_WORDS << std::endl;
+  std::cout << "CACHE_SIZE=" << std::dec << CACHE_SIZE << std::endl;
+
+  std::cout << "BUFFER_WORD_ADDRESS_BITS=" << std::dec << BUFFER_WORD_ADDRESS_BITS << std::endl;
+  std::cout << "BUFFER_WORDS=" << std::dec << BUFFER_WORDS << std::endl;
+  std::cout << "BUFFER_SIZE=" << std::dec << BUFFER_SIZE << std::endl;
+
+  std::cout << "LOOP_ITERATOR_BITS=" << std::dec << LOOP_ITERATOR_BITS << std::endl;
+  std::cout << "LOOP_MAX_TRIP_COUNT=" << std::dec << LOOP_MAX_TRIP_COUNT << std::endl;
+  std::cout << "LOOP_TRIP_COUNT_BITS=" << std::dec << LOOP_TRIP_COUNT_BITS << std::endl;
+  std::cout << "CACHE_LENGTH_BITS=" << std::dec << CACHE_LENGTH_BITS << std::endl;
+  std::cout << "CACHE_LENGTH=" << std::dec << CACHE_LENGTH << std::endl;
+  std::cout << "BUFFER_LENGTH_BITS=" << std::dec << BUFFER_LENGTH_BITS << std::endl;
 
   std::cout << "Allocating " << std::dec << BUFFER_SIZE  << " byte transmit buffer... ";
   tx_buffer = (axi_t *)malloc(BUFFER_SIZE);

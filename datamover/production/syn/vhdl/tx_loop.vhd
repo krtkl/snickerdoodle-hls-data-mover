@@ -11,7 +11,7 @@ use IEEE.numeric_std.all;
 
 entity tx_loop is
 port (
-    axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
+    axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (7 downto 0);
     m_axi_tx_buffer_V_AWVALID : OUT STD_LOGIC;
     m_axi_tx_buffer_V_AWREADY : IN STD_LOGIC;
     m_axi_tx_buffer_V_AWADDR : OUT STD_LOGIC_VECTOR (31 downto 0);
@@ -59,7 +59,7 @@ port (
     m_axi_tx_buffer_V_BUSER : IN STD_LOGIC_VECTOR (0 downto 0);
     tx_buffer_V_offset : IN STD_LOGIC_VECTOR (28 downto 0);
     loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-    final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
+    final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
     ap_clk : IN STD_LOGIC;
     ap_rst : IN STD_LOGIC;
     tx_buffer_V_offset_ap_vld : IN STD_LOGIC;
@@ -76,7 +76,7 @@ end;
 
 
 architecture behav of tx_loop is 
-    constant ap_const_lv64_0 : STD_LOGIC_VECTOR (63 downto 0) := "0000000000000000000000000000000000000000000000000000000000000000";
+    constant ap_const_lv8_0 : STD_LOGIC_VECTOR (7 downto 0) := "00000000";
     constant ap_const_logic_0 : STD_LOGIC := '0';
     constant ap_const_logic_1 : STD_LOGIC := '1';
     constant ap_const_boolean_1 : BOOLEAN := true;
@@ -89,7 +89,7 @@ architecture behav of tx_loop is
     constant ap_const_lv32_0 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000000";
     constant ap_const_lv3_0 : STD_LOGIC_VECTOR (2 downto 0) := "000";
     constant ap_const_lv4_0 : STD_LOGIC_VECTOR (3 downto 0) := "0000";
-    constant ap_const_lv8_0 : STD_LOGIC_VECTOR (7 downto 0) := "00000000";
+    constant ap_const_lv64_0 : STD_LOGIC_VECTOR (63 downto 0) := "0000000000000000000000000000000000000000000000000000000000000000";
 
     signal dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWVALID : STD_LOGIC;
     signal dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWADDR : STD_LOGIC_VECTOR (31 downto 0);
@@ -123,7 +123,7 @@ architecture behav of tx_loop is
     signal dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARUSER : STD_LOGIC_VECTOR (0 downto 0);
     signal dataflow_in_loop59_U0_m_axi_tx_buffer_V_RREADY : STD_LOGIC;
     signal dataflow_in_loop59_U0_m_axi_tx_buffer_V_BREADY : STD_LOGIC;
-    signal dataflow_in_loop59_U0_axis_V_V_TDATA : STD_LOGIC_VECTOR (63 downto 0);
+    signal dataflow_in_loop59_U0_axis_V_V_TDATA : STD_LOGIC_VECTOR (7 downto 0);
     signal dataflow_in_loop59_U0_axis_V_V_TVALID : STD_LOGIC;
     signal dataflow_in_loop59_U0_ap_done : STD_LOGIC;
     signal dataflow_in_loop59_U0_ap_start : STD_LOGIC;
@@ -192,8 +192,8 @@ architecture behav of tx_loop is
         tx_buffer_V_offset : IN STD_LOGIC_VECTOR (28 downto 0);
         val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
         loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-        final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
-        axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
+        final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
+        axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (7 downto 0);
         tx_buffer_V_offset_ap_vld : IN STD_LOGIC;
         val_assign_ap_vld : IN STD_LOGIC;
         loop_count_V_ap_vld : IN STD_LOGIC;

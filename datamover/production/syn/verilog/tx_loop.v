@@ -72,7 +72,7 @@ module tx_loop (
 );
 
 
-output  [63:0] axis_V_V_TDATA;
+output  [7:0] axis_V_V_TDATA;
 output   m_axi_tx_buffer_V_AWVALID;
 input   m_axi_tx_buffer_V_AWREADY;
 output  [31:0] m_axi_tx_buffer_V_AWADDR;
@@ -120,7 +120,7 @@ input  [0:0] m_axi_tx_buffer_V_BID;
 input  [0:0] m_axi_tx_buffer_V_BUSER;
 input  [28:0] tx_buffer_V_offset;
 input  [12:0] loop_count_V;
-input  [9:0] final_burst_length_V;
+input  [12:0] final_burst_length_V;
 input   ap_clk;
 input   ap_rst;
 input   tx_buffer_V_offset_ap_vld;
@@ -169,7 +169,7 @@ wire   [3:0] dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARREGION;
 wire   [0:0] dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARUSER;
 wire    dataflow_in_loop59_U0_m_axi_tx_buffer_V_RREADY;
 wire    dataflow_in_loop59_U0_m_axi_tx_buffer_V_BREADY;
-wire   [63:0] dataflow_in_loop59_U0_axis_V_V_TDATA;
+wire   [7:0] dataflow_in_loop59_U0_axis_V_V_TDATA;
 wire    dataflow_in_loop59_U0_axis_V_V_TVALID;
 wire    dataflow_in_loop59_U0_ap_done;
 reg    dataflow_in_loop59_U0_ap_start;

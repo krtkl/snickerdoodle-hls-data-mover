@@ -61,8 +61,8 @@ port (
     tx_buffer_V_offset : IN STD_LOGIC_VECTOR (28 downto 0);
     val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
     loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-    final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
-    axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
+    final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
+    axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (7 downto 0);
     tx_buffer_V_offset_ap_vld : IN STD_LOGIC;
     val_assign_ap_vld : IN STD_LOGIC;
     loop_count_V_ap_vld : IN STD_LOGIC;
@@ -79,8 +79,9 @@ end;
 
 architecture behav of dataflow_in_loop59 is 
     constant ap_const_logic_1 : STD_LOGIC := '1';
-    constant ap_const_lv64_0 : STD_LOGIC_VECTOR (63 downto 0) := "0000000000000000000000000000000000000000000000000000000000000000";
+    constant ap_const_lv8_0 : STD_LOGIC_VECTOR (7 downto 0) := "00000000";
     constant ap_const_logic_0 : STD_LOGIC := '0';
+    constant ap_const_lv64_0 : STD_LOGIC_VECTOR (63 downto 0) := "0000000000000000000000000000000000000000000000000000000000000000";
     constant ap_const_lv2_0 : STD_LOGIC_VECTOR (1 downto 0) := "00";
     constant ap_const_lv2_1 : STD_LOGIC_VECTOR (1 downto 0) := "01";
     constant ap_const_lv1_0 : STD_LOGIC_VECTOR (0 downto 0) := "0";
@@ -88,7 +89,6 @@ architecture behav of dataflow_in_loop59 is
     constant ap_const_lv32_0 : STD_LOGIC_VECTOR (31 downto 0) := "00000000000000000000000000000000";
     constant ap_const_lv3_0 : STD_LOGIC_VECTOR (2 downto 0) := "000";
     constant ap_const_lv4_0 : STD_LOGIC_VECTOR (3 downto 0) := "0000";
-    constant ap_const_lv8_0 : STD_LOGIC_VECTOR (7 downto 0) := "00000000";
     constant ap_const_boolean_1 : BOOLEAN := true;
 
     signal cache_V_i_q0 : STD_LOGIC_VECTOR (63 downto 0);
@@ -134,7 +134,7 @@ architecture behav of dataflow_in_loop59 is
     signal read_burst_U0_cache_V_ce0 : STD_LOGIC;
     signal read_burst_U0_cache_V_we0 : STD_LOGIC;
     signal read_burst_U0_cache_V_d0 : STD_LOGIC_VECTOR (63 downto 0);
-    signal read_burst_U0_ap_return : STD_LOGIC_VECTOR (9 downto 0);
+    signal read_burst_U0_ap_return : STD_LOGIC_VECTOR (12 downto 0);
     signal ap_channel_done_data_length_V : STD_LOGIC;
     signal data_length_V_full_n : STD_LOGIC;
     signal ap_sync_reg_channel_write_data_length_V : STD_LOGIC := '0';
@@ -150,12 +150,12 @@ architecture behav of dataflow_in_loop59 is
     signal tx_axis_words_U0_ap_ready : STD_LOGIC;
     signal tx_axis_words_U0_cache_V_address0 : STD_LOGIC_VECTOR (8 downto 0);
     signal tx_axis_words_U0_cache_V_ce0 : STD_LOGIC;
-    signal tx_axis_words_U0_axis_V_V_TDATA : STD_LOGIC_VECTOR (63 downto 0);
+    signal tx_axis_words_U0_axis_V_V_TDATA : STD_LOGIC_VECTOR (7 downto 0);
     signal tx_axis_words_U0_axis_V_V_TVALID : STD_LOGIC;
     signal ap_sync_continue : STD_LOGIC;
     signal cache_V_i_full_n : STD_LOGIC;
     signal cache_V_t_empty_n : STD_LOGIC;
-    signal data_length_V_dout : STD_LOGIC_VECTOR (9 downto 0);
+    signal data_length_V_dout : STD_LOGIC_VECTOR (12 downto 0);
     signal data_length_V_empty_n : STD_LOGIC;
     signal ap_sync_done : STD_LOGIC;
     signal ap_sync_ready : STD_LOGIC;
@@ -221,12 +221,12 @@ architecture behav of dataflow_in_loop59 is
         tx_buffer_V_offset : IN STD_LOGIC_VECTOR (28 downto 0);
         val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
         loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-        final_burst_length_V : IN STD_LOGIC_VECTOR (9 downto 0);
+        final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
         cache_V_address0 : OUT STD_LOGIC_VECTOR (8 downto 0);
         cache_V_ce0 : OUT STD_LOGIC;
         cache_V_we0 : OUT STD_LOGIC;
         cache_V_d0 : OUT STD_LOGIC_VECTOR (63 downto 0);
-        ap_return : OUT STD_LOGIC_VECTOR (9 downto 0) );
+        ap_return : OUT STD_LOGIC_VECTOR (12 downto 0) );
     end component;
 
 
@@ -242,8 +242,8 @@ architecture behav of dataflow_in_loop59 is
         cache_V_address0 : OUT STD_LOGIC_VECTOR (8 downto 0);
         cache_V_ce0 : OUT STD_LOGIC;
         cache_V_q0 : IN STD_LOGIC_VECTOR (63 downto 0);
-        p_read : IN STD_LOGIC_VECTOR (9 downto 0);
-        axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (63 downto 0);
+        p_read : IN STD_LOGIC_VECTOR (12 downto 0);
+        axis_V_V_TDATA : OUT STD_LOGIC_VECTOR (7 downto 0);
         axis_V_V_TVALID : OUT STD_LOGIC;
         axis_V_V_TREADY : IN STD_LOGIC );
     end component;
@@ -276,16 +276,16 @@ architecture behav of dataflow_in_loop59 is
     end component;
 
 
-    component fifo_w10_d2_A IS
+    component fifo_w13_d2_A IS
     port (
         clk : IN STD_LOGIC;
         reset : IN STD_LOGIC;
         if_read_ce : IN STD_LOGIC;
         if_write_ce : IN STD_LOGIC;
-        if_din : IN STD_LOGIC_VECTOR (9 downto 0);
+        if_din : IN STD_LOGIC_VECTOR (12 downto 0);
         if_full_n : OUT STD_LOGIC;
         if_write : IN STD_LOGIC;
-        if_dout : OUT STD_LOGIC_VECTOR (9 downto 0);
+        if_dout : OUT STD_LOGIC_VECTOR (12 downto 0);
         if_empty_n : OUT STD_LOGIC;
         if_read : IN STD_LOGIC );
     end component;
@@ -399,7 +399,7 @@ begin
         axis_V_V_TVALID => tx_axis_words_U0_axis_V_V_TVALID,
         axis_V_V_TREADY => axis_V_V_TREADY);
 
-    data_length_V_U : component fifo_w10_d2_A
+    data_length_V_U : component fifo_w13_d2_A
     port map (
         clk => ap_clk,
         reset => ap_rst,

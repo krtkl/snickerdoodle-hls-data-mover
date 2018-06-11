@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'dataflow_in_loop59'
 ================================================================
-* Date:           Mon Jun 11 01:13:33 2018
+* Date:           Mon Jun 11 01:41:08 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -25,22 +25,22 @@
 
 + Latency (clock cycles): 
     * Summary: 
-    +-----+------+-----+-----+----------+
-    |   Latency  |  Interval | Pipeline |
-    | min |  max | min | max |   Type   |
-    +-----+------+-----+-----+----------+
-    |  525|  1037|  523|  523| dataflow |
-    +-----+------+-----+-----+----------+
+    +-----+------+-----+------+----------+
+    |   Latency  |  Interval  | Pipeline |
+    | min |  max | min |  max |   Type   |
+    +-----+------+-----+------+----------+
+    |  525|  4622|  523|  4100| dataflow |
+    +-----+------+-----+------+----------+
 
     + Detail: 
         * Instance: 
-        +------------------+---------------+-----+-----+-----+-----+---------+
-        |                  |               |  Latency  |  Interval | Pipeline|
-        |     Instance     |     Module    | min | max | min | max |   Type  |
-        +------------------+---------------+-----+-----+-----+-----+---------+
-        |read_burst_U0     |read_burst     |  522|  522|  522|  522|   none  |
-        |tx_axis_words_U0  |tx_axis_words  |    2|  514|    2|  514|   none  |
-        +------------------+---------------+-----+-----+-----+-----+---------+
+        +------------------+---------------+-----+------+-----+------+---------+
+        |                  |               |   Latency  |  Interval  | Pipeline|
+        |     Instance     |     Module    | min |  max | min |  max |   Type  |
+        +------------------+---------------+-----+------+-----+------+---------+
+        |read_burst_U0     |read_burst     |  522|   522|  522|   522|   none  |
+        |tx_axis_words_U0  |tx_axis_words  |    2|  4099|    2|  4099|   none  |
+        +------------------+---------------+-----+------+-----+------+---------+
 
         * Loop: 
         N/A
@@ -57,16 +57,16 @@
 |DSP              |        -|      -|       -|      -|
 |Expression       |        -|      -|       0|     14|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        -|      -|     181|    367|
+|Instance         |        -|      -|     259|    556|
 |Memory           |        2|      -|       0|      0|
 |Multiplexer      |        -|      -|       -|     18|
 |Register         |        -|      -|       2|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        2|      0|     183|    399|
+|Total            |        2|      0|     261|    588|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
-|Utilization (%)  |    ~0   |      0|   ~0   |   ~0  |
+|Utilization (%)  |    ~0   |      0|   ~0   |      1|
 +-----------------+---------+-------+--------+-------+
 
 + Detail: 
@@ -74,10 +74,10 @@
     +------------------+---------------+---------+-------+-----+-----+
     |     Instance     |     Module    | BRAM_18K| DSP48E|  FF | LUT |
     +------------------+---------------+---------+-------+-----+-----+
-    |read_burst_U0     |read_burst     |        0|      0|  163|  253|
-    |tx_axis_words_U0  |tx_axis_words  |        0|      0|   18|  114|
+    |read_burst_U0     |read_burst     |        0|      0|  166|  256|
+    |tx_axis_words_U0  |tx_axis_words  |        0|      0|   93|  300|
     +------------------+---------------+---------+-------+-----+-----+
-    |Total             |               |        0|      0|  181|  367|
+    |Total             |               |        0|      0|  259|  556|
     +------------------+---------------+---------+-------+-----+-----+
 
     * DSP48: 
@@ -96,9 +96,9 @@
     +-----------------+---------+---+----+------+-----+---------+
     |       Name      | BRAM_18K| FF| LUT| Depth| Bits| Size:D*B|
     +-----------------+---------+---+----+------+-----+---------+
-    |data_length_V_U  |        0|  0|   0|     2|   10|       20|
+    |data_length_V_U  |        0|  0|   0|     2|   13|       26|
     +-----------------+---------+---+----+------+-----+---------+
-    |Total            |        0|  0|   0|     2|   10|       20|
+    |Total            |        0|  0|   0|     2|   13|       26|
     +-----------------+---------+---+----+------+-----+---------+
 
     * Expression: 
@@ -203,9 +203,9 @@
 |val_assign_ap_vld            |  in |    1|   ap_none  |      val_assign      |    scalar    |
 |loop_count_V                 |  in |   13|   ap_none  |     loop_count_V     |    scalar    |
 |loop_count_V_ap_vld          |  in |    1|   ap_none  |     loop_count_V     |    scalar    |
-|final_burst_length_V         |  in |   10|   ap_none  | final_burst_length_V |    scalar    |
+|final_burst_length_V         |  in |   13|   ap_none  | final_burst_length_V |    scalar    |
 |final_burst_length_V_ap_vld  |  in |    1|   ap_none  | final_burst_length_V |    scalar    |
-|axis_V_V_TDATA               | out |   64|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TDATA               | out |    8|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TVALID              | out |    1|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TREADY              |  in |    1|    axis    |       axis_V_V       |    pointer   |
 +-----------------------------+-----+-----+------------+----------------------+--------------+

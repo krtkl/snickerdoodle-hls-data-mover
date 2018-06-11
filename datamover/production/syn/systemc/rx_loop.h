@@ -17,9 +17,9 @@ namespace ap_rtl {
 
 struct rx_loop : public sc_module {
     // Port declarations 61
-    sc_in< sc_lv<64> > axis_V_V_TDATA;
+    sc_in< sc_lv<8> > axis_V_V_TDATA;
     sc_in< sc_lv<13> > loop_count_V;
-    sc_in< sc_lv<10> > final_burst_length_V;
+    sc_in< sc_lv<13> > final_burst_length_V;
     sc_out< sc_logic > m_axi_rx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_rx_buffer_V_AWREADY;
     sc_out< sc_lv<32> > m_axi_rx_buffer_V_AWADDR;

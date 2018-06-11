@@ -23,18 +23,23 @@
 <unit>clock cycles</unit>
 <Best-caseLatency>525</Best-caseLatency>
 <Average-caseLatency>undef</Average-caseLatency>
-<Worst-caseLatency>1037</Worst-caseLatency>
-<DataflowPipelineThroughput>523</DataflowPipelineThroughput>
+<Worst-caseLatency>4622</Worst-caseLatency>
+<DataflowPipelineThroughput>
+<range>
+<min>523</min>
+<max>4100</max>
+</range>
+</DataflowPipelineThroughput>
 <Interval-min>523</Interval-min>
-<Interval-max>523</Interval-max>
+<Interval-max>4100</Interval-max>
 </SummaryOfOverallLatency>
 </PerformanceEstimates>
 
 <AreaEstimates>
 <Resources>
 <BRAM_18K>2</BRAM_18K>
-<FF>183</FF>
-<LUT>399</LUT>
+<FF>261</FF>
+<LUT>588</LUT>
 <DSP48E>0</DSP48E>
 </Resources>
 <AvailableResources>
@@ -692,7 +697,7 @@
 <IOProtocol>ap_none</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>10</Bits>
+<Bits>13</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -714,7 +719,7 @@
 <IOProtocol>axis</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>out</Dir>
-<Bits>64</Bits>
+<Bits>8</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
