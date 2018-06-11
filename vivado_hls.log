@@ -1,0 +1,10 @@
+INFO: [HLS 200-10] Running 'C:/Xilinx/Vivado/2018.1/bin/unwrapped/win64.o/vivado_hls.exe'
+INFO: [HLS 200-10] For user 'Jamil J. Weatherbee' on host 'macula10' (Windows NT_amd64 version 6.2) on Sun Jun 10 13:19:56 -0700 2018
+INFO: [HLS 200-10] In directory 'C:/git/snickerdoodle-hls-data-mover'
+INFO: [HLS 200-10] Opening project 'C:/git/snickerdoodle-hls-data-mover/datamover'.
+INFO: [HLS 200-10] Opening solution 'C:/git/snickerdoodle-hls-data-mover/datamover/production'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 6.5ns.
+INFO: [SYN 201-201] Setting up clock 'default' with an uncertainty of 2ns.
+INFO: [HLS 200-10] Setting target device to 'xc7z020clg400-3'
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.

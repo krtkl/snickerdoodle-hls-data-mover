@@ -42,6 +42,16 @@
 			<location>C:/git/snickerdoodle-hls-data-mover/datamover/production/.tcls</location>
 		</link>
 		<link>
+			<name>source/datamover.cpp</name>
+			<type>1</type>
+			<location>C:/git/snickerdoodle-hls-data-mover/datamover/datamover.cpp</location>
+		</link>
+		<link>
+			<name>testbench/testbench.cpp</name>
+			<type>1</type>
+			<location>C:/git/snickerdoodle-hls-data-mover/datamover/testbench.cpp</location>
+		</link>
+		<link>
 			<name>production/constraints/.xml.directive</name>
 			<type>1</type>
 			<location>C:/git/snickerdoodle-hls-data-mover/datamover/production/production.directive</location>

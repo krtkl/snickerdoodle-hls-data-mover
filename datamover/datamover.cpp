@@ -171,47 +171,38 @@ void get_loop_parameters (const ap_uint<28> data_length,
 
 
 /* main body of the data mover implementation */
-void data_mover (hls::stream<axis_t> &data_rx, /* 8-bit wide AXIS slave interface */
-				 hls::stream<axis_t> &data_tx, /* 8-bit wide AXIS master interface */
-				 const uint64_t *tx_buffer, /* DDR buffer to read data to transmit from */
-				 const ap_uint<28> *tx_buffer_size, /* number of bytes in the tx buffer */
-				 ap_uint<28> *tx_byte_count, /* number of bytes received */
-				 uint64_t *rx_buffer, /* DDR buffer to write received data to */
-				 const ap_uint<28> *rx_buffer_size, /* byte capacity of the rx buffer */
-				 ap_uint<28> *rx_byte_count) /* number of bytes received */
+void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
+				 hls::stream<axis_t> &data_tx, /* AXIS master interface */
+				 const axi_t tx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
+				 const ap_uint<BUFFER_LENGTH_ADDRESS_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
+				 axi_t rx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
+				 const ap_uint<BUFFER_LENGTH_ADDRESS_BITS> *rx_buffer_length) /* number of AXIS words to write to the rx buffer */
 {
 #pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE axis register both port=data_rx
 #pragma HLS INTERFACE axis register both port=data_tx
 
-/* Note: C/RTL Co-Simulation can not successfully handle 256MB array depth so the depth is reduced to 8MB for C/RTL Co-Simulation */
-#pragma HLS INTERFACE m_axi depth=33554432 port=tx_buffer offset=slave bundle=DMA
-//#pragma HLS INTERFACE m_axi depth=1048576 port=tx_buffer offset=slave bundle=DMA
+#pragma HLS INTERFACE m_axi port=tx_buffer offset=slave bundle=DMA
 #pragma HLS INTERFACE s_axilite port=tx_buffer bundle=control
-#pragma HLS INTERFACE s_axilite port=tx_buffer_size bundle=control
-#pragma HLS INTERFACE s_axilite port=tx_byte_count bundle=control
+#pragma HLS INTERFACE s_axilite port=tx_buffer_length bundle=control
 
-/* Note: C/RTL Co-Simulation can not successfully handle 256MB array depth so the depth is reduced to 8MB for C/RTL Co-Simulation */
-#pragma HLS INTERFACE m_axi depth=33554432 port=rx_buffer offset=slave bundle=DMA
-//#pragma HLS INTERFACE m_axi depth=1048576 port=rx_buffer offset=slave bundle=DMA
+#pragma HLS INTERFACE m_axi port=rx_buffer offset=slave bundle=DMA
 #pragma HLS INTERFACE s_axilite port=rx_buffer bundle=control
-#pragma HLS INTERFACE s_axilite port=rx_buffer_size bundle=control
-#pragma HLS INTERFACE s_axilite port=rx_byte_count bundle=control
+#pragma HLS INTERFACE s_axilite port=rx_buffer_length bundle=control
 
   /* local variables */
-  ap_uint<17> tx_loop_count; /* iterator for tx loop data flow process */
-  ap_uint<13> tx_final_burst_length; /* length of the final block of tx data loaded into the cache */
-  ap_uint<17> rx_loop_count; /* iterator for rx loop data flow process */
-  ap_uint<13> rx_final_burst_length; /* length of the final block of rx data loaded into the cache */
+  ap_uint<LOOP_TRIP_COUNT_BITS> tx_loop_count; /* iterator for tx loop data flow process */
+  ap_uint<CACHE_LENGTH_ADDRESS_BITS> tx_final_burst_length; /* length of the final block of tx data loaded into the cache */
+  ap_uint<LOOP_TRIP_COUNT_BITS> rx_loop_count; /* iterator for rx loop data flow process */
+  ap_uint<CACHE_LENGTH_ADDRESS_BITS> rx_final_burst_length; /* length of the final block of rx data loaded into the cache */
 
-  get_loop_parameters (*tx_buffer_size, tx_loop_count, tx_final_burst_length);
-  get_loop_parameters (*rx_buffer_size, rx_loop_count, rx_final_burst_length);
+  /* setup tx and rx loop parameters */
+  get_loop_parameters (*tx_buffer_length, tx_loop_count, tx_final_burst_length);
+  get_loop_parameters (*rx_buffer_length, rx_loop_count, rx_final_burst_length);
 
   /* Transmit Section */
   tx_loop (data_tx, tx_buffer, tx_loop_count, tx_final_burst_length);
-  *tx_byte_count = *tx_buffer_size; /* no STOP implementation yet - write return byte count register with buffer size */
 
   /* Receive Section */
   rx_loop (data_rx, rx_loop_count, rx_final_burst_length, rx_buffer);
-  *rx_byte_count = *rx_buffer_size; /* no STOP implementation yet - write return byte count register with buffer size */
 }

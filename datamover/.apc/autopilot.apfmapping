@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
-  <source/>
-  <testbench/>
+  <source>
+    <originFiles name="datamover.cpp" path="C:\git\snickerdoodle-hls-data-mover\datamover\datamover.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="testbench.cpp" path="C:\git\snickerdoodle-hls-data-mover\datamover\testbench.cpp"/>
+  </testbench>
 </autopilotfilemapping:AutoPilotFileMapping>

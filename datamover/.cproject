@@ -29,10 +29,12 @@
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include/ap_sysc"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include/etc"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include"/>
+									<listOptionValue builtIn="false" value="C:/git/snickerdoodle-hls-data-mover"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/win64/tools/systemc/include"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.787589940" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="AESL_TB"/>
+									<listOptionValue builtIn="false" value="__llvm__"/>
 									<listOptionValue builtIn="false" value="__llvm__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.652069146" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -45,10 +47,12 @@
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include/ap_sysc"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include/etc"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include"/>
+									<listOptionValue builtIn="false" value="C:/git/snickerdoodle-hls-data-mover"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/win64/tools/systemc/include"/>
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.789145294" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="AESL_TB"/>
+									<listOptionValue builtIn="false" value="__llvm__"/>
 									<listOptionValue builtIn="false" value="__llvm__"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.2029843765" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -77,7 +81,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="production|*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -111,6 +115,7 @@
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include/ap_sysc"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include/etc"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include"/>
+									<listOptionValue builtIn="false" value="C:/git/snickerdoodle-hls-data-mover"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/win64/tools/systemc/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1685922708" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -123,6 +128,7 @@
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include/ap_sysc"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include/etc"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/include"/>
+									<listOptionValue builtIn="false" value="C:/git/snickerdoodle-hls-data-mover"/>
 									<listOptionValue builtIn="false" value="C:/Xilinx/Vivado/2018.1/win64/tools/systemc/include"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1325036877" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -151,7 +157,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="production|*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
