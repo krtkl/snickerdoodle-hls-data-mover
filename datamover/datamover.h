@@ -58,18 +58,18 @@ const int BUFFER_SIZE = BUFFER_WORDS*AXI_WORD_SIZE; /* size of read and write bu
 
 const int LOOP_ITERATOR_BITS = BUFFER_WORD_ADDRESS_BITS-CACHE_WORD_ADDRESS_BITS; /* main read and write loop iterator bits (12) */
 const int LOOP_TRIP_COUNT_BITS = LOOP_ITERATOR_BITS+1; /* main read and write loop trip count bits (13) */
-const int CACHE_LENGTH_ADDRESS_BITS = CACHE_WORD_ADDRESS_BITS+AXI_WORD_LOG2_BYTES-AXIS_WORD_LOG2_BYTES+1; /* bits needed to size a cache read/write in AXIS words (13) */
-const int BUFFER_LENGTH_ADDRESS_BITS = BUFFER_WORD_ADDRESS_BITS+AXI_WORD_LOG2_BYTES-AXIS_WORD_LOG2_BYTES+1; /* bits needed to size a buffer in AXIS words (25) */
+const int CACHE_LENGTH_BITS = CACHE_WORD_ADDRESS_BITS+AXI_WORD_LOG2_BYTES-AXIS_WORD_LOG2_BYTES+1; /* bits needed to size a cache read/write in AXIS words (13) */
+const int CACHE_LENGTH = CACHE_SIZE/AXIS_WORD_SIZE; /* AXIS words in cache buffer (4096) */
+const int BUFFER_LENGTH_BITS = BUFFER_WORD_ADDRESS_BITS+AXI_WORD_LOG2_BYTES-AXIS_WORD_LOG2_BYTES+1; /* bits needed to size a buffer in AXIS words (25) */
 
 /* type definitions */
 typedef ap_uint<AXI_WORD_SIZE> axi_t;
 typedef ap_uint<AXIS_WORD_SIZE> axis_t;
 
-
 /* function declarations */
 void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
 				 hls::stream<axis_t> &data_tx, /* AXIS master interface */
-				 const axi_t tx_buffer[BUFFER_WORDS], /* DDR buffer to read data to transmit from */
-				 const ap_uint<BUFFER_SIZE_ADDRESS_BITS> *tx_buffer_size, /* number of AXIS words to read from the tx buffer */
-				 axi_t rx_buffer[BUFFER_WORDS], /* DDR buffer to write received data to */
-				 const ap_uint<BUFFER_SIZE_ADDRESS_BITS> *rx_buffer_size); /* number of AXIS words to write to the rx buffer */
+				 const axi_t tx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
+				 const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
+				 axi_t rx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
+				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length); /* number of AXIS words to write to the rx buffer */
