@@ -30,7 +30,7 @@
 /**
  * @description AXIS data mover
  * @author Jamil J. Weatherbee
- * @version 2018-06-09T17:51:33Z
+ * @version 2018-06-11T01:49:07Z
  */
 
 #include "datamover.h"
@@ -38,32 +38,31 @@
 volatile bool stop; /* global stop flag for early exit from blocking transfers - not yet implemented */
 
 /* data flow subfunction implementing AXI port read bursts */
-void read_burst (const uint64_t *buffer,
-				 const ap_uint<16> n,
-				 const ap_uint<17> loop_count,
-				 const ap_uint<13> final_burst_length,
-				 uint64_t cache[CACHE_WORDS],
-				 ap_uint<13> &data_length)
+void read_burst (const axi_t tx_buffer[BUFFER_WORDS],
+				 const ap_uint<LOOP_ITERATOR_BITS> n,
+				 const ap_uint<LOOP_TRIP_COUNT_BITS> loop_count,
+				 const ap_uint<CACHE_LENGTH_BITS> final_burst_length,
+				 axi_t cache[CACHE_WORDS],
+				 ap_uint<CACHE_LENGTH_BITS> &data_length)
 {
-  ap_uint<25> buffer_offset	= n;
+  ap_uint<BUFFER_WORD_ADDRESS_BITS> buffer_offset = n;
   buffer_offset = buffer_offset * CACHE_WORDS;
-  memcpy(cache, buffer+buffer_offset, CACHE_SIZE); /* burst read a block of data into the transmit cache */
+  memcpy(cache, &tx_buffer[buffer_offset], CACHE_SIZE); /* burst read a block of data into the transmit cache */
   if (n==loop_count-1) data_length = final_burst_length;
   else data_length = CACHE_SIZE;
 }
 
 
 /* data flow subfunction implementing AXIS port transmission */
-void tx_bytes (const uint64_t cache[CACHE_WORDS],
-			   const ap_uint<13> data_length,
+void tx_axis_words (const axi_t cache[CACHE_WORDS],
+			   const ap_uint<CACHE_LENGTH_BITS> data_length,
 			   hls::stream<axis_t> &axis)
 {
-  for (int n=0;n<data_length;n++)
+  for (int i=0;i<data_length;i++)
    {
-#pragma HLS LOOP_TRIPCOUNT max=4096
 #pragma HLS PIPELINE II=1
-	 uint8_t data;
-	 data = (uint8_t)(cache[n/WORD_SIZE] >> (BITS_PER_BYTE*(n%WORD_SIZE))); /* get data byte from cache */
+	 axis_t data;
+	 data = ((axis_t *)cache)[i]; /* get AXIS word from cache */
 	 axis << data; /* transmit AXIS byte */
    }
 }
@@ -71,19 +70,18 @@ void tx_bytes (const uint64_t cache[CACHE_WORDS],
 
 /* function containing main data flow loop for transmit */
 void tx_loop (hls::stream<axis_t> &axis,
-			  const uint64_t *buffer,
-			  const ap_uint<17> loop_count,
-			  const ap_uint<13> final_burst_length)
+			  const axi_t tx_buffer[BUFFER_WORDS],
+			  const ap_uint<LOOP_TRIP_COUNT_BITS> loop_count,
+			  const ap_uint<CACHE_LENGTH_BITS> final_burst_length)
 {
   for (int n=0;n<loop_count;n++)
    {
-#pragma HLS LOOP_TRIPCOUNT max=65536
 #pragma HLS DATAFLOW
-	 uint64_t cache[CACHE_WORDS]; /* AXI read burst buffer for transmit */
-	 ap_uint<13> data_length; /* length of axis transmit burst */
+	 axi_t cache[CACHE_WORDS]; /* AXI read burst buffer for transmit */
+	 ap_uint<CACHE_LENGTH_BITS> data_length; /* length of axis transmit burst */
 
-	 read_burst (buffer, n, loop_count, final_burst_length, cache, data_length);
-     tx_bytes (cache, data_length, axis);
+	 read_burst (tx_buffer, n, loop_count, final_burst_length, cache, data_length);
+     tx_axis_words (cache, data_length, axis);
    }
 }
 
@@ -104,14 +102,14 @@ void rx_axis_words (hls::stream<axis_t> &axis,
   /* loop through every AXIS word in cache, any bytes not used in the block are zeroed */
   for (int i=0; i<CACHE_LENGTH; i++)
    {
-#pragma HLS PIPELINE II
+#pragma HLS PIPELINE II=1
 	 axis_t data = 0; /* zero word working register to load up with value from AXIS */
      if (data_length)
       {
     	axis >> data; /* receive AXIS byte */
     	data_length--; /*  one less word to suck in */
       }
-     ((axis_t *)cache)[i] = data; /* load word to cache */
+     ((axis_t *)cache)[i] = data; /* load AXIS word to cache */
    }
 
   buffer_offset = (ap_uint<BUFFER_WORD_ADDRESS_BITS>)n*CACHE_WORDS; /* calculate buffer offset for write burst */
@@ -146,7 +144,7 @@ void rx_loop (hls::stream<axis_t> &axis,
 
 
 /* given the data length calculates the number of cache block size loop iterations needed and the length of the data in the last cache block */
-void get_loop_parameters (const ap_uint<CACHE_LENGTH_BITS> data_length,
+void get_loop_parameters (const ap_uint<BUFFER_LENGTH_BITS> data_length,
 		  	 	 	 	  ap_uint<LOOP_TRIP_COUNT_BITS> &loop_count,
 						  ap_uint<CACHE_LENGTH_BITS> &final_burst_length)
 {
