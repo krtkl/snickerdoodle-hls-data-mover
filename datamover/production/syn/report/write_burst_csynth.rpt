@@ -1,0 +1,208 @@
+
+
+================================================================
+== Vivado HLS Report for 'write_burst'
+================================================================
+* Date:           Mon Jun 11 00:35:20 2018
+
+* Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
+* Project:        datamover
+* Solution:       production
+* Product family: zynq
+* Target device:  xc7z020clg400-3
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |   6.50|      4.50|        2.00|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+-----+-----+-----+---------+
+    |  Latency  |  Interval | Pipeline|
+    | min | max | min | max |   Type  |
+    +-----+-----+-----+-----+---------+
+    |  520|  520|  520|  520|   none  |
+    +-----+-----+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +--------------------------+-----+-----+----------+-----------+-----------+------+----------+
+        |                          |  Latency  | Iteration|  Initiation Interval  | Trip |          |
+        |         Loop Name        | min | max |  Latency |  achieved |   target  | Count| Pipelined|
+        +--------------------------+-----+-----+----------+-----------+-----------+------+----------+
+        |- memcpy.rx_buffer.V.gep  |  513|  513|         3|          1|          1|   512|    yes   |
+        +--------------------------+-----+-----+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     77|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |        -|      -|       -|      -|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|    134|
+|Register         |        -|      -|     120|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        0|      0|     120|    211|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |        0|      0|   ~0   |   ~0  |
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------------+----------+-------+---+----+------------+------------+
+    |        Variable Name        | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------------+----------+-------+---+----+------------+------------+
+    |indvar_next_i_i_i_fu_161_p2  |     +    |      0|  0|  17|          10|           1|
+    |sum_i_i_fu_139_p2            |     +    |      0|  0|  37|          30|          30|
+    |ap_block_pp0_stage0_11001    |    and   |      0|  0|   2|           1|           1|
+    |ap_block_state5_io           |    and   |      0|  0|   2|           1|           1|
+    |exitcond_i_i_i_fu_155_p2     |   icmp   |      0|  0|  13|          10|          11|
+    |ap_block_state1              |    or    |      0|  0|   2|           1|           1|
+    |ap_enable_pp0                |    xor   |      0|  0|   2|           1|           2|
+    |ap_enable_reg_pp0_iter1      |    xor   |      0|  0|   2|           2|           1|
+    +-----------------------------+----------+-------+---+----+------------+------------+
+    |Total                        |          |      0|  0|  77|          56|          48|
+    +-----------------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +------------------------------------------+----+-----------+-----+-----------+
+    |                   Name                   | LUT| Input Size| Bits| Total Bits|
+    +------------------------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                                 |  44|          9|    1|          9|
+    |ap_done                                   |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1                   |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter2                   |   9|          2|    1|          2|
+    |ap_sig_ioackin_m_axi_rx_buffer_V_AWREADY  |   9|          2|    1|          2|
+    |ap_sig_ioackin_m_axi_rx_buffer_V_WREADY   |   9|          2|    1|          2|
+    |indvar_i_i_i_reg_120                      |   9|          2|   10|         20|
+    |rx_buffer_V_blk_n_AW                      |   9|          2|    1|          2|
+    |rx_buffer_V_blk_n_B                       |   9|          2|    1|          2|
+    |rx_buffer_V_blk_n_W                       |   9|          2|    1|          2|
+    |rx_buffer_V_offset_blk_n                  |   9|          2|    1|          2|
+    +------------------------------------------+----+-----------+-----+-----------+
+    |Total                                     | 134|         29|   20|         47|
+    +------------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +------------------------------------------+----+----+-----+-----------+
+    |                   Name                   | FF | LUT| Bits| Const Bits|
+    +------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                 |   8|   0|    8|          0|
+    |ap_done_reg                               |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter0                   |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1                   |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2                   |   1|   0|    1|          0|
+    |ap_reg_ioackin_m_axi_rx_buffer_V_AWREADY  |   1|   0|    1|          0|
+    |ap_reg_ioackin_m_axi_rx_buffer_V_WREADY   |   1|   0|    1|          0|
+    |cache_V_load_reg_197                      |  64|   0|   64|          0|
+    |exitcond_i_i_i_reg_183                    |   1|   0|    1|          0|
+    |exitcond_i_i_i_reg_183_pp0_iter1_reg      |   1|   0|    1|          0|
+    |indvar_i_i_i_reg_120                      |  10|   0|   10|          0|
+    |sum_i_i_reg_172                           |  30|   0|   30|          0|
+    +------------------------------------------+----+----+-----+-----------+
+    |Total                                     | 120|   0|  120|          0|
+    +------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------+-----+-----+------------+--------------------+--------------+
+|          RTL Ports         | Dir | Bits|  Protocol  |    Source Object   |    C Type    |
++----------------------------+-----+-----+------------+--------------------+--------------+
+|ap_clk                      |  in |    1| ap_ctrl_hs |     write_burst    | return value |
+|ap_rst                      |  in |    1| ap_ctrl_hs |     write_burst    | return value |
+|ap_start                    |  in |    1| ap_ctrl_hs |     write_burst    | return value |
+|ap_done                     | out |    1| ap_ctrl_hs |     write_burst    | return value |
+|ap_continue                 |  in |    1| ap_ctrl_hs |     write_burst    | return value |
+|ap_idle                     | out |    1| ap_ctrl_hs |     write_burst    | return value |
+|ap_ready                    | out |    1| ap_ctrl_hs |     write_burst    | return value |
+|cache_V_address0            | out |    9|  ap_memory |       cache_V      |     array    |
+|cache_V_ce0                 | out |    1|  ap_memory |       cache_V      |     array    |
+|cache_V_q0                  |  in |   64|  ap_memory |       cache_V      |     array    |
+|buffer_offset_V             |  in |   21|   ap_none  |   buffer_offset_V  |    scalar    |
+|m_axi_rx_buffer_V_AWVALID   | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWREADY   |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWADDR    | out |   32|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWID      | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWLEN     | out |   32|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWSIZE    | out |    3|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWBURST   | out |    2|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWLOCK    | out |    2|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWCACHE   | out |    4|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWPROT    | out |    3|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWQOS     | out |    4|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWREGION  | out |    4|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_AWUSER    | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_WVALID    | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_WREADY    |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_WDATA     | out |   64|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_WSTRB     | out |    8|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_WLAST     | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_WID       | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_WUSER     | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARVALID   | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARREADY   |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARADDR    | out |   32|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARID      | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARLEN     | out |   32|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARSIZE    | out |    3|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARBURST   | out |    2|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARLOCK    | out |    2|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARCACHE   | out |    4|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARPROT    | out |    3|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARQOS     | out |    4|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARREGION  | out |    4|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_ARUSER    | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_RVALID    |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_RREADY    | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_RDATA     |  in |   64|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_RLAST     |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_RID       |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_RUSER     |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_RRESP     |  in |    2|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_BVALID    |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_BREADY    | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_BRESP     |  in |    2|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_BID       |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|m_axi_rx_buffer_V_BUSER     |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
+|rx_buffer_V_offset_dout     |  in |   29|   ap_fifo  | rx_buffer_V_offset |    pointer   |
+|rx_buffer_V_offset_empty_n  |  in |    1|   ap_fifo  | rx_buffer_V_offset |    pointer   |
+|rx_buffer_V_offset_read     | out |    1|   ap_fifo  | rx_buffer_V_offset |    pointer   |
++----------------------------+-----+-----+------------+--------------------+--------------+
+

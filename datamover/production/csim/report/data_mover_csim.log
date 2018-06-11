@@ -1,2 +1,14 @@
 INFO: [SIM 2] *************** CSIM start ***************
 INFO: [SIM 4] CSIM will launch GCC as the compiler.
+   Compiling ../../../testbench.cpp in debug mode
+   Compiling ../../../datamover.cpp in debug mode
+   Generating csim.exe
+Allocating 16777216 byte transmit buffer... SUCCESS
+Allocating 16777216 byte receive buffer... SUCCESS
+tx_buffer crc=0x7D0DE0C7
+rx_stream crc=0x81F93BCF
+Testing data_mover()...
+data_tx crc=0x7D0DE0C7
+rx_buffer crc=0x81F93BCF
+INFO: [SIM 1] CSim done with 0 errors.
+INFO: [SIM 3] *************** CSIM finish ***************

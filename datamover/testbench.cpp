@@ -30,7 +30,7 @@
 /**
  * @description AXIS data mover test bench
  * @author Jamil J. Weatherbee
- * @version 2018-06-08T22:51:53Z
+ * @version 2018-06-11T07:32:32Z
  */
 
 #include <stdlib.h>
@@ -41,6 +41,7 @@
 /* constant definitions */
 const uint32_t TX_PRBS_STATE = 0x15EC38A2;
 const int TX_TRANSFER_LENGTH = 1048575;
+
 const uint32_t RX_PRBS_STATE = 0x970AC5FD;
 const int RX_TRANSFER_LENGTH = 1048577;
 
@@ -113,25 +114,6 @@ int main (void)
   if (NULL==rx_buffer) { std::cout << "SUCCESS" << std::endl; return EXIT_FAILURE; }
   else std::cout << "SUCCESS" << std::endl;
 
-  /* send words to receiver */
-  PRBS_state = RX_PRBS_STATE;
-  rx_buffer_length = RX_TRANSFER_LENGTH;
-  rx_stream_crc = 0xFFFFFFFF;
-  for (int n=0; n<RX_TRANSFER_LENGTH; n++)
-   {
-	 axis_t data=0;
-	 uint8_t b;
-	 for (int i=0;i<sizeof(data);i++)
-	  {
-	    b = get_PRBS_byte(PRBS_state);
-	    data |= ((axis_t)b)<<(i*BITS_PER_BYTE);
-	    rx_stream_crc = (rx_stream_crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)rx_stream_crc ^ b];
-	  }
-	 data_rx << data;
-   }
-  rx_stream_crc^= 0xFFFFFFFF;
-  std::cout << "rx_stream crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)rx_stream_crc << std::endl;
-
   /* write bytes to transmit buffer */
   PRBS_state = TX_PRBS_STATE;
   tx_buffer_length = TX_TRANSFER_LENGTH;
@@ -145,6 +127,25 @@ int main (void)
   }
   tx_buffer_crc ^= 0xFFFFFFFF;
   std::cout << "tx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)tx_buffer_crc << std::endl;
+
+  /* send words to receiver */
+  PRBS_state = RX_PRBS_STATE;
+  rx_buffer_length = RX_TRANSFER_LENGTH;
+  rx_stream_crc = 0xFFFFFFFF;
+  for (int n=0; n<RX_TRANSFER_LENGTH; n++)
+   {
+	 axis_t data=0;
+	 for (int i=0;i<sizeof(data);i++)
+	  {
+		uint8_t b;
+	    b = get_PRBS_byte(PRBS_state);
+	    data |= ((axis_t)b)<<(i*BITS_PER_BYTE);
+	    rx_stream_crc = (rx_stream_crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)rx_stream_crc ^ b];
+	  }
+	 data_rx << data;
+   }
+  rx_stream_crc^= 0xFFFFFFFF;
+  std::cout << "rx_stream crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)rx_stream_crc << std::endl;
 
   std::cout << "Testing data_mover()..." << std::endl;
   data_mover(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length);
@@ -167,11 +168,12 @@ int main (void)
   std::cout << "data_tx crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
   if (crc != tx_buffer_crc) errors++;
 
-/***** FIX BELOW ****/
-
   /* check receive buffer */
   crc = 0xFFFFFFFF; /* setup CRC working register */
-  for (int n=0; n<rx_byte_count; n++) crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ ((uint8_t *)rx_buffer)[n]]; /* update crc for data byte received */
+  for (int n=0; n<RX_TRANSFER_LENGTH*AXIS_WORD_SIZE; n++)
+   {
+	 crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ ((uint8_t *)rx_buffer)[n]]; /* update crc for data byte received */
+   }
   crc ^= 0xFFFFFFFF; /* return final CRC-32 value */
 
   std::cout << "rx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;

@@ -1,0 +1,198 @@
+
+
+================================================================
+== Vivado HLS Report for 'rx_loop'
+================================================================
+* Date:           Mon Jun 11 00:35:21 2018
+
+* Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
+* Project:        datamover
+* Solution:       production
+* Product family: zynq
+* Target device:  xc7z020clg400-3
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing (ns): 
+    * Summary: 
+    +--------+-------+----------+------------+
+    |  Clock | Target| Estimated| Uncertainty|
+    +--------+-------+----------+------------+
+    |ap_clk  |   6.50|      6.38|        2.00|
+    +--------+-------+----------+------------+
+
++ Latency (clock cycles): 
+    * Summary: 
+    +-----+----------+-----+----------+---------+
+    |     Latency    |    Interval    | Pipeline|
+    | min |    max   | min |    max   |   Type  |
+    +-----+----------+-----+----------+---------+
+    |  522|  16794122|  522|  16794122|   none  |
+    +-----+----------+-----+----------+---------+
+
+    + Detail: 
+        * Instance: 
+        +---------------------+------------------+------+------+------+------+----------+
+        |                     |                  |   Latency   |   Interval  | Pipeline |
+        |       Instance      |      Module      |  min |  max |  min |  max |   Type   |
+        +---------------------+------------------+------+------+------+------+----------+
+        |dataflow_in_loop_U0  |dataflow_in_loop  |  4620|  4620|  4100|  4100| dataflow |
+        +---------------------+------------------+------+------+------+------+----------+
+
+        * Loop: 
+        +----------+-----+----------+----------+-----------+-----------+----------+----------+
+        |          |     Latency    | Iteration|  Initiation Interval  |   Trip   |          |
+        | Loop Name| min |    max   |  Latency |  achieved |   target  |   Count  | Pipelined|
+        +----------+-----+----------+----------+-----------+-----------+----------+----------+
+        |- Loop 1  |  521|  16794121|      4622|          -|          -| 0 ~ 4096 |    no    |
+        +----------+-----+----------+----------+-----------+-----------+----------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-------+--------+-------+
+|       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
++-----------------+---------+-------+--------+-------+
+|DSP              |        -|      -|       -|      -|
+|Expression       |        -|      -|       0|     40|
+|FIFO             |        -|      -|       -|      -|
+|Instance         |        2|      -|     490|    976|
+|Memory           |        -|      -|       -|      -|
+|Multiplexer      |        -|      -|       -|     18|
+|Register         |        -|      -|      28|      -|
++-----------------+---------+-------+--------+-------+
+|Total            |        2|      0|     518|   1034|
++-----------------+---------+-------+--------+-------+
+|Available        |      280|    220|  106400|  53200|
++-----------------+---------+-------+--------+-------+
+|Utilization (%)  |    ~0   |      0|   ~0   |      1|
++-----------------+---------+-------+--------+-------+
+
++ Detail: 
+    * Instance: 
+    +---------------------+------------------+---------+-------+-----+-----+
+    |       Instance      |      Module      | BRAM_18K| DSP48E|  FF | LUT |
+    +---------------------+------------------+---------+-------+-----+-----+
+    |dataflow_in_loop_U0  |dataflow_in_loop  |        2|      0|  490|  976|
+    +---------------------+------------------+---------+-------+-----+-----+
+    |Total                |                  |        2|      0|  490|  976|
+    +---------------------+------------------+---------+-------+-----+-----+
+
+    * DSP48: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------------+----------+-------+---+----+------------+------------+
+    |        Variable Name       | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------------+----------+-------+---+----+------------+------------+
+    |loop_dataflow_input_count   |     +    |      0|  0|  20|          13|           1|
+    |loop_dataflow_output_count  |     +    |      0|  0|  20|          13|           1|
+    +----------------------------+----------+-------+---+----+------------+------------+
+    |Total                       |          |      0|  0|  40|          26|           2|
+    +----------------------------+----------+-------+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------+----+-----------+-----+-----------+
+    |            Name            | LUT| Input Size| Bits| Total Bits|
+    +----------------------------+----+-----------+-----+-----------+
+    |loop_dataflow_input_count   |   9|          2|   13|         26|
+    |loop_dataflow_output_count  |   9|          2|   13|         26|
+    +----------------------------+----+-----------+-----+-----------+
+    |Total                       |  18|          4|   26|         52|
+    +----------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------+----+----+-----+-----------+
+    |            Name            | FF | LUT| Bits| Const Bits|
+    +----------------------------+----+----+-----+-----------+
+    |loop_dataflow_busy          |   1|   0|    1|          0|
+    |loop_dataflow_enable        |   1|   0|    1|          0|
+    |loop_dataflow_input_count   |  13|   0|   13|          0|
+    |loop_dataflow_output_count  |  13|   0|   13|          0|
+    +----------------------------+----+----+-----+-----------+
+    |Total                       |  28|   0|   28|          0|
+    +----------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------------+-----+-----+------------+----------------------+--------------+
+|          RTL Ports          | Dir | Bits|  Protocol  |     Source Object    |    C Type    |
++-----------------------------+-----+-----+------------+----------------------+--------------+
+|axis_V_V_TDATA               |  in |    8|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TVALID              |  in |    1|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TREADY              | out |    1|    axis    |       axis_V_V       |    pointer   |
+|loop_count_V                 |  in |   13|   ap_none  |     loop_count_V     |    scalar    |
+|loop_count_V_ap_vld          |  in |    1|   ap_none  |     loop_count_V     |    scalar    |
+|final_burst_length_V         |  in |   13|   ap_none  | final_burst_length_V |    scalar    |
+|final_burst_length_V_ap_vld  |  in |    1|   ap_none  | final_burst_length_V |    scalar    |
+|m_axi_rx_buffer_V_AWVALID    | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWREADY    |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWADDR     | out |   32|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWID       | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWLEN      | out |   32|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWSIZE     | out |    3|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWBURST    | out |    2|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWLOCK     | out |    2|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWCACHE    | out |    4|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWPROT     | out |    3|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWQOS      | out |    4|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWREGION   | out |    4|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_AWUSER     | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_WVALID     | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_WREADY     |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_WDATA      | out |   64|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_WSTRB      | out |    8|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_WLAST      | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_WID        | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_WUSER      | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARVALID    | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARREADY    |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARADDR     | out |   32|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARID       | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARLEN      | out |   32|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARSIZE     | out |    3|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARBURST    | out |    2|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARLOCK     | out |    2|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARCACHE    | out |    4|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARPROT     | out |    3|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARQOS      | out |    4|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARREGION   | out |    4|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_ARUSER     | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_RVALID     |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_RREADY     | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_RDATA      |  in |   64|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_RLAST      |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_RID        |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_RUSER      |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_RRESP      |  in |    2|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_BVALID     |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_BREADY     | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_BRESP      |  in |    2|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_BID        |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|m_axi_rx_buffer_V_BUSER      |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
+|rx_buffer_V_offset           |  in |   29|   ap_none  |  rx_buffer_V_offset  |    scalar    |
+|rx_buffer_V_offset_ap_vld    |  in |    1|   ap_none  |  rx_buffer_V_offset  |    scalar    |
+|ap_clk                       |  in |    1| ap_ctrl_hs |        rx_loop       | return value |
+|ap_rst                       |  in |    1| ap_ctrl_hs |        rx_loop       | return value |
+|ap_done                      | out |    1| ap_ctrl_hs |        rx_loop       | return value |
+|ap_start                     |  in |    1| ap_ctrl_hs |        rx_loop       | return value |
+|ap_ready                     | out |    1| ap_ctrl_hs |        rx_loop       | return value |
+|ap_idle                      | out |    1| ap_ctrl_hs |        rx_loop       | return value |
+|ap_continue                  |  in |    1| ap_ctrl_hs |        rx_loop       | return value |
++-----------------------------+-----+-----+------------+----------------------+--------------+
+

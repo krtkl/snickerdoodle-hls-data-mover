@@ -5,8 +5,8 @@
 // 
 // ==============================================================
 
-#ifndef __dataflow_in_loop_bkb_memcore_H__
-#define __dataflow_in_loop_bkb_memcore_H__
+#ifndef __dataflow_in_loop5bkb_memcore_H__
+#define __dataflow_in_loop5bkb_memcore_H__
 
 
 #include <systemc>
@@ -19,7 +19,7 @@ using namespace sc_dt;
 #include <iostream>
 #include <fstream>
 
-struct dataflow_in_loop_bkb_memcore_ram : public sc_core::sc_module {
+struct dataflow_in_loop5bkb_memcore_ram : public sc_core::sc_module {
 
   static const unsigned DataWidth = 64;
   static const unsigned AddressRange = 1024;
@@ -45,7 +45,7 @@ sc_core::sc_in<bool> clk;
 sc_lv<DataWidth> ram[AddressRange];
 
 
-   SC_CTOR(dataflow_in_loop_bkb_memcore_ram) {
+   SC_CTOR(dataflow_in_loop5bkb_memcore_ram) {
 
 
 SC_METHOD(prc_write_0);
@@ -108,7 +108,7 @@ void prc_write_1()
 }; //endmodule
 
 
-SC_MODULE(dataflow_in_loop_bkb_memcore) {
+SC_MODULE(dataflow_in_loop5bkb_memcore) {
 
 
 static const unsigned DataWidth = 64;
@@ -129,11 +129,11 @@ sc_core::sc_in<sc_logic> reset;
 sc_core::sc_in<bool> clk;
 
 
-dataflow_in_loop_bkb_memcore_ram* meminst;
+dataflow_in_loop5bkb_memcore_ram* meminst;
 
 
-SC_CTOR(dataflow_in_loop_bkb_memcore) {
-meminst = new dataflow_in_loop_bkb_memcore_ram("dataflow_in_loop_bkb_memcore_ram");
+SC_CTOR(dataflow_in_loop5bkb_memcore) {
+meminst = new dataflow_in_loop5bkb_memcore_ram("dataflow_in_loop5bkb_memcore_ram");
 meminst->address0(address0);
 meminst->ce0(ce0);
 meminst->q0(q0);
@@ -149,7 +149,7 @@ meminst->d1(d1);
 meminst->reset(reset);
 meminst->clk(clk);
 }
-~dataflow_in_loop_bkb_memcore() {
+~dataflow_in_loop5bkb_memcore() {
     delete meminst;
 }
 

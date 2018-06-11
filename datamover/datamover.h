@@ -30,7 +30,7 @@
 /**
  * @description AXIS data mover header file
  * @author Jamil J. Weatherbee
- * @version 2018-06-11T01:49:07Z
+ * @version 2018-06-11T07:32:32Z
  */
 
 /* include data types needed */
@@ -49,6 +49,8 @@ const int AXI_WORD_BITS = AXI_WORD_SIZE*BITS_PER_BYTE; /* AXI ACP port word size
 const int AXIS_WORD_LOG2_BYTES = 0; /* AXIS ports word size expressed as a power of 2 */
 const int AXIS_WORD_SIZE = (1<<AXIS_WORD_LOG2_BYTES); /* AXIS ports word size in bytes (1) */
 const int AXIS_WORD_BITS = AXIS_WORD_SIZE*BITS_PER_BYTE; /* AXIS word size in bits (8) */
+
+const int AXIS_WORDS_PER_AXI_WORD = AXI_WORD_SIZE/AXIS_WORD_SIZE; /* number of AXIS words in each AXI word (8) */
 
 const int CACHE_WORD_ADDRESS_BITS = 9; /* AXI word address bits for cache buffer */
 const int CACHE_WORDS = (1<<CACHE_WORD_ADDRESS_BITS); /* AXI words in cache buffer (512) */

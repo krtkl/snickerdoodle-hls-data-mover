@@ -6,7 +6,7 @@
 // ==============================================================
 
 `timescale 1 ns / 1 ps
-module dataflow_in_loop_bkb_memcore_ram (addr0, ce0, d0, we0, q0, addr1, ce1, d1, we1, q1,  clk);
+module dataflow_in_loop5bkb_memcore_ram (addr0, ce0, d0, we0, q0, addr1, ce1, d1, we1, q1,  clk);
 
 parameter DWIDTH = 64;
 parameter AWIDTH = 10;
@@ -63,7 +63,7 @@ endmodule
 
 
 `timescale 1 ns / 1 ps
-module dataflow_in_loop_bkb_memcore(
+module dataflow_in_loop5bkb_memcore(
     reset,
     clk,
     address0,
@@ -95,7 +95,7 @@ output[DataWidth - 1:0] q1;
 
 
 
-dataflow_in_loop_bkb_memcore_ram dataflow_in_loop_bkb_memcore_ram_U(
+dataflow_in_loop5bkb_memcore_ram dataflow_in_loop5bkb_memcore_ram_U(
     .clk( clk ),
     .addr0( address0 ),
     .ce0( ce0 ),

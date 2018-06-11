@@ -20,7 +20,7 @@
     "ClockPeriod": "6.5",
     "IsCombLogic": "0",
     "II": "x",
-    "Latency": "6",
+    "Latency": "525",
     "Uncertainty": "2"
   },
   "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 6.500 [get_ports ap_clk]"]},
@@ -40,24 +40,40 @@
       "impl\/vhdl\/data_mover_control_s_axi.vhd",
       "impl\/vhdl\/data_mover_DMA_m_axi.vhd",
       "impl\/vhdl\/dataflow_in_loop.vhd",
-      "impl\/vhdl\/dataflow_in_loop_bkb.vhd",
-      "impl\/vhdl\/dataflow_in_loop_bkb_memcore.vhd",
+      "impl\/vhdl\/dataflow_in_loop5bkb.vhd",
+      "impl\/vhdl\/dataflow_in_loop5bkb_memcore.vhd",
+      "impl\/vhdl\/dataflow_in_loop59.vhd",
+      "impl\/vhdl\/dataflow_in_loop_cud.vhd",
+      "impl\/vhdl\/dataflow_in_loop_cud_memcore.vhd",
       "impl\/vhdl\/fifo_w13_d2_A.vhd",
+      "impl\/vhdl\/fifo_w21_d2_A.vhd",
+      "impl\/vhdl\/fifo_w29_d2_A.vhd",
       "impl\/vhdl\/read_burst.vhd",
+      "impl\/vhdl\/rx_axis_words25.vhd",
+      "impl\/vhdl\/rx_loop.vhd",
       "impl\/vhdl\/tx_axis_words.vhd",
       "impl\/vhdl\/tx_loop.vhd",
+      "impl\/vhdl\/write_burst.vhd",
       "impl\/vhdl\/data_mover.vhd"
     ],
     "Verilog": [
       "impl\/verilog\/data_mover_control_s_axi.v",
       "impl\/verilog\/data_mover_DMA_m_axi.v",
       "impl\/verilog\/dataflow_in_loop.v",
-      "impl\/verilog\/dataflow_in_loop_bkb.v",
-      "impl\/verilog\/dataflow_in_loop_bkb_memcore.v",
+      "impl\/verilog\/dataflow_in_loop5bkb.v",
+      "impl\/verilog\/dataflow_in_loop5bkb_memcore.v",
+      "impl\/verilog\/dataflow_in_loop59.v",
+      "impl\/verilog\/dataflow_in_loop_cud.v",
+      "impl\/verilog\/dataflow_in_loop_cud_memcore.v",
       "impl\/verilog\/fifo_w13_d2_A.v",
+      "impl\/verilog\/fifo_w21_d2_A.v",
+      "impl\/verilog\/fifo_w29_d2_A.v",
       "impl\/verilog\/read_burst.v",
+      "impl\/verilog\/rx_axis_words25.v",
+      "impl\/verilog\/rx_loop.v",
       "impl\/verilog\/tx_axis_words.v",
       "impl\/verilog\/tx_loop.v",
+      "impl\/verilog\/write_burst.v",
       "impl\/verilog\/data_mover.v"
     ],
     "SwDriver": [
@@ -954,12 +970,31 @@
   "ModuleInfo": {
     "Hierarchy": {
       "ModuleName": "data_mover",
-      "Instances": [{
-          "ModuleName": "tx_loop",
-          "InstanceName": "grp_tx_loop_fu_80",
+      "Instances": [
+        {
+          "ModuleName": "rx_loop",
+          "InstanceName": "grp_rx_loop_fu_94",
           "Instances": [{
               "ModuleName": "dataflow_in_loop",
               "InstanceName": "dataflow_in_loop_U0",
+              "Instances": [
+                {
+                  "ModuleName": "rx_axis_words25",
+                  "InstanceName": "rx_axis_words25_U0"
+                },
+                {
+                  "ModuleName": "write_burst",
+                  "InstanceName": "write_burst_U0"
+                }
+              ]
+            }]
+        },
+        {
+          "ModuleName": "tx_loop",
+          "InstanceName": "grp_tx_loop_fu_105",
+          "Instances": [{
+              "ModuleName": "dataflow_in_loop59",
+              "InstanceName": "dataflow_in_loop59_U0",
               "Instances": [
                 {
                   "ModuleName": "read_burst",
@@ -971,7 +1006,8 @@
                 }
               ]
             }]
-        }]
+        }
+      ]
     },
     "Metrics": {
       "read_burst": {
@@ -1034,7 +1070,7 @@
           "DSP48E": "0"
         }
       },
-      "dataflow_in_loop": {
+      "dataflow_in_loop59": {
         "Latency": {
           "LatencyBest": "525",
           "LatencyAvg": "",
@@ -1091,14 +1127,40 @@
           "DSP48E": "0"
         }
       },
-      "data_mover": {
+      "rx_axis_words25": {
         "Latency": {
-          "LatencyBest": "6",
-          "LatencyAvg": "",
-          "LatencyWorst": "16794126",
-          "PipelineIIMin": "7",
-          "PipelineIIMax": "16794127",
-          "PipelineII": "7 ~ 16794127",
+          "LatencyBest": "4099",
+          "LatencyAvg": "4099",
+          "LatencyWorst": "4099",
+          "PipelineII": "4099",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "6.50",
+          "Uncertainty": "2.00",
+          "Estimate": "4.67"
+        },
+        "Loops": [{
+            "Name": "Loop 1",
+            "TripCount": "512",
+            "Latency": "4096",
+            "PipelineII": "8",
+            "PipelineDepth": "9"
+          }],
+        "Area": {
+          "FF": "363",
+          "LUT": "692",
+          "BRAM_18K": "0",
+          "DSP48E": "0"
+        }
+      },
+      "write_burst": {
+        "Latency": {
+          "LatencyBest": "520",
+          "LatencyAvg": "520",
+          "LatencyWorst": "520",
+          "PipelineII": "520",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
@@ -1107,10 +1169,95 @@
           "Uncertainty": "2.00",
           "Estimate": "4.50"
         },
+        "Loops": [{
+            "Name": "memcpy.rx_buffer.V.gep",
+            "TripCount": "512",
+            "Latency": "513",
+            "PipelineII": "1",
+            "PipelineDepth": "3"
+          }],
         "Area": {
-          "BRAM_18K": "6",
-          "FF": "1112",
-          "LUT": "1834",
+          "FF": "120",
+          "LUT": "211",
+          "BRAM_18K": "0",
+          "DSP48E": "0"
+        }
+      },
+      "dataflow_in_loop": {
+        "Latency": {
+          "LatencyBest": "4620",
+          "LatencyAvg": "4620",
+          "LatencyWorst": "4620",
+          "PipelineII": "4100",
+          "PipelineDepth": "",
+          "PipelineType": "dataflow"
+        },
+        "Timing": {
+          "Target": "6.50",
+          "Uncertainty": "2.00",
+          "Estimate": "6.38"
+        },
+        "Area": {
+          "BRAM_18K": "2",
+          "FF": "490",
+          "LUT": "976",
+          "DSP48E": "0"
+        }
+      },
+      "rx_loop": {
+        "Latency": {
+          "LatencyBest": "522",
+          "LatencyAvg": "",
+          "LatencyWorst": "16794122",
+          "PipelineIIMin": "522",
+          "PipelineIIMax": "16794122",
+          "PipelineII": "522 ~ 16794122",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "6.50",
+          "Uncertainty": "2.00",
+          "Estimate": "6.38"
+        },
+        "Loops": [{
+            "Name": "Loop 1",
+            "TripCount": "",
+            "LatencyMin": "521",
+            "LatencyMax": "16794121",
+            "Latency": "521 ~ 16794121",
+            "PipelineII": "",
+            "PipelineDepthMin": "521",
+            "PipelineDepthMax": "16794121",
+            "PipelineDepth": "521 ~ 16794121"
+          }],
+        "Area": {
+          "BRAM_18K": "2",
+          "FF": "518",
+          "LUT": "1034",
+          "DSP48E": "0"
+        }
+      },
+      "data_mover": {
+        "Latency": {
+          "LatencyBest": "525",
+          "LatencyAvg": "",
+          "LatencyWorst": "16794127",
+          "PipelineIIMin": "526",
+          "PipelineIIMax": "16794128",
+          "PipelineII": "526 ~ 16794128",
+          "PipelineDepth": "",
+          "PipelineType": "none"
+        },
+        "Timing": {
+          "Target": "6.50",
+          "Uncertainty": "2.00",
+          "Estimate": "6.38"
+        },
+        "Area": {
+          "BRAM_18K": "8",
+          "FF": "1707",
+          "LUT": "2997",
           "DSP48E": "0"
         }
       }
@@ -1118,7 +1265,7 @@
   },
   "GenData": {
     "DataVersion": "0.1",
-    "Time": "2018-06-10 20:20:24 -0700",
+    "Time": "2018-06-11 00:35:24 -0700",
     "ToolName": "vivado_hls",
     "ToolVersion": "2018.1"
   }

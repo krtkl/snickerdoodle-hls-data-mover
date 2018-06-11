@@ -6,7 +6,7 @@
         <schedule model="data_mover"/>
     </config>
     <UIConfigurations>
-        <UIAutosynConf hideTrivialOp="true" isBasedOnBoard="false" isSolutionDirty="false" isStopAskAgain="false" showDetailDesignViewer="false">
+        <UIAutosynConf hideTrivialOp="true" isBasedOnBoard="false" isSolutionDirty="true" isStopAskAgain="false" showDetailDesignViewer="false">
             <Platform>xilinx/zynq/zynq</Platform>
             <Platform>xilinx/zynq/zynq_fpv6</Platform>
             <customLibs/>
@@ -68,7 +68,7 @@
         <DownStreamTool name="vivado"/>
     </downStreamTool>
     <clockList>
-        <clock name="default" default="false" uncertainty="2.0" period="6.5"/>
+        <clock default="false" name="default" uncertainty="2.0" period="6.5"/>
     </clockList>
 </solution>
 

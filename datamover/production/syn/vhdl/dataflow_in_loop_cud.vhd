@@ -9,7 +9,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity dataflow_in_loop_bkb  is
+entity dataflow_in_loop_cud  is
     generic (
         DataWidth    : integer := 64;
         AddressRange : integer := 32;
@@ -42,9 +42,9 @@ entity dataflow_in_loop_bkb  is
     );
 end entity;
 
-architecture rtl of dataflow_in_loop_bkb is
+architecture rtl of dataflow_in_loop_cud is
 
-component dataflow_in_loop_bkb_memcore is
+component dataflow_in_loop_cud_memcore is
 port (
     clk      : in  std_logic;
     reset    : in  std_logic;
@@ -76,7 +76,7 @@ begin
 
     memcore_iaddr <= i_address0 & std_logic_vector(iptr);
     memcore_taddr <= t_address0 & std_logic_vector(tptr);
-    dataflow_in_loop_bkb_memcore_U : component dataflow_in_loop_bkb_memcore
+    dataflow_in_loop_cud_memcore_U : component dataflow_in_loop_cud_memcore
     port map (
         clk      => clk,
         reset    => reset,
