@@ -35,8 +35,6 @@
 
 #include "datamover.h"
 
-volatile bool stop; /* global stop flag for early exit from blocking transfers - not yet implemented */
-
 /* data flow subfunction implementing AXI port read bursts */
 void read_burst (const axi_t tx_buffer[BUFFER_WORDS],
 				 const ap_uint<LOOP_ITERATOR_BITS> n,
@@ -60,10 +58,20 @@ void tx_axis_words (const axi_t cache[CACHE_WORDS],
 {
   for (int i=0;i<data_length;i++)
    {
+#pragma HLS LOOP_TRIPCOUNT max=CACHE_LENGTH
 #pragma HLS PIPELINE II=1
-	 axis_t data;
-	 data = ((axis_t *)cache)[i]; /* get AXIS word from cache */
-	 axis << data; /* transmit AXIS byte */
+	 axi_t axi_word;
+	 axis_t axis_word;
+
+//	 const int AXI_WORD_LOG2_BYTES = 3; /* AXI ACP port word size expressed as a power of 2 */
+//	 const int AXI_WORD_SIZE = (1<<AXI_WORD_LOG2_BYTES); /* AXI ACP port word size in bytes (8) */
+//
+//	 const int AXIS_WORD_LOG2_BYTES = 0; /* AXIS ports word size expressed as a power of 2 */
+//	 const int AXIS_WORD_SIZE = (1<<AXIS_WORD_LOG2_BYTES); /* AXIS ports word size in bytes (1) */
+
+	 axi_word = cache[i*AXIS_WORD_SIZE/AXI_WORD_SIZE];
+	 axis_word = (axis_t)(axi_word >>((i%(AXI_WORD_SIZE/AXIS_WORD_SIZE))*(BITS_PER_BYTE*AXIS_WORD_SIZE)));
+	 axis << axis_word; /* transmit AXIS byte */
    }
 }
 
@@ -76,6 +84,7 @@ void tx_loop (hls::stream<axis_t> &axis,
 {
   for (int n=0;n<loop_count;n++)
    {
+#pragma HLS LOOP_TRIPCOUNT max=LOOP_MAX_TRIP_COUNT
 #pragma HLS DATAFLOW
 	 axi_t cache[CACHE_WORDS]; /* AXI read burst buffer for transmit */
 	 ap_uint<CACHE_LENGTH_BITS> data_length; /* length of axis transmit burst */
@@ -86,61 +95,61 @@ void tx_loop (hls::stream<axis_t> &axis,
 }
 
 
-/* data flow subfunction implementing AXIS port reception */
-void rx_axis_words (hls::stream<axis_t> &axis,
-			   const ap_uint<LOOP_TRIP_COUNT_BITS> loop_count,
-			   const ap_uint<CACHE_LENGTH_BITS> final_burst_length,
-			   const ap_uint<LOOP_ITERATOR_BITS> n,
-			   axi_t cache[CACHE_WORDS],
-			   ap_uint<BUFFER_WORD_ADDRESS_BITS> &buffer_offset)
-{
-  ap_uint<CACHE_LENGTH_BITS> data_length; /* how many AXIS words to suck in from the AXIS port and transfer to the cache */
-
-  if (n==loop_count-1) data_length = final_burst_length;
-  else data_length = CACHE_LENGTH;
-
-  /* loop through every AXIS word in cache, any bytes not used in the block are zeroed */
-  for (int i=0; i<CACHE_LENGTH; i++)
-   {
-#pragma HLS PIPELINE II=1
-	 axis_t data = 0; /* zero word working register to load up with value from AXIS */
-     if (data_length)
-      {
-    	axis >> data; /* receive AXIS byte */
-    	data_length--; /*  one less word to suck in */
-      }
-     ((axis_t *)cache)[i] = data; /* load AXIS word to cache */
-   }
-
-  buffer_offset = (ap_uint<BUFFER_WORD_ADDRESS_BITS>)n*CACHE_WORDS; /* calculate buffer offset for write burst */
-}
-
-
-/* data flow subfunction implementing AXI port write bursts */
-void write_burst (const axi_t cache[CACHE_WORDS],
-				  const ap_uint<BUFFER_WORD_ADDRESS_BITS> buffer_offset,
-				  axi_t rx_buffer[BUFFER_WORDS])
-{
-  memcpy(&rx_buffer[buffer_offset], cache, CACHE_SIZE); /* burst write a block of data from the receive cache */
-}
-
-
-/* function containing main data flow loop for receive */
-void rx_loop (hls::stream<axis_t> &axis,
-			  const ap_uint<LOOP_TRIP_COUNT_BITS> loop_count,
-			  const ap_uint<CACHE_LENGTH_BITS> final_burst_length,
-			  axi_t rx_buffer[BUFFER_WORDS])
-{
-  for (int n=0;n<loop_count;n++)
-   {
-#pragma HLS DATAFLOW
-	 axi_t cache[CACHE_WORDS]; /* AXI write burst buffer for receive */
-	 ap_uint<BUFFER_WORD_ADDRESS_BITS> buffer_offset; /* word offset into AXI buffer to write cache out to */
-
-	 rx_axis_words (axis, loop_count, final_burst_length, n, cache, buffer_offset);
-	 write_burst (cache, buffer_offset, rx_buffer);
-   }
-}
+///* data flow subfunction implementing AXIS port reception */
+//void rx_axis_words (hls::stream<axis_t> &axis,
+//			   const ap_uint<LOOP_TRIP_COUNT_BITS> loop_count,
+//			   const ap_uint<CACHE_LENGTH_BITS> final_burst_length,
+//			   const ap_uint<LOOP_ITERATOR_BITS> n,
+//			   axi_t cache[CACHE_WORDS],
+//			   ap_uint<BUFFER_WORD_ADDRESS_BITS> &buffer_offset)
+//{
+//  ap_uint<CACHE_LENGTH_BITS> data_length; /* how many AXIS words to suck in from the AXIS port and transfer to the cache */
+//
+//  if (n==loop_count-1) data_length = final_burst_length;
+//  else data_length = CACHE_LENGTH;
+//
+//  /* loop through every AXIS word in cache, any bytes not used in the block are zeroed */
+//  for (int i=0; i<CACHE_LENGTH; i++)
+//   {
+//#pragma HLS PIPELINE II=1
+//	 axis_t data = 0; /* zero word working register to load up with value from AXIS */
+//     if (data_length)
+//      {
+//    	axis >> data; /* receive AXIS byte */
+//    	data_length--; /*  one less word to suck in */
+//      }
+//     ((axis_t *)cache)[i] = data; /* load AXIS word to cache */
+//   }
+//
+//  buffer_offset = (ap_uint<BUFFER_WORD_ADDRESS_BITS>)n*CACHE_WORDS; /* calculate buffer offset for write burst */
+//}
+//
+//
+///* data flow subfunction implementing AXI port write bursts */
+//void write_burst (const axi_t cache[CACHE_WORDS],
+//				  const ap_uint<BUFFER_WORD_ADDRESS_BITS> buffer_offset,
+//				  axi_t rx_buffer[BUFFER_WORDS])
+//{
+//  memcpy(&rx_buffer[buffer_offset], cache, CACHE_SIZE); /* burst write a block of data from the receive cache */
+//}
+//
+//
+///* function containing main data flow loop for receive */
+//void rx_loop (hls::stream<axis_t> &axis,
+//			  const ap_uint<LOOP_TRIP_COUNT_BITS> loop_count,
+//			  const ap_uint<CACHE_LENGTH_BITS> final_burst_length,
+//			  axi_t rx_buffer[BUFFER_WORDS])
+//{
+//  for (int n=0;n<loop_count;n++)
+//   {
+//#pragma HLS DATAFLOW
+//	 axi_t cache[CACHE_WORDS]; /* AXI write burst buffer for receive */
+//	 ap_uint<BUFFER_WORD_ADDRESS_BITS> buffer_offset; /* word offset into AXI buffer to write cache out to */
+//
+//	 rx_axis_words (axis, loop_count, final_burst_length, n, cache, buffer_offset);
+//	 write_burst (cache, buffer_offset, rx_buffer);
+//   }
+//}
 
 
 /* given the data length calculates the number of cache block size loop iterations needed and the length of the data in the last cache block */
@@ -184,16 +193,16 @@ void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
   /* local variables */
   ap_uint<LOOP_TRIP_COUNT_BITS> tx_loop_count; /* iterator for tx loop data flow process */
   ap_uint<CACHE_LENGTH_BITS> tx_final_burst_length; /* length of the final block of tx data loaded into the cache */
-  ap_uint<LOOP_TRIP_COUNT_BITS> rx_loop_count; /* iterator for rx loop data flow process */
-  ap_uint<CACHE_LENGTH_BITS> rx_final_burst_length; /* length of the final block of rx data loaded into the cache */
+//  ap_uint<LOOP_TRIP_COUNT_BITS> rx_loop_count; /* iterator for rx loop data flow process */
+//  ap_uint<CACHE_LENGTH_BITS> rx_final_burst_length; /* length of the final block of rx data loaded into the cache */
 
   /* setup tx and rx loop parameters */
   get_loop_parameters (*tx_buffer_length, tx_loop_count, tx_final_burst_length);
-  get_loop_parameters (*rx_buffer_length, rx_loop_count, rx_final_burst_length);
+//  get_loop_parameters (*rx_buffer_length, rx_loop_count, rx_final_burst_length);
 
   /* Transmit Section */
   tx_loop (data_tx, tx_buffer, tx_loop_count, tx_final_burst_length);
 
-  /* Receive Section */
-  rx_loop (data_rx, rx_loop_count, rx_final_burst_length, rx_buffer);
+//  /* Receive Section */
+//  rx_loop (data_rx, rx_loop_count, rx_final_burst_length, rx_buffer);
 }
