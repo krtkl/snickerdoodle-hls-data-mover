@@ -13,10 +13,10 @@ entity dataflow_in_loop is
 port (
     ap_clk : IN STD_LOGIC;
     ap_rst : IN STD_LOGIC;
-    axis_V_V_TDATA : IN STD_LOGIC_VECTOR (7 downto 0);
-    loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-    final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
-    val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
+    axis_V_V_TDATA : IN STD_LOGIC_VECTOR (31 downto 0);
+    loop_count_V : IN STD_LOGIC_VECTOR (13 downto 0);
+    final_burst_length_V : IN STD_LOGIC_VECTOR (10 downto 0);
+    val_assign : IN STD_LOGIC_VECTOR (13 downto 0);
     m_axi_rx_buffer_V_AWVALID : OUT STD_LOGIC;
     m_axi_rx_buffer_V_AWREADY : IN STD_LOGIC;
     m_axi_rx_buffer_V_AWADDR : OUT STD_LOGIC_VECTOR (31 downto 0);
@@ -105,7 +105,7 @@ architecture behav of dataflow_in_loop is
     signal rx_axis_words25_U0_cache_V_d0 : STD_LOGIC_VECTOR (63 downto 0);
     signal rx_axis_words25_U0_rx_buffer_V_offset_out_din : STD_LOGIC_VECTOR (28 downto 0);
     signal rx_axis_words25_U0_rx_buffer_V_offset_out_write : STD_LOGIC;
-    signal rx_axis_words25_U0_ap_return : STD_LOGIC_VECTOR (20 downto 0);
+    signal rx_axis_words25_U0_ap_return : STD_LOGIC_VECTOR (21 downto 0);
     signal ap_channel_done_buffer_offset_V : STD_LOGIC;
     signal buffer_offset_V_full_n : STD_LOGIC;
     signal ap_sync_reg_channel_write_buffer_offset_V : STD_LOGIC := '0';
@@ -160,7 +160,7 @@ architecture behav of dataflow_in_loop is
     signal rx_buffer_V_offset_c_full_n : STD_LOGIC;
     signal rx_buffer_V_offset_c_dout : STD_LOGIC_VECTOR (28 downto 0);
     signal rx_buffer_V_offset_c_empty_n : STD_LOGIC;
-    signal buffer_offset_V_dout : STD_LOGIC_VECTOR (20 downto 0);
+    signal buffer_offset_V_dout : STD_LOGIC_VECTOR (21 downto 0);
     signal buffer_offset_V_empty_n : STD_LOGIC;
     signal ap_sync_done : STD_LOGIC;
     signal ap_sync_ready : STD_LOGIC;
@@ -178,12 +178,12 @@ architecture behav of dataflow_in_loop is
         ap_continue : IN STD_LOGIC;
         ap_idle : OUT STD_LOGIC;
         ap_ready : OUT STD_LOGIC;
-        axis_V_V_TDATA : IN STD_LOGIC_VECTOR (7 downto 0);
+        axis_V_V_TDATA : IN STD_LOGIC_VECTOR (31 downto 0);
         axis_V_V_TVALID : IN STD_LOGIC;
         axis_V_V_TREADY : OUT STD_LOGIC;
-        loop_count_V : IN STD_LOGIC_VECTOR (12 downto 0);
-        final_burst_length_V : IN STD_LOGIC_VECTOR (12 downto 0);
-        val_assign : IN STD_LOGIC_VECTOR (12 downto 0);
+        loop_count_V : IN STD_LOGIC_VECTOR (13 downto 0);
+        final_burst_length_V : IN STD_LOGIC_VECTOR (10 downto 0);
+        val_assign : IN STD_LOGIC_VECTOR (13 downto 0);
         cache_V_address0 : OUT STD_LOGIC_VECTOR (8 downto 0);
         cache_V_ce0 : OUT STD_LOGIC;
         cache_V_we0 : OUT STD_LOGIC;
@@ -192,7 +192,7 @@ architecture behav of dataflow_in_loop is
         rx_buffer_V_offset_out_din : OUT STD_LOGIC_VECTOR (28 downto 0);
         rx_buffer_V_offset_out_full_n : IN STD_LOGIC;
         rx_buffer_V_offset_out_write : OUT STD_LOGIC;
-        ap_return : OUT STD_LOGIC_VECTOR (20 downto 0) );
+        ap_return : OUT STD_LOGIC_VECTOR (21 downto 0) );
     end component;
 
 
@@ -208,7 +208,7 @@ architecture behav of dataflow_in_loop is
         cache_V_address0 : OUT STD_LOGIC_VECTOR (8 downto 0);
         cache_V_ce0 : OUT STD_LOGIC;
         cache_V_q0 : IN STD_LOGIC_VECTOR (63 downto 0);
-        buffer_offset_V : IN STD_LOGIC_VECTOR (20 downto 0);
+        buffer_offset_V : IN STD_LOGIC_VECTOR (21 downto 0);
         m_axi_rx_buffer_V_AWVALID : OUT STD_LOGIC;
         m_axi_rx_buffer_V_AWREADY : IN STD_LOGIC;
         m_axi_rx_buffer_V_AWADDR : OUT STD_LOGIC_VECTOR (31 downto 0);
@@ -302,16 +302,16 @@ architecture behav of dataflow_in_loop is
     end component;
 
 
-    component fifo_w21_d2_A IS
+    component fifo_w22_d2_A IS
     port (
         clk : IN STD_LOGIC;
         reset : IN STD_LOGIC;
         if_read_ce : IN STD_LOGIC;
         if_write_ce : IN STD_LOGIC;
-        if_din : IN STD_LOGIC_VECTOR (20 downto 0);
+        if_din : IN STD_LOGIC_VECTOR (21 downto 0);
         if_full_n : OUT STD_LOGIC;
         if_write : IN STD_LOGIC;
-        if_dout : OUT STD_LOGIC_VECTOR (20 downto 0);
+        if_dout : OUT STD_LOGIC_VECTOR (21 downto 0);
         if_empty_n : OUT STD_LOGIC;
         if_read : IN STD_LOGIC );
     end component;
@@ -444,7 +444,7 @@ begin
         if_empty_n => rx_buffer_V_offset_c_empty_n,
         if_read => write_burst_U0_rx_buffer_V_offset_read);
 
-    buffer_offset_V_U : component fifo_w21_d2_A
+    buffer_offset_V_U : component fifo_w22_d2_A
     port map (
         clk => ap_clk,
         reset => ap_rst,

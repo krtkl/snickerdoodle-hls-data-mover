@@ -17,7 +17,7 @@ namespace ap_rtl {
 
 struct tx_loop : public sc_module {
     // Port declarations 61
-    sc_out< sc_lv<8> > axis_V_V_TDATA;
+    sc_out< sc_lv<32> > axis_V_V_TDATA;
     sc_out< sc_logic > m_axi_tx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_tx_buffer_V_AWREADY;
     sc_out< sc_lv<32> > m_axi_tx_buffer_V_AWADDR;
@@ -64,8 +64,8 @@ struct tx_loop : public sc_module {
     sc_in< sc_lv<1> > m_axi_tx_buffer_V_BID;
     sc_in< sc_lv<1> > m_axi_tx_buffer_V_BUSER;
     sc_in< sc_lv<29> > tx_buffer_V_offset;
-    sc_in< sc_lv<13> > loop_count_V;
-    sc_in< sc_lv<13> > final_burst_length_V;
+    sc_in< sc_lv<14> > loop_count_V;
+    sc_in< sc_lv<11> > final_burst_length_V;
     sc_in_clk ap_clk;
     sc_in< sc_logic > ap_rst;
     sc_in< sc_logic > tx_buffer_V_offset_ap_vld;
@@ -124,7 +124,7 @@ struct tx_loop : public sc_module {
     sc_signal< sc_lv<1> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARUSER;
     sc_signal< sc_logic > dataflow_in_loop59_U0_m_axi_tx_buffer_V_RREADY;
     sc_signal< sc_logic > dataflow_in_loop59_U0_m_axi_tx_buffer_V_BREADY;
-    sc_signal< sc_lv<8> > dataflow_in_loop59_U0_axis_V_V_TDATA;
+    sc_signal< sc_lv<32> > dataflow_in_loop59_U0_axis_V_V_TDATA;
     sc_signal< sc_logic > dataflow_in_loop59_U0_axis_V_V_TVALID;
     sc_signal< sc_logic > dataflow_in_loop59_U0_ap_done;
     sc_signal< sc_logic > dataflow_in_loop59_U0_ap_start;
@@ -135,25 +135,25 @@ struct tx_loop : public sc_module {
     sc_signal< sc_logic > ap_sync_done;
     sc_signal< sc_logic > ap_sync_ready;
     sc_signal< sc_logic > loop_dataflow_enable;
-    sc_signal< sc_lv<13> > loop_dataflow_input_count;
-    sc_signal< sc_lv<13> > loop_dataflow_output_count;
+    sc_signal< sc_lv<14> > loop_dataflow_input_count;
+    sc_signal< sc_lv<14> > loop_dataflow_output_count;
     sc_signal< sc_logic > loop_dataflow_busy;
     sc_signal< sc_logic > dataflow_in_loop59_U0_start_full_n;
     sc_signal< sc_logic > dataflow_in_loop59_U0_start_write;
-    static const sc_lv<8> ap_const_lv8_0;
+    static const sc_lv<32> ap_const_lv32_0;
     static const sc_logic ap_const_logic_0;
     static const sc_logic ap_const_logic_1;
     static const bool ap_const_boolean_1;
-    static const sc_lv<13> ap_const_lv13_0;
-    static const sc_lv<13> ap_const_lv13_1;
+    static const sc_lv<14> ap_const_lv14_0;
+    static const sc_lv<14> ap_const_lv14_1;
     static const sc_lv<2> ap_const_lv2_0;
     static const sc_lv<2> ap_const_lv2_1;
     static const sc_lv<1> ap_const_lv1_0;
     static const sc_lv<1> ap_const_lv1_1;
-    static const sc_lv<32> ap_const_lv32_0;
     static const sc_lv<3> ap_const_lv3_0;
     static const sc_lv<4> ap_const_lv4_0;
     static const sc_lv<64> ap_const_lv64_0;
+    static const sc_lv<8> ap_const_lv8_0;
     // Thread declarations
     void thread_ap_var_for_const0();
     void thread_ap_var_for_const1();

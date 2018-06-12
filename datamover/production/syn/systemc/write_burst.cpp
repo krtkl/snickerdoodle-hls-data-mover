@@ -847,7 +847,7 @@ void write_burst::thread_sum_i_i_fu_139_p2() {
 }
 
 void write_burst::thread_tmp_i_cast_i_i_fu_131_p1() {
-    tmp_i_cast_i_i_fu_131_p1 = esl_zext<30,21>(buffer_offset_V.read());
+    tmp_i_cast_i_i_fu_131_p1 = esl_zext<30,22>(buffer_offset_V.read());
 }
 
 void write_burst::thread_ap_NS_fsm() {

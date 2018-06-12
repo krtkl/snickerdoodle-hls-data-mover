@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'dataflow_in_loop59'
 ================================================================
-* Date:           Mon Jun 11 01:41:08 2018
+* Date:           Mon Jun 11 19:35:36 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -29,7 +29,7 @@
     |   Latency  |  Interval  | Pipeline |
     | min |  max | min |  max |   Type   |
     +-----+------+-----+------+----------+
-    |  525|  4622|  523|  4100| dataflow |
+    |  525|  1550|  523|  1028| dataflow |
     +-----+------+-----+------+----------+
 
     + Detail: 
@@ -39,7 +39,7 @@
         |     Instance     |     Module    | min |  max | min |  max |   Type  |
         +------------------+---------------+-----+------+-----+------+---------+
         |read_burst_U0     |read_burst     |  522|   522|  522|   522|   none  |
-        |tx_axis_words_U0  |tx_axis_words  |    2|  4099|    2|  4099|   none  |
+        |tx_axis_words_U0  |tx_axis_words  |    2|  1027|    2|  1027|   none  |
         +------------------+---------------+-----+------+-----+------+---------+
 
         * Loop: 
@@ -57,12 +57,12 @@
 |DSP              |        -|      -|       -|      -|
 |Expression       |        -|      -|       0|     14|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        -|      -|     259|    556|
+|Instance         |        -|      -|     252|    553|
 |Memory           |        2|      -|       0|      0|
 |Multiplexer      |        -|      -|       -|     18|
 |Register         |        -|      -|       2|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        2|      0|     261|    588|
+|Total            |        2|      0|     254|    585|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -74,10 +74,10 @@
     +------------------+---------------+---------+-------+-----+-----+
     |     Instance     |     Module    | BRAM_18K| DSP48E|  FF | LUT |
     +------------------+---------------+---------+-------+-----+-----+
-    |read_burst_U0     |read_burst     |        0|      0|  166|  256|
-    |tx_axis_words_U0  |tx_axis_words  |        0|      0|   93|  300|
+    |read_burst_U0     |read_burst     |        0|      0|  165|  255|
+    |tx_axis_words_U0  |tx_axis_words  |        0|      0|   87|  298|
     +------------------+---------------+---------+-------+-----+-----+
-    |Total             |               |        0|      0|  259|  556|
+    |Total             |               |        0|      0|  252|  553|
     +------------------+---------------+---------+-------+-----+-----+
 
     * DSP48: 
@@ -96,9 +96,9 @@
     +-----------------+---------+---+----+------+-----+---------+
     |       Name      | BRAM_18K| FF| LUT| Depth| Bits| Size:D*B|
     +-----------------+---------+---+----+------+-----+---------+
-    |data_length_V_U  |        0|  0|   0|     2|   13|       26|
+    |data_length_V_U  |        0|  0|   0|     2|   11|       22|
     +-----------------+---------+---+----+------+-----+---------+
-    |Total            |        0|  0|   0|     2|   13|       26|
+    |Total            |        0|  0|   0|     2|   11|       22|
     +-----------------+---------+---+----+------+-----+---------+
 
     * Expression: 
@@ -199,13 +199,13 @@
 |m_axi_tx_buffer_V_BUSER      |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
 |tx_buffer_V_offset           |  in |   29|   ap_none  |  tx_buffer_V_offset  |    scalar    |
 |tx_buffer_V_offset_ap_vld    |  in |    1|   ap_none  |  tx_buffer_V_offset  |    scalar    |
-|val_assign                   |  in |   13|   ap_none  |      val_assign      |    scalar    |
+|val_assign                   |  in |   14|   ap_none  |      val_assign      |    scalar    |
 |val_assign_ap_vld            |  in |    1|   ap_none  |      val_assign      |    scalar    |
-|loop_count_V                 |  in |   13|   ap_none  |     loop_count_V     |    scalar    |
+|loop_count_V                 |  in |   14|   ap_none  |     loop_count_V     |    scalar    |
 |loop_count_V_ap_vld          |  in |    1|   ap_none  |     loop_count_V     |    scalar    |
-|final_burst_length_V         |  in |   13|   ap_none  | final_burst_length_V |    scalar    |
+|final_burst_length_V         |  in |   11|   ap_none  | final_burst_length_V |    scalar    |
 |final_burst_length_V_ap_vld  |  in |    1|   ap_none  | final_burst_length_V |    scalar    |
-|axis_V_V_TDATA               | out |    8|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TDATA               | out |   32|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TVALID              | out |    1|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TREADY              |  in |    1|    axis    |       axis_V_V       |    pointer   |
 +-----------------------------+-----+-----+------------+----------------------+--------------+

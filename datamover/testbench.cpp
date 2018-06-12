@@ -30,7 +30,7 @@
 /**
  * @description AXIS data mover test bench
  * @author Jamil J. Weatherbee
- * @version 2018-06-11T08:18:22Z
+ * @version 2018-06-11T21:40:26Z
  */
 
 #include <stdlib.h>
@@ -181,7 +181,7 @@ int main (void)
   std::cout << "rx_stream crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)rx_stream_crc << std::endl;
 
   std::cout << "Testing data_mover()..." << std::endl;
-  data_mover(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length);
+  data_mover_32b64b(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length);
 
   /* check transmit stream */
   crc = 0xFFFFFFFF; /* setup CRC working register */

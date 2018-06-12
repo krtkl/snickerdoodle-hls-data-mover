@@ -58,11 +58,11 @@ proc sort_file_names {files {top_name {}}} {
 ## IP Info
 set Vendor      "krtl"
 set Library     "snickerdoodle"
-set IPName      "data_mover"
-set Version     "1.05"
-set DisplayName "data mover"
-set Revision    "1806110208"
-set Description "data mover"
+set IPName      "data_mover_32b64b"
+set Version     "1.06"
+set DisplayName "32-bit AXIS to 64-bit AXI data mover"
+set Revision    "1806112011"
+set Description "32-bit AXIS to 64-bit AXI data mover"
 set Device      "zynq"
 set Taxonomy    "/VIVADO_HLS_IP"
 set has_xpm_memory "0"
@@ -71,7 +71,7 @@ set sdx_kernel_files {}
 set enable_xo_gen 0
 
 ## Variables
-set Top "data_mover"
+set Top "data_mover_32b64b"
 set VhdlFiles [sort_file_names [glob -nocomplain hdl/vhdl/*] ${Top}.vhd]
 set VerilogFiles [sort_file_names [glob -nocomplain hdl/verilog/*] ${Top}.v]
 set SWDriverFiles [sort_file_names [glob-r drivers]]
@@ -88,7 +88,7 @@ set Interfaces {
         param_prefix "C_S_AXI_CONTROL"
         addr_bits "6"
         port_width "AWADDR 6 WDATA 32 WSTRB 4 ARADDR 6 RDATA 32"
-        registers {{0x00 CTRL       RW   0x0 "Control signals" {{ 0 1 AP_START RW 0 "Control signal Register for 'ap_start'." } { 1 1 AP_DONE R 0 "Control signal Register for 'ap_done'." } { 2 1 AP_IDLE R 0 "Control signal Register for 'ap_idle'." } { 3 1 AP_READY R 0 "Control signal Register for 'ap_ready'." } { 4 3 RESERVED_1 R 0 "Reserved.  0s on read." } { 7 1 AUTO_RESTART RW 0 "Control signal Register for 'auto_restart'." } { 8 24 RESERVED_2 R 0 "Reserved.  0s on read." }}} {0x04 GIER       RW   0x0 "Global Interrupt Enable Register" {{ 0 1 Enable RW 0 "Master enable for the device interrupt output to the system interrupt controller: 0 = Disabled, 1 = Enabled" } { 1 31 RESERVED R 0 "Reserved.  0s on read." }} } {0x08 IP_IER     RW   0x0 "IP Interrupt Enable Register" {{ 0 1 CHAN0_INT_EN RW 0 "Enable Channel 0 (ap_done) Interrupt.  0 = Disabled, 1 = Enabled." } { 1 1 CHAN1_INT_EN RW 0 "Enable Channel 1 (ap_ready) Interrupt.  0 = Disabled, 1 = Enabled." } { 2 30 RESERVED R 0 "Reserved.  0s on read." }}} {0x0c IP_ISR     RW   0x0 "IP Interrupt Status Register" {{ 0 1 CHAN0_INT_ST RTOW 0 "Channel 0 (ap_done) Interrupt Status. 0 = No Channel 0 input interrupt, 1 = Channel 0 input interrup" } { 1 1 CHAN1_INT_ST RTOW 0 "Channel 1 (ap_ready) Interrupt Status. 0 = No Channel 1 input interrupt, 1 = Channel 1 input interrup" } { 2 30 RESERVED R 0 "Reserved.  0s on read." }}} {0x10 tx_buffer_V W 0x0 "Data signal of tx_buffer_V" {{0 32 tx_buffer_V W 0 "Bit 31 to 0 Data signal of tx_buffer_V"}}} {0x18 tx_buffer_length_V W 0x0 "Data signal of tx_buffer_length_V" {{0 25 tx_buffer_length_V W 0 "Bit 24 to 0 Data signal of tx_buffer_length_V"} {25 7 RESERVED R 0 "Reserved.  0s on read."}}} {0x20 rx_buffer_V W 0x0 "Data signal of rx_buffer_V" {{0 32 rx_buffer_V W 0 "Bit 31 to 0 Data signal of rx_buffer_V"}}} {0x28 rx_buffer_length_V W 0x0 "Data signal of rx_buffer_length_V" {{0 25 rx_buffer_length_V W 0 "Bit 24 to 0 Data signal of rx_buffer_length_V"} {25 7 RESERVED R 0 "Reserved.  0s on read."}}}}
+        registers {{0x00 CTRL       RW   0x0 "Control signals" {{ 0 1 AP_START RW 0 "Control signal Register for 'ap_start'." } { 1 1 AP_DONE R 0 "Control signal Register for 'ap_done'." } { 2 1 AP_IDLE R 0 "Control signal Register for 'ap_idle'." } { 3 1 AP_READY R 0 "Control signal Register for 'ap_ready'." } { 4 3 RESERVED_1 R 0 "Reserved.  0s on read." } { 7 1 AUTO_RESTART RW 0 "Control signal Register for 'auto_restart'." } { 8 24 RESERVED_2 R 0 "Reserved.  0s on read." }}} {0x04 GIER       RW   0x0 "Global Interrupt Enable Register" {{ 0 1 Enable RW 0 "Master enable for the device interrupt output to the system interrupt controller: 0 = Disabled, 1 = Enabled" } { 1 31 RESERVED R 0 "Reserved.  0s on read." }} } {0x08 IP_IER     RW   0x0 "IP Interrupt Enable Register" {{ 0 1 CHAN0_INT_EN RW 0 "Enable Channel 0 (ap_done) Interrupt.  0 = Disabled, 1 = Enabled." } { 1 1 CHAN1_INT_EN RW 0 "Enable Channel 1 (ap_ready) Interrupt.  0 = Disabled, 1 = Enabled." } { 2 30 RESERVED R 0 "Reserved.  0s on read." }}} {0x0c IP_ISR     RW   0x0 "IP Interrupt Status Register" {{ 0 1 CHAN0_INT_ST RTOW 0 "Channel 0 (ap_done) Interrupt Status. 0 = No Channel 0 input interrupt, 1 = Channel 0 input interrup" } { 1 1 CHAN1_INT_ST RTOW 0 "Channel 1 (ap_ready) Interrupt Status. 0 = No Channel 1 input interrupt, 1 = Channel 1 input interrup" } { 2 30 RESERVED R 0 "Reserved.  0s on read." }}} {0x10 tx_buffer_V W 0x0 "Data signal of tx_buffer_V" {{0 32 tx_buffer_V W 0 "Bit 31 to 0 Data signal of tx_buffer_V"}}} {0x18 tx_buffer_length_V W 0x0 "Data signal of tx_buffer_length_V" {{0 24 tx_buffer_length_V W 0 "Bit 23 to 0 Data signal of tx_buffer_length_V"} {24 8 RESERVED R 0 "Reserved.  0s on read."}}} {0x20 rx_buffer_V W 0x0 "Data signal of rx_buffer_V" {{0 32 rx_buffer_V W 0 "Bit 31 to 0 Data signal of rx_buffer_V"}}} {0x28 rx_buffer_length_V W 0x0 "Data signal of rx_buffer_length_V" {{0 24 rx_buffer_length_V W 0 "Bit 23 to 0 Data signal of rx_buffer_length_V"} {24 8 RESERVED R 0 "Reserved.  0s on read."}}}}
         memories ""
         ctype {
             AWVALID {
@@ -158,8 +158,8 @@ set Interfaces {
             }
             WDATA {
                 Type "integer unsigned"
-                Width "25"
-                Bits "25"
+                Width "24"
+                Bits "24"
             }
             WSTRB {
                 Type "integer unsigned"
@@ -173,8 +173,8 @@ set Interfaces {
             }
             RDATA {
                 Type "integer unsigned"
-                Width "25"
-                Bits "25"
+                Width "24"
+                Bits "24"
             }
         }
         data_width "32"
@@ -461,13 +461,13 @@ set Interfaces {
         port_prefix "data_rx_V_V"
         has_tready "1"
         ports {
-            TDATA 8
+            TDATA 32
         }
         ctype {
             TDATA {
                 Type "integer unsigned"
-                Width "8"
-                Bits "8"
+                Width "32"
+                Bits "32"
             }
             TVALID {
                 Type "bool"
@@ -487,13 +487,13 @@ set Interfaces {
         port_prefix "data_tx_V_V"
         has_tready "1"
         ports {
-            TDATA 8
+            TDATA 32
         }
         ctype {
             TDATA {
                 Type "integer unsigned"
-                Width "8"
-                Bits "8"
+                Width "32"
+                Bits "32"
             }
             TVALID {
                 Type "bool"

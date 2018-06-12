@@ -76,10 +76,10 @@ module dataflow_in_loop (
 
 input   ap_clk;
 input   ap_rst;
-input  [7:0] axis_V_V_TDATA;
-input  [12:0] loop_count_V;
-input  [12:0] final_burst_length_V;
-input  [12:0] val_assign;
+input  [31:0] axis_V_V_TDATA;
+input  [13:0] loop_count_V;
+input  [10:0] final_burst_length_V;
+input  [13:0] val_assign;
 output   m_axi_rx_buffer_V_AWVALID;
 input   m_axi_rx_buffer_V_AWREADY;
 output  [31:0] m_axi_rx_buffer_V_AWADDR;
@@ -152,7 +152,7 @@ wire    rx_axis_words25_U0_cache_V_we0;
 wire   [63:0] rx_axis_words25_U0_cache_V_d0;
 wire   [28:0] rx_axis_words25_U0_rx_buffer_V_offset_out_din;
 wire    rx_axis_words25_U0_rx_buffer_V_offset_out_write;
-wire   [20:0] rx_axis_words25_U0_ap_return;
+wire   [21:0] rx_axis_words25_U0_ap_return;
 wire    ap_channel_done_buffer_offset_V;
 wire    buffer_offset_V_full_n;
 reg    ap_sync_reg_channel_write_buffer_offset_V;
@@ -207,7 +207,7 @@ wire    cache_V_t_empty_n;
 wire    rx_buffer_V_offset_c_full_n;
 wire   [28:0] rx_buffer_V_offset_c_dout;
 wire    rx_buffer_V_offset_c_empty_n;
-wire   [20:0] buffer_offset_V_dout;
+wire   [21:0] buffer_offset_V_dout;
 wire    buffer_offset_V_empty_n;
 wire    ap_sync_done;
 wire    ap_sync_ready;
@@ -347,7 +347,7 @@ fifo_w29_d2_A rx_buffer_V_offset_c_U(
     .if_read(write_burst_U0_rx_buffer_V_offset_read)
 );
 
-fifo_w21_d2_A buffer_offset_V_U(
+fifo_w22_d2_A buffer_offset_V_U(
     .clk(ap_clk),
     .reset(ap_rst),
     .if_read_ce(1'b1),

@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'read_burst'
 ================================================================
-* Date:           Mon Jun 11 01:41:07 2018
+* Date:           Mon Jun 11 19:35:35 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -54,14 +54,14 @@
 |       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
-|Expression       |        -|      -|       0|    125|
+|Expression       |        -|      -|       0|    124|
 |FIFO             |        -|      -|       -|      -|
 |Instance         |        -|      -|       -|      -|
 |Memory           |        -|      -|       -|      -|
 |Multiplexer      |        -|      -|       -|    131|
-|Register         |        -|      -|     166|      -|
+|Register         |        -|      -|     165|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        0|      0|     166|    256|
+|Total            |        0|      0|     165|    255|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -85,19 +85,19 @@
     +-----------------------------------+----------+-------+---+----+------------+------------+
     |           Variable Name           | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +-----------------------------------+----------+-------+---+----+------------+------------+
-    |indvar_next_i_i_fu_174_p2          |     +    |      0|  0|  17|          10|           1|
-    |r_V_fu_188_p2                      |     +    |      0|  0|  21|          14|           2|
-    |sum_i_fu_152_p2                    |     +    |      0|  0|  37|          30|          30|
+    |indvar_next_i_i_fu_176_p2          |     +    |      0|  0|  17|          10|           1|
+    |r_V_fu_190_p2                      |     +    |      0|  0|  22|          15|           2|
+    |sum_i_fu_154_p2                    |     +    |      0|  0|  37|          30|          30|
     |ap_block_pp0_stage0_11001          |    and   |      0|  0|   2|           1|           1|
     |ap_block_state10_pp0_stage0_iter1  |    and   |      0|  0|   2|           1|           1|
-    |exitcond_i_i_fu_168_p2             |   icmp   |      0|  0|  13|          10|          11|
-    |tmp_3_i_i_fu_197_p2                |   icmp   |      0|  0|  13|          14|          14|
+    |exitcond_i_i_fu_170_p2             |   icmp   |      0|  0|  13|          10|          11|
+    |tmp_3_i_i_fu_199_p2                |   icmp   |      0|  0|  13|          15|          15|
     |ap_block_state1                    |    or    |      0|  0|   2|           1|           1|
-    |data_length_V_write_s_fu_203_p3    |  select  |      0|  0|  14|           1|          13|
+    |data_length_V_write_s_fu_205_p3    |  select  |      0|  0|  12|           1|          11|
     |ap_enable_pp0                      |    xor   |      0|  0|   2|           1|           2|
     |ap_enable_reg_pp0_iter1            |    xor   |      0|  0|   2|           2|           1|
     +-----------------------------------+----------+-------+---+----+------------+------------+
-    |Total                              |          |      0|  0| 125|          85|          77|
+    |Total                              |          |      0|  0| 124|          87|          76|
     +-----------------------------------+----------+-------+---+----+------------+------------+
 
     * Multiplexer: 
@@ -108,14 +108,14 @@
     |ap_done                                   |   9|          2|    1|          2|
     |ap_enable_reg_pp0_iter1                   |   9|          2|    1|          2|
     |ap_enable_reg_pp0_iter2                   |   9|          2|    1|          2|
-    |ap_phi_mux_indvar_i_i_phi_fu_124_p4       |   9|          2|   10|         20|
-    |ap_return                                 |   9|          2|   13|         26|
+    |ap_phi_mux_indvar_i_i_phi_fu_126_p4       |   9|          2|   10|         20|
+    |ap_return                                 |   9|          2|   11|         22|
     |ap_sig_ioackin_m_axi_tx_buffer_V_ARREADY  |   9|          2|    1|          2|
-    |indvar_i_i_reg_120                        |   9|          2|   10|         20|
+    |indvar_i_i_reg_122                        |   9|          2|   10|         20|
     |tx_buffer_V_blk_n_AR                      |   9|          2|    1|          2|
     |tx_buffer_V_blk_n_R                       |   9|          2|    1|          2|
     +------------------------------------------+----+-----------+-----+-----------+
-    |Total                                     | 131|         29|   40|         89|
+    |Total                                     | 131|         29|   38|         85|
     +------------------------------------------+----+-----------+-----+-----------+
 
     * Register: 
@@ -128,17 +128,17 @@
     |ap_enable_reg_pp0_iter1                   |   1|   0|    1|          0|
     |ap_enable_reg_pp0_iter2                   |   1|   0|    1|          0|
     |ap_reg_ioackin_m_axi_tx_buffer_V_ARREADY  |   1|   0|    1|          0|
-    |ap_return_preg                            |  13|   0|   13|          0|
-    |exitcond_i_i_reg_236                      |   1|   0|    1|          0|
-    |exitcond_i_i_reg_236_pp0_iter1_reg        |   1|   0|    1|          0|
-    |indvar_i_i_reg_120                        |  10|   0|   10|          0|
-    |indvar_i_i_reg_120_pp0_iter1_reg          |  10|   0|   10|          0|
-    |indvar_next_i_i_reg_240                   |  10|   0|   10|          0|
-    |sum_i_reg_215                             |  30|   0|   30|          0|
-    |tmp_reg_210                               |  12|   0|   12|          0|
-    |tx_buffer_V_addr_rea_reg_245              |  64|   0|   64|          0|
+    |ap_return_preg                            |  11|   0|   11|          0|
+    |exitcond_i_i_reg_238                      |   1|   0|    1|          0|
+    |exitcond_i_i_reg_238_pp0_iter1_reg        |   1|   0|    1|          0|
+    |indvar_i_i_reg_122                        |  10|   0|   10|          0|
+    |indvar_i_i_reg_122_pp0_iter1_reg          |  10|   0|   10|          0|
+    |indvar_next_i_i_reg_242                   |  10|   0|   10|          0|
+    |sum_i_reg_217                             |  30|   0|   30|          0|
+    |tmp_reg_212                               |  13|   0|   13|          0|
+    |tx_buffer_V_addr_rea_reg_247              |  64|   0|   64|          0|
     +------------------------------------------+----+----+-----+-----------+
-    |Total                                     | 166|   0|  166|          0|
+    |Total                                     | 165|   0|  165|          0|
     +------------------------------------------+----+----+-----+-----------+
 
 
@@ -157,7 +157,7 @@
 |ap_continue                 |  in |    1| ap_ctrl_hs |      read_burst      | return value |
 |ap_idle                     | out |    1| ap_ctrl_hs |      read_burst      | return value |
 |ap_ready                    | out |    1| ap_ctrl_hs |      read_burst      | return value |
-|ap_return                   | out |   13| ap_ctrl_hs |      read_burst      | return value |
+|ap_return                   | out |   11| ap_ctrl_hs |      read_burst      | return value |
 |m_axi_tx_buffer_V_AWVALID   | out |    1|    m_axi   |      tx_buffer_V     |    pointer   |
 |m_axi_tx_buffer_V_AWREADY   |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
 |m_axi_tx_buffer_V_AWADDR    | out |   32|    m_axi   |      tx_buffer_V     |    pointer   |
@@ -204,9 +204,9 @@
 |m_axi_tx_buffer_V_BID       |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
 |m_axi_tx_buffer_V_BUSER     |  in |    1|    m_axi   |      tx_buffer_V     |    pointer   |
 |tx_buffer_V_offset          |  in |   29|   ap_none  |  tx_buffer_V_offset  |    scalar    |
-|val_assign                  |  in |   13|   ap_none  |      val_assign      |    scalar    |
-|loop_count_V                |  in |   13|   ap_none  |     loop_count_V     |    scalar    |
-|final_burst_length_V        |  in |   13|   ap_none  | final_burst_length_V |    scalar    |
+|val_assign                  |  in |   14|   ap_none  |      val_assign      |    scalar    |
+|loop_count_V                |  in |   14|   ap_none  |     loop_count_V     |    scalar    |
+|final_burst_length_V        |  in |   11|   ap_none  | final_burst_length_V |    scalar    |
 |cache_V_address0            | out |    9|  ap_memory |        cache_V       |     array    |
 |cache_V_ce0                 | out |    1|  ap_memory |        cache_V       |     array    |
 |cache_V_we0                 | out |    1|  ap_memory |        cache_V       |     array    |

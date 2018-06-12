@@ -88,7 +88,7 @@ output   ap_ready;
 output  [8:0] cache_V_address0;
 output   cache_V_ce0;
 input  [63:0] cache_V_q0;
-input  [20:0] buffer_offset_V;
+input  [21:0] buffer_offset_V;
 output   m_axi_rx_buffer_V_AWVALID;
 input   m_axi_rx_buffer_V_AWREADY;
 output  [31:0] m_axi_rx_buffer_V_AWADDR;

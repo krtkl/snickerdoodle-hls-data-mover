@@ -139,7 +139,7 @@ dataflow_in_loop::dataflow_in_loop(sc_module_name name) : sc_module(name), mVcdF
     rx_buffer_V_offset_c_U->if_dout(rx_buffer_V_offset_c_dout);
     rx_buffer_V_offset_c_U->if_empty_n(rx_buffer_V_offset_c_empty_n);
     rx_buffer_V_offset_c_U->if_read(write_burst_U0_rx_buffer_V_offset_read);
-    buffer_offset_V_U = new fifo_w21_d2_A("buffer_offset_V_U");
+    buffer_offset_V_U = new fifo_w22_d2_A("buffer_offset_V_U");
     buffer_offset_V_U->clk(ap_clk);
     buffer_offset_V_U->reset(ap_rst);
     buffer_offset_V_U->if_read_ce(ap_var_for_const2);

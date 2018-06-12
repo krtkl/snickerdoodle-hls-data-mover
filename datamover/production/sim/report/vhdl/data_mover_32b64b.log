@@ -1,0 +1,231 @@
+INFO: [COSIM-47] Using XSIM for RTL simulation.
+INFO: [COSIM-14] Instrumenting C test bench ...
+WARNING: [COSIM-369] AXI_master port 'tx_buffer.V' has a depth of '4194304'. Insufficient depth may result in simulation mismatch or freeze.
+WARNING: [COSIM-369] AXI_master port 'rx_buffer.V' has a depth of '4194304'. Insufficient depth may result in simulation mismatch or freeze.
+   Build using "C:/Xilinx/Vivado/2018.1/msys/bin/g++.exe"
+   Compiling apatb_data_mover_32b64b.cpp
+   Compiling datamover.cpp_pre.cpp.tb.cpp
+   Compiling testbench.cpp_pre.cpp.tb.cpp
+   Generating cosim.tv.exe
+INFO: [COSIM-302] Starting C TB testing ... 
+INFO: [COSIM-333] Generating C post check test bench ...
+INFO: [COSIM-12] Generating RTL test bench ...
+INFO: [COSIM-322] Starting VHDL simulation. 
+INFO: [COSIM-15] Starting XSIM ...
+INFO: [COSIM-316] Starting C post checking ...
+Test Parameters:
+TX_PRBS_STATE=0x15EC38A2
+TX_TRANSFER_LENGTH=1048575
+RX_PRBS_STATE=0x970AC5FD
+RX_TRANSFER_LENGTH=1048577
+AXI_WORD_LOG2_BYTES=3
+AXI_WORD_SIZE=8
+AXI_WORD_BITS=64
+AXIS_WORD_LOG2_BYTES=2
+AXIS_WORD_SIZE=4
+AXIS_WORD_BITS=32
+AXIS_WORDS_PER_AXI_WORD=2
+CACHE_WORD_ADDRESS_BITS=9
+CACHE_WORDS=512
+CACHE_SIZE=4096
+BUFFER_WORD_ADDRESS_BITS=22
+BUFFER_WORDS=4194304
+BUFFER_SIZE=33554432
+LOOP_ITERATOR_BITS=13
+LOOP_MAX_TRIP_COUNT=8192
+LOOP_TRIP_COUNT_BITS=14
+CACHE_LENGTH_BITS=11
+CACHE_LENGTH=1024
+BUFFER_LENGTH_BITS=24
+Allocating 33554432 byte transmit buffer... SUCCESS
+Allocating 33554432 byte receive buffer... SUCCESS
+tx_buffer crc=0x5899FCC8
+rx_stream crc=0xAC6CE6B7
+Testing data_mover()...
+data_tx crc=0x5899FCC8
+rx_buffer crc=0xAC6CE6B7
+
+C:\git\snickerdoodle-hls-data-mover\datamover\production\sim\vhdl>call C:/Xilinx/Vivado/2018.1/bin/xelab xil_defaultlib.apatb_data_mover_32b64b_top glbl -prj data_mover_32b64b.prj -L smartconnect_v1_0 -L axi_protocol_checker_v1_1_12 -L axi_protocol_checker_v1_1_13 -L axis_protocol_checker_v1_1_11 -L axis_protocol_checker_v1_1_12 -L xil_defaultlib -L unisims --initfile "C:/Xilinx/Vivado/2018.1/data/xsim/ip/xsim_ip.ini" --lib "ieee_proposed=./ieee_proposed" -s data_mover_32b64b  
+INFO: [XSIM 43-3496] Using init file passed via -initfile option "C:/Xilinx/Vivado/2018.1/data/xsim/ip/xsim_ip.ini".
+Vivado Simulator 2018.1
+Copyright 1986-1999, 2001-2017 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2018.1/bin/unwrapped/win64.o/xelab.exe xil_defaultlib.apatb_data_mover_32b64b_top glbl -prj data_mover_32b64b.prj -L smartconnect_v1_0 -L axi_protocol_checker_v1_1_12 -L axi_protocol_checker_v1_1_13 -L axis_protocol_checker_v1_1_11 -L axis_protocol_checker_v1_1_12 -L xil_defaultlib -L unisims --initfile C:/Xilinx/Vivado/2018.1/data/xsim/ip/xsim_ip.ini --lib ieee_proposed=./ieee_proposed -s data_mover_32b64b 
+Multi-threading is on. Using 2 slave threads.
+Determining compilation order of HDL files.
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/glbl.v" into library work
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/AESL_sim_pkg.vhd" into library xil_defaultlib
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/AESL_axi_master_DMA.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity AESL_axi_master_DMA
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/AESL_axi_slave_control.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity AESL_axi_slave_control
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/AESL_axi_s_data_rx_V_V.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity AESL_axi_s_data_rx_V_V
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/AESL_axi_s_data_tx_V_V.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity AESL_axi_s_data_tx_V_V
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/dataflow_in_loop.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity dataflow_in_loop
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/dataflow_in_loop59.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity dataflow_in_loop59
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/dataflow_in_loop5bkb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity dataflow_in_loop5bkb
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/dataflow_in_loop5bkb_memcore.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity dataflow_in_loop5bkb_memcore_ram
+INFO: [VRFC 10-307] analyzing entity dataflow_in_loop5bkb_memcore
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/dataflow_in_loop_cud.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity dataflow_in_loop_cud
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/dataflow_in_loop_cud_memcore.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity dataflow_in_loop_cud_memcore_ram
+INFO: [VRFC 10-307] analyzing entity dataflow_in_loop_cud_memcore
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/data_mover_32b64b.autotb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity apatb_data_mover_32b64b_top
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/data_mover_32b64b.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/data_mover_32b64b_control_s_axi.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_control_s_axi
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/data_mover_32b64b_DMA_m_axi.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_DMA_m_axi
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_DMA_m_axi_reg_slice
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_DMA_m_axi_fifo
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_DMA_m_axi_buffer
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_DMA_m_axi_decoder
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_DMA_m_axi_throttl
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_DMA_m_axi_read
+INFO: [VRFC 10-307] analyzing entity data_mover_32b64b_DMA_m_axi_write
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/fifo_w11_d2_A.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity fifo_w11_d2_A_shiftReg
+INFO: [VRFC 10-307] analyzing entity fifo_w11_d2_A
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/fifo_w22_d2_A.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity fifo_w22_d2_A_shiftReg
+INFO: [VRFC 10-307] analyzing entity fifo_w22_d2_A
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/fifo_w29_d2_A.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity fifo_w29_d2_A_shiftReg
+INFO: [VRFC 10-307] analyzing entity fifo_w29_d2_A
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/read_burst.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity read_burst
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/rx_axis_words25.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity rx_axis_words25
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/rx_loop.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity rx_loop
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/tx_axis_words.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity tx_axis_words
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/tx_loop.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity tx_loop
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/write_burst.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity write_burst
+Starting static elaboration
+WARNING: [VRFC 10-1303] range is empty (null range) [/wrk/xhdhdnobkup2/mounicav/xsimsource/xsim_HEAD/data/vhdl/src/ieee_2008/numeric_std-body.vhdl:3476]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_unsigned
+Compiling package ieee.numeric_std
+Compiling package ieee.std_logic_textio
+Compiling module work.glbl
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_control_s_axi [data_mover_32b64b_control_s_axi_...]
+Compiling architecture behav of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_throttl [\data_mover_32b64b_DMA_m_axi_thr...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_fifo [\data_mover_32b64b_DMA_m_axi_fif...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_reg_slice [\data_mover_32b64b_DMA_m_axi_reg...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_fifo [\data_mover_32b64b_DMA_m_axi_fif...]
+Compiling architecture arch of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_buffer [\data_mover_32b64b_DMA_m_axi_buf...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_fifo [\data_mover_32b64b_DMA_m_axi_fif...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_fifo [\data_mover_32b64b_DMA_m_axi_fif...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_write [\data_mover_32b64b_DMA_m_axi_wri...]
+Compiling architecture arch of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_buffer [\data_mover_32b64b_DMA_m_axi_buf...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_reg_slice [\data_mover_32b64b_DMA_m_axi_reg...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi_read [\data_mover_32b64b_DMA_m_axi_rea...]
+Compiling architecture behave of entity xil_defaultlib.data_mover_32b64b_DMA_m_axi [\data_mover_32b64b_DMA_m_axi(num...]
+Compiling architecture rtl of entity xil_defaultlib.dataflow_in_loop5bkb_memcore_ram [\dataflow_in_loop5bkb_memcore_ra...]
+Compiling architecture arch of entity xil_defaultlib.dataflow_in_loop5bkb_memcore [dataflow_in_loop5bkb_memcore_def...]
+Compiling architecture rtl of entity xil_defaultlib.dataflow_in_loop5bkb [\dataflow_in_loop5bkb(addressran...]
+Compiling architecture behav of entity xil_defaultlib.read_burst [read_burst_default]
+Compiling architecture behav of entity xil_defaultlib.tx_axis_words [tx_axis_words_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo_w11_d2_A_shiftReg [fifo_w11_d2_a_shiftreg_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo_w11_d2_A [\fifo_w11_d2_A(1,8)\]
+Compiling architecture behav of entity xil_defaultlib.dataflow_in_loop59 [dataflow_in_loop59_default]
+Compiling architecture behav of entity xil_defaultlib.tx_loop [tx_loop_default]
+Compiling architecture rtl of entity xil_defaultlib.dataflow_in_loop_cud_memcore_ram [\dataflow_in_loop_cud_memcore_ra...]
+Compiling architecture arch of entity xil_defaultlib.dataflow_in_loop_cud_memcore [dataflow_in_loop_cud_memcore_def...]
+Compiling architecture rtl of entity xil_defaultlib.dataflow_in_loop_cud [\dataflow_in_loop_cud(addressran...]
+Compiling architecture behav of entity xil_defaultlib.rx_axis_words25 [rx_axis_words25_default]
+Compiling architecture behav of entity xil_defaultlib.write_burst [write_burst_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo_w29_d2_A_shiftReg [fifo_w29_d2_a_shiftreg_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo_w29_d2_A [\fifo_w29_d2_A(1,8)\]
+Compiling architecture rtl of entity xil_defaultlib.fifo_w22_d2_A_shiftReg [fifo_w22_d2_a_shiftreg_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo_w22_d2_A [\fifo_w22_d2_A(1,8)\]
+Compiling architecture behav of entity xil_defaultlib.dataflow_in_loop [dataflow_in_loop_default]
+Compiling architecture behav of entity xil_defaultlib.rx_loop [rx_loop_default]
+Compiling architecture behav of entity xil_defaultlib.data_mover_32b64b [data_mover_32b64b_default]
+Compiling architecture behav of entity xil_defaultlib.AESL_axi_s_data_rx_V_V [aesl_axi_s_data_rx_v_v_default]
+Compiling architecture behav of entity xil_defaultlib.AESL_axi_s_data_tx_V_V [aesl_axi_s_data_tx_v_v_default]
+Compiling architecture behav of entity xil_defaultlib.AESL_axi_master_DMA [aesl_axi_master_dma_default]
+Compiling architecture behav of entity xil_defaultlib.AESL_axi_slave_control [aesl_axi_slave_control_default]
+Compiling architecture behav of entity xil_defaultlib.apatb_data_mover_32b64b_top
+Built simulation snapshot data_mover_32b64b
+
+****** Webtalk v2018.1 (64-bit)
+  **** SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
+  **** IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/xsim.dir/data_mover_32b64b/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-186] 'C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/xsim.dir/data_mover_32b64b/webtalk/usage_statistics_ext_xsim.xml' has been successfully sent to Xilinx on Mon Jun 11 19:54:37 2018. For additional details about this file, please refer to the WebTalk help file at C:/Xilinx/Vivado/2018.1/doc/webtalk_introduction.html.
+INFO: [Common 17-206] Exiting Webtalk at Mon Jun 11 19:54:37 2018...
+
+****** xsim v2018.1 (64-bit)
+  **** SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
+  **** IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/data_mover_32b64b/xsim_script.tcl
+# xsim {data_mover_32b64b} -autoloadwcfg -tclbatch {data_mover_32b64b.tcl}
+Vivado Simulator 2018.1
+Time resolution is 1 ps
+source data_mover_32b64b.tcl
+## run all
+Note: simulation done!
+Time: 6853018250 ps  Iteration: 1  Process: /apatb_data_mover_32b64b_top/generate_sim_done_proc  File: C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/data_mover_32b64b.autotb.vhd
+Failure: NORMAL EXIT (note: failure is to force the simulator to stop)
+Time: 6853018250 ps  Iteration: 1  Process: /apatb_data_mover_32b64b_top/generate_sim_done_proc  File: C:/git/snickerdoodle-hls-data-mover/datamover/production/sim/vhdl/data_mover_32b64b.autotb.vhd
+$finish called at time : 6853018250 ps
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:07:14 . Memory (MB): peak = 229.719 ; gain = 0.000
+## quit
+INFO: [Common 17-206] Exiting xsim at Mon Jun 11 20:02:05 2018...
+Test Parameters:
+TX_PRBS_STATE=0x15EC38A2
+TX_TRANSFER_LENGTH=1048575
+RX_PRBS_STATE=0x970AC5FD
+RX_TRANSFER_LENGTH=1048577
+AXI_WORD_LOG2_BYTES=3
+AXI_WORD_SIZE=8
+AXI_WORD_BITS=64
+AXIS_WORD_LOG2_BYTES=2
+AXIS_WORD_SIZE=4
+AXIS_WORD_BITS=32
+AXIS_WORDS_PER_AXI_WORD=2
+CACHE_WORD_ADDRESS_BITS=9
+CACHE_WORDS=512
+CACHE_SIZE=4096
+BUFFER_WORD_ADDRESS_BITS=22
+BUFFER_WORDS=4194304
+BUFFER_SIZE=33554432
+LOOP_ITERATOR_BITS=13
+LOOP_MAX_TRIP_COUNT=8192
+LOOP_TRIP_COUNT_BITS=14
+CACHE_LENGTH_BITS=11
+CACHE_LENGTH=1024
+BUFFER_LENGTH_BITS=24
+Allocating 33554432 byte transmit buffer... SUCCESS
+Allocating 33554432 byte receive buffer... SUCCESS
+tx_buffer crc=0x5899FCC8
+rx_stream crc=0xAC6CE6B7
+Testing data_mover()...
+data_tx crc=0x5899FCC8
+rx_buffer crc=0xAC6CE6B7
+INFO: [COSIM-1000] *** C/RTL co-simulation finished: PASS ***
+INFO: [COSIM-211] II is measurable only when transaction number is greater than 1 in RTL simulation. Otherwise, they will be marked as all NA. If user wants to calculate them, please make sure there are at least 2 transactions in RTL simulation.

@@ -15,7 +15,7 @@
 #include "write_burst.h"
 #include "dataflow_in_loop_cud.h"
 #include "fifo_w29_d2_A.h"
-#include "fifo_w21_d2_A.h"
+#include "fifo_w22_d2_A.h"
 
 namespace ap_rtl {
 
@@ -23,10 +23,10 @@ struct dataflow_in_loop : public sc_module {
     // Port declarations 63
     sc_in_clk ap_clk;
     sc_in< sc_logic > ap_rst;
-    sc_in< sc_lv<8> > axis_V_V_TDATA;
-    sc_in< sc_lv<13> > loop_count_V;
-    sc_in< sc_lv<13> > final_burst_length_V;
-    sc_in< sc_lv<13> > val_assign;
+    sc_in< sc_lv<32> > axis_V_V_TDATA;
+    sc_in< sc_lv<14> > loop_count_V;
+    sc_in< sc_lv<11> > final_burst_length_V;
+    sc_in< sc_lv<14> > val_assign;
     sc_out< sc_logic > m_axi_rx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_rx_buffer_V_AWREADY;
     sc_out< sc_lv<32> > m_axi_rx_buffer_V_AWADDR;
@@ -103,7 +103,7 @@ struct dataflow_in_loop : public sc_module {
     rx_axis_words25* rx_axis_words25_U0;
     write_burst* write_burst_U0;
     fifo_w29_d2_A* rx_buffer_V_offset_c_U;
-    fifo_w21_d2_A* buffer_offset_V_U;
+    fifo_w22_d2_A* buffer_offset_V_U;
     sc_signal< sc_lv<64> > cache_V_i_q0;
     sc_signal< sc_lv<64> > cache_V_t_q0;
     sc_signal< sc_logic > rx_axis_words25_U0_ap_start;
@@ -118,7 +118,7 @@ struct dataflow_in_loop : public sc_module {
     sc_signal< sc_lv<64> > rx_axis_words25_U0_cache_V_d0;
     sc_signal< sc_lv<29> > rx_axis_words25_U0_rx_buffer_V_offset_out_din;
     sc_signal< sc_logic > rx_axis_words25_U0_rx_buffer_V_offset_out_write;
-    sc_signal< sc_lv<21> > rx_axis_words25_U0_ap_return;
+    sc_signal< sc_lv<22> > rx_axis_words25_U0_ap_return;
     sc_signal< sc_logic > ap_channel_done_buffer_offset_V;
     sc_signal< sc_logic > buffer_offset_V_full_n;
     sc_signal< sc_logic > ap_sync_reg_channel_write_buffer_offset_V;
@@ -173,7 +173,7 @@ struct dataflow_in_loop : public sc_module {
     sc_signal< sc_logic > rx_buffer_V_offset_c_full_n;
     sc_signal< sc_lv<29> > rx_buffer_V_offset_c_dout;
     sc_signal< sc_logic > rx_buffer_V_offset_c_empty_n;
-    sc_signal< sc_lv<21> > buffer_offset_V_dout;
+    sc_signal< sc_lv<22> > buffer_offset_V_dout;
     sc_signal< sc_logic > buffer_offset_V_empty_n;
     sc_signal< sc_logic > ap_sync_done;
     sc_signal< sc_logic > ap_sync_ready;

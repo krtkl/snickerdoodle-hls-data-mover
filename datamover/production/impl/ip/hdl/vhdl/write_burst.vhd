@@ -21,7 +21,7 @@ port (
     cache_V_address0 : OUT STD_LOGIC_VECTOR (8 downto 0);
     cache_V_ce0 : OUT STD_LOGIC;
     cache_V_q0 : IN STD_LOGIC_VECTOR (63 downto 0);
-    buffer_offset_V : IN STD_LOGIC_VECTOR (20 downto 0);
+    buffer_offset_V : IN STD_LOGIC_VECTOR (21 downto 0);
     m_axi_rx_buffer_V_AWVALID : OUT STD_LOGIC;
     m_axi_rx_buffer_V_AWREADY : IN STD_LOGIC;
     m_axi_rx_buffer_V_AWADDR : OUT STD_LOGIC_VECTOR (31 downto 0);

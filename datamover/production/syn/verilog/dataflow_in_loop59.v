@@ -122,10 +122,10 @@ input  [1:0] m_axi_tx_buffer_V_BRESP;
 input  [0:0] m_axi_tx_buffer_V_BID;
 input  [0:0] m_axi_tx_buffer_V_BUSER;
 input  [28:0] tx_buffer_V_offset;
-input  [12:0] val_assign;
-input  [12:0] loop_count_V;
-input  [12:0] final_burst_length_V;
-output  [7:0] axis_V_V_TDATA;
+input  [13:0] val_assign;
+input  [13:0] loop_count_V;
+input  [10:0] final_burst_length_V;
+output  [31:0] axis_V_V_TDATA;
 input   tx_buffer_V_offset_ap_vld;
 input   val_assign_ap_vld;
 input   loop_count_V_ap_vld;
@@ -181,7 +181,7 @@ wire   [8:0] read_burst_U0_cache_V_address0;
 wire    read_burst_U0_cache_V_ce0;
 wire    read_burst_U0_cache_V_we0;
 wire   [63:0] read_burst_U0_cache_V_d0;
-wire   [12:0] read_burst_U0_ap_return;
+wire   [10:0] read_burst_U0_ap_return;
 wire    ap_channel_done_data_length_V;
 wire    data_length_V_full_n;
 reg    ap_sync_reg_channel_write_data_length_V;
@@ -197,12 +197,12 @@ wire    tx_axis_words_U0_ap_idle;
 wire    tx_axis_words_U0_ap_ready;
 wire   [8:0] tx_axis_words_U0_cache_V_address0;
 wire    tx_axis_words_U0_cache_V_ce0;
-wire   [7:0] tx_axis_words_U0_axis_V_V_TDATA;
+wire   [31:0] tx_axis_words_U0_axis_V_V_TDATA;
 wire    tx_axis_words_U0_axis_V_V_TVALID;
 wire    ap_sync_continue;
 wire    cache_V_i_full_n;
 wire    cache_V_t_empty_n;
-wire   [12:0] data_length_V_dout;
+wire   [10:0] data_length_V_dout;
 wire    data_length_V_empty_n;
 wire    ap_sync_done;
 wire    ap_sync_ready;
@@ -323,7 +323,7 @@ tx_axis_words tx_axis_words_U0(
     .axis_V_V_TREADY(axis_V_V_TREADY)
 );
 
-fifo_w13_d2_A data_length_V_U(
+fifo_w11_d2_A data_length_V_U(
     .clk(ap_clk),
     .reset(ap_rst),
     .if_read_ce(1'b1),

@@ -13,16 +13,16 @@ using namespace std;
 namespace ap_rtl {
 
 const sc_logic dataflow_in_loop59::ap_const_logic_1 = sc_dt::Log_1;
-const sc_lv<8> dataflow_in_loop59::ap_const_lv8_0 = "00000000";
+const sc_lv<32> dataflow_in_loop59::ap_const_lv32_0 = "00000000000000000000000000000000";
 const sc_logic dataflow_in_loop59::ap_const_logic_0 = sc_dt::Log_0;
 const sc_lv<64> dataflow_in_loop59::ap_const_lv64_0 = "0000000000000000000000000000000000000000000000000000000000000000";
 const sc_lv<2> dataflow_in_loop59::ap_const_lv2_0 = "00";
 const sc_lv<2> dataflow_in_loop59::ap_const_lv2_1 = "1";
 const sc_lv<1> dataflow_in_loop59::ap_const_lv1_0 = "0";
 const sc_lv<1> dataflow_in_loop59::ap_const_lv1_1 = "1";
-const sc_lv<32> dataflow_in_loop59::ap_const_lv32_0 = "00000000000000000000000000000000";
 const sc_lv<3> dataflow_in_loop59::ap_const_lv3_0 = "000";
 const sc_lv<4> dataflow_in_loop59::ap_const_lv4_0 = "0000";
+const sc_lv<8> dataflow_in_loop59::ap_const_lv8_0 = "00000000";
 const bool dataflow_in_loop59::ap_const_boolean_1 = true;
 
 dataflow_in_loop59::dataflow_in_loop59(sc_module_name name) : sc_module(name), mVcdFile(0) {
@@ -122,7 +122,7 @@ dataflow_in_loop59::dataflow_in_loop59(sc_module_name name) : sc_module(name), m
     tx_axis_words_U0->axis_V_V_TDATA(tx_axis_words_U0_axis_V_V_TDATA);
     tx_axis_words_U0->axis_V_V_TVALID(tx_axis_words_U0_axis_V_V_TVALID);
     tx_axis_words_U0->axis_V_V_TREADY(axis_V_V_TREADY);
-    data_length_V_U = new fifo_w13_d2_A("data_length_V_U");
+    data_length_V_U = new fifo_w11_d2_A("data_length_V_U");
     data_length_V_U->clk(ap_clk);
     data_length_V_U->reset(ap_rst);
     data_length_V_U->if_read_ce(ap_var_for_const2);

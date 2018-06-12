@@ -26,7 +26,7 @@ struct write_burst : public sc_module {
     sc_out< sc_lv<9> > cache_V_address0;
     sc_out< sc_logic > cache_V_ce0;
     sc_in< sc_lv<64> > cache_V_q0;
-    sc_in< sc_lv<21> > buffer_offset_V;
+    sc_in< sc_lv<22> > buffer_offset_V;
     sc_out< sc_logic > m_axi_rx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_rx_buffer_V_AWREADY;
     sc_out< sc_lv<32> > m_axi_rx_buffer_V_AWADDR;

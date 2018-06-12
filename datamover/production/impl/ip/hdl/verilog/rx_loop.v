@@ -72,9 +72,9 @@ module rx_loop (
 );
 
 
-input  [7:0] axis_V_V_TDATA;
-input  [12:0] loop_count_V;
-input  [12:0] final_burst_length_V;
+input  [31:0] axis_V_V_TDATA;
+input  [13:0] loop_count_V;
+input  [10:0] final_burst_length_V;
 output   m_axi_rx_buffer_V_AWVALID;
 input   m_axi_rx_buffer_V_AWREADY;
 output  [31:0] m_axi_rx_buffer_V_AWADDR;
@@ -179,8 +179,8 @@ wire    ap_sync_continue;
 wire    ap_sync_done;
 wire    ap_sync_ready;
 reg    loop_dataflow_enable;
-reg   [12:0] loop_dataflow_input_count;
-reg   [12:0] loop_dataflow_output_count;
+reg   [13:0] loop_dataflow_input_count;
+reg   [13:0] loop_dataflow_output_count;
 reg    loop_dataflow_busy;
 wire    dataflow_in_loop_U0_start_full_n;
 wire    dataflow_in_loop_U0_start_write;
@@ -188,8 +188,8 @@ wire    dataflow_in_loop_U0_start_write;
 // power-on initialization
 initial begin
 #0 loop_dataflow_enable = 1'b0;
-#0 loop_dataflow_input_count = 13'd0;
-#0 loop_dataflow_output_count = 13'd0;
+#0 loop_dataflow_input_count = 14'd0;
+#0 loop_dataflow_output_count = 14'd0;
 #0 loop_dataflow_busy = 1'b0;
 end
 
@@ -285,24 +285,24 @@ end
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
-        loop_dataflow_input_count <= 13'd0;
+        loop_dataflow_input_count <= 14'd0;
     end else begin
         if (((loop_dataflow_input_count == loop_count_V) & (loop_dataflow_enable == 1'b1))) begin
-            loop_dataflow_input_count <= 13'd0;
+            loop_dataflow_input_count <= 14'd0;
         end else if (((loop_dataflow_enable == 1'b1) & (dataflow_in_loop_U0_ap_ready == 1'b1))) begin
-            loop_dataflow_input_count <= (loop_dataflow_input_count + 13'd1);
+            loop_dataflow_input_count <= (loop_dataflow_input_count + 14'd1);
         end
     end
 end
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
-        loop_dataflow_output_count <= 13'd0;
+        loop_dataflow_output_count <= 14'd0;
     end else begin
         if (((loop_dataflow_output_count == loop_count_V) & (ap_continue == 1'b1))) begin
-            loop_dataflow_output_count <= 13'd0;
+            loop_dataflow_output_count <= 14'd0;
         end else if ((dataflow_in_loop_U0_ap_done == 1'b1)) begin
-            loop_dataflow_output_count <= (loop_dataflow_output_count + 13'd1);
+            loop_dataflow_output_count <= (loop_dataflow_output_count + 14'd1);
         end
     end
 end

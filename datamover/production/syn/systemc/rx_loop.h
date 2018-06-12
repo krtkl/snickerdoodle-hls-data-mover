@@ -17,9 +17,9 @@ namespace ap_rtl {
 
 struct rx_loop : public sc_module {
     // Port declarations 61
-    sc_in< sc_lv<8> > axis_V_V_TDATA;
-    sc_in< sc_lv<13> > loop_count_V;
-    sc_in< sc_lv<13> > final_burst_length_V;
+    sc_in< sc_lv<32> > axis_V_V_TDATA;
+    sc_in< sc_lv<14> > loop_count_V;
+    sc_in< sc_lv<11> > final_burst_length_V;
     sc_out< sc_logic > m_axi_rx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_rx_buffer_V_AWREADY;
     sc_out< sc_lv<32> > m_axi_rx_buffer_V_AWADDR;
@@ -135,16 +135,16 @@ struct rx_loop : public sc_module {
     sc_signal< sc_logic > ap_sync_done;
     sc_signal< sc_logic > ap_sync_ready;
     sc_signal< sc_logic > loop_dataflow_enable;
-    sc_signal< sc_lv<13> > loop_dataflow_input_count;
-    sc_signal< sc_lv<13> > loop_dataflow_output_count;
+    sc_signal< sc_lv<14> > loop_dataflow_input_count;
+    sc_signal< sc_lv<14> > loop_dataflow_output_count;
     sc_signal< sc_logic > loop_dataflow_busy;
     sc_signal< sc_logic > dataflow_in_loop_U0_start_full_n;
     sc_signal< sc_logic > dataflow_in_loop_U0_start_write;
     static const sc_logic ap_const_logic_0;
     static const sc_logic ap_const_logic_1;
     static const bool ap_const_boolean_1;
-    static const sc_lv<13> ap_const_lv13_0;
-    static const sc_lv<13> ap_const_lv13_1;
+    static const sc_lv<14> ap_const_lv14_0;
+    static const sc_lv<14> ap_const_lv14_1;
     static const sc_lv<64> ap_const_lv64_0;
     static const sc_lv<64> ap_const_lv64_1;
     static const sc_lv<1> ap_const_lv1_0;

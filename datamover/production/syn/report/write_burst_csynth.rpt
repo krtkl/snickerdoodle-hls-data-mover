@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'write_burst'
 ================================================================
-* Date:           Mon Jun 11 01:41:09 2018
+* Date:           Mon Jun 11 19:35:37 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -155,7 +155,7 @@
 |cache_V_address0            | out |    9|  ap_memory |       cache_V      |     array    |
 |cache_V_ce0                 | out |    1|  ap_memory |       cache_V      |     array    |
 |cache_V_q0                  |  in |   64|  ap_memory |       cache_V      |     array    |
-|buffer_offset_V             |  in |   21|   ap_none  |   buffer_offset_V  |    scalar    |
+|buffer_offset_V             |  in |   22|   ap_none  |   buffer_offset_V  |    scalar    |
 |m_axi_rx_buffer_V_AWVALID   | out |    1|    m_axi   |     rx_buffer_V    |    pointer   |
 |m_axi_rx_buffer_V_AWREADY   |  in |    1|    m_axi   |     rx_buffer_V    |    pointer   |
 |m_axi_rx_buffer_V_AWADDR    | out |   32|    m_axi   |     rx_buffer_V    |    pointer   |

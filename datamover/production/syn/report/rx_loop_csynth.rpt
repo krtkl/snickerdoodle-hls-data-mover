@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'rx_loop'
 ================================================================
-* Date:           Mon Jun 11 01:41:10 2018
+* Date:           Mon Jun 11 19:35:38 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -20,17 +20,17 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      6.38|        2.00|
+    |ap_clk  |   6.50|      5.77|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
     * Summary: 
-    +-----+----------+-----+----------+---------+
-    |     Latency    |    Interval    | Pipeline|
-    | min |    max   | min |    max   |   Type  |
-    +-----+----------+-----+----------+---------+
-    |  522|  16794122|  522|  16794122|   none  |
-    +-----+----------+-----+----------+---------+
+    +-----+---------+-----+---------+---------+
+    |    Latency    |    Interval   | Pipeline|
+    | min |   max   | min |   max   |   Type  |
+    +-----+---------+-----+---------+---------+
+    |  522|  8421898|  522|  8421898|   none  |
+    +-----+---------+-----+---------+---------+
 
     + Detail: 
         * Instance: 
@@ -38,16 +38,16 @@
         |                     |                  |   Latency   |   Interval  | Pipeline |
         |       Instance      |      Module      |  min |  max |  min |  max |   Type   |
         +---------------------+------------------+------+------+------+------+----------+
-        |dataflow_in_loop_U0  |dataflow_in_loop  |  4620|  4620|  4100|  4100| dataflow |
+        |dataflow_in_loop_U0  |dataflow_in_loop  |  1548|  1548|  1028|  1028| dataflow |
         +---------------------+------------------+------+------+------+------+----------+
 
         * Loop: 
-        +----------+-----+----------+----------+-----------+-----------+----------+----------+
-        |          |     Latency    | Iteration|  Initiation Interval  |   Trip   |          |
-        | Loop Name| min |    max   |  Latency |  achieved |   target  |   Count  | Pipelined|
-        +----------+-----+----------+----------+-----------+-----------+----------+----------+
-        |- Loop 1  |  521|  16794121|      4622|          -|          -| 0 ~ 4096 |    no    |
-        +----------+-----+----------+----------+-----------+-----------+----------+----------+
+        +----------+-----+---------+----------+-----------+-----------+----------+----------+
+        |          |    Latency    | Iteration|  Initiation Interval  |   Trip   |          |
+        | Loop Name| min |   max   |  Latency |  achieved |   target  |   Count  | Pipelined|
+        +----------+-----+---------+----------+-----------+-----------+----------+----------+
+        |- Loop 1  |  521|  8421897|      1550|          -|          -| 0 ~ 8192 |    no    |
+        +----------+-----+---------+----------+-----------+-----------+----------+----------+
 
 
 
@@ -59,14 +59,14 @@
 |       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
-|Expression       |        -|      -|       0|     40|
+|Expression       |        -|      -|       0|     42|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        2|      -|     490|    976|
+|Instance         |        2|      -|     247|    577|
 |Memory           |        -|      -|       -|      -|
 |Multiplexer      |        -|      -|       -|     18|
-|Register         |        -|      -|      28|      -|
+|Register         |        -|      -|      30|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        2|      0|     518|   1034|
+|Total            |        2|      0|     277|    637|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -78,9 +78,9 @@
     +---------------------+------------------+---------+-------+-----+-----+
     |       Instance      |      Module      | BRAM_18K| DSP48E|  FF | LUT |
     +---------------------+------------------+---------+-------+-----+-----+
-    |dataflow_in_loop_U0  |dataflow_in_loop  |        2|      0|  490|  976|
+    |dataflow_in_loop_U0  |dataflow_in_loop  |        2|      0|  247|  577|
     +---------------------+------------------+---------+-------+-----+-----+
-    |Total                |                  |        2|      0|  490|  976|
+    |Total                |                  |        2|      0|  247|  577|
     +---------------------+------------------+---------+-------+-----+-----+
 
     * DSP48: 
@@ -96,20 +96,20 @@
     +----------------------------+----------+-------+---+----+------------+------------+
     |        Variable Name       | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +----------------------------+----------+-------+---+----+------------+------------+
-    |loop_dataflow_input_count   |     +    |      0|  0|  20|          13|           1|
-    |loop_dataflow_output_count  |     +    |      0|  0|  20|          13|           1|
+    |loop_dataflow_input_count   |     +    |      0|  0|  21|          14|           1|
+    |loop_dataflow_output_count  |     +    |      0|  0|  21|          14|           1|
     +----------------------------+----------+-------+---+----+------------+------------+
-    |Total                       |          |      0|  0|  40|          26|           2|
+    |Total                       |          |      0|  0|  42|          28|           2|
     +----------------------------+----------+-------+---+----+------------+------------+
 
     * Multiplexer: 
     +----------------------------+----+-----------+-----+-----------+
     |            Name            | LUT| Input Size| Bits| Total Bits|
     +----------------------------+----+-----------+-----+-----------+
-    |loop_dataflow_input_count   |   9|          2|   13|         26|
-    |loop_dataflow_output_count  |   9|          2|   13|         26|
+    |loop_dataflow_input_count   |   9|          2|   14|         28|
+    |loop_dataflow_output_count  |   9|          2|   14|         28|
     +----------------------------+----+-----------+-----+-----------+
-    |Total                       |  18|          4|   26|         52|
+    |Total                       |  18|          4|   28|         56|
     +----------------------------+----+-----------+-----+-----------+
 
     * Register: 
@@ -118,10 +118,10 @@
     +----------------------------+----+----+-----+-----------+
     |loop_dataflow_busy          |   1|   0|    1|          0|
     |loop_dataflow_enable        |   1|   0|    1|          0|
-    |loop_dataflow_input_count   |  13|   0|   13|          0|
-    |loop_dataflow_output_count  |  13|   0|   13|          0|
+    |loop_dataflow_input_count   |  14|   0|   14|          0|
+    |loop_dataflow_output_count  |  14|   0|   14|          0|
     +----------------------------+----+----+-----+-----------+
-    |Total                       |  28|   0|   28|          0|
+    |Total                       |  30|   0|   30|          0|
     +----------------------------+----+----+-----+-----------+
 
 
@@ -133,12 +133,12 @@
 +-----------------------------+-----+-----+------------+----------------------+--------------+
 |          RTL Ports          | Dir | Bits|  Protocol  |     Source Object    |    C Type    |
 +-----------------------------+-----+-----+------------+----------------------+--------------+
-|axis_V_V_TDATA               |  in |    8|    axis    |       axis_V_V       |    pointer   |
+|axis_V_V_TDATA               |  in |   32|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TVALID              |  in |    1|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TREADY              | out |    1|    axis    |       axis_V_V       |    pointer   |
-|loop_count_V                 |  in |   13|   ap_none  |     loop_count_V     |    scalar    |
+|loop_count_V                 |  in |   14|   ap_none  |     loop_count_V     |    scalar    |
 |loop_count_V_ap_vld          |  in |    1|   ap_none  |     loop_count_V     |    scalar    |
-|final_burst_length_V         |  in |   13|   ap_none  | final_burst_length_V |    scalar    |
+|final_burst_length_V         |  in |   11|   ap_none  | final_burst_length_V |    scalar    |
 |final_burst_length_V_ap_vld  |  in |    1|   ap_none  | final_burst_length_V |    scalar    |
 |m_axi_rx_buffer_V_AWVALID    | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
 |m_axi_rx_buffer_V_AWREADY    |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |

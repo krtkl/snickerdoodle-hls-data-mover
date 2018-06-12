@@ -17,24 +17,24 @@
 <PipelineType>dataflow</PipelineType>
 <SummaryOfTimingAnalysis>
 <unit>ns</unit>
-<EstimatedClockPeriod>6.38</EstimatedClockPeriod>
+<EstimatedClockPeriod>5.77</EstimatedClockPeriod>
 </SummaryOfTimingAnalysis>
 <SummaryOfOverallLatency>
 <unit>clock cycles</unit>
-<Best-caseLatency>4620</Best-caseLatency>
-<Average-caseLatency>4620</Average-caseLatency>
-<Worst-caseLatency>4620</Worst-caseLatency>
-<DataflowPipelineThroughput>4100</DataflowPipelineThroughput>
-<Interval-min>4100</Interval-min>
-<Interval-max>4100</Interval-max>
+<Best-caseLatency>1548</Best-caseLatency>
+<Average-caseLatency>1548</Average-caseLatency>
+<Worst-caseLatency>1548</Worst-caseLatency>
+<DataflowPipelineThroughput>1028</DataflowPipelineThroughput>
+<Interval-min>1028</Interval-min>
+<Interval-max>1028</Interval-max>
 </SummaryOfOverallLatency>
 </PerformanceEstimates>
 
 <AreaEstimates>
 <Resources>
 <BRAM_18K>2</BRAM_18K>
-<FF>490</FF>
-<LUT>976</LUT>
+<FF>247</FF>
+<LUT>577</LUT>
 <DSP48E>0</DSP48E>
 </Resources>
 <AvailableResources>
@@ -131,7 +131,7 @@
 <IOProtocol>axis</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>8</Bits>
+<Bits>32</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -164,7 +164,7 @@
 <IOProtocol>ap_none</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>13</Bits>
+<Bits>14</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -186,7 +186,7 @@
 <IOProtocol>ap_none</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>13</Bits>
+<Bits>11</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -208,7 +208,7 @@
 <IOProtocol>ap_none</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>13</Bits>
+<Bits>14</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>

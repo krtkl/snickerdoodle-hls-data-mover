@@ -72,7 +72,7 @@ module tx_loop (
 );
 
 
-output  [7:0] axis_V_V_TDATA;
+output  [31:0] axis_V_V_TDATA;
 output   m_axi_tx_buffer_V_AWVALID;
 input   m_axi_tx_buffer_V_AWREADY;
 output  [31:0] m_axi_tx_buffer_V_AWADDR;
@@ -119,8 +119,8 @@ input  [1:0] m_axi_tx_buffer_V_BRESP;
 input  [0:0] m_axi_tx_buffer_V_BID;
 input  [0:0] m_axi_tx_buffer_V_BUSER;
 input  [28:0] tx_buffer_V_offset;
-input  [12:0] loop_count_V;
-input  [12:0] final_burst_length_V;
+input  [13:0] loop_count_V;
+input  [10:0] final_burst_length_V;
 input   ap_clk;
 input   ap_rst;
 input   tx_buffer_V_offset_ap_vld;
@@ -169,7 +169,7 @@ wire   [3:0] dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARREGION;
 wire   [0:0] dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARUSER;
 wire    dataflow_in_loop59_U0_m_axi_tx_buffer_V_RREADY;
 wire    dataflow_in_loop59_U0_m_axi_tx_buffer_V_BREADY;
-wire   [7:0] dataflow_in_loop59_U0_axis_V_V_TDATA;
+wire   [31:0] dataflow_in_loop59_U0_axis_V_V_TDATA;
 wire    dataflow_in_loop59_U0_axis_V_V_TVALID;
 wire    dataflow_in_loop59_U0_ap_done;
 reg    dataflow_in_loop59_U0_ap_start;
@@ -180,8 +180,8 @@ wire    ap_sync_continue;
 wire    ap_sync_done;
 wire    ap_sync_ready;
 reg    loop_dataflow_enable;
-reg   [12:0] loop_dataflow_input_count;
-reg   [12:0] loop_dataflow_output_count;
+reg   [13:0] loop_dataflow_input_count;
+reg   [13:0] loop_dataflow_output_count;
 reg    loop_dataflow_busy;
 wire    dataflow_in_loop59_U0_start_full_n;
 wire    dataflow_in_loop59_U0_start_write;
@@ -189,8 +189,8 @@ wire    dataflow_in_loop59_U0_start_write;
 // power-on initialization
 initial begin
 #0 loop_dataflow_enable = 1'b0;
-#0 loop_dataflow_input_count = 13'd0;
-#0 loop_dataflow_output_count = 13'd0;
+#0 loop_dataflow_input_count = 14'd0;
+#0 loop_dataflow_output_count = 14'd0;
 #0 loop_dataflow_busy = 1'b0;
 end
 
@@ -286,24 +286,24 @@ end
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
-        loop_dataflow_input_count <= 13'd0;
+        loop_dataflow_input_count <= 14'd0;
     end else begin
         if (((loop_dataflow_input_count == loop_count_V) & (loop_dataflow_enable == 1'b1))) begin
-            loop_dataflow_input_count <= 13'd0;
+            loop_dataflow_input_count <= 14'd0;
         end else if (((loop_dataflow_enable == 1'b1) & (dataflow_in_loop59_U0_ap_ready == 1'b1))) begin
-            loop_dataflow_input_count <= (loop_dataflow_input_count + 13'd1);
+            loop_dataflow_input_count <= (loop_dataflow_input_count + 14'd1);
         end
     end
 end
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
-        loop_dataflow_output_count <= 13'd0;
+        loop_dataflow_output_count <= 14'd0;
     end else begin
         if (((loop_dataflow_output_count == loop_count_V) & (ap_continue == 1'b1))) begin
-            loop_dataflow_output_count <= 13'd0;
+            loop_dataflow_output_count <= 14'd0;
         end else if ((dataflow_in_loop59_U0_ap_done == 1'b1)) begin
-            loop_dataflow_output_count <= (loop_dataflow_output_count + 13'd1);
+            loop_dataflow_output_count <= (loop_dataflow_output_count + 14'd1);
         end
     end
 end

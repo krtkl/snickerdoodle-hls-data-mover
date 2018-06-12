@@ -15,8 +15,8 @@ namespace ap_rtl {
 const sc_logic rx_loop::ap_const_logic_0 = sc_dt::Log_0;
 const sc_logic rx_loop::ap_const_logic_1 = sc_dt::Log_1;
 const bool rx_loop::ap_const_boolean_1 = true;
-const sc_lv<13> rx_loop::ap_const_lv13_0 = "0000000000000";
-const sc_lv<13> rx_loop::ap_const_lv13_1 = "1";
+const sc_lv<14> rx_loop::ap_const_lv14_0 = "00000000000000";
+const sc_lv<14> rx_loop::ap_const_lv14_1 = "1";
 const sc_lv<64> rx_loop::ap_const_lv64_0 = "0000000000000000000000000000000000000000000000000000000000000000";
 const sc_lv<64> rx_loop::ap_const_lv64_1 = "1";
 const sc_lv<1> rx_loop::ap_const_lv1_0 = "0";
@@ -224,8 +224,8 @@ rx_loop::rx_loop(sc_module_name name) : sc_module(name), mVcdFile(0) {
     SC_THREAD(thread_ap_var_for_const3);
 
     loop_dataflow_enable = SC_LOGIC_0;
-    loop_dataflow_input_count = "0000000000000";
-    loop_dataflow_output_count = "0000000000000";
+    loop_dataflow_input_count = "00000000000000";
+    loop_dataflow_output_count = "00000000000000";
     loop_dataflow_busy = SC_LOGIC_0;
     static int apTFileNum = 0;
     stringstream apTFilenSS;
@@ -378,7 +378,7 @@ void rx_loop::thread_ap_clk_no_reset_() {
         loop_dataflow_busy = ap_const_logic_0;
     } else {
         if ((esl_seteq<1,1,1>(ap_const_logic_1, ap_continue.read()) && 
-             esl_seteq<1,13,13>(loop_count_V.read(), loop_dataflow_output_count.read()))) {
+             esl_seteq<1,14,14>(loop_count_V.read(), loop_dataflow_output_count.read()))) {
             loop_dataflow_busy = ap_const_logic_0;
         } else if (esl_seteq<1,1,1>(ap_const_logic_1, ap_start.read())) {
             loop_dataflow_busy = ap_const_logic_1;
@@ -391,35 +391,35 @@ void rx_loop::thread_ap_clk_no_reset_() {
              esl_seteq<1,1,1>(ap_const_logic_1, ap_start.read()))) {
             loop_dataflow_enable = ap_const_logic_1;
         } else if ((esl_seteq<1,1,1>(ap_const_logic_1, loop_dataflow_enable.read()) && 
-                    esl_seteq<1,13,13>(loop_count_V.read(), loop_dataflow_input_count.read()))) {
+                    esl_seteq<1,14,14>(loop_count_V.read(), loop_dataflow_input_count.read()))) {
             loop_dataflow_enable = ap_const_logic_0;
         }
     }
     if ( ap_rst.read() == ap_const_logic_1) {
-        loop_dataflow_input_count = ap_const_lv13_0;
+        loop_dataflow_input_count = ap_const_lv14_0;
     } else {
         if ((esl_seteq<1,1,1>(ap_const_logic_1, loop_dataflow_enable.read()) && 
-             esl_seteq<1,13,13>(loop_count_V.read(), loop_dataflow_input_count.read()))) {
-            loop_dataflow_input_count = ap_const_lv13_0;
+             esl_seteq<1,14,14>(loop_count_V.read(), loop_dataflow_input_count.read()))) {
+            loop_dataflow_input_count = ap_const_lv14_0;
         } else if ((esl_seteq<1,1,1>(ap_const_logic_1, loop_dataflow_enable.read()) && 
                     esl_seteq<1,1,1>(dataflow_in_loop_U0_ap_ready.read(), ap_const_logic_1))) {
-            loop_dataflow_input_count = (!loop_dataflow_input_count.read().is_01() || !ap_const_lv13_1.is_01())? sc_lv<13>(): (sc_biguint<13>(loop_dataflow_input_count.read()) + sc_biguint<13>(ap_const_lv13_1));
+            loop_dataflow_input_count = (!loop_dataflow_input_count.read().is_01() || !ap_const_lv14_1.is_01())? sc_lv<14>(): (sc_biguint<14>(loop_dataflow_input_count.read()) + sc_biguint<14>(ap_const_lv14_1));
         }
     }
     if ( ap_rst.read() == ap_const_logic_1) {
-        loop_dataflow_output_count = ap_const_lv13_0;
+        loop_dataflow_output_count = ap_const_lv14_0;
     } else {
         if ((esl_seteq<1,1,1>(ap_const_logic_1, ap_continue.read()) && 
-             esl_seteq<1,13,13>(loop_count_V.read(), loop_dataflow_output_count.read()))) {
-            loop_dataflow_output_count = ap_const_lv13_0;
+             esl_seteq<1,14,14>(loop_count_V.read(), loop_dataflow_output_count.read()))) {
+            loop_dataflow_output_count = ap_const_lv14_0;
         } else if (esl_seteq<1,1,1>(dataflow_in_loop_U0_ap_done.read(), ap_const_logic_1)) {
-            loop_dataflow_output_count = (!loop_dataflow_output_count.read().is_01() || !ap_const_lv13_1.is_01())? sc_lv<13>(): (sc_biguint<13>(loop_dataflow_output_count.read()) + sc_biguint<13>(ap_const_lv13_1));
+            loop_dataflow_output_count = (!loop_dataflow_output_count.read().is_01() || !ap_const_lv14_1.is_01())? sc_lv<14>(): (sc_biguint<14>(loop_dataflow_output_count.read()) + sc_biguint<14>(ap_const_lv14_1));
         }
     }
 }
 
 void rx_loop::thread_ap_done() {
-    if ((esl_seteq<1,13,13>(loop_count_V.read(), loop_dataflow_output_count.read()) && 
+    if ((esl_seteq<1,14,14>(loop_count_V.read(), loop_dataflow_output_count.read()) && 
          esl_seteq<1,1,1>(ap_const_logic_1, loop_dataflow_busy.read()))) {
         ap_done = ap_const_logic_1;
     } else {
@@ -432,7 +432,7 @@ void rx_loop::thread_ap_idle() {
 }
 
 void rx_loop::thread_ap_ready() {
-    if (esl_seteq<1,13,13>(loop_count_V.read(), loop_dataflow_input_count.read())) {
+    if (esl_seteq<1,14,14>(loop_count_V.read(), loop_dataflow_input_count.read())) {
         ap_ready = ap_const_logic_1;
     } else {
         ap_ready = ap_const_logic_0;
@@ -461,7 +461,7 @@ void rx_loop::thread_dataflow_in_loop_U0_ap_continue() {
 
 void rx_loop::thread_dataflow_in_loop_U0_ap_start() {
     if ((esl_seteq<1,1,1>(ap_const_logic_1, loop_dataflow_enable.read()) && 
-         !esl_seteq<1,13,13>(loop_count_V.read(), loop_dataflow_input_count.read()))) {
+         !esl_seteq<1,14,14>(loop_count_V.read(), loop_dataflow_input_count.read()))) {
         dataflow_in_loop_U0_ap_start = ap_const_logic_1;
     } else {
         dataflow_in_loop_U0_ap_start = ap_const_logic_0;
