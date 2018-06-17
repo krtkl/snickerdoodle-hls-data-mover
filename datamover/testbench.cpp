@@ -40,9 +40,12 @@
 
 /* constant definitions */
 const uint32_t PRBS_STATE_SEED = 0x15EC38A2;
+
 const int TX_TRANSFER_LENGTH_1 = 1048575;
 const int RX_TRANSFER_LENGTH_1 = 1048577;
 
+const int TX_TRANSFER_LENGTH_2 = 97158;
+const int RX_TRANSFER_LENGTH_2 = 67306;
 
 /* 32-bit CRC lookup table using polynomial x^32+x^26+x^23+x^22+x^16+x^12+x^11+x^10+x^8+x^7+x^5+x^4+x^2+x+1 */
 static const int CRC_DATA_WORD_BITS = 8;
@@ -170,11 +173,13 @@ int main (void)
   ap_uint<BUFFER_COUNT_BITS> last_buffer;
   bool increment_buffer;
 
-  std::cout << "Test Parameters:" << std::endl;
+  std::cout << std::endl << "*** Test Parameters ***" << std::endl;
 
   std::cout << "PRBS_STATE_SEED=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << PRBS_STATE_SEED << std::endl;
   std::cout << "TX_TRANSFER_LENGTH_1=" << std::dec << TX_TRANSFER_LENGTH_1 << std::endl;
   std::cout << "RX_TRANSFER_LENGTH_1=" << std::dec << RX_TRANSFER_LENGTH_1 << std::endl;
+  std::cout << "TX_TRANSFER_LENGTH_2=" << std::dec << TX_TRANSFER_LENGTH_2 << std::endl;
+  std::cout << "RX_TRANSFER_LENGTH_2=" << std::dec << RX_TRANSFER_LENGTH_2 << std::endl;
 
   std::cout << "BUFFER_COUNT_BITS=" << std::dec << BUFFER_COUNT_BITS << std::endl;
   std::cout << "BUFFER_COUNT=" << std::dec << BUFFER_COUNT << std::endl;
@@ -206,6 +211,9 @@ int main (void)
 
   increment_buffer = true;
 
+  /*** PASS 1 ***/
+  std::cout << std::endl << "*** PASS 1 ***" << std::endl;
+
   /* write bytes to transmit buffer */
   tx_buffer_length = TX_TRANSFER_LENGTH_1;
   tx_buffer_crc = PRBS_fill_buffer ((uint8_t *)tx_buffer[0], tx_buffer_length);
@@ -236,6 +244,38 @@ int main (void)
   std::cout << "rx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
   if (crc != rx_stream_crc) errors++;
 
+  /*** PASS 2 ***/
+  std::cout << std::endl << "*** PASS 2 ***" << std::endl;
+
+  /* write bytes to transmit buffer */
+  tx_buffer_length = TX_TRANSFER_LENGTH_2;
+  tx_buffer_crc = PRBS_fill_buffer ((uint8_t *)tx_buffer[1], tx_buffer_length);
+  std::cout << "tx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)tx_buffer_crc << std::endl;
+
+  /* send words to receiver */
+  rx_buffer_length = RX_TRANSFER_LENGTH_2;
+  rx_stream_crc = PRBS_fill_stream (data_rx, rx_buffer_length);
+  std::cout << "rx_stream crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)rx_stream_crc << std::endl;
+
+  std::cout << "tx_buffer_length=" << std::dec << (unsigned)tx_buffer_length << std::endl;
+  std::cout << "rx_buffer_length=" << std::dec << (unsigned)rx_buffer_length << std::endl;
+  std::cout << "increment_buffer=" << std::dec << increment_buffer << std::endl;
+
+  std::cout << "Testing data_mover()..." << std::endl;
+  data_mover(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length, &last_buffer, &increment_buffer);
+
+  std::cout << "last_buffer=" << std::dec << (unsigned)last_buffer << std::endl;
+  if (1 != last_buffer) errors++;
+
+  /* check transmit stream */
+  crc = get_stream_CRC (data_tx, tx_buffer_length);
+  std::cout << "data_tx crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
+  if (crc != tx_buffer_crc) errors++;
+
+  /* check receive buffer */
+  crc = get_buffer_CRC ((uint8_t *)rx_buffer[last_buffer], rx_buffer_length);
+  std::cout << "rx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
+  if (crc != rx_stream_crc) errors++;
 
 
   if (errors) { std::cout << "FAILED! with " << std::dec << errors << " errors." << std::endl; return EXIT_FAILURE; }

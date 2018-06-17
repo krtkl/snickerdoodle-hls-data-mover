@@ -1,5 +1,5 @@
 INFO: [HLS 200-10] Running 'C:/Xilinx/Vivado/2018.1/bin/unwrapped/win64.o/vivado_hls.exe'
-INFO: [HLS 200-10] For user 'Jamil J. Weatherbee' on host 'macula10' (Windows NT_amd64 version 6.2) on Sat Jun 16 22:02:02 -0700 2018
+INFO: [HLS 200-10] For user 'Jamil J. Weatherbee' on host 'macula10' (Windows NT_amd64 version 6.2) on Sat Jun 16 22:13:44 -0700 2018
 INFO: [HLS 200-10] In directory 'C:/git/snickerdoodle-hls-data-mover'
 INFO: [HLS 200-10] Opening project 'C:/git/snickerdoodle-hls-data-mover/datamover'.
 INFO: [HLS 200-10] Opening solution 'C:/git/snickerdoodle-hls-data-mover/datamover/production'.
@@ -27,10 +27,13 @@ In file included from C:/Xilinx/Vivado/2018.1/include/floating_point_v7_0_bitacc
                  from ../../../datamover.cpp:36:
 C:/Xilinx/Vivado/2018.1/include/gmp.h:62:0: warning: "__GMP_LIBGMP_DLL" redefined [enabled by default]
 C:/Xilinx/Vivado/2018.1/include/floating_point_v7_0_bitacc_cmodel.h:135:0: note: this is the location of the previous definition
-Test Parameters:
+
+*** Test Parameters ***
 PRBS_STATE_SEED=0x15EC38A2
 TX_TRANSFER_LENGTH_1=1048575
 RX_TRANSFER_LENGTH_1=1048577
+TX_TRANSFER_LENGTH_2=97158
+RX_TRANSFER_LENGTH_2=67306
 BUFFER_COUNT_BITS=1
 BUFFER_COUNT=2
 AXI_WORD_LOG2_BYTES=3
@@ -52,6 +55,8 @@ LOOP_TRIP_COUNT_BITS=12
 CACHE_LENGTH_BITS=13
 CACHE_LENGTH=4096
 BUFFER_LENGTH_BITS=24
+
+*** PASS 1 ***
 tx_buffer crc=0x7D0DE0C7
 rx_stream crc=0x952D50C9
 tx_buffer_length=1048575
@@ -61,5 +66,16 @@ Testing data_mover()...
 last_buffer=0
 data_tx crc=0x7D0DE0C7
 rx_buffer crc=0x952D50C9
+
+*** PASS 2 ***
+tx_buffer crc=0xAE1DAC25
+rx_stream crc=0x99196DDB
+tx_buffer_length=97158
+rx_buffer_length=67306
+increment_buffer=1
+Testing data_mover()...
+last_buffer=1
+data_tx crc=0xAE1DAC25
+rx_buffer crc=0x99196DDB
 INFO: [SIM 211-1] CSim done with 0 errors.
 INFO: [SIM 211-3] *************** CSIM finish ***************

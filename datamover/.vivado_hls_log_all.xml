@@ -7,6 +7,8 @@
       <mgLog/>
       <packageLog/>
       <csimLog>
+        <logs message="ERROR: [SIM 211-100] 'csim_design' failed: nonzero return value." projectName="datamover" solutionName="production" date="2018-06-16T22:09:21.633-0700"/>
+        <logs message="@E Simulation failed: Function 'main' returns nonzero value '1'." projectName="datamover" solutionName="production" date="2018-06-16T22:09:21.617-0700"/>
         <logs message="ERROR: [SIM 211-100] 'csim_design' failed: compilation error(s)." projectName="datamover" solutionName="production" date="2018-06-16T22:01:43.954-0700"/>
         <logs message="ERROR: [SIM 211-100] 'csim_design' failed: nonzero return value." projectName="datamover" solutionName="production" date="2018-06-16T21:49:48.798-0700"/>
         <logs message="@E Simulation failed: Function 'main' returns nonzero value '1'." projectName="datamover" solutionName="production" date="2018-06-16T21:49:48.782-0700"/>

@@ -3,10 +3,13 @@ INFO: [SIM 4] CSIM will launch GCC as the compiler.
    Compiling ../../../testbench.cpp in debug mode
    Compiling ../../../datamover.cpp in debug mode
    Generating csim.exe
-Test Parameters:
+
+*** Test Parameters ***
 PRBS_STATE_SEED=0x15EC38A2
 TX_TRANSFER_LENGTH_1=1048575
 RX_TRANSFER_LENGTH_1=1048577
+TX_TRANSFER_LENGTH_2=97158
+RX_TRANSFER_LENGTH_2=67306
 BUFFER_COUNT_BITS=1
 BUFFER_COUNT=2
 AXI_WORD_LOG2_BYTES=3
@@ -28,6 +31,8 @@ LOOP_TRIP_COUNT_BITS=12
 CACHE_LENGTH_BITS=13
 CACHE_LENGTH=4096
 BUFFER_LENGTH_BITS=24
+
+*** PASS 1 ***
 tx_buffer crc=0x7D0DE0C7
 rx_stream crc=0x952D50C9
 tx_buffer_length=1048575
@@ -37,5 +42,16 @@ Testing data_mover()...
 last_buffer=0
 data_tx crc=0x7D0DE0C7
 rx_buffer crc=0x952D50C9
+
+*** PASS 2 ***
+tx_buffer crc=0xAE1DAC25
+rx_stream crc=0x99196DDB
+tx_buffer_length=97158
+rx_buffer_length=67306
+increment_buffer=1
+Testing data_mover()...
+last_buffer=1
+data_tx crc=0xAE1DAC25
+rx_buffer crc=0x99196DDB
 INFO: [SIM 1] CSim done with 0 errors.
 INFO: [SIM 3] *************** CSIM finish ***************
