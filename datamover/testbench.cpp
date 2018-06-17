@@ -93,11 +93,11 @@ uint8_t get_PRBS_byte (uint32_t &PRBS_state)
 }
 
 
-/* fill a buffer with PRBS bytes and return the CRC-32 of the payload */
+/* fill a buffer with PRBS words and return the CRC-32 of the payload */
 uint32_t PRBS_fill_buffer (uint8_t *buffer, const ap_uint<BUFFER_LENGTH_BITS> length)
 {
   uint32_t crc = 0xFFFFFFFF;
-  for (int n=0;n<length;n++)
+  for (int n=0;n<length*AXIS_WORD_SIZE;n++)
    {
 	 uint8_t b;
 	 b = get_PRBS_byte(PRBS_state);
@@ -124,6 +124,34 @@ uint32_t PRBS_fill_stream (hls::stream<axis_t> &stream, const ap_uint<BUFFER_LEN
 	  }
 	 stream << data;
    }
+  return crc ^ 0xFFFFFFFF;
+}
+
+/* retrieve a word stream and calculate the CRC-32 of the payload */
+uint32_t get_stream_CRC (hls::stream<axis_t> &stream, const ap_uint<BUFFER_LENGTH_BITS> length)
+{
+  uint32_t crc = 0xFFFFFFFF;
+
+  for (int n=0; n<length; n++)
+   {
+	 axis_t data;
+	 stream >> data;
+     for (int i=0;i<sizeof(data);i++)
+	  {
+	    uint8_t b;
+		b = data >> (i*BITS_PER_BYTE);
+		crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ b];
+	  }
+   }
+  return crc ^ 0xFFFFFFFF;
+}
+
+
+/* return the CRC-32 of a buffer of words */
+uint32_t get_buffer_CRC (const uint8_t *buffer, const ap_uint<BUFFER_LENGTH_BITS> length)
+{
+  uint32_t crc = 0xFFFFFFFF;
+  for (int n=0; n<length*AXIS_WORD_SIZE; n++) crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ buffer[n]];
   return crc ^ 0xFFFFFFFF;
 }
 
@@ -199,33 +227,16 @@ int main (void)
   if (0 != last_buffer) errors++;
 
   /* check transmit stream */
-  crc = 0xFFFFFFFF; /* setup CRC working register */
-  for (int n=0; n<TX_TRANSFER_LENGTH_1; n++)
-  {
-	axis_t data;
-	data_tx >> data;
-	for (int i=0;i<sizeof(data);i++)
-	 {
-	   uint8_t b;
-	   b = data >> (i*BITS_PER_BYTE);
-	   crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ b]; /* update crc for data byte transmitted */
-	 }
-  }
-  crc ^= 0xFFFFFFFF; /* return final CRC-32 value */
-
+  crc = get_stream_CRC (data_tx, tx_buffer_length);
   std::cout << "data_tx crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
   if (crc != tx_buffer_crc) errors++;
 
   /* check receive buffer */
-  crc = 0xFFFFFFFF; /* setup CRC working register */
-  for (int n=0; n<RX_TRANSFER_LENGTH_1*AXIS_WORD_SIZE; n++)
-   {
-	 crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ ((uint8_t *)rx_buffer)[last_buffer*BUFFER_SIZE+n]]; /* update crc for data byte received */
-   }
-  crc ^= 0xFFFFFFFF; /* return final CRC-32 value */
-
+  crc = get_buffer_CRC ((uint8_t *)rx_buffer[last_buffer], rx_buffer_length);
   std::cout << "rx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
   if (crc != rx_stream_crc) errors++;
+
+
 
   if (errors) { std::cout << "FAILED! with " << std::dec << errors << " errors." << std::endl; return EXIT_FAILURE; }
   return EXIT_SUCCESS;

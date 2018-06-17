@@ -1,5 +1,5 @@
 INFO: [HLS 200-10] Running 'C:/Xilinx/Vivado/2018.1/bin/unwrapped/win64.o/vivado_hls.exe'
-INFO: [HLS 200-10] For user 'Jamil J. Weatherbee' on host 'macula10' (Windows NT_amd64 version 6.2) on Sat Jun 16 21:29:09 -0700 2018
+INFO: [HLS 200-10] For user 'Jamil J. Weatherbee' on host 'macula10' (Windows NT_amd64 version 6.2) on Sat Jun 16 22:02:02 -0700 2018
 INFO: [HLS 200-10] In directory 'C:/git/snickerdoodle-hls-data-mover'
 INFO: [HLS 200-10] Opening project 'C:/git/snickerdoodle-hls-data-mover/datamover'.
 INFO: [HLS 200-10] Opening solution 'C:/git/snickerdoodle-hls-data-mover/datamover/production'.
