@@ -5,8 +5,8 @@ INFO: [SIM 4] CSIM will launch GCC as the compiler.
    Generating csim.exe
 Test Parameters:
 PRBS_STATE_SEED=0x15EC38A2
-TX_TRANSFER_LENGTH=1048575
-RX_TRANSFER_LENGTH=1048577
+TX_TRANSFER_LENGTH_1=1048575
+RX_TRANSFER_LENGTH_1=1048577
 BUFFER_COUNT_BITS=1
 BUFFER_COUNT=2
 AXI_WORD_LOG2_BYTES=3
@@ -32,11 +32,8 @@ tx_buffer crc=0x7D0DE0C7
 rx_stream crc=0x952D50C9
 tx_buffer_length=1048575
 rx_buffer_length=1048577
-current_buffer=0
-last_buffer=0
 increment_buffer=1
 Testing data_mover()...
-current_buffer=1
 last_buffer=0
 data_tx crc=0x7D0DE0C7
 rx_buffer crc=0x952D50C9

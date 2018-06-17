@@ -95,6 +95,14 @@ void XData_mover_Set_rx_buffer_V(XData_mover *InstancePtr, u32 Data);
 u32 XData_mover_Get_rx_buffer_V(XData_mover *InstancePtr);
 void XData_mover_Set_rx_buffer_length_V(XData_mover *InstancePtr, u32 Data);
 u32 XData_mover_Get_rx_buffer_length_V(XData_mover *InstancePtr);
+void XData_mover_Set_current_buffer_V_i(XData_mover *InstancePtr, u32 Data);
+u32 XData_mover_Get_current_buffer_V_i(XData_mover *InstancePtr);
+u32 XData_mover_Get_current_buffer_V_o(XData_mover *InstancePtr);
+u32 XData_mover_Get_current_buffer_V_o_vld(XData_mover *InstancePtr);
+u32 XData_mover_Get_last_buffer_V(XData_mover *InstancePtr);
+u32 XData_mover_Get_last_buffer_V_vld(XData_mover *InstancePtr);
+void XData_mover_Set_increment_buffer(XData_mover *InstancePtr, u32 Data);
+u32 XData_mover_Get_increment_buffer(XData_mover *InstancePtr);
 
 void XData_mover_InterruptGlobalEnable(XData_mover *InstancePtr);
 void XData_mover_InterruptGlobalDisable(XData_mover *InstancePtr);

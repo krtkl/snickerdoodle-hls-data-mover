@@ -19,7 +19,7 @@ generic (
     C_M_AXI_DMA_ARUSER_WIDTH : INTEGER := 1;
     C_M_AXI_DMA_RUSER_WIDTH : INTEGER := 1;
     C_M_AXI_DMA_BUSER_WIDTH : INTEGER := 1;
-    C_S_AXI_CONTROL_ADDR_WIDTH : INTEGER := 6;
+    C_S_AXI_CONTROL_ADDR_WIDTH : INTEGER := 7;
     C_S_AXI_CONTROL_DATA_WIDTH : INTEGER := 32;
     C_M_AXI_DMA_USER_VALUE : INTEGER := 0;
     C_M_AXI_DMA_PROT_VALUE : INTEGER := 0;
@@ -78,12 +78,6 @@ port (
     data_tx_V_V_TDATA : OUT STD_LOGIC_VECTOR (7 downto 0);
     data_tx_V_V_TVALID : OUT STD_LOGIC;
     data_tx_V_V_TREADY : IN STD_LOGIC;
-    current_buffer_V_i : IN STD_LOGIC_VECTOR (0 downto 0);
-    current_buffer_V_o : OUT STD_LOGIC_VECTOR (0 downto 0);
-    current_buffer_V_o_ap_vld : OUT STD_LOGIC;
-    last_buffer_V : OUT STD_LOGIC_VECTOR (0 downto 0);
-    last_buffer_V_ap_vld : OUT STD_LOGIC;
-    increment_buffer : IN STD_LOGIC;
     s_axi_control_AWVALID : IN STD_LOGIC;
     s_axi_control_AWREADY : OUT STD_LOGIC;
     s_axi_control_AWADDR : IN STD_LOGIC_VECTOR (C_S_AXI_CONTROL_ADDR_WIDTH-1 downto 0);
@@ -108,7 +102,7 @@ end;
 architecture behav of data_mover is 
     attribute CORE_GENERATION_INFO : STRING;
     attribute CORE_GENERATION_INFO of behav : architecture is
-    "data_mover,hls_ip_2018_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=1,HLS_INPUT_PART=xc7z020clg400-3,HLS_INPUT_CLOCK=6.500000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.376250,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=8,HLS_SYN_DSP=0,HLS_SYN_FF=1703,HLS_SYN_LUT=3030}";
+    "data_mover,hls_ip_2018_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=1,HLS_INPUT_PART=xc7z020clg400-3,HLS_INPUT_CLOCK=6.500000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.376250,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=8,HLS_SYN_DSP=0,HLS_SYN_FF=1732,HLS_SYN_LUT=3038}";
     constant ap_const_logic_1 : STD_LOGIC := '1';
     constant ap_const_logic_0 : STD_LOGIC := '0';
     constant ap_ST_fsm_state1 : STD_LOGIC_VECTOR (3 downto 0) := "0001";
@@ -179,6 +173,11 @@ architecture behav of data_mover is
     signal tx_buffer_length_V : STD_LOGIC_VECTOR (23 downto 0);
     signal rx_buffer_V : STD_LOGIC_VECTOR (31 downto 0);
     signal rx_buffer_length_V : STD_LOGIC_VECTOR (23 downto 0);
+    signal current_buffer_V_i : STD_LOGIC_VECTOR (0 downto 0);
+    signal current_buffer_V_o : STD_LOGIC_VECTOR (0 downto 0);
+    signal current_buffer_V_o_ap_vld : STD_LOGIC;
+    signal last_buffer_V_ap_vld : STD_LOGIC;
+    signal increment_buffer : STD_LOGIC;
     signal DMA_AWVALID : STD_LOGIC;
     signal DMA_AWREADY : STD_LOGIC;
     signal DMA_WVALID : STD_LOGIC;
@@ -210,6 +209,7 @@ architecture behav of data_mover is
     signal rx_final_burst_lengt_reg_310 : STD_LOGIC_VECTOR (12 downto 0);
     signal rx_loop_count_V_fu_267_p3 : STD_LOGIC_VECTOR (11 downto 0);
     signal rx_loop_count_V_reg_315 : STD_LOGIC_VECTOR (11 downto 0);
+    signal increment_buffer_rea_reg_320 : STD_LOGIC_VECTOR (0 downto 0);
     signal grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWVALID : STD_LOGIC;
     signal grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWADDR : STD_LOGIC_VECTOR (31 downto 0);
     signal grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWID : STD_LOGIC_VECTOR (0 downto 0);
@@ -302,7 +302,6 @@ architecture behav of data_mover is
     signal grp_tx_loop_fu_145_ap_start_reg : STD_LOGIC := '0';
     signal ap_sync_reg_grp_tx_loop_fu_145_ap_ready : STD_LOGIC := '0';
     signal ap_sync_reg_grp_tx_loop_fu_145_ap_done : STD_LOGIC := '0';
-    signal increment_buffer_rea_read_fu_119_p2 : STD_LOGIC_VECTOR (0 downto 0);
     signal not_s_fu_276_p2 : STD_LOGIC_VECTOR (0 downto 0);
     signal r_V_fu_180_p1 : STD_LOGIC_VECTOR (11 downto 0);
     signal tmp_4_i_fu_190_p4 : STD_LOGIC_VECTOR (11 downto 0);
@@ -487,7 +486,13 @@ architecture behav of data_mover is
         tx_buffer_V : OUT STD_LOGIC_VECTOR (31 downto 0);
         tx_buffer_length_V : OUT STD_LOGIC_VECTOR (23 downto 0);
         rx_buffer_V : OUT STD_LOGIC_VECTOR (31 downto 0);
-        rx_buffer_length_V : OUT STD_LOGIC_VECTOR (23 downto 0) );
+        rx_buffer_length_V : OUT STD_LOGIC_VECTOR (23 downto 0);
+        current_buffer_V_o : IN STD_LOGIC_VECTOR (0 downto 0);
+        current_buffer_V_o_ap_vld : IN STD_LOGIC;
+        current_buffer_V_i : OUT STD_LOGIC_VECTOR (0 downto 0);
+        last_buffer_V : IN STD_LOGIC_VECTOR (0 downto 0);
+        last_buffer_V_ap_vld : IN STD_LOGIC;
+        increment_buffer : OUT STD_LOGIC );
     end component;
 
 
@@ -644,7 +649,13 @@ begin
         tx_buffer_V => tx_buffer_V,
         tx_buffer_length_V => tx_buffer_length_V,
         rx_buffer_V => rx_buffer_V,
-        rx_buffer_length_V => rx_buffer_length_V);
+        rx_buffer_length_V => rx_buffer_length_V,
+        current_buffer_V_o => current_buffer_V_o,
+        current_buffer_V_o_ap_vld => current_buffer_V_o_ap_vld,
+        current_buffer_V_i => current_buffer_V_i,
+        last_buffer_V => buffer_no_V_reg_292,
+        last_buffer_V_ap_vld => last_buffer_V_ap_vld,
+        increment_buffer => increment_buffer);
 
     data_mover_DMA_m_axi_U : component data_mover_DMA_m_axi
     generic map (
@@ -1106,6 +1117,7 @@ begin
         if (ap_clk'event and ap_clk = '1') then
             if ((ap_const_logic_1 = ap_CS_fsm_state2)) then
                 buffer_no_V_reg_292 <= current_buffer_V_i;
+                increment_buffer_rea_reg_320 <= (0=>increment_buffer, others=>'-');
                 rx_buffer_V3_reg_282 <= rx_buffer_V(31 downto 3);
                 rx_final_burst_lengt_reg_310 <= rx_final_burst_lengt_fu_258_p3;
                 rx_loop_count_V_reg_315 <= rx_loop_count_V_fu_267_p3;
@@ -1276,9 +1288,9 @@ begin
     ap_sync_grp_tx_loop_fu_145_ap_done <= (grp_tx_loop_fu_145_ap_done or ap_sync_reg_grp_tx_loop_fu_145_ap_done);
     ap_sync_grp_tx_loop_fu_145_ap_ready <= (grp_tx_loop_fu_145_ap_ready or ap_sync_reg_grp_tx_loop_fu_145_ap_ready);
 
-    current_buffer_V_o_assign_proc : process(current_buffer_V_i, ap_CS_fsm_state3, ap_block_state3_on_subcall_done, increment_buffer_rea_read_fu_119_p2, not_s_fu_276_p2)
+    current_buffer_V_o_assign_proc : process(current_buffer_V_i, increment_buffer_rea_reg_320, ap_CS_fsm_state3, ap_block_state3_on_subcall_done, not_s_fu_276_p2)
     begin
-        if (((increment_buffer_rea_read_fu_119_p2 = ap_const_lv1_1) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done) and (ap_const_logic_1 = ap_CS_fsm_state3))) then 
+        if (((increment_buffer_rea_reg_320 = ap_const_lv1_1) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done) and (ap_const_logic_1 = ap_CS_fsm_state3))) then 
             current_buffer_V_o <= not_s_fu_276_p2;
         else 
             current_buffer_V_o <= current_buffer_V_i;
@@ -1286,9 +1298,9 @@ begin
     end process;
 
 
-    current_buffer_V_o_ap_vld_assign_proc : process(ap_CS_fsm_state3, ap_block_state3_on_subcall_done, increment_buffer_rea_read_fu_119_p2)
+    current_buffer_V_o_ap_vld_assign_proc : process(increment_buffer_rea_reg_320, ap_CS_fsm_state3, ap_block_state3_on_subcall_done)
     begin
-        if (((increment_buffer_rea_read_fu_119_p2 = ap_const_lv1_1) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done) and (ap_const_logic_1 = ap_CS_fsm_state3))) then 
+        if (((increment_buffer_rea_reg_320 = ap_const_lv1_1) and (ap_const_boolean_0 = ap_block_state3_on_subcall_done) and (ap_const_logic_1 = ap_CS_fsm_state3))) then 
             current_buffer_V_o_ap_vld <= ap_const_logic_1;
         else 
             current_buffer_V_o_ap_vld <= ap_const_logic_0;
@@ -1367,8 +1379,6 @@ begin
 
     grp_tx_loop_fu_145_ap_start <= grp_tx_loop_fu_145_ap_start_reg;
     grp_tx_loop_fu_145_axis_V_V_TREADY <= data_tx_V_V_1_state(1);
-    increment_buffer_rea_read_fu_119_p2 <= (0=>increment_buffer, others=>'-');
-    last_buffer_V <= buffer_no_V_reg_292;
 
     last_buffer_V_ap_vld_assign_proc : process(ap_CS_fsm_state3, ap_block_state3_on_subcall_done)
     begin

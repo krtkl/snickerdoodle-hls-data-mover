@@ -74,6 +74,12 @@ data_mover::data_mover(sc_module_name name) : sc_module(name), mVcdFile(0) {
     data_mover_control_s_axi_U->tx_buffer_length_V(tx_buffer_length_V);
     data_mover_control_s_axi_U->rx_buffer_V(rx_buffer_V);
     data_mover_control_s_axi_U->rx_buffer_length_V(rx_buffer_length_V);
+    data_mover_control_s_axi_U->current_buffer_V_o(current_buffer_V_o);
+    data_mover_control_s_axi_U->current_buffer_V_o_ap_vld(current_buffer_V_o_ap_vld);
+    data_mover_control_s_axi_U->current_buffer_V_i(current_buffer_V_i);
+    data_mover_control_s_axi_U->last_buffer_V(buffer_no_V_reg_292);
+    data_mover_control_s_axi_U->last_buffer_V_ap_vld(last_buffer_V_ap_vld);
+    data_mover_control_s_axi_U->increment_buffer(increment_buffer);
     data_mover_DMA_m_axi_U = new data_mover_DMA_m_axi<0,64,32,5,16,16,16,16,C_M_AXI_DMA_ID_WIDTH,C_M_AXI_DMA_ADDR_WIDTH,C_M_AXI_DMA_DATA_WIDTH,C_M_AXI_DMA_AWUSER_WIDTH,C_M_AXI_DMA_ARUSER_WIDTH,C_M_AXI_DMA_WUSER_WIDTH,C_M_AXI_DMA_RUSER_WIDTH,C_M_AXI_DMA_BUSER_WIDTH,C_M_AXI_DMA_USER_VALUE,C_M_AXI_DMA_PROT_VALUE,C_M_AXI_DMA_CACHE_VALUE>("data_mover_DMA_m_axi_U");
     data_mover_DMA_m_axi_U->AWVALID(m_axi_DMA_AWVALID);
     data_mover_DMA_m_axi_U->AWREADY(m_axi_DMA_AWREADY);
@@ -377,15 +383,15 @@ data_mover::data_mover(sc_module_name name) : sc_module(name), mVcdFile(0) {
 
     SC_METHOD(thread_current_buffer_V_o);
     sensitive << ( current_buffer_V_i );
+    sensitive << ( increment_buffer_rea_reg_320 );
     sensitive << ( ap_CS_fsm_state3 );
     sensitive << ( ap_block_state3_on_subcall_done );
-    sensitive << ( increment_buffer_rea_read_fu_119_p2 );
     sensitive << ( not_s_fu_276_p2 );
 
     SC_METHOD(thread_current_buffer_V_o_ap_vld);
+    sensitive << ( increment_buffer_rea_reg_320 );
     sensitive << ( ap_CS_fsm_state3 );
     sensitive << ( ap_block_state3_on_subcall_done );
-    sensitive << ( increment_buffer_rea_read_fu_119_p2 );
 
     SC_METHOD(thread_data_rx_V_V_0_ack_in);
     sensitive << ( data_rx_V_V_0_state );
@@ -479,16 +485,6 @@ data_mover::data_mover(sc_module_name name) : sc_module(name), mVcdFile(0) {
 
     SC_METHOD(thread_grp_tx_loop_fu_145_axis_V_V_TREADY);
     sensitive << ( data_tx_V_V_1_state );
-
-    SC_METHOD(thread_increment_buffer_rea_read_fu_119_p2);
-    sensitive << ( increment_buffer );
-    sensitive << ( ap_CS_fsm_state3 );
-    sensitive << ( ap_block_state3_on_subcall_done );
-
-    SC_METHOD(thread_last_buffer_V);
-    sensitive << ( buffer_no_V_reg_292 );
-    sensitive << ( ap_CS_fsm_state3 );
-    sensitive << ( ap_block_state3_on_subcall_done );
 
     SC_METHOD(thread_last_buffer_V_ap_vld);
     sensitive << ( ap_CS_fsm_state3 );
@@ -643,12 +639,6 @@ data_mover::data_mover(sc_module_name name) : sc_module(name), mVcdFile(0) {
     sc_trace(mVcdFile, data_tx_V_V_TDATA, "(port)data_tx_V_V_TDATA");
     sc_trace(mVcdFile, data_tx_V_V_TVALID, "(port)data_tx_V_V_TVALID");
     sc_trace(mVcdFile, data_tx_V_V_TREADY, "(port)data_tx_V_V_TREADY");
-    sc_trace(mVcdFile, current_buffer_V_i, "(port)current_buffer_V_i");
-    sc_trace(mVcdFile, current_buffer_V_o, "(port)current_buffer_V_o");
-    sc_trace(mVcdFile, current_buffer_V_o_ap_vld, "(port)current_buffer_V_o_ap_vld");
-    sc_trace(mVcdFile, last_buffer_V, "(port)last_buffer_V");
-    sc_trace(mVcdFile, last_buffer_V_ap_vld, "(port)last_buffer_V_ap_vld");
-    sc_trace(mVcdFile, increment_buffer, "(port)increment_buffer");
     sc_trace(mVcdFile, s_axi_control_AWVALID, "(port)s_axi_control_AWVALID");
     sc_trace(mVcdFile, s_axi_control_AWREADY, "(port)s_axi_control_AWREADY");
     sc_trace(mVcdFile, s_axi_control_AWADDR, "(port)s_axi_control_AWADDR");
@@ -708,6 +698,11 @@ data_mover::data_mover(sc_module_name name) : sc_module(name), mVcdFile(0) {
     sc_trace(mVcdFile, tx_buffer_length_V, "tx_buffer_length_V");
     sc_trace(mVcdFile, rx_buffer_V, "rx_buffer_V");
     sc_trace(mVcdFile, rx_buffer_length_V, "rx_buffer_length_V");
+    sc_trace(mVcdFile, current_buffer_V_i, "current_buffer_V_i");
+    sc_trace(mVcdFile, current_buffer_V_o, "current_buffer_V_o");
+    sc_trace(mVcdFile, current_buffer_V_o_ap_vld, "current_buffer_V_o_ap_vld");
+    sc_trace(mVcdFile, last_buffer_V_ap_vld, "last_buffer_V_ap_vld");
+    sc_trace(mVcdFile, increment_buffer, "increment_buffer");
     sc_trace(mVcdFile, DMA_AWVALID, "DMA_AWVALID");
     sc_trace(mVcdFile, DMA_AWREADY, "DMA_AWREADY");
     sc_trace(mVcdFile, DMA_WVALID, "DMA_WVALID");
@@ -738,6 +733,7 @@ data_mover::data_mover(sc_module_name name) : sc_module(name), mVcdFile(0) {
     sc_trace(mVcdFile, rx_final_burst_lengt_reg_310, "rx_final_burst_lengt_reg_310");
     sc_trace(mVcdFile, rx_loop_count_V_fu_267_p3, "rx_loop_count_V_fu_267_p3");
     sc_trace(mVcdFile, rx_loop_count_V_reg_315, "rx_loop_count_V_reg_315");
+    sc_trace(mVcdFile, increment_buffer_rea_reg_320, "increment_buffer_rea_reg_320");
     sc_trace(mVcdFile, grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWVALID, "grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWVALID");
     sc_trace(mVcdFile, grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWADDR, "grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWADDR");
     sc_trace(mVcdFile, grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWID, "grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWID");
@@ -829,7 +825,6 @@ data_mover::data_mover(sc_module_name name) : sc_module(name), mVcdFile(0) {
     sc_trace(mVcdFile, grp_tx_loop_fu_145_ap_start_reg, "grp_tx_loop_fu_145_ap_start_reg");
     sc_trace(mVcdFile, ap_sync_reg_grp_tx_loop_fu_145_ap_ready, "ap_sync_reg_grp_tx_loop_fu_145_ap_ready");
     sc_trace(mVcdFile, ap_sync_reg_grp_tx_loop_fu_145_ap_done, "ap_sync_reg_grp_tx_loop_fu_145_ap_done");
-    sc_trace(mVcdFile, increment_buffer_rea_read_fu_119_p2, "increment_buffer_rea_read_fu_119_p2");
     sc_trace(mVcdFile, not_s_fu_276_p2, "not_s_fu_276_p2");
     sc_trace(mVcdFile, r_V_fu_180_p1, "r_V_fu_180_p1");
     sc_trace(mVcdFile, tmp_4_i_fu_190_p4, "tmp_4_i_fu_190_p4");
@@ -1040,6 +1035,7 @@ void data_mover::thread_ap_clk_no_reset_() {
     }
     if (esl_seteq<1,1,1>(ap_const_logic_1, ap_CS_fsm_state2.read())) {
         buffer_no_V_reg_292 = current_buffer_V_i.read();
+        increment_buffer_rea_reg_320 =  (sc_lv<1>) (increment_buffer.read());
         rx_buffer_V3_reg_282 = rx_buffer_V.read().range(31, 3);
         rx_final_burst_lengt_reg_310 = rx_final_burst_lengt_fu_258_p3.read();
         rx_loop_count_V_reg_315 = rx_loop_count_V_fu_267_p3.read();
@@ -1178,7 +1174,7 @@ void data_mover::thread_ap_sync_grp_tx_loop_fu_145_ap_ready() {
 void data_mover::thread_current_buffer_V_o() {
     if ((esl_seteq<1,1,1>(ap_const_logic_1, ap_CS_fsm_state3.read()) && 
          esl_seteq<1,1,1>(ap_const_boolean_0, ap_block_state3_on_subcall_done.read()) && 
-         esl_seteq<1,1,1>(ap_const_lv1_1, increment_buffer_rea_read_fu_119_p2.read()))) {
+         esl_seteq<1,1,1>(ap_const_lv1_1, increment_buffer_rea_reg_320.read()))) {
         current_buffer_V_o = not_s_fu_276_p2.read();
     } else {
         current_buffer_V_o = current_buffer_V_i.read();
@@ -1188,7 +1184,7 @@ void data_mover::thread_current_buffer_V_o() {
 void data_mover::thread_current_buffer_V_o_ap_vld() {
     if ((esl_seteq<1,1,1>(ap_const_logic_1, ap_CS_fsm_state3.read()) && 
          esl_seteq<1,1,1>(ap_const_boolean_0, ap_block_state3_on_subcall_done.read()) && 
-         esl_seteq<1,1,1>(ap_const_lv1_1, increment_buffer_rea_read_fu_119_p2.read()))) {
+         esl_seteq<1,1,1>(ap_const_lv1_1, increment_buffer_rea_reg_320.read()))) {
         current_buffer_V_o_ap_vld = ap_const_logic_1;
     } else {
         current_buffer_V_o_ap_vld = ap_const_logic_0;
@@ -1323,14 +1319,6 @@ void data_mover::thread_grp_tx_loop_fu_145_ap_start() {
 
 void data_mover::thread_grp_tx_loop_fu_145_axis_V_V_TREADY() {
     grp_tx_loop_fu_145_axis_V_V_TREADY = data_tx_V_V_1_state.read()[1];
-}
-
-void data_mover::thread_increment_buffer_rea_read_fu_119_p2() {
-    increment_buffer_rea_read_fu_119_p2 =  (sc_lv<1>) (increment_buffer.read());
-}
-
-void data_mover::thread_last_buffer_V() {
-    last_buffer_V = buffer_no_V_reg_292.read();
 }
 
 void data_mover::thread_last_buffer_V_ap_vld() {
@@ -1498,12 +1486,6 @@ void data_mover::thread_hdltv_gen() {
         mHdltvoutHandle << " , " <<  " \"data_tx_V_V_TDATA\" :  \"" << data_tx_V_V_TDATA.read() << "\" ";
         mHdltvoutHandle << " , " <<  " \"data_tx_V_V_TVALID\" :  \"" << data_tx_V_V_TVALID.read() << "\" ";
         mHdltvinHandle << " , " <<  " \"data_tx_V_V_TREADY\" :  \"" << data_tx_V_V_TREADY.read() << "\" ";
-        mHdltvinHandle << " , " <<  " \"current_buffer_V_i\" :  \"" << current_buffer_V_i.read() << "\" ";
-        mHdltvoutHandle << " , " <<  " \"current_buffer_V_o\" :  \"" << current_buffer_V_o.read() << "\" ";
-        mHdltvoutHandle << " , " <<  " \"current_buffer_V_o_ap_vld\" :  \"" << current_buffer_V_o_ap_vld.read() << "\" ";
-        mHdltvoutHandle << " , " <<  " \"last_buffer_V\" :  \"" << last_buffer_V.read() << "\" ";
-        mHdltvoutHandle << " , " <<  " \"last_buffer_V_ap_vld\" :  \"" << last_buffer_V_ap_vld.read() << "\" ";
-        mHdltvinHandle << " , " <<  " \"increment_buffer\" :  \"" << increment_buffer.read() << "\" ";
         mHdltvinHandle << " , " <<  " \"s_axi_control_AWVALID\" :  \"" << s_axi_control_AWVALID.read() << "\" ";
         mHdltvoutHandle << " , " <<  " \"s_axi_control_AWREADY\" :  \"" << s_axi_control_AWREADY.read() << "\" ";
         mHdltvinHandle << " , " <<  " \"s_axi_control_AWADDR\" :  \"" << s_axi_control_AWADDR.read() << "\" ";

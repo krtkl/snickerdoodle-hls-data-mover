@@ -8,7 +8,7 @@
 `timescale 1ns/1ps
 module data_mover_control_s_axi
 #(parameter
-    C_S_AXI_ADDR_WIDTH = 6,
+    C_S_AXI_ADDR_WIDTH = 7,
     C_S_AXI_DATA_WIDTH = 32
 )(
     // axi4 lite slave signals
@@ -41,7 +41,13 @@ module data_mover_control_s_axi
     output wire [31:0]                   tx_buffer_V,
     output wire [23:0]                   tx_buffer_length_V,
     output wire [31:0]                   rx_buffer_V,
-    output wire [23:0]                   rx_buffer_length_V
+    output wire [23:0]                   rx_buffer_length_V,
+    output wire [0:0]                    current_buffer_V_i,
+    input  wire [0:0]                    current_buffer_V_o,
+    input  wire                          current_buffer_V_o_ap_vld,
+    input  wire [0:0]                    last_buffer_V,
+    input  wire                          last_buffer_V_ap_vld,
+    output wire [0:0]                    increment_buffer
 );
 //------------------------Address Info-------------------
 // 0x00 : Control signals
@@ -76,22 +82,50 @@ module data_mover_control_s_axi
 //        bit 23~0 - rx_buffer_length_V[23:0] (Read/Write)
 //        others   - reserved
 // 0x2c : reserved
+// 0x30 : Data signal of current_buffer_V_i
+//        bit 0  - current_buffer_V_i[0] (Read/Write)
+//        others - reserved
+// 0x34 : reserved
+// 0x38 : Data signal of current_buffer_V_o
+//        bit 0  - current_buffer_V_o[0] (Read)
+//        others - reserved
+// 0x3c : Control signal of current_buffer_V_o
+//        bit 0  - current_buffer_V_o_ap_vld (Read/COR)
+//        others - reserved
+// 0x40 : Data signal of last_buffer_V
+//        bit 0  - last_buffer_V[0] (Read)
+//        others - reserved
+// 0x44 : Control signal of last_buffer_V
+//        bit 0  - last_buffer_V_ap_vld (Read/COR)
+//        others - reserved
+// 0x48 : Data signal of increment_buffer
+//        bit 0  - increment_buffer[0] (Read/Write)
+//        others - reserved
+// 0x4c : reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 //------------------------Parameter----------------------
 localparam
-    ADDR_AP_CTRL                   = 6'h00,
-    ADDR_GIE                       = 6'h04,
-    ADDR_IER                       = 6'h08,
-    ADDR_ISR                       = 6'h0c,
-    ADDR_TX_BUFFER_V_DATA_0        = 6'h10,
-    ADDR_TX_BUFFER_V_CTRL          = 6'h14,
-    ADDR_TX_BUFFER_LENGTH_V_DATA_0 = 6'h18,
-    ADDR_TX_BUFFER_LENGTH_V_CTRL   = 6'h1c,
-    ADDR_RX_BUFFER_V_DATA_0        = 6'h20,
-    ADDR_RX_BUFFER_V_CTRL          = 6'h24,
-    ADDR_RX_BUFFER_LENGTH_V_DATA_0 = 6'h28,
-    ADDR_RX_BUFFER_LENGTH_V_CTRL   = 6'h2c,
+    ADDR_AP_CTRL                   = 7'h00,
+    ADDR_GIE                       = 7'h04,
+    ADDR_IER                       = 7'h08,
+    ADDR_ISR                       = 7'h0c,
+    ADDR_TX_BUFFER_V_DATA_0        = 7'h10,
+    ADDR_TX_BUFFER_V_CTRL          = 7'h14,
+    ADDR_TX_BUFFER_LENGTH_V_DATA_0 = 7'h18,
+    ADDR_TX_BUFFER_LENGTH_V_CTRL   = 7'h1c,
+    ADDR_RX_BUFFER_V_DATA_0        = 7'h20,
+    ADDR_RX_BUFFER_V_CTRL          = 7'h24,
+    ADDR_RX_BUFFER_LENGTH_V_DATA_0 = 7'h28,
+    ADDR_RX_BUFFER_LENGTH_V_CTRL   = 7'h2c,
+    ADDR_CURRENT_BUFFER_V_I_DATA_0 = 7'h30,
+    ADDR_CURRENT_BUFFER_V_I_CTRL   = 7'h34,
+    ADDR_CURRENT_BUFFER_V_O_DATA_0 = 7'h38,
+    ADDR_CURRENT_BUFFER_V_O_CTRL   = 7'h3c,
+    ADDR_LAST_BUFFER_V_DATA_0      = 7'h40,
+    ADDR_LAST_BUFFER_V_CTRL        = 7'h44,
+    ADDR_INCREMENT_BUFFER_DATA_0   = 7'h48,
+    ADDR_INCREMENT_BUFFER_CTRL     = 7'h4c,
     WRIDLE                         = 2'd0,
     WRDATA                         = 2'd1,
     WRRESP                         = 2'd2,
@@ -99,7 +133,7 @@ localparam
     RDIDLE                         = 2'd0,
     RDDATA                         = 2'd1,
     RDRESET                        = 2'd2,
-    ADDR_BITS         = 6;
+    ADDR_BITS         = 7;
 
 //------------------------Local signal-------------------
     reg  [1:0]                    wstate = WRRESET;
@@ -126,6 +160,12 @@ localparam
     reg  [23:0]                   int_tx_buffer_length_V = 'b0;
     reg  [31:0]                   int_rx_buffer_V = 'b0;
     reg  [23:0]                   int_rx_buffer_length_V = 'b0;
+    reg  [0:0]                    int_current_buffer_V_i = 'b0;
+    reg  [0:0]                    int_current_buffer_V_o = 'b0;
+    reg                           int_current_buffer_V_o_ap_vld;
+    reg  [0:0]                    int_last_buffer_V = 'b0;
+    reg                           int_last_buffer_V_ap_vld;
+    reg  [0:0]                    int_increment_buffer = 'b0;
 
 //------------------------Instantiation------------------
 
@@ -245,6 +285,24 @@ always @(posedge ACLK) begin
                 ADDR_RX_BUFFER_LENGTH_V_DATA_0: begin
                     rdata <= int_rx_buffer_length_V[23:0];
                 end
+                ADDR_CURRENT_BUFFER_V_I_DATA_0: begin
+                    rdata <= int_current_buffer_V_i[0:0];
+                end
+                ADDR_CURRENT_BUFFER_V_O_DATA_0: begin
+                    rdata <= int_current_buffer_V_o[0:0];
+                end
+                ADDR_CURRENT_BUFFER_V_O_CTRL: begin
+                    rdata[0] <= int_current_buffer_V_o_ap_vld;
+                end
+                ADDR_LAST_BUFFER_V_DATA_0: begin
+                    rdata <= int_last_buffer_V[0:0];
+                end
+                ADDR_LAST_BUFFER_V_CTRL: begin
+                    rdata[0] <= int_last_buffer_V_ap_vld;
+                end
+                ADDR_INCREMENT_BUFFER_DATA_0: begin
+                    rdata <= int_increment_buffer[0:0];
+                end
             endcase
         end
     end
@@ -258,6 +316,8 @@ assign tx_buffer_V        = int_tx_buffer_V;
 assign tx_buffer_length_V = int_tx_buffer_length_V;
 assign rx_buffer_V        = int_rx_buffer_V;
 assign rx_buffer_length_V = int_rx_buffer_length_V;
+assign current_buffer_V_i = int_current_buffer_V_i;
+assign increment_buffer   = int_increment_buffer;
 // int_ap_start
 always @(posedge ACLK) begin
     if (ARESET)
@@ -391,6 +451,70 @@ always @(posedge ACLK) begin
     else if (ACLK_EN) begin
         if (w_hs && waddr == ADDR_RX_BUFFER_LENGTH_V_DATA_0)
             int_rx_buffer_length_V[23:0] <= (WDATA[31:0] & wmask) | (int_rx_buffer_length_V[23:0] & ~wmask);
+    end
+end
+
+// int_current_buffer_V_i[0:0]
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_current_buffer_V_i[0:0] <= 0;
+    else if (ACLK_EN) begin
+        if (w_hs && waddr == ADDR_CURRENT_BUFFER_V_I_DATA_0)
+            int_current_buffer_V_i[0:0] <= (WDATA[31:0] & wmask) | (int_current_buffer_V_i[0:0] & ~wmask);
+    end
+end
+
+// int_current_buffer_V_o
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_current_buffer_V_o <= 0;
+    else if (ACLK_EN) begin
+        if (current_buffer_V_o_ap_vld)
+            int_current_buffer_V_o <= current_buffer_V_o;
+    end
+end
+
+// int_current_buffer_V_o_ap_vld
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_current_buffer_V_o_ap_vld <= 1'b0;
+    else if (ACLK_EN) begin
+        if (current_buffer_V_o_ap_vld)
+            int_current_buffer_V_o_ap_vld <= 1'b1;
+        else if (ar_hs && raddr == ADDR_CURRENT_BUFFER_V_O_CTRL)
+            int_current_buffer_V_o_ap_vld <= 1'b0; // clear on read
+    end
+end
+
+// int_last_buffer_V
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_last_buffer_V <= 0;
+    else if (ACLK_EN) begin
+        if (last_buffer_V_ap_vld)
+            int_last_buffer_V <= last_buffer_V;
+    end
+end
+
+// int_last_buffer_V_ap_vld
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_last_buffer_V_ap_vld <= 1'b0;
+    else if (ACLK_EN) begin
+        if (last_buffer_V_ap_vld)
+            int_last_buffer_V_ap_vld <= 1'b1;
+        else if (ar_hs && raddr == ADDR_LAST_BUFFER_V_CTRL)
+            int_last_buffer_V_ap_vld <= 1'b0; // clear on read
+    end
+end
+
+// int_increment_buffer[0:0]
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_increment_buffer[0:0] <= 0;
+    else if (ACLK_EN) begin
+        if (w_hs && waddr == ADDR_INCREMENT_BUFFER_DATA_0)
+            int_increment_buffer[0:0] <= (WDATA[31:0] & wmask) | (int_increment_buffer[0:0] & ~wmask);
     end
 end
 

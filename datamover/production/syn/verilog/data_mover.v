@@ -7,7 +7,7 @@
 
 `timescale 1 ns / 1 ps 
 
-(* CORE_GENERATION_INFO="data_mover,hls_ip_2018_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=1,HLS_INPUT_PART=xc7z020clg400-3,HLS_INPUT_CLOCK=6.500000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.376250,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=8,HLS_SYN_DSP=0,HLS_SYN_FF=1703,HLS_SYN_LUT=3030}" *)
+(* CORE_GENERATION_INFO="data_mover,hls_ip_2018_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=1,HLS_INPUT_PART=xc7z020clg400-3,HLS_INPUT_CLOCK=6.500000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=6.376250,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=8,HLS_SYN_DSP=0,HLS_SYN_FF=1732,HLS_SYN_LUT=3038}" *)
 
 module data_mover (
         ap_clk,
@@ -63,12 +63,6 @@ module data_mover (
         data_tx_V_V_TDATA,
         data_tx_V_V_TVALID,
         data_tx_V_V_TREADY,
-        current_buffer_V_i,
-        current_buffer_V_o,
-        current_buffer_V_o_ap_vld,
-        last_buffer_V,
-        last_buffer_V_ap_vld,
-        increment_buffer,
         s_axi_control_AWVALID,
         s_axi_control_AWREADY,
         s_axi_control_AWADDR,
@@ -94,7 +88,7 @@ parameter    ap_ST_fsm_state2 = 4'd2;
 parameter    ap_ST_fsm_state3 = 4'd4;
 parameter    ap_ST_fsm_state4 = 4'd8;
 parameter    C_S_AXI_CONTROL_DATA_WIDTH = 32;
-parameter    C_S_AXI_CONTROL_ADDR_WIDTH = 6;
+parameter    C_S_AXI_CONTROL_ADDR_WIDTH = 7;
 parameter    C_S_AXI_DATA_WIDTH = 32;
 parameter    C_M_AXI_DMA_ID_WIDTH = 1;
 parameter    C_M_AXI_DMA_ADDR_WIDTH = 32;
@@ -167,12 +161,6 @@ output   data_rx_V_V_TREADY;
 output  [7:0] data_tx_V_V_TDATA;
 output   data_tx_V_V_TVALID;
 input   data_tx_V_V_TREADY;
-input  [0:0] current_buffer_V_i;
-output  [0:0] current_buffer_V_o;
-output   current_buffer_V_o_ap_vld;
-output  [0:0] last_buffer_V;
-output   last_buffer_V_ap_vld;
-input   increment_buffer;
 input   s_axi_control_AWVALID;
 output   s_axi_control_AWREADY;
 input  [C_S_AXI_CONTROL_ADDR_WIDTH - 1:0] s_axi_control_AWADDR;
@@ -191,10 +179,6 @@ output   s_axi_control_BVALID;
 input   s_axi_control_BREADY;
 output  [1:0] s_axi_control_BRESP;
 output   interrupt;
-
-reg[0:0] current_buffer_V_o;
-reg current_buffer_V_o_ap_vld;
-reg last_buffer_V_ap_vld;
 
 reg    ap_rst_n_inv;
 wire    ap_start;
@@ -235,6 +219,11 @@ wire   [31:0] tx_buffer_V;
 wire   [23:0] tx_buffer_length_V;
 wire   [31:0] rx_buffer_V;
 wire   [23:0] rx_buffer_length_V;
+wire   [0:0] current_buffer_V_i;
+reg   [0:0] current_buffer_V_o;
+reg    current_buffer_V_o_ap_vld;
+reg    last_buffer_V_ap_vld;
+wire    increment_buffer;
 reg    DMA_AWVALID;
 wire    DMA_AWREADY;
 reg    DMA_WVALID;
@@ -265,6 +254,7 @@ wire   [12:0] rx_final_burst_lengt_fu_258_p3;
 reg   [12:0] rx_final_burst_lengt_reg_310;
 wire   [11:0] rx_loop_count_V_fu_267_p3;
 reg   [11:0] rx_loop_count_V_reg_315;
+reg   [0:0] increment_buffer_rea_reg_320;
 wire    grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWVALID;
 wire   [31:0] grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWADDR;
 wire   [0:0] grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWID;
@@ -356,7 +346,6 @@ reg    ap_sync_reg_grp_rx_loop_fu_132_ap_done;
 reg    grp_tx_loop_fu_145_ap_start_reg;
 reg    ap_sync_reg_grp_tx_loop_fu_145_ap_ready;
 reg    ap_sync_reg_grp_tx_loop_fu_145_ap_done;
-wire   [0:0] increment_buffer_rea_read_fu_119_p2;
 wire   [0:0] not_s_fu_276_p2;
 wire   [11:0] r_V_fu_180_p1;
 wire   [11:0] tmp_4_i_fu_190_p4;
@@ -420,7 +409,13 @@ data_mover_control_s_axi_U(
     .tx_buffer_V(tx_buffer_V),
     .tx_buffer_length_V(tx_buffer_length_V),
     .rx_buffer_V(rx_buffer_V),
-    .rx_buffer_length_V(rx_buffer_length_V)
+    .rx_buffer_length_V(rx_buffer_length_V),
+    .current_buffer_V_o(current_buffer_V_o),
+    .current_buffer_V_o_ap_vld(current_buffer_V_o_ap_vld),
+    .current_buffer_V_i(current_buffer_V_i),
+    .last_buffer_V(buffer_no_V_reg_292),
+    .last_buffer_V_ap_vld(last_buffer_V_ap_vld),
+    .increment_buffer(increment_buffer)
 );
 
 data_mover_DMA_m_axi #(
@@ -826,6 +821,7 @@ end
 always @ (posedge ap_clk) begin
     if ((1'b1 == ap_CS_fsm_state2)) begin
         buffer_no_V_reg_292 <= current_buffer_V_i;
+        increment_buffer_rea_reg_320 <= increment_buffer;
         rx_buffer_V3_reg_282 <= {{rx_buffer_V[31:3]}};
         rx_final_burst_lengt_reg_310 <= rx_final_burst_lengt_fu_258_p3;
         rx_loop_count_V_reg_315 <= rx_loop_count_V_fu_267_p3;
@@ -924,7 +920,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((increment_buffer_rea_read_fu_119_p2 == 1'd1) & (1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
+    if (((increment_buffer_rea_reg_320 == 1'd1) & (1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
         current_buffer_V_o = not_s_fu_276_p2;
     end else begin
         current_buffer_V_o = current_buffer_V_i;
@@ -932,7 +928,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (((increment_buffer_rea_read_fu_119_p2 == 1'd1) & (1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
+    if (((increment_buffer_rea_reg_320 == 1'd1) & (1'b0 == ap_block_state3_on_subcall_done) & (1'b1 == ap_CS_fsm_state3))) begin
         current_buffer_V_o_ap_vld = 1'b1;
     end else begin
         current_buffer_V_o_ap_vld = 1'b0;
@@ -1086,10 +1082,6 @@ assign grp_rx_loop_fu_132_axis_V_V_TVALID = data_rx_V_V_0_state[1'd0];
 assign grp_tx_loop_fu_145_ap_start = grp_tx_loop_fu_145_ap_start_reg;
 
 assign grp_tx_loop_fu_145_axis_V_V_TREADY = data_tx_V_V_1_state[1'd1];
-
-assign increment_buffer_rea_read_fu_119_p2 = increment_buffer;
-
-assign last_buffer_V = buffer_no_V_reg_292;
 
 assign not_s_fu_276_p2 = (buffer_no_V_reg_292 ^ 1'd1);
 

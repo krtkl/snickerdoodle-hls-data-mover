@@ -11,7 +11,7 @@ use IEEE.NUMERIC_STD.all;
 
 entity data_mover_control_s_axi is
 generic (
-    C_S_AXI_ADDR_WIDTH    : INTEGER := 6;
+    C_S_AXI_ADDR_WIDTH    : INTEGER := 7;
     C_S_AXI_DATA_WIDTH    : INTEGER := 32);
 port (
     -- axi4 lite slave signals
@@ -44,7 +44,13 @@ port (
     tx_buffer_V           :out  STD_LOGIC_VECTOR(31 downto 0);
     tx_buffer_length_V    :out  STD_LOGIC_VECTOR(23 downto 0);
     rx_buffer_V           :out  STD_LOGIC_VECTOR(31 downto 0);
-    rx_buffer_length_V    :out  STD_LOGIC_VECTOR(23 downto 0)
+    rx_buffer_length_V    :out  STD_LOGIC_VECTOR(23 downto 0);
+    current_buffer_V_i    :out  STD_LOGIC_VECTOR(0 downto 0);
+    current_buffer_V_o    :in   STD_LOGIC_VECTOR(0 downto 0);
+    current_buffer_V_o_ap_vld :in   STD_LOGIC;
+    last_buffer_V         :in   STD_LOGIC_VECTOR(0 downto 0);
+    last_buffer_V_ap_vld  :in   STD_LOGIC;
+    increment_buffer      :out  STD_LOGIC_VECTOR(0 downto 0)
 );
 end entity data_mover_control_s_axi;
 
@@ -81,6 +87,26 @@ end entity data_mover_control_s_axi;
 --        bit 23~0 - rx_buffer_length_V[23:0] (Read/Write)
 --        others   - reserved
 -- 0x2c : reserved
+-- 0x30 : Data signal of current_buffer_V_i
+--        bit 0  - current_buffer_V_i[0] (Read/Write)
+--        others - reserved
+-- 0x34 : reserved
+-- 0x38 : Data signal of current_buffer_V_o
+--        bit 0  - current_buffer_V_o[0] (Read)
+--        others - reserved
+-- 0x3c : Control signal of current_buffer_V_o
+--        bit 0  - current_buffer_V_o_ap_vld (Read/COR)
+--        others - reserved
+-- 0x40 : Data signal of last_buffer_V
+--        bit 0  - last_buffer_V[0] (Read)
+--        others - reserved
+-- 0x44 : Control signal of last_buffer_V
+--        bit 0  - last_buffer_V_ap_vld (Read/COR)
+--        others - reserved
+-- 0x48 : Data signal of increment_buffer
+--        bit 0  - increment_buffer[0] (Read/Write)
+--        others - reserved
+-- 0x4c : reserved
 -- (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 architecture behave of data_mover_control_s_axi is
@@ -100,7 +126,15 @@ architecture behave of data_mover_control_s_axi is
     constant ADDR_RX_BUFFER_V_CTRL          : INTEGER := 16#24#;
     constant ADDR_RX_BUFFER_LENGTH_V_DATA_0 : INTEGER := 16#28#;
     constant ADDR_RX_BUFFER_LENGTH_V_CTRL   : INTEGER := 16#2c#;
-    constant ADDR_BITS         : INTEGER := 6;
+    constant ADDR_CURRENT_BUFFER_V_I_DATA_0 : INTEGER := 16#30#;
+    constant ADDR_CURRENT_BUFFER_V_I_CTRL   : INTEGER := 16#34#;
+    constant ADDR_CURRENT_BUFFER_V_O_DATA_0 : INTEGER := 16#38#;
+    constant ADDR_CURRENT_BUFFER_V_O_CTRL   : INTEGER := 16#3c#;
+    constant ADDR_LAST_BUFFER_V_DATA_0      : INTEGER := 16#40#;
+    constant ADDR_LAST_BUFFER_V_CTRL        : INTEGER := 16#44#;
+    constant ADDR_INCREMENT_BUFFER_DATA_0   : INTEGER := 16#48#;
+    constant ADDR_INCREMENT_BUFFER_CTRL     : INTEGER := 16#4c#;
+    constant ADDR_BITS         : INTEGER := 7;
 
     signal waddr               : UNSIGNED(ADDR_BITS-1 downto 0);
     signal wmask               : UNSIGNED(31 downto 0);
@@ -126,6 +160,12 @@ architecture behave of data_mover_control_s_axi is
     signal int_tx_buffer_length_V : UNSIGNED(23 downto 0) := (others => '0');
     signal int_rx_buffer_V     : UNSIGNED(31 downto 0) := (others => '0');
     signal int_rx_buffer_length_V : UNSIGNED(23 downto 0) := (others => '0');
+    signal int_current_buffer_V_i : UNSIGNED(0 downto 0) := (others => '0');
+    signal int_current_buffer_V_o : UNSIGNED(0 downto 0) := (others => '0');
+    signal int_current_buffer_V_o_ap_vld : STD_LOGIC;
+    signal int_last_buffer_V   : UNSIGNED(0 downto 0) := (others => '0');
+    signal int_last_buffer_V_ap_vld : STD_LOGIC;
+    signal int_increment_buffer : UNSIGNED(0 downto 0) := (others => '0');
 
 
 begin
@@ -255,6 +295,18 @@ begin
                         rdata_data <= RESIZE(int_rx_buffer_V(31 downto 0), 32);
                     when ADDR_RX_BUFFER_LENGTH_V_DATA_0 =>
                         rdata_data <= RESIZE(int_rx_buffer_length_V(23 downto 0), 32);
+                    when ADDR_CURRENT_BUFFER_V_I_DATA_0 =>
+                        rdata_data <= RESIZE(int_current_buffer_V_i(0 downto 0), 32);
+                    when ADDR_CURRENT_BUFFER_V_O_DATA_0 =>
+                        rdata_data <= RESIZE(int_current_buffer_V_o(0 downto 0), 32);
+                    when ADDR_CURRENT_BUFFER_V_O_CTRL =>
+                        rdata_data <= (0 => int_current_buffer_V_o_ap_vld, others => '0');
+                    when ADDR_LAST_BUFFER_V_DATA_0 =>
+                        rdata_data <= RESIZE(int_last_buffer_V(0 downto 0), 32);
+                    when ADDR_LAST_BUFFER_V_CTRL =>
+                        rdata_data <= (0 => int_last_buffer_V_ap_vld, others => '0');
+                    when ADDR_INCREMENT_BUFFER_DATA_0 =>
+                        rdata_data <= RESIZE(int_increment_buffer(0 downto 0), 32);
                     when others =>
                         rdata_data <= (others => '0');
                     end case;
@@ -270,6 +322,8 @@ begin
     tx_buffer_length_V   <= STD_LOGIC_VECTOR(int_tx_buffer_length_V);
     rx_buffer_V          <= STD_LOGIC_VECTOR(int_rx_buffer_V);
     rx_buffer_length_V   <= STD_LOGIC_VECTOR(int_rx_buffer_length_V);
+    current_buffer_V_i   <= STD_LOGIC_VECTOR(int_current_buffer_V_i);
+    increment_buffer     <= STD_LOGIC_VECTOR(int_increment_buffer);
 
     process (ACLK)
     begin
@@ -435,6 +489,84 @@ begin
             if (ACLK_EN = '1') then
                 if (w_hs = '1' and waddr = ADDR_RX_BUFFER_LENGTH_V_DATA_0) then
                     int_rx_buffer_length_V(23 downto 0) <= (UNSIGNED(WDATA(23 downto 0)) and wmask(23 downto 0)) or ((not wmask(23 downto 0)) and int_rx_buffer_length_V(23 downto 0));
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ACLK_EN = '1') then
+                if (w_hs = '1' and waddr = ADDR_CURRENT_BUFFER_V_I_DATA_0) then
+                    int_current_buffer_V_i(0 downto 0) <= (UNSIGNED(WDATA(0 downto 0)) and wmask(0 downto 0)) or ((not wmask(0 downto 0)) and int_current_buffer_V_i(0 downto 0));
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                int_current_buffer_V_o <= (others => '0');
+            elsif (ACLK_EN = '1') then
+                if (current_buffer_V_o_ap_vld = '1') then
+                    int_current_buffer_V_o <= UNSIGNED(current_buffer_V_o); -- clear on read
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                int_current_buffer_V_o_ap_vld <= '0';
+            elsif (ACLK_EN = '1') then
+                if (current_buffer_V_o_ap_vld = '1') then
+                    int_current_buffer_V_o_ap_vld <= '1';
+                elsif (ar_hs = '1' and raddr = ADDR_CURRENT_BUFFER_V_O_CTRL) then
+                    int_current_buffer_V_o_ap_vld <= '0'; -- clear on read
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                int_last_buffer_V <= (others => '0');
+            elsif (ACLK_EN = '1') then
+                if (last_buffer_V_ap_vld = '1') then
+                    int_last_buffer_V <= UNSIGNED(last_buffer_V); -- clear on read
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                int_last_buffer_V_ap_vld <= '0';
+            elsif (ACLK_EN = '1') then
+                if (last_buffer_V_ap_vld = '1') then
+                    int_last_buffer_V_ap_vld <= '1';
+                elsif (ar_hs = '1' and raddr = ADDR_LAST_BUFFER_V_CTRL) then
+                    int_last_buffer_V_ap_vld <= '0'; -- clear on read
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ACLK_EN = '1') then
+                if (w_hs = '1' and waddr = ADDR_INCREMENT_BUFFER_DATA_0) then
+                    int_increment_buffer(0 downto 0) <= (UNSIGNED(WDATA(0 downto 0)) and wmask(0 downto 0)) or ((not wmask(0 downto 0)) and int_increment_buffer(0 downto 0));
                 end if;
             end if;
         end if;

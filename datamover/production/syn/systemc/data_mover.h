@@ -26,10 +26,10 @@ template<unsigned int C_M_AXI_DMA_ADDR_WIDTH = 32,
          unsigned int C_M_AXI_DMA_ARUSER_WIDTH = 1,
          unsigned int C_M_AXI_DMA_RUSER_WIDTH = 1,
          unsigned int C_M_AXI_DMA_BUSER_WIDTH = 1,
-         unsigned int C_S_AXI_CONTROL_ADDR_WIDTH = 6,
+         unsigned int C_S_AXI_CONTROL_ADDR_WIDTH = 7,
          unsigned int C_S_AXI_CONTROL_DATA_WIDTH = 32>
 struct data_mover : public sc_module {
-    // Port declarations 77
+    // Port declarations 71
     sc_in_clk ap_clk;
     sc_in< sc_logic > ap_rst_n;
     sc_out< sc_logic > m_axi_DMA_AWVALID;
@@ -83,12 +83,6 @@ struct data_mover : public sc_module {
     sc_out< sc_lv<8> > data_tx_V_V_TDATA;
     sc_out< sc_logic > data_tx_V_V_TVALID;
     sc_in< sc_logic > data_tx_V_V_TREADY;
-    sc_in< sc_lv<1> > current_buffer_V_i;
-    sc_out< sc_lv<1> > current_buffer_V_o;
-    sc_out< sc_logic > current_buffer_V_o_ap_vld;
-    sc_out< sc_lv<1> > last_buffer_V;
-    sc_out< sc_logic > last_buffer_V_ap_vld;
-    sc_in< sc_logic > increment_buffer;
     sc_in< sc_logic > s_axi_control_AWVALID;
     sc_out< sc_logic > s_axi_control_AWREADY;
     sc_in< sc_uint<C_S_AXI_CONTROL_ADDR_WIDTH> > s_axi_control_AWADDR;
@@ -167,6 +161,11 @@ struct data_mover : public sc_module {
     sc_signal< sc_lv<24> > tx_buffer_length_V;
     sc_signal< sc_lv<32> > rx_buffer_V;
     sc_signal< sc_lv<24> > rx_buffer_length_V;
+    sc_signal< sc_lv<1> > current_buffer_V_i;
+    sc_signal< sc_lv<1> > current_buffer_V_o;
+    sc_signal< sc_logic > current_buffer_V_o_ap_vld;
+    sc_signal< sc_logic > last_buffer_V_ap_vld;
+    sc_signal< sc_logic > increment_buffer;
     sc_signal< sc_logic > DMA_AWVALID;
     sc_signal< sc_logic > DMA_AWREADY;
     sc_signal< sc_logic > DMA_WVALID;
@@ -197,6 +196,7 @@ struct data_mover : public sc_module {
     sc_signal< sc_lv<13> > rx_final_burst_lengt_reg_310;
     sc_signal< sc_lv<12> > rx_loop_count_V_fu_267_p3;
     sc_signal< sc_lv<12> > rx_loop_count_V_reg_315;
+    sc_signal< sc_lv<1> > increment_buffer_rea_reg_320;
     sc_signal< sc_logic > grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWVALID;
     sc_signal< sc_lv<32> > grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWADDR;
     sc_signal< sc_lv<1> > grp_rx_loop_fu_132_m_axi_rx_buffer_V_AWID;
@@ -288,7 +288,6 @@ struct data_mover : public sc_module {
     sc_signal< sc_logic > grp_tx_loop_fu_145_ap_start_reg;
     sc_signal< sc_logic > ap_sync_reg_grp_tx_loop_fu_145_ap_ready;
     sc_signal< sc_logic > ap_sync_reg_grp_tx_loop_fu_145_ap_done;
-    sc_signal< sc_lv<1> > increment_buffer_rea_read_fu_119_p2;
     sc_signal< sc_lv<1> > not_s_fu_276_p2;
     sc_signal< sc_lv<12> > r_V_fu_180_p1;
     sc_signal< sc_lv<12> > tmp_4_i_fu_190_p4;
@@ -386,8 +385,6 @@ struct data_mover : public sc_module {
     void thread_grp_tx_loop_fu_145_ap_continue();
     void thread_grp_tx_loop_fu_145_ap_start();
     void thread_grp_tx_loop_fu_145_axis_V_V_TREADY();
-    void thread_increment_buffer_rea_read_fu_119_p2();
-    void thread_last_buffer_V();
     void thread_last_buffer_V_ap_vld();
     void thread_not_s_fu_276_p2();
     void thread_r_V_1_fu_228_p1();

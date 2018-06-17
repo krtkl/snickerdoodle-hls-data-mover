@@ -2,6 +2,12 @@
     <checksum>
         <value string="false"/>
     </checksum>
+    <downStreamTool>
+        <DownStreamTool name="vivado"/>
+    </downStreamTool>
+    <clockList>
+        <clock default="false" name="default" period="6.5" uncertainty="2.0"/>
+    </clockList>
     <config>
         <schedule model="data_mover"/>
     </config>
@@ -64,11 +70,5 @@
         <library name="DefaultPlatform" value="xilinx/zynq/zynq"/>
         <library name="DefaultPlatform" value="xilinx/zynq/zynq_fpv6"/>
     </libraryList>
-    <downStreamTool>
-        <DownStreamTool name="vivado"/>
-    </downStreamTool>
-    <clockList>
-        <clock default="false" name="default" uncertainty="2.0" period="6.5"/>
-    </clockList>
 </solution>
 

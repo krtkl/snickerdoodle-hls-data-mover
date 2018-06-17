@@ -30,7 +30,7 @@
 /**
  * @description AXIS data mover header file
  * @author Jamil J. Weatherbee
- * @version 2018-06-11T08:18:22Z
+ * @version 2018-06-17T04:26:31Z
  */
 
 /* include data types needed */
@@ -81,6 +81,5 @@ void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
 				 const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
 				 axi_t rx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
 				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length, /* number of AXIS words to write to the rx buffer */
-				 ap_uint<BUFFER_COUNT_BITS> *current_buffer, /* buffer number to use */
-				 ap_uint<BUFFER_COUNT_BITS> *last_buffer, /* buffer number last used */
-				 const bool *increment_buffer); /* set this flag to increment the current buffer on each call */
+				 ap_uint<BUFFER_COUNT_BITS> *last_buffer, /* returns buffer number last used */
+				 const bool *increment_buffer); /* if set target buffer is post-incremented, if clear buffer 0 always used */

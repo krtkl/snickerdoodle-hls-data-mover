@@ -107,24 +107,6 @@
       "polarity": "ACTIVE_LOW",
       "ctype": {"RST": {"Type": "bool"}}
     },
-    "current_buffer_V_i": {
-      "type": "data",
-      "dir": "in",
-      "width": "1",
-      "ctype": {"DATA": {
-          "Type": "integer unsigned",
-          "Width": "1"
-        }}
-    },
-    "current_buffer_V_o": {
-      "type": "data",
-      "dir": "out",
-      "width": "1",
-      "ctype": {"DATA": {
-          "Type": "integer unsigned",
-          "Width": "1"
-        }}
-    },
     "data_rx_V_V": {
       "type": "axi4stream",
       "mode": "slave",
@@ -155,27 +137,9 @@
       },
       "port_width": {"TDATA": "8"}
     },
-    "increment_buffer": {
-      "type": "data",
-      "dir": "in",
-      "width": "1",
-      "ctype": {"DATA": {
-          "Type": "null",
-          "Width": "1"
-        }}
-    },
     "interrupt": {
       "type": "interrupt",
       "ctype": {"INTERRUPT": {"Type": "bool"}}
-    },
-    "last_buffer_V": {
-      "type": "data",
-      "dir": "out",
-      "width": "1",
-      "ctype": {"DATA": {
-          "Type": "integer unsigned",
-          "Width": "1"
-        }}
     },
     "m_axi_DMA": {
       "type": "native_axim",
@@ -362,7 +326,7 @@
       "mode": "slave",
       "port_prefix": "s_axi_control",
       "param_prefix": "C_S_AXI_CONTROL",
-      "addr_bits": "6",
+      "addr_bits": "7",
       "registers": [
         {
           "offset": "0x00",
@@ -599,6 +563,156 @@
               "description": "Reserved.  0s on read."
             }
           ]
+        },
+        {
+          "offset": "0x30",
+          "name": "current_buffer_V_i",
+          "access": "W",
+          "reset_value": "0x0",
+          "description": "Data signal of current_buffer_V_i",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "current_buffer_V_i",
+              "access": "W",
+              "reset_value": "0",
+              "description": "Bit 0 to 0 Data signal of current_buffer_V_i"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x38",
+          "name": "current_buffer_V_o",
+          "access": "R",
+          "reset_value": "0x0",
+          "description": "Data signal of current_buffer_V_o",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "current_buffer_V_o",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Bit 0 to 0 Data signal of current_buffer_V_o"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x3c",
+          "name": "current_buffer_V_o_ctrl",
+          "access": "R",
+          "reset_value": "0x0",
+          "description": "Control signal of current_buffer_V_o",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "current_buffer_V_o_ap_vld",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Control signal current_buffer_V_o_ap_vld"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x40",
+          "name": "last_buffer_V",
+          "access": "R",
+          "reset_value": "0x0",
+          "description": "Data signal of last_buffer_V",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "last_buffer_V",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Bit 0 to 0 Data signal of last_buffer_V"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x44",
+          "name": "last_buffer_V_ctrl",
+          "access": "R",
+          "reset_value": "0x0",
+          "description": "Control signal of last_buffer_V",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "last_buffer_V_ap_vld",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Control signal last_buffer_V_ap_vld"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x48",
+          "name": "increment_buffer",
+          "access": "W",
+          "reset_value": "0x0",
+          "description": "Data signal of increment_buffer",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "increment_buffer",
+              "access": "W",
+              "reset_value": "0",
+              "description": "Bit 0 to 0 Data signal of increment_buffer"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
         }
       ],
       "memories": "",
@@ -623,11 +737,11 @@
         },
         "AWADDR": {
           "Type": "integer unsigned",
-          "Width": "6"
+          "Width": "7"
         },
         "WDATA": {
-          "Type": "integer unsigned",
-          "Width": "24"
+          "Type": "null",
+          "Width": "1"
         },
         "WSTRB": {
           "Type": "integer unsigned",
@@ -635,17 +749,17 @@
         },
         "ARADDR": {
           "Type": "integer unsigned",
-          "Width": "6"
+          "Width": "7"
         },
         "RDATA": {
-          "Type": "integer unsigned",
-          "Width": "24"
+          "Type": "null",
+          "Width": "1"
         }
       },
       "data_width": "32",
       "port_width": {
-        "ARADDR": "6",
-        "AWADDR": "6",
+        "ARADDR": "7",
+        "AWADDR": "7",
         "RDATA": "32",
         "WDATA": "32",
         "WSTRB": "4"
@@ -663,7 +777,7 @@
     },
     "s_axi_control_AWADDR": {
       "dir": "in",
-      "width": "6"
+      "width": "7"
     },
     "s_axi_control_WVALID": {
       "dir": "in",
@@ -691,7 +805,7 @@
     },
     "s_axi_control_ARADDR": {
       "dir": "in",
-      "width": "6"
+      "width": "7"
     },
     "s_axi_control_RVALID": {
       "dir": "out",
@@ -947,33 +1061,6 @@
     "data_tx_V_V_TREADY": {
       "dir": "in",
       "width": "1"
-    },
-    "current_buffer_V_i": {
-      "dir": "in",
-      "width": "1",
-      "isVector": "true"
-    },
-    "current_buffer_V_o": {
-      "dir": "out",
-      "width": "1",
-      "isVector": "true"
-    },
-    "current_buffer_V_o_ap_vld": {
-      "dir": "out",
-      "width": "1"
-    },
-    "last_buffer_V": {
-      "dir": "out",
-      "width": "1",
-      "isVector": "true"
-    },
-    "last_buffer_V_ap_vld": {
-      "dir": "out",
-      "width": "1"
-    },
-    "increment_buffer": {
-      "dir": "in",
-      "width": "1"
     }
   },
   "CPorts": {
@@ -1013,6 +1100,39 @@
       "handshakeRef": "ap_none",
       "Object": "control"
     },
+    "current_buffer_V_i": {
+      "interfaceRef": "s_axi_control",
+      "dir": "in",
+      "offset": "48",
+      "statusOffset": "NA",
+      "handshakeRef": "ap_none",
+      "Object": "control"
+    },
+    "current_buffer_V_o": {
+      "interfaceRef": "s_axi_control",
+      "dir": "out",
+      "offset": "56",
+      "statusOffset": "60",
+      "handshakeRef": "ap_vld",
+      "Object": "control"
+    },
+    "last_buffer_V": {
+      "interfaceRef": "s_axi_control",
+      "dir": "out",
+      "offset": "64",
+      "statusOffset": "68",
+      "handshakeRef": "ap_vld",
+      "Object": "control",
+      "firstOutLatency": "2"
+    },
+    "increment_buffer": {
+      "interfaceRef": "s_axi_control",
+      "dir": "in",
+      "offset": "72",
+      "statusOffset": "NA",
+      "handshakeRef": "ap_none",
+      "Object": "control"
+    },
     "ap_ctrl": {
       "interfaceRef": "s_axi_control",
       "dir": "in",
@@ -1030,31 +1150,6 @@
       "interfaceRef": "data_tx_V_V",
       "dir": "out",
       "firstOutLatency": "3"
-    },
-    "current_buffer_V_i": {
-      "interfaceRef": "current_buffer_V_i",
-      "dir": "in",
-      "dataWidth": "1",
-      "handshakeRef": "ap_none"
-    },
-    "current_buffer_V_o": {
-      "interfaceRef": "current_buffer_V_o",
-      "dir": "out",
-      "dataWidth": "1",
-      "handshakeRef": "ap_vld"
-    },
-    "last_buffer_V": {
-      "interfaceRef": "last_buffer_V",
-      "dir": "out",
-      "dataWidth": "1",
-      "handshakeRef": "ap_vld",
-      "firstOutLatency": "2"
-    },
-    "increment_buffer": {
-      "interfaceRef": "increment_buffer",
-      "dir": "in",
-      "dataWidth": "1",
-      "handshakeRef": "ap_none"
     }
   },
   "ModuleInfo": {
@@ -1346,8 +1441,8 @@
         },
         "Area": {
           "BRAM_18K": "8",
-          "FF": "1703",
-          "LUT": "3030",
+          "FF": "1732",
+          "LUT": "3038",
           "DSP48E": "0"
         }
       }
@@ -1355,7 +1450,7 @@
   },
   "GenData": {
     "DataVersion": "0.1",
-    "Time": "2018-06-16 18:50:03 -0700",
+    "Time": "2018-06-16 19:27:14 -0700",
     "ToolName": "vivado_hls",
     "ToolVersion": "2018.1"
   }

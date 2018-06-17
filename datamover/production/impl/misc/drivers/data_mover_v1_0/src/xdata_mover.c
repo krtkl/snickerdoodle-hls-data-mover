@@ -144,6 +144,80 @@ u32 XData_mover_Get_rx_buffer_length_V(XData_mover *InstancePtr) {
     return Data;
 }
 
+void XData_mover_Set_current_buffer_V_i(XData_mover *InstancePtr, u32 Data) {
+    Xil_AssertVoid(InstancePtr != NULL);
+    Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    XData_mover_WriteReg(InstancePtr->Control_BaseAddress, XDATA_MOVER_CONTROL_ADDR_CURRENT_BUFFER_V_I_DATA, Data);
+}
+
+u32 XData_mover_Get_current_buffer_V_i(XData_mover *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XData_mover_ReadReg(InstancePtr->Control_BaseAddress, XDATA_MOVER_CONTROL_ADDR_CURRENT_BUFFER_V_I_DATA);
+    return Data;
+}
+
+u32 XData_mover_Get_current_buffer_V_o(XData_mover *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XData_mover_ReadReg(InstancePtr->Control_BaseAddress, XDATA_MOVER_CONTROL_ADDR_CURRENT_BUFFER_V_O_DATA);
+    return Data;
+}
+
+u32 XData_mover_Get_current_buffer_V_o_vld(XData_mover *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XData_mover_ReadReg(InstancePtr->Control_BaseAddress, XDATA_MOVER_CONTROL_ADDR_CURRENT_BUFFER_V_O_CTRL);
+    return Data & 0x1;
+}
+
+u32 XData_mover_Get_last_buffer_V(XData_mover *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XData_mover_ReadReg(InstancePtr->Control_BaseAddress, XDATA_MOVER_CONTROL_ADDR_LAST_BUFFER_V_DATA);
+    return Data;
+}
+
+u32 XData_mover_Get_last_buffer_V_vld(XData_mover *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XData_mover_ReadReg(InstancePtr->Control_BaseAddress, XDATA_MOVER_CONTROL_ADDR_LAST_BUFFER_V_CTRL);
+    return Data & 0x1;
+}
+
+void XData_mover_Set_increment_buffer(XData_mover *InstancePtr, u32 Data) {
+    Xil_AssertVoid(InstancePtr != NULL);
+    Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    XData_mover_WriteReg(InstancePtr->Control_BaseAddress, XDATA_MOVER_CONTROL_ADDR_INCREMENT_BUFFER_DATA, Data);
+}
+
+u32 XData_mover_Get_increment_buffer(XData_mover *InstancePtr) {
+    u32 Data;
+
+    Xil_AssertNonvoid(InstancePtr != NULL);
+    Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+    Data = XData_mover_ReadReg(InstancePtr->Control_BaseAddress, XDATA_MOVER_CONTROL_ADDR_INCREMENT_BUFFER_DATA);
+    return Data;
+}
+
 void XData_mover_InterruptGlobalEnable(XData_mover *InstancePtr) {
     Xil_AssertVoid(InstancePtr != NULL);
     Xil_AssertVoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
