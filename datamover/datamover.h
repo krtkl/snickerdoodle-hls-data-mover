@@ -41,6 +41,9 @@
 
 /* constant definitions */
 const int BITS_PER_BYTE = 8; /* bits per byte */
+const int BITS_PER_BOOL = 1;
+const int BOOL_FALSE = 0;
+const int BOOL_TRUE = 1;
 
 const int BUFFER_COUNT_BITS = 1; /* number of bits needed to enumerate a read or write buffer */
 const int BUFFER_COUNT = (1<<BUFFER_COUNT_BITS); /* number of transmit and receive buffer pairs (2) */
@@ -82,4 +85,4 @@ void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
 				 axi_t rx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
 				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length, /* number of AXIS words to write to the rx buffer */
 				 ap_uint<BUFFER_COUNT_BITS> *last_buffer, /* returns buffer number last used */
-				 const bool *increment_buffer); /* if set target buffer is post-incremented, if clear buffer 0 always used */
+				 const ap_uint<BITS_PER_BOOL> *increment_buffer); /* if set target buffer is post-incremented, if clear buffer 0 always used */

@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'dataflow_in_loop'
 ================================================================
-* Date:           Sat Jun 16 19:27:10 2018
+* Date:           Sun Jun 17 00:08:15 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -38,7 +38,7 @@
         |                      |                   |   Latency   |   Interval  | Pipeline|
         |       Instance       |       Module      |  min |  max |  min |  max |   Type  |
         +----------------------+-------------------+------+------+------+------+---------+
-        |rx_axis_words6831_U0  |rx_axis_words6831  |  4099|  4099|  4099|  4099|   none  |
+        |rx_axis_words7131_U0  |rx_axis_words7131  |  4099|  4099|  4099|  4099|   none  |
         |write_burst_U0        |write_burst        |   520|   520|   520|   520|   none  |
         +----------------------+-------------------+------+------+------+------+---------+
 
@@ -74,7 +74,7 @@
     +----------------------+-------------------+---------+-------+-----+-----+
     |       Instance       |       Module      | BRAM_18K| DSP48E|  FF | LUT |
     +----------------------+-------------------+---------+-------+-----+-----+
-    |rx_axis_words6831_U0  |rx_axis_words6831  |        0|      0|  362|  702|
+    |rx_axis_words7131_U0  |rx_axis_words7131  |        0|      0|  362|  702|
     |write_burst_U0        |write_burst        |        0|      0|  120|  220|
     +----------------------+-------------------+---------+-------+-----+-----+
     |Total                 |                   |        0|      0|  482|  922|
@@ -110,7 +110,7 @@
     |ap_channel_done_buffer_offset_V        |    and   |      0|  0|   2|           1|           1|
     |ap_channel_done_cache_V                |    and   |      0|  0|   2|           1|           1|
     |ap_idle                                |    and   |      0|  0|   2|           1|           1|
-    |rx_axis_words6831_U0_ap_continue       |    and   |      0|  0|   2|           1|           1|
+    |rx_axis_words7131_U0_ap_continue       |    and   |      0|  0|   2|           1|           1|
     |write_burst_U0_ap_start                |    and   |      0|  0|   2|           1|           1|
     |ap_sync_channel_write_buffer_offset_V  |    or    |      0|  0|   2|           1|           1|
     |ap_sync_channel_write_cache_V          |    or    |      0|  0|   2|           1|           1|

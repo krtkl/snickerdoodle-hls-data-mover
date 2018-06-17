@@ -183,7 +183,7 @@ void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
 				 axi_t rx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
 				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length, /* number of AXIS words to write to the rx buffer */
 				 ap_uint<BUFFER_COUNT_BITS> *last_buffer, /* returns buffer number last used */
-				 const bool *increment_buffer) /* if set target buffer is post-incremented, if clear buffer 0 always used */
+				 const ap_uint<BITS_PER_BOOL> *increment_buffer) /* if set target buffer is post-incremented, if clear buffer 0 always used */
 {
 #pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE axis register both port=data_rx
@@ -197,7 +197,6 @@ void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
 #pragma HLS INTERFACE s_axilite port=rx_buffer bundle=control
 #pragma HLS INTERFACE s_axilite port=rx_buffer_length bundle=control
 
-#pragma HLS INTERFACE s_axilite port=current_buffer bundle=control
 #pragma HLS INTERFACE s_axilite port=last_buffer bundle=control
 #pragma HLS INTERFACE s_axilite port=increment_buffer bundle=control
 
@@ -213,7 +212,7 @@ void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
   bool tx_done = false;
   bool rx_done = false;
 
-  if (false == *increment_buffer) current_buffer = 0; /* if buffer is not set to increment then always use first buffer */
+  if (BOOL_FALSE == *increment_buffer) current_buffer = 0; /* if buffer is not set to increment then always use first buffer */
 
   /* setup tx and rx loop parameters */
   get_loop_parameters (*tx_buffer_length, tx_loop_count, tx_final_burst_length);
@@ -228,6 +227,6 @@ void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
   if (tx_done && rx_done) /* this condition blocks writes to the last_buffer until the transfers are complete */
    {
      *last_buffer = current_buffer; /* return the buffer just used for transmit and receive */
-     if (true == *increment_buffer) current_buffer++; /* increment buffer to use (rolls over to zero) */
+     if (BOOL_TRUE == *increment_buffer) current_buffer++; /* increment buffer to use (rolls over to zero) */
    }
 }

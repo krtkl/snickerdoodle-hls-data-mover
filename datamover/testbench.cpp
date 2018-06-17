@@ -171,7 +171,7 @@ int main (void)
   uint32_t rx_stream_crc;
   uint32_t crc;
   ap_uint<BUFFER_COUNT_BITS> last_buffer;
-  bool increment_buffer;
+  ap_uint<BITS_PER_BOOL> increment_buffer;
 
   std::cout << std::endl << "*** Test Parameters ***" << std::endl;
 
@@ -209,7 +209,7 @@ int main (void)
   std::cout << "CACHE_LENGTH=" << std::dec << CACHE_LENGTH << std::endl;
   std::cout << "BUFFER_LENGTH_BITS=" << std::dec << BUFFER_LENGTH_BITS << std::endl;
 
-  increment_buffer = true;
+  increment_buffer = BOOL_TRUE;
 
   /*** PASS 1 ***/
   std::cout << std::endl << "*** PASS 1 ***" << std::endl;

@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'data_mover'
 ================================================================
-* Date:           Sat Jun 16 19:27:11 2018
+* Date:           Sun Jun 17 00:08:16 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -38,8 +38,8 @@
         |                    |         |    Latency    |    Interval   | Pipeline|
         |      Instance      |  Module | min |   max   | min |   max   |   Type  |
         +--------------------+---------+-----+---------+-----+---------+---------+
-        |grp_rx_loop_fu_132  |rx_loop  |  522|  8397322|  522|  8397322|   none  |
-        |grp_tx_loop_fu_145  |tx_loop  |    4|  8397324|    4|  8397324|   none  |
+        |grp_rx_loop_fu_121  |rx_loop  |  522|  8397322|  522|  8397322|   none  |
+        |grp_tx_loop_fu_133  |tx_loop  |    4|  8397324|    4|  8397324|   none  |
         +--------------------+---------+-----+---------+-----+---------+---------+
 
         * Loop: 
@@ -55,14 +55,14 @@
 |       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
-|Expression       |        -|      -|       0|    152|
+|Expression       |        -|      -|       0|    160|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        8|      -|    1572|   2748|
+|Instance         |        8|      -|    1558|   2744|
 |Memory           |        -|      -|       -|      -|
-|Multiplexer      |        -|      -|       -|    138|
-|Register         |        -|      -|     160|      -|
+|Multiplexer      |        -|      -|       -|    129|
+|Register         |        -|      -|     162|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        8|      0|    1732|   3038|
+|Total            |        8|      0|    1720|   3033|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -75,11 +75,11 @@
     |          Instance          |          Module          | BRAM_18K| DSP48E|  FF |  LUT |
     +----------------------------+--------------------------+---------+-------+-----+------+
     |data_mover_DMA_m_axi_U      |data_mover_DMA_m_axi      |        4|      0|  566|   766|
-    |data_mover_control_s_axi_U  |data_mover_control_s_axi  |        0|      0|  200|   272|
-    |grp_rx_loop_fu_132          |rx_loop                   |        2|      0|  520|  1067|
-    |grp_tx_loop_fu_145          |tx_loop                   |        2|      0|  286|   643|
+    |data_mover_control_s_axi_U  |data_mover_control_s_axi  |        0|      0|  186|   268|
+    |grp_rx_loop_fu_121          |rx_loop                   |        2|      0|  520|  1067|
+    |grp_tx_loop_fu_133          |tx_loop                   |        2|      0|  286|   643|
     +----------------------------+--------------------------+---------+-------+-----+------+
-    |Total                       |                          |        8|      0| 1572|  2748|
+    |Total                       |                          |        8|      0| 1558|  2744|
     +----------------------------+--------------------------+---------+-------+-----+------+
 
     * DSP48: 
@@ -95,28 +95,32 @@
     +-------------------------------------+----------+-------+---+----+------------+------------+
     |            Variable Name            | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +-------------------------------------+----------+-------+---+----+------------+------------+
-    |tmp_9_i1_fu_252_p2                   |     +    |      0|  0|  19|           1|          12|
-    |tmp_9_i_fu_204_p2                    |     +    |      0|  0|  19|           1|          12|
+    |tmp_9_i1_fu_258_p2                   |     +    |      0|  0|  19|           1|          12|
+    |tmp_9_i_fu_210_p2                    |     +    |      0|  0|  19|           1|          12|
+    |current_buffer_V_loa_1_fu_177_p2     |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_load_A                 |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_load_B                 |    and   |      0|  0|   2|           1|           1|
     |data_tx_V_V_1_load_A                 |    and   |      0|  0|   2|           1|           1|
     |data_tx_V_V_1_load_B                 |    and   |      0|  0|   2|           1|           1|
+    |not_s_12_fu_294_p2                   |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_state_cmp_full         |   icmp   |      0|  0|   8|           2|           1|
     |data_tx_V_V_1_state_cmp_full         |   icmp   |      0|  0|   8|           2|           1|
-    |tmp_i1_fu_232_p2                     |   icmp   |      0|  0|  13|          12|           1|
-    |tmp_i_fu_184_p2                      |   icmp   |      0|  0|  13|          12|           1|
+    |tmp_i1_fu_238_p2                     |   icmp   |      0|  0|  13|          12|           1|
+    |tmp_i_fu_190_p2                      |   icmp   |      0|  0|  13|          12|           1|
     |ap_block_state3_on_subcall_done      |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_rx_loop_fu_132_ap_done   |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_rx_loop_fu_132_ap_ready  |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_tx_loop_fu_145_ap_done   |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_tx_loop_fu_145_ap_ready  |    or    |      0|  0|   2|           1|           1|
-    |rx_final_burst_lengt_fu_258_p3       |  select  |      0|  0|  14|           1|          14|
-    |rx_loop_count_V_fu_267_p3            |  select  |      0|  0|  12|           1|          12|
-    |tx_final_burst_lengt_fu_210_p3       |  select  |      0|  0|  14|           1|          14|
-    |tx_loop_count_V_fu_219_p3            |  select  |      0|  0|  12|           1|          12|
-    |not_s_fu_276_p2                      |    xor   |      0|  0|   2|           1|           2|
+    |ap_sync_grp_rx_loop_fu_121_ap_done   |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_rx_loop_fu_121_ap_ready  |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_tx_loop_fu_133_ap_done   |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_tx_loop_fu_133_ap_ready  |    or    |      0|  0|   2|           1|           1|
+    |p_s_fu_288_p2                        |    or    |      0|  0|   2|           1|           1|
+    |rx_final_burst_lengt_fu_264_p3       |  select  |      0|  0|  14|           1|          14|
+    |rx_loop_count_V_fu_273_p3            |  select  |      0|  0|  12|           1|          12|
+    |tx_final_burst_lengt_fu_216_p3       |  select  |      0|  0|  14|           1|          14|
+    |tx_loop_count_V_fu_225_p3            |  select  |      0|  0|  12|           1|          12|
+    |not_increment_buffer_fu_171_p2       |    xor   |      0|  0|   2|           1|           2|
+    |not_s_fu_282_p2                      |    xor   |      0|  0|   2|           1|           2|
     +-------------------------------------+----------+-------+---+----+------------+------------+
-    |Total                                |          |      0|  0| 152|          44|          91|
+    |Total                                |          |      0|  0| 160|          48|          96|
     +-------------------------------------+----------+-------+---+----+------------+------------+
 
     * Multiplexer: 
@@ -129,14 +133,13 @@
     |DMA_RREADY              |   9|          2|    1|          2|
     |DMA_WVALID              |   9|          2|    1|          2|
     |ap_NS_fsm               |  27|          5|    1|          5|
-    |current_buffer_V_o      |   9|          2|    1|          2|
     |data_rx_V_V_0_ack_out   |   9|          2|    1|          2|
     |data_rx_V_V_0_data_out  |   9|          2|    8|         16|
     |data_rx_V_V_0_state     |  15|          3|    2|          6|
     |data_tx_V_V_1_data_out  |   9|          2|    8|         16|
     |data_tx_V_V_1_state     |  15|          3|    2|          6|
     +------------------------+----+-----------+-----+-----------+
-    |Total                   | 138|         29|   28|         63|
+    |Total                   | 129|         27|   27|         61|
     +------------------------+----+-----------+-----+-----------+
 
     * Register: 
@@ -144,11 +147,12 @@
     |                   Name                  | FF | LUT| Bits| Const Bits|
     +-----------------------------------------+----+----+-----+-----------+
     |ap_CS_fsm                                |   4|   0|    4|          0|
-    |ap_sync_reg_grp_rx_loop_fu_132_ap_done   |   1|   0|    1|          0|
-    |ap_sync_reg_grp_rx_loop_fu_132_ap_ready  |   1|   0|    1|          0|
-    |ap_sync_reg_grp_tx_loop_fu_145_ap_done   |   1|   0|    1|          0|
-    |ap_sync_reg_grp_tx_loop_fu_145_ap_ready  |   1|   0|    1|          0|
-    |buffer_no_V_reg_292                      |   1|   0|    1|          0|
+    |ap_sync_reg_grp_rx_loop_fu_121_ap_done   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_rx_loop_fu_121_ap_ready  |   1|   0|    1|          0|
+    |ap_sync_reg_grp_tx_loop_fu_133_ap_done   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_tx_loop_fu_133_ap_ready  |   1|   0|    1|          0|
+    |current_buffer_V                         |   1|   0|    1|          0|
+    |current_buffer_V_loa_1_reg_315           |   1|   0|    1|          0|
     |data_rx_V_V_0_payload_A                  |   8|   0|    8|          0|
     |data_rx_V_V_0_payload_B                  |   8|   0|    8|          0|
     |data_rx_V_V_0_sel_rd                     |   1|   0|    1|          0|
@@ -159,17 +163,18 @@
     |data_tx_V_V_1_sel_rd                     |   1|   0|    1|          0|
     |data_tx_V_V_1_sel_wr                     |   1|   0|    1|          0|
     |data_tx_V_V_1_state                      |   2|   0|    2|          0|
-    |grp_rx_loop_fu_132_ap_start_reg          |   1|   0|    1|          0|
-    |grp_tx_loop_fu_145_ap_start_reg          |   1|   0|    1|          0|
-    |increment_buffer_rea_reg_320             |   1|   0|    1|          0|
-    |rx_buffer_V3_reg_282                     |  29|   0|   29|          0|
-    |rx_final_burst_lengt_reg_310             |  13|   0|   13|          0|
-    |rx_loop_count_V_reg_315                  |  12|   0|   12|          0|
-    |tx_buffer_V1_reg_287                     |  29|   0|   29|          0|
-    |tx_final_burst_lengt_reg_300             |  13|   0|   13|          0|
-    |tx_loop_count_V_reg_305                  |  12|   0|   12|          0|
+    |grp_rx_loop_fu_121_ap_start_reg          |   1|   0|    1|          0|
+    |grp_tx_loop_fu_133_ap_start_reg          |   1|   0|    1|          0|
+    |not_s_12_reg_345                         |   1|   0|    1|          0|
+    |p_s_reg_341                              |   1|   0|    1|          0|
+    |rx_buffer_V3_reg_305                     |  29|   0|   29|          0|
+    |rx_final_burst_lengt_reg_331             |  13|   0|   13|          0|
+    |rx_loop_count_V_reg_336                  |  12|   0|   12|          0|
+    |tx_buffer_V1_reg_310                     |  29|   0|   29|          0|
+    |tx_final_burst_lengt_reg_321             |  13|   0|   13|          0|
+    |tx_loop_count_V_reg_326                  |  12|   0|   12|          0|
     +-----------------------------------------+----+----+-----+-----------+
-    |Total                                    | 160|   0|  160|          0|
+    |Total                                    | 162|   0|  162|          0|
     +-----------------------------------------+----+----+-----+-----------+
 
 
@@ -183,14 +188,14 @@
 +-----------------------+-----+-----+------------+--------------+--------------+
 |s_axi_control_AWVALID  |  in |    1|    s_axi   |    control   |    pointer   |
 |s_axi_control_AWREADY  | out |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_AWADDR   |  in |    7|    s_axi   |    control   |    pointer   |
+|s_axi_control_AWADDR   |  in |    6|    s_axi   |    control   |    pointer   |
 |s_axi_control_WVALID   |  in |    1|    s_axi   |    control   |    pointer   |
 |s_axi_control_WREADY   | out |    1|    s_axi   |    control   |    pointer   |
 |s_axi_control_WDATA    |  in |   32|    s_axi   |    control   |    pointer   |
 |s_axi_control_WSTRB    |  in |    4|    s_axi   |    control   |    pointer   |
 |s_axi_control_ARVALID  |  in |    1|    s_axi   |    control   |    pointer   |
 |s_axi_control_ARREADY  | out |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_ARADDR   |  in |    7|    s_axi   |    control   |    pointer   |
+|s_axi_control_ARADDR   |  in |    6|    s_axi   |    control   |    pointer   |
 |s_axi_control_RVALID   | out |    1|    s_axi   |    control   |    pointer   |
 |s_axi_control_RREADY   |  in |    1|    s_axi   |    control   |    pointer   |
 |s_axi_control_RDATA    | out |   32|    s_axi   |    control   |    pointer   |

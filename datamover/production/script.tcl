@@ -14,5 +14,5 @@ set_clock_uncertainty 2.0
 #source "./datamover/production/directives.tcl"
 csim_design -clean
 csynth_design
-cosim_design -trace_level port -rtl vhdl -tool xsim
-export_design -flow impl -rtl vhdl -format ip_catalog -description "data mover" -vendor "krtl" -library "snickerdoodle" -version "1.05" -display_name "data mover"
+cosim_design -rtl vhdl -tool xsim
+export_design -flow impl -rtl vhdl -format ip_catalog -description "data mover" -vendor "krtl" -library "snickerdoodle" -version "1.10" -display_name "data mover"
