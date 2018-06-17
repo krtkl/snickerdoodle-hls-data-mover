@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'data_mover'
 ================================================================
-* Date:           Mon Jun 11 01:41:10 2018
+* Date:           Sat Jun 16 18:50:00 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -25,22 +25,22 @@
 
 + Latency (clock cycles): 
     * Summary: 
-    +-----+----------+-----+----------+---------+
-    |     Latency    |    Interval    | Pipeline|
-    | min |    max   | min |    max   |   Type  |
-    +-----+----------+-----+----------+---------+
-    |  525|  16794127|  525|  16794127|   none  |
-    +-----+----------+-----+----------+---------+
+    +-----+---------+-----+---------+---------+
+    |    Latency    |    Interval   | Pipeline|
+    | min |   max   | min |   max   |   Type  |
+    +-----+---------+-----+---------+---------+
+    |  525|  8397327|  525|  8397327|   none  |
+    +-----+---------+-----+---------+---------+
 
     + Detail: 
         * Instance: 
-        +--------------------+---------+-----+----------+-----+----------+---------+
-        |                    |         |     Latency    |    Interval    | Pipeline|
-        |      Instance      |  Module | min |    max   | min |    max   |   Type  |
-        +--------------------+---------+-----+----------+-----+----------+---------+
-        |grp_rx_loop_fu_94   |rx_loop  |  522|  16794122|  522|  16794122|   none  |
-        |grp_tx_loop_fu_105  |tx_loop  |    4|  16794124|    4|  16794124|   none  |
-        +--------------------+---------+-----+----------+-----+----------+---------+
+        +--------------------+---------+-----+---------+-----+---------+---------+
+        |                    |         |    Latency    |    Interval   | Pipeline|
+        |      Instance      |  Module | min |   max   | min |   max   |   Type  |
+        +--------------------+---------+-----+---------+-----+---------+---------+
+        |grp_rx_loop_fu_132  |rx_loop  |  522|  8397322|  522|  8397322|   none  |
+        |grp_tx_loop_fu_145  |tx_loop  |    4|  8397324|    4|  8397324|   none  |
+        +--------------------+---------+-----+---------+-----+---------+---------+
 
         * Loop: 
         N/A
@@ -55,14 +55,14 @@
 |       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
-|Expression       |        -|      -|       0|    154|
+|Expression       |        -|      -|       0|    152|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        8|      -|    1547|   2714|
+|Instance         |        8|      -|    1544|   2740|
 |Memory           |        -|      -|       -|      -|
-|Multiplexer      |        -|      -|       -|    129|
-|Register         |        -|      -|     160|      -|
+|Multiplexer      |        -|      -|       -|    138|
+|Register         |        -|      -|     159|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        8|      0|    1707|   2997|
+|Total            |        8|      0|    1703|   3030|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -75,11 +75,11 @@
     |          Instance          |          Module          | BRAM_18K| DSP48E|  FF |  LUT |
     +----------------------------+--------------------------+---------+-------+-----+------+
     |data_mover_DMA_m_axi_U      |data_mover_DMA_m_axi      |        4|      0|  566|   766|
-    |data_mover_control_s_axi_U  |data_mover_control_s_axi  |        0|      0|  174|   268|
-    |grp_rx_loop_fu_94           |rx_loop                   |        2|      0|  518|  1034|
-    |grp_tx_loop_fu_105          |tx_loop                   |        2|      0|  289|   646|
+    |data_mover_control_s_axi_U  |data_mover_control_s_axi  |        0|      0|  172|   264|
+    |grp_rx_loop_fu_132          |rx_loop                   |        2|      0|  520|  1067|
+    |grp_tx_loop_fu_145          |tx_loop                   |        2|      0|  286|   643|
     +----------------------------+--------------------------+---------+-------+-----+------+
-    |Total                       |                          |        8|      0| 1547|  2714|
+    |Total                       |                          |        8|      0| 1544|  2740|
     +----------------------------+--------------------------+---------+-------+-----+------+
 
     * DSP48: 
@@ -95,27 +95,28 @@
     +-------------------------------------+----------+-------+---+----+------------+------------+
     |            Variable Name            | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +-------------------------------------+----------+-------+---+----+------------+------------+
-    |tmp_9_i1_fu_210_p2                   |     +    |      0|  0|  20|           1|          13|
-    |tmp_9_i_fu_162_p2                    |     +    |      0|  0|  20|           1|          13|
+    |tmp_9_i1_fu_252_p2                   |     +    |      0|  0|  19|           1|          12|
+    |tmp_9_i_fu_204_p2                    |     +    |      0|  0|  19|           1|          12|
     |data_rx_V_V_0_load_A                 |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_load_B                 |    and   |      0|  0|   2|           1|           1|
     |data_tx_V_V_1_load_A                 |    and   |      0|  0|   2|           1|           1|
     |data_tx_V_V_1_load_B                 |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_state_cmp_full         |   icmp   |      0|  0|   8|           2|           1|
     |data_tx_V_V_1_state_cmp_full         |   icmp   |      0|  0|   8|           2|           1|
-    |tmp_i1_fu_190_p2                     |   icmp   |      0|  0|  13|          12|           1|
-    |tmp_i_fu_142_p2                      |   icmp   |      0|  0|  13|          12|           1|
+    |tmp_i1_fu_232_p2                     |   icmp   |      0|  0|  13|          12|           1|
+    |tmp_i_fu_184_p2                      |   icmp   |      0|  0|  13|          12|           1|
     |ap_block_state3_on_subcall_done      |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_rx_loop_fu_94_ap_done    |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_rx_loop_fu_94_ap_ready   |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_tx_loop_fu_105_ap_done   |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_tx_loop_fu_105_ap_ready  |    or    |      0|  0|   2|           1|           1|
-    |rx_final_burst_lengt_fu_216_p3       |  select  |      0|  0|  14|           1|          14|
-    |rx_loop_count_V_fu_225_p3            |  select  |      0|  0|  13|           1|          13|
-    |tx_final_burst_lengt_fu_168_p3       |  select  |      0|  0|  14|           1|          14|
-    |tx_loop_count_V_fu_177_p3            |  select  |      0|  0|  13|           1|          13|
+    |ap_sync_grp_rx_loop_fu_132_ap_done   |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_rx_loop_fu_132_ap_ready  |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_tx_loop_fu_145_ap_done   |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_tx_loop_fu_145_ap_ready  |    or    |      0|  0|   2|           1|           1|
+    |rx_final_burst_lengt_fu_258_p3       |  select  |      0|  0|  14|           1|          14|
+    |rx_loop_count_V_fu_267_p3            |  select  |      0|  0|  12|           1|          12|
+    |tx_final_burst_lengt_fu_210_p3       |  select  |      0|  0|  14|           1|          14|
+    |tx_loop_count_V_fu_219_p3            |  select  |      0|  0|  12|           1|          12|
+    |not_s_fu_276_p2                      |    xor   |      0|  0|   2|           1|           2|
     +-------------------------------------+----------+-------+---+----+------------+------------+
-    |Total                                |          |      0|  0| 154|          43|          93|
+    |Total                                |          |      0|  0| 152|          44|          91|
     +-------------------------------------+----------+-------+---+----+------------+------------+
 
     * Multiplexer: 
@@ -128,13 +129,14 @@
     |DMA_RREADY              |   9|          2|    1|          2|
     |DMA_WVALID              |   9|          2|    1|          2|
     |ap_NS_fsm               |  27|          5|    1|          5|
+    |current_buffer_V_o      |   9|          2|    1|          2|
     |data_rx_V_V_0_ack_out   |   9|          2|    1|          2|
     |data_rx_V_V_0_data_out  |   9|          2|    8|         16|
     |data_rx_V_V_0_state     |  15|          3|    2|          6|
     |data_tx_V_V_1_data_out  |   9|          2|    8|         16|
     |data_tx_V_V_1_state     |  15|          3|    2|          6|
     +------------------------+----+-----------+-----+-----------+
-    |Total                   | 129|         27|   27|         61|
+    |Total                   | 138|         29|   28|         63|
     +------------------------+----+-----------+-----+-----------+
 
     * Register: 
@@ -142,10 +144,11 @@
     |                   Name                  | FF | LUT| Bits| Const Bits|
     +-----------------------------------------+----+----+-----+-----------+
     |ap_CS_fsm                                |   4|   0|    4|          0|
-    |ap_sync_reg_grp_rx_loop_fu_94_ap_done    |   1|   0|    1|          0|
-    |ap_sync_reg_grp_rx_loop_fu_94_ap_ready   |   1|   0|    1|          0|
-    |ap_sync_reg_grp_tx_loop_fu_105_ap_done   |   1|   0|    1|          0|
-    |ap_sync_reg_grp_tx_loop_fu_105_ap_ready  |   1|   0|    1|          0|
+    |ap_sync_reg_grp_rx_loop_fu_132_ap_done   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_rx_loop_fu_132_ap_ready  |   1|   0|    1|          0|
+    |ap_sync_reg_grp_tx_loop_fu_145_ap_done   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_tx_loop_fu_145_ap_ready  |   1|   0|    1|          0|
+    |buffer_no_V_reg_292                      |   1|   0|    1|          0|
     |data_rx_V_V_0_payload_A                  |   8|   0|    8|          0|
     |data_rx_V_V_0_payload_B                  |   8|   0|    8|          0|
     |data_rx_V_V_0_sel_rd                     |   1|   0|    1|          0|
@@ -156,16 +159,16 @@
     |data_tx_V_V_1_sel_rd                     |   1|   0|    1|          0|
     |data_tx_V_V_1_sel_wr                     |   1|   0|    1|          0|
     |data_tx_V_V_1_state                      |   2|   0|    2|          0|
-    |grp_rx_loop_fu_94_ap_start_reg           |   1|   0|    1|          0|
-    |grp_tx_loop_fu_105_ap_start_reg          |   1|   0|    1|          0|
-    |rx_buffer_V3_reg_234                     |  29|   0|   29|          0|
-    |rx_final_burst_lengt_reg_254             |  13|   0|   13|          0|
-    |rx_loop_count_V_reg_259                  |  13|   0|   13|          0|
-    |tx_buffer_V1_reg_239                     |  29|   0|   29|          0|
-    |tx_final_burst_lengt_reg_244             |  13|   0|   13|          0|
-    |tx_loop_count_V_reg_249                  |  13|   0|   13|          0|
+    |grp_rx_loop_fu_132_ap_start_reg          |   1|   0|    1|          0|
+    |grp_tx_loop_fu_145_ap_start_reg          |   1|   0|    1|          0|
+    |rx_buffer_V3_reg_282                     |  29|   0|   29|          0|
+    |rx_final_burst_lengt_reg_310             |  13|   0|   13|          0|
+    |rx_loop_count_V_reg_315                  |  12|   0|   12|          0|
+    |tx_buffer_V1_reg_287                     |  29|   0|   29|          0|
+    |tx_final_burst_lengt_reg_300             |  13|   0|   13|          0|
+    |tx_loop_count_V_reg_305                  |  12|   0|   12|          0|
     +-----------------------------------------+----+----+-----+-----------+
-    |Total                                    | 160|   0|  160|          0|
+    |Total                                    | 159|   0|  159|          0|
     +-----------------------------------------+----+----+-----+-----------+
 
 
@@ -174,79 +177,85 @@
 == Interface
 ================================================================
 * Summary: 
-+-----------------------+-----+-----+------------+--------------+--------------+
-|       RTL Ports       | Dir | Bits|  Protocol  | Source Object|    C Type    |
-+-----------------------+-----+-----+------------+--------------+--------------+
-|s_axi_control_AWVALID  |  in |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_AWREADY  | out |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_AWADDR   |  in |    6|    s_axi   |    control   |    pointer   |
-|s_axi_control_WVALID   |  in |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_WREADY   | out |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_WDATA    |  in |   32|    s_axi   |    control   |    pointer   |
-|s_axi_control_WSTRB    |  in |    4|    s_axi   |    control   |    pointer   |
-|s_axi_control_ARVALID  |  in |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_ARREADY  | out |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_ARADDR   |  in |    6|    s_axi   |    control   |    pointer   |
-|s_axi_control_RVALID   | out |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_RREADY   |  in |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_RDATA    | out |   32|    s_axi   |    control   |    pointer   |
-|s_axi_control_RRESP    | out |    2|    s_axi   |    control   |    pointer   |
-|s_axi_control_BVALID   | out |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_BREADY   |  in |    1|    s_axi   |    control   |    pointer   |
-|s_axi_control_BRESP    | out |    2|    s_axi   |    control   |    pointer   |
-|ap_clk                 |  in |    1| ap_ctrl_hs |  data_mover  | return value |
-|ap_rst_n               |  in |    1| ap_ctrl_hs |  data_mover  | return value |
-|interrupt              | out |    1| ap_ctrl_hs |  data_mover  | return value |
-|m_axi_DMA_AWVALID      | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWREADY      |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWADDR       | out |   32|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWID         | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWLEN        | out |    8|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWSIZE       | out |    3|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWBURST      | out |    2|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWLOCK       | out |    2|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWCACHE      | out |    4|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWPROT       | out |    3|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWQOS        | out |    4|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWREGION     | out |    4|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_AWUSER       | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_WVALID       | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_WREADY       |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_WDATA        | out |   64|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_WSTRB        | out |    8|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_WLAST        | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_WID          | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_WUSER        | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARVALID      | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARREADY      |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARADDR       | out |   32|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARID         | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARLEN        | out |    8|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARSIZE       | out |    3|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARBURST      | out |    2|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARLOCK       | out |    2|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARCACHE      | out |    4|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARPROT       | out |    3|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARQOS        | out |    4|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARREGION     | out |    4|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_ARUSER       | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_RVALID       |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_RREADY       | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_RDATA        |  in |   64|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_RLAST        |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_RID          |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_RUSER        |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_RRESP        |  in |    2|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_BVALID       |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_BREADY       | out |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_BRESP        |  in |    2|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_BID          |  in |    1|    m_axi   |      DMA     |    pointer   |
-|m_axi_DMA_BUSER        |  in |    1|    m_axi   |      DMA     |    pointer   |
-|data_rx_V_V_TDATA      |  in |    8|    axis    |  data_rx_V_V |    pointer   |
-|data_rx_V_V_TVALID     |  in |    1|    axis    |  data_rx_V_V |    pointer   |
-|data_rx_V_V_TREADY     | out |    1|    axis    |  data_rx_V_V |    pointer   |
-|data_tx_V_V_TDATA      | out |    8|    axis    |  data_tx_V_V |    pointer   |
-|data_tx_V_V_TVALID     | out |    1|    axis    |  data_tx_V_V |    pointer   |
-|data_tx_V_V_TREADY     |  in |    1|    axis    |  data_tx_V_V |    pointer   |
-+-----------------------+-----+-----+------------+--------------+--------------+
++---------------------------+-----+-----+------------+------------------+--------------+
+|         RTL Ports         | Dir | Bits|  Protocol  |   Source Object  |    C Type    |
++---------------------------+-----+-----+------------+------------------+--------------+
+|s_axi_control_AWVALID      |  in |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_AWREADY      | out |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_AWADDR       |  in |    6|    s_axi   |      control     |    pointer   |
+|s_axi_control_WVALID       |  in |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_WREADY       | out |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_WDATA        |  in |   32|    s_axi   |      control     |    pointer   |
+|s_axi_control_WSTRB        |  in |    4|    s_axi   |      control     |    pointer   |
+|s_axi_control_ARVALID      |  in |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_ARREADY      | out |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_ARADDR       |  in |    6|    s_axi   |      control     |    pointer   |
+|s_axi_control_RVALID       | out |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_RREADY       |  in |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_RDATA        | out |   32|    s_axi   |      control     |    pointer   |
+|s_axi_control_RRESP        | out |    2|    s_axi   |      control     |    pointer   |
+|s_axi_control_BVALID       | out |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_BREADY       |  in |    1|    s_axi   |      control     |    pointer   |
+|s_axi_control_BRESP        | out |    2|    s_axi   |      control     |    pointer   |
+|ap_clk                     |  in |    1| ap_ctrl_hs |    data_mover    | return value |
+|ap_rst_n                   |  in |    1| ap_ctrl_hs |    data_mover    | return value |
+|interrupt                  | out |    1| ap_ctrl_hs |    data_mover    | return value |
+|m_axi_DMA_AWVALID          | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWREADY          |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWADDR           | out |   32|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWID             | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWLEN            | out |    8|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWSIZE           | out |    3|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWBURST          | out |    2|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWLOCK           | out |    2|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWCACHE          | out |    4|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWPROT           | out |    3|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWQOS            | out |    4|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWREGION         | out |    4|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_AWUSER           | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_WVALID           | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_WREADY           |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_WDATA            | out |   64|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_WSTRB            | out |    8|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_WLAST            | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_WID              | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_WUSER            | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARVALID          | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARREADY          |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARADDR           | out |   32|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARID             | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARLEN            | out |    8|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARSIZE           | out |    3|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARBURST          | out |    2|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARLOCK           | out |    2|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARCACHE          | out |    4|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARPROT           | out |    3|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARQOS            | out |    4|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARREGION         | out |    4|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_ARUSER           | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_RVALID           |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_RREADY           | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_RDATA            |  in |   64|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_RLAST            |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_RID              |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_RUSER            |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_RRESP            |  in |    2|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_BVALID           |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_BREADY           | out |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_BRESP            |  in |    2|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_BID              |  in |    1|    m_axi   |        DMA       |    pointer   |
+|m_axi_DMA_BUSER            |  in |    1|    m_axi   |        DMA       |    pointer   |
+|data_rx_V_V_TDATA          |  in |    8|    axis    |    data_rx_V_V   |    pointer   |
+|data_rx_V_V_TVALID         |  in |    1|    axis    |    data_rx_V_V   |    pointer   |
+|data_rx_V_V_TREADY         | out |    1|    axis    |    data_rx_V_V   |    pointer   |
+|data_tx_V_V_TDATA          | out |    8|    axis    |    data_tx_V_V   |    pointer   |
+|data_tx_V_V_TVALID         | out |    1|    axis    |    data_tx_V_V   |    pointer   |
+|data_tx_V_V_TREADY         |  in |    1|    axis    |    data_tx_V_V   |    pointer   |
+|current_buffer_V_i         |  in |    1|   ap_ovld  | current_buffer_V |    pointer   |
+|current_buffer_V_o         | out |    1|   ap_ovld  | current_buffer_V |    pointer   |
+|current_buffer_V_o_ap_vld  | out |    1|   ap_ovld  | current_buffer_V |    pointer   |
+|last_buffer_V              | out |    1|   ap_vld   |   last_buffer_V  |    pointer   |
+|last_buffer_V_ap_vld       | out |    1|   ap_vld   |   last_buffer_V  |    pointer   |
+|increment_buffer           |  in |    1|   ap_none  | increment_buffer |    pointer   |
++---------------------------+-----+-----+------------+------------------+--------------+
 

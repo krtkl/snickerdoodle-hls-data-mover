@@ -176,10 +176,13 @@ void get_loop_parameters (const ap_uint<BUFFER_LENGTH_BITS> data_length,
 /* main body of the data mover implementation */
 void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
 				 hls::stream<axis_t> &data_tx, /* AXIS master interface */
-				 const axi_t tx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
+				 const axi_t tx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
 				 const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
-				 axi_t rx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
-				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length) /* number of AXIS words to write to the rx buffer */
+				 axi_t rx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
+				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length, /* number of AXIS words to write to the rx buffer */
+				 ap_uint<BUFFER_COUNT_BITS> *current_buffer, /* buffer number to use */
+				 ap_uint<BUFFER_COUNT_BITS> *last_buffer, /* buffer number last used */
+				 const bool *increment_buffer) /* set this flag to increment the current buffer on each call */
 {
 #pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE axis register both port=data_rx
@@ -198,14 +201,20 @@ void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
   ap_uint<CACHE_LENGTH_BITS> tx_final_burst_length; /* length of the final block of tx data loaded into the cache */
   ap_uint<LOOP_TRIP_COUNT_BITS> rx_loop_count; /* iterator for rx loop data flow process */
   ap_uint<CACHE_LENGTH_BITS> rx_final_burst_length; /* length of the final block of rx data loaded into the cache */
+  ap_uint<BUFFER_COUNT_BITS> buffer_no; /* buffer to read or write from */
+
+  buffer_no = *current_buffer; /* retrieve buffer to use from AXI register */
 
   /* setup tx and rx loop parameters */
   get_loop_parameters (*tx_buffer_length, tx_loop_count, tx_final_burst_length);
   get_loop_parameters (*rx_buffer_length, rx_loop_count, rx_final_burst_length);
 
   /* Transmit Section */
-  tx_loop (data_tx, tx_buffer, tx_loop_count, tx_final_burst_length);
+  tx_loop (data_tx, tx_buffer[buffer_no], tx_loop_count, tx_final_burst_length);
 
   /* Receive Section */
-  rx_loop (data_rx, rx_loop_count, rx_final_burst_length, rx_buffer);
+  rx_loop (data_rx, rx_loop_count, rx_final_burst_length, rx_buffer[buffer_no]);
+
+  *last_buffer = buffer_no; /* return the buffer just used for transmit and receive */
+  if (*increment_buffer) *current_buffer = buffer_no+1; /* increment buffer to use (rolls over to zero) */
 }
