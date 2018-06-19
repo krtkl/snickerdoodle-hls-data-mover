@@ -16,9 +16,9 @@
 namespace ap_rtl {
 
 struct rx_loop : public sc_module {
-    // Port declarations 61
+    // Port declarations 63
     sc_in< sc_lv<32> > axis_V_V_TDATA;
-    sc_in< sc_lv<14> > loop_count_V;
+    sc_in< sc_lv<12> > loop_count_V;
     sc_in< sc_lv<11> > final_burst_length_V;
     sc_out< sc_logic > m_axi_rx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_rx_buffer_V_AWREADY;
@@ -66,6 +66,7 @@ struct rx_loop : public sc_module {
     sc_in< sc_lv<1> > m_axi_rx_buffer_V_BID;
     sc_in< sc_lv<1> > m_axi_rx_buffer_V_BUSER;
     sc_in< sc_lv<29> > rx_buffer_V_offset;
+    sc_in< sc_lv<1> > rx_buffer_V_offset1;
     sc_in_clk ap_clk;
     sc_in< sc_logic > ap_rst;
     sc_in< sc_logic > axis_V_V_TVALID;
@@ -73,6 +74,7 @@ struct rx_loop : public sc_module {
     sc_in< sc_logic > loop_count_V_ap_vld;
     sc_in< sc_logic > final_burst_length_V_ap_vld;
     sc_in< sc_logic > rx_buffer_V_offset_ap_vld;
+    sc_in< sc_logic > rx_buffer_V_offset1_ap_vld;
     sc_out< sc_logic > ap_done;
     sc_in< sc_logic > ap_start;
     sc_out< sc_logic > ap_ready;
@@ -135,16 +137,16 @@ struct rx_loop : public sc_module {
     sc_signal< sc_logic > ap_sync_done;
     sc_signal< sc_logic > ap_sync_ready;
     sc_signal< sc_logic > loop_dataflow_enable;
-    sc_signal< sc_lv<14> > loop_dataflow_input_count;
-    sc_signal< sc_lv<14> > loop_dataflow_output_count;
+    sc_signal< sc_lv<12> > loop_dataflow_input_count;
+    sc_signal< sc_lv<12> > loop_dataflow_output_count;
     sc_signal< sc_logic > loop_dataflow_busy;
     sc_signal< sc_logic > dataflow_in_loop_U0_start_full_n;
     sc_signal< sc_logic > dataflow_in_loop_U0_start_write;
     static const sc_logic ap_const_logic_0;
     static const sc_logic ap_const_logic_1;
     static const bool ap_const_boolean_1;
-    static const sc_lv<14> ap_const_lv14_0;
-    static const sc_lv<14> ap_const_lv14_1;
+    static const sc_lv<12> ap_const_lv12_0;
+    static const sc_lv<12> ap_const_lv12_1;
     static const sc_lv<64> ap_const_lv64_0;
     static const sc_lv<64> ap_const_lv64_1;
     static const sc_lv<1> ap_const_lv1_0;

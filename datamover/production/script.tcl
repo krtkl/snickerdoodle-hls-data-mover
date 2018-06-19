@@ -15,4 +15,4 @@ set_clock_uncertainty 2.0
 csim_design -clean
 csynth_design
 cosim_design -rtl vhdl -tool xsim
-export_design -flow impl -rtl vhdl -format ip_catalog -description "32-bit AXIS to 64-bit AXI data mover" -vendor "krtl" -library "snickerdoodle" -version "1.06" -display_name "32-bit AXIS to 64-bit AXI data mover"
+export_design -flow impl -rtl vhdl -format ip_catalog -description "32-bit AXIS to 64-bit AXI data mover" -vendor "krtl" -library "snickerdoodle" -version "1.10" -display_name "32-bit AXIS to 64-bit AXI data mover"

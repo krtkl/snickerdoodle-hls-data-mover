@@ -70,7 +70,7 @@ struct tx_axis_words : public sc_module {
     sc_signal< sc_lv<64> > tmp_5_i_fu_105_p1;
     sc_signal< bool > ap_block_pp0_stage0_01001;
     sc_signal< sc_logic > ap_reg_ioackin_axis_V_V_TREADY;
-    sc_signal< sc_lv<10> > tmp_7_cast_i_fu_95_p4;
+    sc_signal< sc_lv<10> > tmp_13_cast_i_fu_95_p4;
     sc_signal< sc_lv<6> > op2_assign_fu_114_p3;
     sc_signal< sc_lv<64> > tmp_8_i_fu_121_p1;
     sc_signal< sc_lv<64> > tmp_9_i_fu_125_p2;
@@ -123,8 +123,8 @@ struct tx_axis_words : public sc_module {
     void thread_exitcond_i_fu_84_p2();
     void thread_i_fu_89_p2();
     void thread_op2_assign_fu_114_p3();
+    void thread_tmp_13_cast_i_fu_95_p4();
     void thread_tmp_5_i_fu_105_p1();
-    void thread_tmp_7_cast_i_fu_95_p4();
     void thread_tmp_8_i_fu_121_p1();
     void thread_tmp_9_i_fu_125_p2();
     void thread_tmp_fu_110_p1();

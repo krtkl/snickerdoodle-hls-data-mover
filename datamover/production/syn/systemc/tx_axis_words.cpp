@@ -138,11 +138,11 @@ tx_axis_words::tx_axis_words(sc_module_name name) : sc_module(name), mVcdFile(0)
     SC_METHOD(thread_op2_assign_fu_114_p3);
     sensitive << ( tmp_reg_154_pp0_iter1_reg );
 
-    SC_METHOD(thread_tmp_5_i_fu_105_p1);
-    sensitive << ( tmp_7_cast_i_fu_95_p4 );
-
-    SC_METHOD(thread_tmp_7_cast_i_fu_95_p4);
+    SC_METHOD(thread_tmp_13_cast_i_fu_95_p4);
     sensitive << ( i_i_reg_73 );
+
+    SC_METHOD(thread_tmp_5_i_fu_105_p1);
+    sensitive << ( tmp_13_cast_i_fu_95_p4 );
 
     SC_METHOD(thread_tmp_8_i_fu_121_p1);
     sensitive << ( op2_assign_fu_114_p3 );
@@ -225,7 +225,7 @@ tx_axis_words::tx_axis_words(sc_module_name name) : sc_module(name), mVcdFile(0)
     sc_trace(mVcdFile, tmp_5_i_fu_105_p1, "tmp_5_i_fu_105_p1");
     sc_trace(mVcdFile, ap_block_pp0_stage0_01001, "ap_block_pp0_stage0_01001");
     sc_trace(mVcdFile, ap_reg_ioackin_axis_V_V_TREADY, "ap_reg_ioackin_axis_V_V_TREADY");
-    sc_trace(mVcdFile, tmp_7_cast_i_fu_95_p4, "tmp_7_cast_i_fu_95_p4");
+    sc_trace(mVcdFile, tmp_13_cast_i_fu_95_p4, "tmp_13_cast_i_fu_95_p4");
     sc_trace(mVcdFile, op2_assign_fu_114_p3, "op2_assign_fu_114_p3");
     sc_trace(mVcdFile, tmp_8_i_fu_121_p1, "tmp_8_i_fu_121_p1");
     sc_trace(mVcdFile, tmp_9_i_fu_125_p2, "tmp_9_i_fu_125_p2");
@@ -480,12 +480,12 @@ void tx_axis_words::thread_op2_assign_fu_114_p3() {
     op2_assign_fu_114_p3 = esl_concat<1,5>(tmp_reg_154_pp0_iter1_reg.read(), ap_const_lv5_0);
 }
 
-void tx_axis_words::thread_tmp_5_i_fu_105_p1() {
-    tmp_5_i_fu_105_p1 = esl_zext<64,10>(tmp_7_cast_i_fu_95_p4.read());
+void tx_axis_words::thread_tmp_13_cast_i_fu_95_p4() {
+    tmp_13_cast_i_fu_95_p4 = i_i_reg_73.read().range(10, 1);
 }
 
-void tx_axis_words::thread_tmp_7_cast_i_fu_95_p4() {
-    tmp_7_cast_i_fu_95_p4 = i_i_reg_73.read().range(10, 1);
+void tx_axis_words::thread_tmp_5_i_fu_105_p1() {
+    tmp_5_i_fu_105_p1 = esl_zext<64,10>(tmp_13_cast_i_fu_95_p4.read());
 }
 
 void tx_axis_words::thread_tmp_8_i_fu_121_p1() {

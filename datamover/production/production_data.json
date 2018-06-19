@@ -28,7 +28,7 @@
     "Vendor": "krtl",
     "Library": "snickerdoodle",
     "Name": "data_mover_32b64b",
-    "Version": "1.06",
+    "Version": "1.10",
     "DisplayName": "32-bit AXIS to 64-bit AXI data mover",
     "Revision": "",
     "Description": "32-bit AXIS to 64-bit AXI data mover",
@@ -40,16 +40,17 @@
       "impl\/vhdl\/data_mover_32b64b_control_s_axi.vhd",
       "impl\/vhdl\/data_mover_32b64b_DMA_m_axi.vhd",
       "impl\/vhdl\/dataflow_in_loop.vhd",
-      "impl\/vhdl\/dataflow_in_loop5bkb.vhd",
-      "impl\/vhdl\/dataflow_in_loop5bkb_memcore.vhd",
-      "impl\/vhdl\/dataflow_in_loop59.vhd",
+      "impl\/vhdl\/dataflow_in_loop6bkb.vhd",
+      "impl\/vhdl\/dataflow_in_loop6bkb_memcore.vhd",
+      "impl\/vhdl\/dataflow_in_loop66.vhd",
       "impl\/vhdl\/dataflow_in_loop_cud.vhd",
       "impl\/vhdl\/dataflow_in_loop_cud_memcore.vhd",
+      "impl\/vhdl\/fifo_w1_d2_A.vhd",
       "impl\/vhdl\/fifo_w11_d2_A.vhd",
-      "impl\/vhdl\/fifo_w22_d2_A.vhd",
+      "impl\/vhdl\/fifo_w20_d2_A.vhd",
       "impl\/vhdl\/fifo_w29_d2_A.vhd",
       "impl\/vhdl\/read_burst.vhd",
-      "impl\/vhdl\/rx_axis_words25.vhd",
+      "impl\/vhdl\/rx_axis_words7131.vhd",
       "impl\/vhdl\/rx_loop.vhd",
       "impl\/vhdl\/tx_axis_words.vhd",
       "impl\/vhdl\/tx_loop.vhd",
@@ -60,16 +61,17 @@
       "impl\/verilog\/data_mover_32b64b_control_s_axi.v",
       "impl\/verilog\/data_mover_32b64b_DMA_m_axi.v",
       "impl\/verilog\/dataflow_in_loop.v",
-      "impl\/verilog\/dataflow_in_loop5bkb.v",
-      "impl\/verilog\/dataflow_in_loop5bkb_memcore.v",
-      "impl\/verilog\/dataflow_in_loop59.v",
+      "impl\/verilog\/dataflow_in_loop6bkb.v",
+      "impl\/verilog\/dataflow_in_loop6bkb_memcore.v",
+      "impl\/verilog\/dataflow_in_loop66.v",
       "impl\/verilog\/dataflow_in_loop_cud.v",
       "impl\/verilog\/dataflow_in_loop_cud_memcore.v",
+      "impl\/verilog\/fifo_w1_d2_A.v",
       "impl\/verilog\/fifo_w11_d2_A.v",
-      "impl\/verilog\/fifo_w22_d2_A.v",
+      "impl\/verilog\/fifo_w20_d2_A.v",
       "impl\/verilog\/fifo_w29_d2_A.v",
       "impl\/verilog\/read_burst.v",
-      "impl\/verilog\/rx_axis_words25.v",
+      "impl\/verilog\/rx_axis_words7131.v",
       "impl\/verilog\/rx_loop.v",
       "impl\/verilog\/tx_axis_words.v",
       "impl\/verilog\/tx_loop.v",
@@ -77,14 +79,14 @@
       "impl\/verilog\/data_mover_32b64b.v"
     ],
     "SwDriver": [
-      "impl\/misc\/drivers\/data_mover_32b64b_v1_06\/data\/data_mover_32b64b.mdd",
-      "impl\/misc\/drivers\/data_mover_32b64b_v1_06\/data\/data_mover_32b64b.tcl",
-      "impl\/misc\/drivers\/data_mover_32b64b_v1_06\/src\/Makefile",
-      "impl\/misc\/drivers\/data_mover_32b64b_v1_06\/src\/xdata_mover_32b64b.c",
-      "impl\/misc\/drivers\/data_mover_32b64b_v1_06\/src\/xdata_mover_32b64b.h",
-      "impl\/misc\/drivers\/data_mover_32b64b_v1_06\/src\/xdata_mover_32b64b_hw.h",
-      "impl\/misc\/drivers\/data_mover_32b64b_v1_06\/src\/xdata_mover_32b64b_linux.c",
-      "impl\/misc\/drivers\/data_mover_32b64b_v1_06\/src\/xdata_mover_32b64b_sinit.c"
+      "impl\/misc\/drivers\/data_mover_32b64b_v1_10\/data\/data_mover_32b64b.mdd",
+      "impl\/misc\/drivers\/data_mover_32b64b_v1_10\/data\/data_mover_32b64b.tcl",
+      "impl\/misc\/drivers\/data_mover_32b64b_v1_10\/src\/Makefile",
+      "impl\/misc\/drivers\/data_mover_32b64b_v1_10\/src\/xdata_mover_32b64b.c",
+      "impl\/misc\/drivers\/data_mover_32b64b_v1_10\/src\/xdata_mover_32b64b.h",
+      "impl\/misc\/drivers\/data_mover_32b64b_v1_10\/src\/xdata_mover_32b64b_hw.h",
+      "impl\/misc\/drivers\/data_mover_32b64b_v1_10\/src\/xdata_mover_32b64b_linux.c",
+      "impl\/misc\/drivers\/data_mover_32b64b_v1_10\/src\/xdata_mover_32b64b_sinit.c"
     ],
     "Misc": ["impl\/misc\/logo.png"]
   },
@@ -506,15 +508,15 @@
           "fields": [
             {
               "offset": "0",
-              "width": "24",
+              "width": "22",
               "name": "tx_buffer_length_V",
               "access": "W",
               "reset_value": "0",
-              "description": "Bit 23 to 0 Data signal of tx_buffer_length_V"
+              "description": "Bit 21 to 0 Data signal of tx_buffer_length_V"
             },
             {
-              "offset": "24",
-              "width": "8",
+              "offset": "22",
+              "width": "10",
               "name": "RESERVED",
               "access": "R",
               "reset_value": "0",
@@ -546,15 +548,90 @@
           "fields": [
             {
               "offset": "0",
-              "width": "24",
+              "width": "22",
               "name": "rx_buffer_length_V",
               "access": "W",
               "reset_value": "0",
-              "description": "Bit 23 to 0 Data signal of rx_buffer_length_V"
+              "description": "Bit 21 to 0 Data signal of rx_buffer_length_V"
             },
             {
-              "offset": "24",
-              "width": "8",
+              "offset": "22",
+              "width": "10",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x30",
+          "name": "last_buffer_V",
+          "access": "R",
+          "reset_value": "0x0",
+          "description": "Data signal of last_buffer_V",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "last_buffer_V",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Bit 0 to 0 Data signal of last_buffer_V"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x34",
+          "name": "last_buffer_V_ctrl",
+          "access": "R",
+          "reset_value": "0x0",
+          "description": "Control signal of last_buffer_V",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "last_buffer_V_ap_vld",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Control signal last_buffer_V_ap_vld"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "reset_value": "0",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x38",
+          "name": "increment_buffer_V",
+          "access": "W",
+          "reset_value": "0x0",
+          "description": "Data signal of increment_buffer_V",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "increment_buffer_V",
+              "access": "W",
+              "reset_value": "0",
+              "description": "Bit 0 to 0 Data signal of increment_buffer_V"
+            },
+            {
+              "offset": "1",
+              "width": "31",
               "name": "RESERVED",
               "access": "R",
               "reset_value": "0",
@@ -589,7 +666,7 @@
         },
         "WDATA": {
           "Type": "integer unsigned",
-          "Width": "24"
+          "Width": "1"
         },
         "WSTRB": {
           "Type": "integer unsigned",
@@ -601,7 +678,7 @@
         },
         "RDATA": {
           "Type": "integer unsigned",
-          "Width": "24"
+          "Width": "1"
         }
       },
       "data_width": "32",
@@ -948,6 +1025,23 @@
       "handshakeRef": "ap_none",
       "Object": "control"
     },
+    "last_buffer_V": {
+      "interfaceRef": "s_axi_control",
+      "dir": "out",
+      "offset": "48",
+      "statusOffset": "52",
+      "handshakeRef": "ap_vld",
+      "Object": "control",
+      "firstOutLatency": "1"
+    },
+    "increment_buffer_V": {
+      "interfaceRef": "s_axi_control",
+      "dir": "in",
+      "offset": "56",
+      "statusOffset": "NA",
+      "handshakeRef": "ap_none",
+      "Object": "control"
+    },
     "ap_ctrl": {
       "interfaceRef": "s_axi_control",
       "dir": "in",
@@ -973,10 +1067,10 @@
       "Instances": [
         {
           "ModuleName": "tx_loop",
-          "InstanceName": "grp_tx_loop_fu_94",
+          "InstanceName": "grp_tx_loop_fu_121",
           "Instances": [{
-              "ModuleName": "dataflow_in_loop59",
-              "InstanceName": "dataflow_in_loop59_U0",
+              "ModuleName": "dataflow_in_loop66",
+              "InstanceName": "dataflow_in_loop66_U0",
               "Instances": [
                 {
                   "ModuleName": "read_burst",
@@ -991,14 +1085,14 @@
         },
         {
           "ModuleName": "rx_loop",
-          "InstanceName": "grp_rx_loop_fu_105",
+          "InstanceName": "grp_rx_loop_fu_133",
           "Instances": [{
               "ModuleName": "dataflow_in_loop",
               "InstanceName": "dataflow_in_loop_U0",
               "Instances": [
                 {
-                  "ModuleName": "rx_axis_words25",
-                  "InstanceName": "rx_axis_words25_U0"
+                  "ModuleName": "rx_axis_words7131",
+                  "InstanceName": "rx_axis_words7131_U0"
                 },
                 {
                   "ModuleName": "write_burst",
@@ -1025,15 +1119,15 @@
           "Estimate": "4.50"
         },
         "Loops": [{
-            "Name": "memcpy.gep2.tx_buffer.V",
+            "Name": "memcpy.gep.tx_buffer.V",
             "TripCount": "512",
             "Latency": "513",
             "PipelineII": "1",
             "PipelineDepth": "3"
           }],
         "Area": {
-          "FF": "165",
-          "LUT": "255",
+          "FF": "163",
+          "LUT": "253",
           "BRAM_18K": "0",
           "DSP48E": "0"
         }
@@ -1070,7 +1164,7 @@
           "DSP48E": "0"
         }
       },
-      "dataflow_in_loop59": {
+      "dataflow_in_loop66": {
         "Latency": {
           "LatencyBest": "525",
           "LatencyAvg": "",
@@ -1088,8 +1182,8 @@
         },
         "Area": {
           "BRAM_18K": "2",
-          "FF": "254",
-          "LUT": "585",
+          "FF": "252",
+          "LUT": "583",
           "DSP48E": "0"
         }
       },
@@ -1097,10 +1191,10 @@
         "Latency": {
           "LatencyBest": "4",
           "LatencyAvg": "",
-          "LatencyWorst": "8421900",
+          "LatencyWorst": "2105868",
           "PipelineIIMin": "4",
-          "PipelineIIMax": "8421900",
-          "PipelineII": "4 ~ 8421900",
+          "PipelineIIMax": "2105868",
+          "PipelineII": "4 ~ 2105868",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
@@ -1113,21 +1207,21 @@
             "Name": "Loop 1",
             "TripCount": "",
             "LatencyMin": "3",
-            "LatencyMax": "8421899",
-            "Latency": "3 ~ 8421899",
+            "LatencyMax": "2105867",
+            "Latency": "3 ~ 2105867",
             "PipelineII": "",
             "PipelineDepthMin": "3",
-            "PipelineDepthMax": "8421899",
-            "PipelineDepth": "3 ~ 8421899"
+            "PipelineDepthMax": "2105867",
+            "PipelineDepth": "3 ~ 2105867"
           }],
         "Area": {
           "BRAM_18K": "2",
-          "FF": "284",
-          "LUT": "645",
+          "FF": "278",
+          "LUT": "639",
           "DSP48E": "0"
         }
       },
-      "rx_axis_words25": {
+      "rx_axis_words7131": {
         "Latency": {
           "LatencyBest": "1027",
           "LatencyAvg": "1027",
@@ -1149,8 +1243,8 @@
             "PipelineDepth": "3"
           }],
         "Area": {
-          "FF": "120",
-          "LUT": "293",
+          "FF": "118",
+          "LUT": "302",
           "BRAM_18K": "0",
           "DSP48E": "0"
         }
@@ -1178,7 +1272,7 @@
           }],
         "Area": {
           "FF": "120",
-          "LUT": "211",
+          "LUT": "220",
           "BRAM_18K": "0",
           "DSP48E": "0"
         }
@@ -1195,12 +1289,12 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "5.77"
+          "Estimate": "5.66"
         },
         "Area": {
           "BRAM_18K": "2",
-          "FF": "247",
-          "LUT": "577",
+          "FF": "250",
+          "LUT": "611",
           "DSP48E": "0"
         }
       },
@@ -1208,33 +1302,33 @@
         "Latency": {
           "LatencyBest": "522",
           "LatencyAvg": "",
-          "LatencyWorst": "8421898",
+          "LatencyWorst": "2105866",
           "PipelineIIMin": "522",
-          "PipelineIIMax": "8421898",
-          "PipelineII": "522 ~ 8421898",
+          "PipelineIIMax": "2105866",
+          "PipelineII": "522 ~ 2105866",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "5.77"
+          "Estimate": "5.66"
         },
         "Loops": [{
             "Name": "Loop 1",
             "TripCount": "",
             "LatencyMin": "521",
-            "LatencyMax": "8421897",
-            "Latency": "521 ~ 8421897",
+            "LatencyMax": "2105865",
+            "Latency": "521 ~ 2105865",
             "PipelineII": "",
             "PipelineDepthMin": "521",
-            "PipelineDepthMax": "8421897",
-            "PipelineDepth": "521 ~ 8421897"
+            "PipelineDepthMax": "2105865",
+            "PipelineDepth": "521 ~ 2105865"
           }],
         "Area": {
           "BRAM_18K": "2",
-          "FF": "277",
-          "LUT": "637",
+          "FF": "276",
+          "LUT": "667",
           "DSP48E": "0"
         }
       },
@@ -1242,22 +1336,22 @@
         "Latency": {
           "LatencyBest": "525",
           "LatencyAvg": "",
-          "LatencyWorst": "8421903",
+          "LatencyWorst": "2105871",
           "PipelineIIMin": "526",
-          "PipelineIIMax": "8421904",
-          "PipelineII": "526 ~ 8421904",
+          "PipelineIIMax": "2105872",
+          "PipelineII": "526 ~ 2105872",
           "PipelineDepth": "",
           "PipelineType": "none"
         },
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "5.77"
+          "Estimate": "5.66"
         },
         "Area": {
           "BRAM_18K": "8",
-          "FF": "1553",
-          "LUT": "2595",
+          "FF": "1556",
+          "LUT": "2617",
           "DSP48E": "0"
         }
       }
@@ -1265,7 +1359,7 @@
   },
   "GenData": {
     "DataVersion": "0.1",
-    "Time": "2018-06-11 20:11:41 -0700",
+    "Time": "2018-06-19 06:00:41 -0700",
     "ToolName": "vivado_hls",
     "ToolVersion": "2018.1"
   }

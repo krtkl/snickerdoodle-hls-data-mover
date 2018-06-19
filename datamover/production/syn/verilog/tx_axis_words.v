@@ -79,7 +79,7 @@ reg    ap_enable_reg_pp0_iter1;
 wire   [63:0] tmp_5_i_fu_105_p1;
 wire    ap_block_pp0_stage0_01001;
 reg    ap_reg_ioackin_axis_V_V_TREADY;
-wire   [9:0] tmp_7_cast_i_fu_95_p4;
+wire   [9:0] tmp_13_cast_i_fu_95_p4;
 wire   [5:0] op2_assign_fu_114_p3;
 wire   [63:0] tmp_8_i_fu_121_p1;
 wire   [63:0] tmp_9_i_fu_125_p2;
@@ -341,9 +341,9 @@ assign i_fu_89_p2 = (i_i_reg_73 + 11'd1);
 
 assign op2_assign_fu_114_p3 = {{tmp_reg_154_pp0_iter1_reg}, {5'd0}};
 
-assign tmp_5_i_fu_105_p1 = tmp_7_cast_i_fu_95_p4;
+assign tmp_13_cast_i_fu_95_p4 = {{i_i_reg_73[10:1]}};
 
-assign tmp_7_cast_i_fu_95_p4 = {{i_i_reg_73[10:1]}};
+assign tmp_5_i_fu_105_p1 = tmp_13_cast_i_fu_95_p4;
 
 assign tmp_8_i_fu_121_p1 = op2_assign_fu_114_p3;
 

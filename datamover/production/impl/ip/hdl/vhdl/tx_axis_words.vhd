@@ -80,7 +80,7 @@ architecture behav of tx_axis_words is
     signal tmp_5_i_fu_105_p1 : STD_LOGIC_VECTOR (63 downto 0);
     signal ap_block_pp0_stage0_01001 : BOOLEAN;
     signal ap_reg_ioackin_axis_V_V_TREADY : STD_LOGIC := '0';
-    signal tmp_7_cast_i_fu_95_p4 : STD_LOGIC_VECTOR (9 downto 0);
+    signal tmp_13_cast_i_fu_95_p4 : STD_LOGIC_VECTOR (9 downto 0);
     signal op2_assign_fu_114_p3 : STD_LOGIC_VECTOR (5 downto 0);
     signal tmp_8_i_fu_121_p1 : STD_LOGIC_VECTOR (63 downto 0);
     signal tmp_9_i_fu_125_p2 : STD_LOGIC_VECTOR (63 downto 0);
@@ -380,8 +380,8 @@ begin
     exitcond_i_fu_84_p2 <= "1" when (i_i_reg_73 = p_read) else "0";
     i_fu_89_p2 <= std_logic_vector(unsigned(i_i_reg_73) + unsigned(ap_const_lv11_1));
     op2_assign_fu_114_p3 <= (tmp_reg_154_pp0_iter1_reg & ap_const_lv5_0);
-    tmp_5_i_fu_105_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(tmp_7_cast_i_fu_95_p4),64));
-    tmp_7_cast_i_fu_95_p4 <= i_i_reg_73(10 downto 1);
+    tmp_13_cast_i_fu_95_p4 <= i_i_reg_73(10 downto 1);
+    tmp_5_i_fu_105_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(tmp_13_cast_i_fu_95_p4),64));
     tmp_8_i_fu_121_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(op2_assign_fu_114_p3),64));
     tmp_9_i_fu_125_p2 <= std_logic_vector(shift_right(unsigned(axi_word_V_reg_159),to_integer(unsigned('0' & tmp_8_i_fu_121_p1(31-1 downto 0)))));
     tmp_fu_110_p1 <= i_i_reg_73(1 - 1 downto 0);

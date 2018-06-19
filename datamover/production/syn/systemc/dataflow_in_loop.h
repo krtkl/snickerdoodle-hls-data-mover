@@ -11,22 +11,23 @@
 #include "systemc.h"
 #include "AESL_pkg.h"
 
-#include "rx_axis_words25.h"
+#include "rx_axis_words7131.h"
 #include "write_burst.h"
 #include "dataflow_in_loop_cud.h"
+#include "fifo_w1_d2_A.h"
 #include "fifo_w29_d2_A.h"
-#include "fifo_w22_d2_A.h"
+#include "fifo_w20_d2_A.h"
 
 namespace ap_rtl {
 
 struct dataflow_in_loop : public sc_module {
-    // Port declarations 63
+    // Port declarations 65
     sc_in_clk ap_clk;
     sc_in< sc_logic > ap_rst;
     sc_in< sc_lv<32> > axis_V_V_TDATA;
-    sc_in< sc_lv<14> > loop_count_V;
+    sc_in< sc_lv<12> > loop_count_V;
     sc_in< sc_lv<11> > final_burst_length_V;
-    sc_in< sc_lv<14> > val_assign;
+    sc_in< sc_lv<12> > val_assign;
     sc_out< sc_logic > m_axi_rx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_rx_buffer_V_AWREADY;
     sc_out< sc_lv<32> > m_axi_rx_buffer_V_AWADDR;
@@ -73,11 +74,13 @@ struct dataflow_in_loop : public sc_module {
     sc_in< sc_lv<1> > m_axi_rx_buffer_V_BID;
     sc_in< sc_lv<1> > m_axi_rx_buffer_V_BUSER;
     sc_in< sc_lv<29> > rx_buffer_V_offset;
+    sc_in< sc_lv<1> > rx_buffer_V_offset1;
     sc_in< sc_logic > axis_V_V_TVALID;
     sc_out< sc_logic > axis_V_V_TREADY;
     sc_in< sc_logic > loop_count_V_ap_vld;
     sc_in< sc_logic > final_burst_length_V_ap_vld;
     sc_in< sc_logic > val_assign_ap_vld;
+    sc_in< sc_logic > rx_buffer_V_offset1_ap_vld;
     sc_in< sc_logic > rx_buffer_V_offset_ap_vld;
     sc_out< sc_logic > ap_done;
     sc_in< sc_logic > ap_start;
@@ -100,31 +103,34 @@ struct dataflow_in_loop : public sc_module {
     sc_trace_file* mVcdFile;
 
     dataflow_in_loop_cud* cache_V_U;
-    rx_axis_words25* rx_axis_words25_U0;
+    rx_axis_words7131* rx_axis_words7131_U0;
     write_burst* write_burst_U0;
-    fifo_w29_d2_A* rx_buffer_V_offset_c_U;
-    fifo_w22_d2_A* buffer_offset_V_U;
+    fifo_w1_d2_A* rx_buffer_V_offset_c_U;
+    fifo_w29_d2_A* rx_buffer_V_offset_c_2_U;
+    fifo_w20_d2_A* buffer_offset_V_U;
     sc_signal< sc_lv<64> > cache_V_i_q0;
     sc_signal< sc_lv<64> > cache_V_t_q0;
-    sc_signal< sc_logic > rx_axis_words25_U0_ap_start;
-    sc_signal< sc_logic > rx_axis_words25_U0_ap_done;
-    sc_signal< sc_logic > rx_axis_words25_U0_ap_continue;
-    sc_signal< sc_logic > rx_axis_words25_U0_ap_idle;
-    sc_signal< sc_logic > rx_axis_words25_U0_ap_ready;
-    sc_signal< sc_logic > rx_axis_words25_U0_axis_V_V_TREADY;
-    sc_signal< sc_lv<9> > rx_axis_words25_U0_cache_V_address0;
-    sc_signal< sc_logic > rx_axis_words25_U0_cache_V_ce0;
-    sc_signal< sc_logic > rx_axis_words25_U0_cache_V_we0;
-    sc_signal< sc_lv<64> > rx_axis_words25_U0_cache_V_d0;
-    sc_signal< sc_lv<29> > rx_axis_words25_U0_rx_buffer_V_offset_out_din;
-    sc_signal< sc_logic > rx_axis_words25_U0_rx_buffer_V_offset_out_write;
-    sc_signal< sc_lv<22> > rx_axis_words25_U0_ap_return;
+    sc_signal< sc_logic > rx_axis_words7131_U0_ap_start;
+    sc_signal< sc_logic > rx_axis_words7131_U0_ap_done;
+    sc_signal< sc_logic > rx_axis_words7131_U0_ap_continue;
+    sc_signal< sc_logic > rx_axis_words7131_U0_ap_idle;
+    sc_signal< sc_logic > rx_axis_words7131_U0_ap_ready;
+    sc_signal< sc_logic > rx_axis_words7131_U0_axis_V_V_TREADY;
+    sc_signal< sc_lv<9> > rx_axis_words7131_U0_cache_V1_address0;
+    sc_signal< sc_logic > rx_axis_words7131_U0_cache_V1_ce0;
+    sc_signal< sc_logic > rx_axis_words7131_U0_cache_V1_we0;
+    sc_signal< sc_lv<64> > rx_axis_words7131_U0_cache_V1_d0;
+    sc_signal< sc_lv<1> > rx_axis_words7131_U0_rx_buffer_V_offset_out_din;
+    sc_signal< sc_logic > rx_axis_words7131_U0_rx_buffer_V_offset_out_write;
+    sc_signal< sc_lv<29> > rx_axis_words7131_U0_rx_buffer_V_offset1_out_din;
+    sc_signal< sc_logic > rx_axis_words7131_U0_rx_buffer_V_offset1_out_write;
+    sc_signal< sc_lv<20> > rx_axis_words7131_U0_ap_return;
     sc_signal< sc_logic > ap_channel_done_buffer_offset_V;
     sc_signal< sc_logic > buffer_offset_V_full_n;
     sc_signal< sc_logic > ap_sync_reg_channel_write_buffer_offset_V;
     sc_signal< sc_logic > ap_sync_channel_write_buffer_offset_V;
     sc_signal< sc_logic > ap_channel_done_cache_V;
-    sc_signal< sc_logic > rx_axis_words25_U0_cache_V_full_n;
+    sc_signal< sc_logic > rx_axis_words7131_U0_cache_V1_full_n;
     sc_signal< sc_logic > ap_sync_reg_channel_write_cache_V;
     sc_signal< sc_logic > ap_sync_channel_write_cache_V;
     sc_signal< sc_logic > write_burst_U0_ap_start;
@@ -167,18 +173,22 @@ struct dataflow_in_loop : public sc_module {
     sc_signal< sc_logic > write_burst_U0_m_axi_rx_buffer_V_RREADY;
     sc_signal< sc_logic > write_burst_U0_m_axi_rx_buffer_V_BREADY;
     sc_signal< sc_logic > write_burst_U0_rx_buffer_V_offset_read;
+    sc_signal< sc_logic > write_burst_U0_rx_buffer_V_offset_c_read;
     sc_signal< sc_logic > ap_sync_continue;
     sc_signal< sc_logic > cache_V_i_full_n;
     sc_signal< sc_logic > cache_V_t_empty_n;
     sc_signal< sc_logic > rx_buffer_V_offset_c_full_n;
-    sc_signal< sc_lv<29> > rx_buffer_V_offset_c_dout;
+    sc_signal< sc_lv<1> > rx_buffer_V_offset_c_dout;
     sc_signal< sc_logic > rx_buffer_V_offset_c_empty_n;
-    sc_signal< sc_lv<22> > buffer_offset_V_dout;
+    sc_signal< sc_logic > rx_buffer_V_offset_c_2_full_n;
+    sc_signal< sc_lv<29> > rx_buffer_V_offset_c_2_dout;
+    sc_signal< sc_logic > rx_buffer_V_offset_c_2_empty_n;
+    sc_signal< sc_lv<20> > buffer_offset_V_dout;
     sc_signal< sc_logic > buffer_offset_V_empty_n;
     sc_signal< sc_logic > ap_sync_done;
     sc_signal< sc_logic > ap_sync_ready;
-    sc_signal< sc_logic > rx_axis_words25_U0_start_full_n;
-    sc_signal< sc_logic > rx_axis_words25_U0_start_write;
+    sc_signal< sc_logic > rx_axis_words7131_U0_start_full_n;
+    sc_signal< sc_logic > rx_axis_words7131_U0_start_write;
     sc_signal< sc_logic > write_burst_U0_start_full_n;
     sc_signal< sc_logic > write_burst_U0_start_write;
     static const sc_logic ap_const_logic_1;
@@ -243,11 +253,11 @@ struct dataflow_in_loop : public sc_module {
     void thread_m_axi_rx_buffer_V_WSTRB();
     void thread_m_axi_rx_buffer_V_WUSER();
     void thread_m_axi_rx_buffer_V_WVALID();
-    void thread_rx_axis_words25_U0_ap_continue();
-    void thread_rx_axis_words25_U0_ap_start();
-    void thread_rx_axis_words25_U0_cache_V_full_n();
-    void thread_rx_axis_words25_U0_start_full_n();
-    void thread_rx_axis_words25_U0_start_write();
+    void thread_rx_axis_words7131_U0_ap_continue();
+    void thread_rx_axis_words7131_U0_ap_start();
+    void thread_rx_axis_words7131_U0_cache_V1_full_n();
+    void thread_rx_axis_words7131_U0_start_full_n();
+    void thread_rx_axis_words7131_U0_start_write();
     void thread_write_burst_U0_ap_continue();
     void thread_write_burst_U0_ap_start();
     void thread_write_burst_U0_start_full_n();

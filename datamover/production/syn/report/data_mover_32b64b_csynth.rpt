@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'data_mover_32b64b'
 ================================================================
-* Date:           Mon Jun 11 19:35:38 2018
+* Date:           Tue Jun 19 00:08:21 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -20,7 +20,7 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      5.77|        2.00|
+    |ap_clk  |   6.50|      5.66|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
@@ -29,7 +29,7 @@
     |    Latency    |    Interval   | Pipeline|
     | min |   max   | min |   max   |   Type  |
     +-----+---------+-----+---------+---------+
-    |  525|  8421903|  525|  8421903|   none  |
+    |  525|  2105871|  525|  2105871|   none  |
     +-----+---------+-----+---------+---------+
 
     + Detail: 
@@ -38,8 +38,8 @@
         |                    |         |    Latency    |    Interval   | Pipeline|
         |      Instance      |  Module | min |   max   | min |   max   |   Type  |
         +--------------------+---------+-----+---------+-----+---------+---------+
-        |grp_tx_loop_fu_94   |tx_loop  |    4|  8421900|    4|  8421900|   none  |
-        |grp_rx_loop_fu_105  |rx_loop  |  522|  8421898|  522|  8421898|   none  |
+        |grp_tx_loop_fu_121  |tx_loop  |    4|  2105868|    4|  2105868|   none  |
+        |grp_rx_loop_fu_133  |rx_loop  |  522|  2105866|  522|  2105866|   none  |
         +--------------------+---------+-----+---------+-----+---------+---------+
 
         * Loop: 
@@ -55,14 +55,14 @@
 |       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
-|Expression       |        -|      -|       0|    154|
+|Expression       |        -|      -|       0|    156|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        8|      -|    1299|   2312|
+|Instance         |        8|      -|    1302|   2332|
 |Memory           |        -|      -|       -|      -|
 |Multiplexer      |        -|      -|       -|    129|
 |Register         |        -|      -|     254|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        8|      0|    1553|   2595|
+|Total            |        8|      0|    1556|   2617|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -75,11 +75,11 @@
     |              Instance             |              Module             | BRAM_18K| DSP48E|  FF | LUT |
     +-----------------------------------+---------------------------------+---------+-------+-----+-----+
     |data_mover_32b64b_DMA_m_axi_U      |data_mover_32b64b_DMA_m_axi      |        4|      0|  566|  766|
-    |data_mover_32b64b_control_s_axi_U  |data_mover_32b64b_control_s_axi  |        0|      0|  172|  264|
-    |grp_rx_loop_fu_105                 |rx_loop                          |        2|      0|  277|  637|
-    |grp_tx_loop_fu_94                  |tx_loop                          |        2|      0|  284|  645|
+    |data_mover_32b64b_control_s_axi_U  |data_mover_32b64b_control_s_axi  |        0|      0|  182|  260|
+    |grp_rx_loop_fu_133                 |rx_loop                          |        2|      0|  276|  667|
+    |grp_tx_loop_fu_121                 |tx_loop                          |        2|      0|  278|  639|
     +-----------------------------------+---------------------------------+---------+-------+-----+-----+
-    |Total                              |                                 |        8|      0| 1299| 2312|
+    |Total                              |                                 |        8|      0| 1302| 2332|
     +-----------------------------------+---------------------------------+---------+-------+-----+-----+
 
     * DSP48: 
@@ -95,27 +95,32 @@
     +-------------------------------------+----------+-------+---+----+------------+------------+
     |            Variable Name            | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +-------------------------------------+----------+-------+---+----+------------+------------+
-    |tmp_9_i1_fu_210_p2                   |     +    |      0|  0|  21|           1|          14|
-    |tmp_9_i_fu_162_p2                    |     +    |      0|  0|  21|           1|          14|
+    |tmp_9_i1_fu_258_p2                   |     +    |      0|  0|  19|           1|          12|
+    |tmp_9_i_fu_210_p2                    |     +    |      0|  0|  19|           1|          12|
+    |current_buffer_V_loa_1_fu_177_p2     |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_load_A                 |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_load_B                 |    and   |      0|  0|   2|           1|           1|
     |data_tx_V_V_1_load_A                 |    and   |      0|  0|   2|           1|           1|
     |data_tx_V_V_1_load_B                 |    and   |      0|  0|   2|           1|           1|
+    |not_s_12_fu_294_p2                   |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_state_cmp_full         |   icmp   |      0|  0|   8|           2|           1|
     |data_tx_V_V_1_state_cmp_full         |   icmp   |      0|  0|   8|           2|           1|
-    |tmp_i1_fu_190_p2                     |   icmp   |      0|  0|  13|          10|           1|
-    |tmp_i_fu_142_p2                      |   icmp   |      0|  0|  13|          10|           1|
+    |tmp_i1_fu_238_p2                     |   icmp   |      0|  0|  13|          10|           1|
+    |tmp_i_fu_190_p2                      |   icmp   |      0|  0|  13|          10|           1|
     |ap_block_state3_on_subcall_done      |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_rx_loop_fu_105_ap_done   |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_rx_loop_fu_105_ap_ready  |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_tx_loop_fu_94_ap_done    |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_tx_loop_fu_94_ap_ready   |    or    |      0|  0|   2|           1|           1|
-    |rx_final_burst_lengt_fu_216_p3       |  select  |      0|  0|  12|           1|          12|
-    |rx_loop_count_V_fu_225_p3            |  select  |      0|  0|  14|           1|          14|
-    |tx_final_burst_lengt_fu_168_p3       |  select  |      0|  0|  12|           1|          12|
-    |tx_loop_count_V_fu_177_p3            |  select  |      0|  0|  14|           1|          14|
+    |ap_sync_grp_rx_loop_fu_133_ap_done   |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_rx_loop_fu_133_ap_ready  |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_tx_loop_fu_121_ap_done   |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_tx_loop_fu_121_ap_ready  |    or    |      0|  0|   2|           1|           1|
+    |p_s_fu_288_p2                        |    or    |      0|  0|   2|           1|           1|
+    |rx_final_burst_lengt_fu_264_p3       |  select  |      0|  0|  12|           1|          12|
+    |rx_loop_count_V_fu_273_p3            |  select  |      0|  0|  12|           1|          12|
+    |tx_final_burst_lengt_fu_216_p3       |  select  |      0|  0|  12|           1|          12|
+    |tx_loop_count_V_fu_225_p3            |  select  |      0|  0|  12|           1|          12|
+    |not_increment_buffer_fu_171_p2       |    xor   |      0|  0|   2|           1|           2|
+    |not_s_fu_282_p2                      |    xor   |      0|  0|   2|           1|           2|
     +-------------------------------------+----------+-------+---+----+------------+------------+
-    |Total                                |          |      0|  0| 154|          39|          93|
+    |Total                                |          |      0|  0| 156|          44|          92|
     +-------------------------------------+----------+-------+---+----+------------+------------+
 
     * Multiplexer: 
@@ -142,10 +147,12 @@
     |                   Name                  | FF | LUT| Bits| Const Bits|
     +-----------------------------------------+----+----+-----+-----------+
     |ap_CS_fsm                                |   4|   0|    4|          0|
-    |ap_sync_reg_grp_rx_loop_fu_105_ap_done   |   1|   0|    1|          0|
-    |ap_sync_reg_grp_rx_loop_fu_105_ap_ready  |   1|   0|    1|          0|
-    |ap_sync_reg_grp_tx_loop_fu_94_ap_done    |   1|   0|    1|          0|
-    |ap_sync_reg_grp_tx_loop_fu_94_ap_ready   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_rx_loop_fu_133_ap_done   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_rx_loop_fu_133_ap_ready  |   1|   0|    1|          0|
+    |ap_sync_reg_grp_tx_loop_fu_121_ap_done   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_tx_loop_fu_121_ap_ready  |   1|   0|    1|          0|
+    |current_buffer_V                         |   1|   0|    1|          0|
+    |current_buffer_V_loa_1_reg_315           |   1|   0|    1|          0|
     |data_rx_V_V_0_payload_A                  |  32|   0|   32|          0|
     |data_rx_V_V_0_payload_B                  |  32|   0|   32|          0|
     |data_rx_V_V_0_sel_rd                     |   1|   0|    1|          0|
@@ -156,14 +163,16 @@
     |data_tx_V_V_1_sel_rd                     |   1|   0|    1|          0|
     |data_tx_V_V_1_sel_wr                     |   1|   0|    1|          0|
     |data_tx_V_V_1_state                      |   2|   0|    2|          0|
-    |grp_rx_loop_fu_105_ap_start_reg          |   1|   0|    1|          0|
-    |grp_tx_loop_fu_94_ap_start_reg           |   1|   0|    1|          0|
-    |rx_buffer_V3_reg_234                     |  29|   0|   29|          0|
-    |rx_final_burst_lengt_reg_254             |  11|   0|   11|          0|
-    |rx_loop_count_V_reg_259                  |  14|   0|   14|          0|
-    |tx_buffer_V1_reg_239                     |  29|   0|   29|          0|
-    |tx_final_burst_lengt_reg_244             |  11|   0|   11|          0|
-    |tx_loop_count_V_reg_249                  |  14|   0|   14|          0|
+    |grp_rx_loop_fu_133_ap_start_reg          |   1|   0|    1|          0|
+    |grp_tx_loop_fu_121_ap_start_reg          |   1|   0|    1|          0|
+    |not_s_12_reg_345                         |   1|   0|    1|          0|
+    |p_s_reg_341                              |   1|   0|    1|          0|
+    |rx_buffer_V3_reg_305                     |  29|   0|   29|          0|
+    |rx_final_burst_lengt_reg_331             |  11|   0|   11|          0|
+    |rx_loop_count_V_reg_336                  |  12|   0|   12|          0|
+    |tx_buffer_V1_reg_310                     |  29|   0|   29|          0|
+    |tx_final_burst_lengt_reg_321             |  11|   0|   11|          0|
+    |tx_loop_count_V_reg_326                  |  12|   0|   12|          0|
     +-----------------------------------------+----+----+-----+-----------+
     |Total                                    | 254|   0|  254|          0|
     +-----------------------------------------+----+----+-----+-----------+

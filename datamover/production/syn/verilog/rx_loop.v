@@ -57,6 +57,7 @@ module rx_loop (
         m_axi_rx_buffer_V_BID,
         m_axi_rx_buffer_V_BUSER,
         rx_buffer_V_offset,
+        rx_buffer_V_offset1,
         ap_clk,
         ap_rst,
         axis_V_V_TVALID,
@@ -64,6 +65,7 @@ module rx_loop (
         loop_count_V_ap_vld,
         final_burst_length_V_ap_vld,
         rx_buffer_V_offset_ap_vld,
+        rx_buffer_V_offset1_ap_vld,
         ap_done,
         ap_start,
         ap_ready,
@@ -73,7 +75,7 @@ module rx_loop (
 
 
 input  [31:0] axis_V_V_TDATA;
-input  [13:0] loop_count_V;
+input  [11:0] loop_count_V;
 input  [10:0] final_burst_length_V;
 output   m_axi_rx_buffer_V_AWVALID;
 input   m_axi_rx_buffer_V_AWREADY;
@@ -121,6 +123,7 @@ input  [1:0] m_axi_rx_buffer_V_BRESP;
 input  [0:0] m_axi_rx_buffer_V_BID;
 input  [0:0] m_axi_rx_buffer_V_BUSER;
 input  [28:0] rx_buffer_V_offset;
+input  [0:0] rx_buffer_V_offset1;
 input   ap_clk;
 input   ap_rst;
 input   axis_V_V_TVALID;
@@ -128,6 +131,7 @@ output   axis_V_V_TREADY;
 input   loop_count_V_ap_vld;
 input   final_burst_length_V_ap_vld;
 input   rx_buffer_V_offset_ap_vld;
+input   rx_buffer_V_offset1_ap_vld;
 output   ap_done;
 input   ap_start;
 output   ap_ready;
@@ -179,8 +183,8 @@ wire    ap_sync_continue;
 wire    ap_sync_done;
 wire    ap_sync_ready;
 reg    loop_dataflow_enable;
-reg   [13:0] loop_dataflow_input_count;
-reg   [13:0] loop_dataflow_output_count;
+reg   [11:0] loop_dataflow_input_count;
+reg   [11:0] loop_dataflow_output_count;
 reg    loop_dataflow_busy;
 wire    dataflow_in_loop_U0_start_full_n;
 wire    dataflow_in_loop_U0_start_write;
@@ -188,8 +192,8 @@ wire    dataflow_in_loop_U0_start_write;
 // power-on initialization
 initial begin
 #0 loop_dataflow_enable = 1'b0;
-#0 loop_dataflow_input_count = 14'd0;
-#0 loop_dataflow_output_count = 14'd0;
+#0 loop_dataflow_input_count = 12'd0;
+#0 loop_dataflow_output_count = 12'd0;
 #0 loop_dataflow_busy = 1'b0;
 end
 
@@ -246,11 +250,13 @@ dataflow_in_loop dataflow_in_loop_U0(
     .m_axi_rx_buffer_V_BID(m_axi_rx_buffer_V_BID),
     .m_axi_rx_buffer_V_BUSER(m_axi_rx_buffer_V_BUSER),
     .rx_buffer_V_offset(rx_buffer_V_offset),
+    .rx_buffer_V_offset1(rx_buffer_V_offset1),
     .axis_V_V_TVALID(axis_V_V_TVALID),
     .axis_V_V_TREADY(dataflow_in_loop_U0_axis_V_V_TREADY),
     .loop_count_V_ap_vld(loop_count_V_ap_vld),
     .final_burst_length_V_ap_vld(final_burst_length_V_ap_vld),
     .val_assign_ap_vld(1'b0),
+    .rx_buffer_V_offset1_ap_vld(rx_buffer_V_offset1_ap_vld),
     .rx_buffer_V_offset_ap_vld(rx_buffer_V_offset_ap_vld),
     .ap_done(dataflow_in_loop_U0_ap_done),
     .ap_start(dataflow_in_loop_U0_ap_start),
@@ -285,24 +291,24 @@ end
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
-        loop_dataflow_input_count <= 14'd0;
+        loop_dataflow_input_count <= 12'd0;
     end else begin
         if (((loop_dataflow_input_count == loop_count_V) & (loop_dataflow_enable == 1'b1))) begin
-            loop_dataflow_input_count <= 14'd0;
+            loop_dataflow_input_count <= 12'd0;
         end else if (((loop_dataflow_enable == 1'b1) & (dataflow_in_loop_U0_ap_ready == 1'b1))) begin
-            loop_dataflow_input_count <= (loop_dataflow_input_count + 14'd1);
+            loop_dataflow_input_count <= (loop_dataflow_input_count + 12'd1);
         end
     end
 end
 
 always @ (posedge ap_clk) begin
     if (ap_rst == 1'b1) begin
-        loop_dataflow_output_count <= 14'd0;
+        loop_dataflow_output_count <= 12'd0;
     end else begin
         if (((loop_dataflow_output_count == loop_count_V) & (ap_continue == 1'b1))) begin
-            loop_dataflow_output_count <= 14'd0;
+            loop_dataflow_output_count <= 12'd0;
         end else if ((dataflow_in_loop_U0_ap_done == 1'b1)) begin
-            loop_dataflow_output_count <= (loop_dataflow_output_count + 14'd1);
+            loop_dataflow_output_count <= (loop_dataflow_output_count + 12'd1);
         end
     end
 end

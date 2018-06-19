@@ -15,7 +15,7 @@
 namespace ap_rtl {
 
 struct write_burst : public sc_module {
-    // Port declarations 59
+    // Port declarations 62
     sc_in_clk ap_clk;
     sc_in< sc_logic > ap_rst;
     sc_in< sc_logic > ap_start;
@@ -26,7 +26,7 @@ struct write_burst : public sc_module {
     sc_out< sc_lv<9> > cache_V_address0;
     sc_out< sc_logic > cache_V_ce0;
     sc_in< sc_lv<64> > cache_V_q0;
-    sc_in< sc_lv<22> > buffer_offset_V;
+    sc_in< sc_lv<20> > buffer_offset_V;
     sc_out< sc_logic > m_axi_rx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_rx_buffer_V_AWREADY;
     sc_out< sc_lv<32> > m_axi_rx_buffer_V_AWADDR;
@@ -75,6 +75,9 @@ struct write_burst : public sc_module {
     sc_in< sc_lv<29> > rx_buffer_V_offset_dout;
     sc_in< sc_logic > rx_buffer_V_offset_empty_n;
     sc_out< sc_logic > rx_buffer_V_offset_read;
+    sc_in< sc_lv<1> > rx_buffer_V_offset_c_dout;
+    sc_in< sc_logic > rx_buffer_V_offset_c_empty_n;
+    sc_out< sc_logic > rx_buffer_V_offset_c_read;
 
 
     // Module declarations
@@ -93,17 +96,18 @@ struct write_burst : public sc_module {
     sc_signal< sc_logic > rx_buffer_V_blk_n_W;
     sc_signal< sc_logic > ap_enable_reg_pp0_iter2;
     sc_signal< bool > ap_block_pp0_stage0;
-    sc_signal< sc_lv<1> > exitcond_i_i_i_reg_183;
-    sc_signal< sc_lv<1> > exitcond_i_i_i_reg_183_pp0_iter1_reg;
+    sc_signal< sc_lv<1> > exitcond_i_i_i_i_reg_215;
+    sc_signal< sc_lv<1> > exitcond_i_i_i_i_reg_215_pp0_iter1_reg;
     sc_signal< sc_logic > rx_buffer_V_blk_n_B;
     sc_signal< sc_logic > ap_CS_fsm_state10;
     sc_signal< sc_logic > rx_buffer_V_offset_blk_n;
-    sc_signal< sc_lv<10> > indvar_i_i_i_reg_120;
-    sc_signal< sc_lv<30> > sum_i_i_fu_139_p2;
-    sc_signal< sc_lv<30> > sum_i_i_reg_172;
+    sc_signal< sc_logic > rx_buffer_V_offset_c_blk_n;
+    sc_signal< sc_lv<10> > indvar_i_i_i_i_reg_144;
+    sc_signal< sc_lv<30> > sum_i_i_fu_171_p2;
+    sc_signal< sc_lv<30> > sum_i_i_reg_204;
     sc_signal< bool > ap_block_state1;
     sc_signal< sc_logic > ap_sig_ioackin_m_axi_rx_buffer_V_AWREADY;
-    sc_signal< sc_lv<1> > exitcond_i_i_i_fu_155_p2;
+    sc_signal< sc_lv<1> > exitcond_i_i_i_i_fu_187_p2;
     sc_signal< sc_logic > ap_CS_fsm_pp0_stage0;
     sc_signal< bool > ap_block_state3_pp0_stage0_iter0;
     sc_signal< bool > ap_block_state4_pp0_stage0_iter1;
@@ -111,19 +115,20 @@ struct write_burst : public sc_module {
     sc_signal< sc_logic > ap_sig_ioackin_m_axi_rx_buffer_V_WREADY;
     sc_signal< bool > ap_block_state5_io;
     sc_signal< bool > ap_block_pp0_stage0_11001;
-    sc_signal< sc_lv<10> > indvar_next_i_i_i_fu_161_p2;
+    sc_signal< sc_lv<10> > indvar_next_i_i_i_i_fu_193_p2;
     sc_signal< sc_logic > ap_enable_reg_pp0_iter0;
-    sc_signal< sc_lv<64> > cache_V_load_reg_197;
+    sc_signal< sc_lv<64> > cache_V_load_reg_229;
     sc_signal< bool > ap_block_pp0_stage0_subdone;
     sc_signal< sc_logic > ap_condition_pp0_exit_iter0_state3;
     sc_signal< sc_logic > ap_enable_reg_pp0_iter1;
-    sc_signal< sc_lv<64> > indvar1_i_i_i_fu_167_p1;
-    sc_signal< sc_lv<64> > sum_cast_i_i_fu_145_p1;
+    sc_signal< sc_lv<64> > indvar4_i_i_i_i_fu_199_p1;
+    sc_signal< sc_lv<64> > sum_cast_i_i_fu_177_p1;
     sc_signal< sc_logic > ap_reg_ioackin_m_axi_rx_buffer_V_AWREADY;
     sc_signal< sc_logic > ap_reg_ioackin_m_axi_rx_buffer_V_WREADY;
     sc_signal< bool > ap_block_pp0_stage0_01001;
-    sc_signal< sc_lv<30> > tmp_i_cast_i_i_fu_131_p1;
-    sc_signal< sc_lv<30> > sext_cast_i_i_fu_135_p1;
+    sc_signal< sc_lv<21> > tmp_2_i_i_fu_155_p3;
+    sc_signal< sc_lv<30> > tmp_3_cast_i_i_fu_163_p1;
+    sc_signal< sc_lv<30> > sext_cast_i_i_fu_167_p1;
     sc_signal< sc_lv<8> > ap_NS_fsm;
     sc_signal< sc_logic > ap_idle_pp0;
     sc_signal< sc_logic > ap_enable_pp0;
@@ -178,9 +183,9 @@ struct write_burst : public sc_module {
     void thread_ap_sig_ioackin_m_axi_rx_buffer_V_WREADY();
     void thread_cache_V_address0();
     void thread_cache_V_ce0();
-    void thread_exitcond_i_i_i_fu_155_p2();
-    void thread_indvar1_i_i_i_fu_167_p1();
-    void thread_indvar_next_i_i_i_fu_161_p2();
+    void thread_exitcond_i_i_i_i_fu_187_p2();
+    void thread_indvar4_i_i_i_i_fu_199_p1();
+    void thread_indvar_next_i_i_i_i_fu_193_p2();
     void thread_m_axi_rx_buffer_V_ARADDR();
     void thread_m_axi_rx_buffer_V_ARBURST();
     void thread_m_axi_rx_buffer_V_ARCACHE();
@@ -217,11 +222,14 @@ struct write_burst : public sc_module {
     void thread_rx_buffer_V_blk_n_B();
     void thread_rx_buffer_V_blk_n_W();
     void thread_rx_buffer_V_offset_blk_n();
+    void thread_rx_buffer_V_offset_c_blk_n();
+    void thread_rx_buffer_V_offset_c_read();
     void thread_rx_buffer_V_offset_read();
-    void thread_sext_cast_i_i_fu_135_p1();
-    void thread_sum_cast_i_i_fu_145_p1();
-    void thread_sum_i_i_fu_139_p2();
-    void thread_tmp_i_cast_i_i_fu_131_p1();
+    void thread_sext_cast_i_i_fu_167_p1();
+    void thread_sum_cast_i_i_fu_177_p1();
+    void thread_sum_i_i_fu_171_p2();
+    void thread_tmp_2_i_i_fu_155_p3();
+    void thread_tmp_3_cast_i_i_fu_163_p1();
     void thread_ap_NS_fsm();
 };
 

@@ -30,7 +30,7 @@
 /**
  * @description AXIS data mover test bench
  * @author Jamil J. Weatherbee
- * @version 2018-06-11T21:40:26Z
+ * @version 2018-06-17T04:26:31Z
  */
 
 #include <stdlib.h>
@@ -39,11 +39,13 @@
 #include "datamover.h"
 
 /* constant definitions */
-const uint32_t TX_PRBS_STATE = 0x15EC38A2;
-const int TX_TRANSFER_LENGTH = 1048575;
+const uint32_t PRBS_STATE_SEED = 0x15EC38A2;
 
-const uint32_t RX_PRBS_STATE = 0x970AC5FD;
-const int RX_TRANSFER_LENGTH = 1048577;
+const int TX_TRANSFER_LENGTH_1 = 1048575;
+const int RX_TRANSFER_LENGTH_1 = 1048577;
+
+const int TX_TRANSFER_LENGTH_2 = 97158;
+const int RX_TRANSFER_LENGTH_2 = 67306;
 
 /* 32-bit CRC lookup table using polynomial x^32+x^26+x^23+x^22+x^16+x^12+x^11+x^10+x^8+x^7+x^5+x^4+x^2+x+1 */
 static const int CRC_DATA_WORD_BITS = 8;
@@ -68,6 +70,12 @@ static const uint32_t crc32_table[CRC_TABLE_SIZE]=
 };
 
 
+/* global data allocation */
+static axi_t tx_buffer[BUFFER_COUNT][BUFFER_WORDS];
+static axi_t rx_buffer[BUFFER_COUNT][BUFFER_WORDS];
+uint32_t PRBS_state = PRBS_STATE_SEED;
+
+
 /* get the next pseudo-random byte */
 uint8_t get_PRBS_byte (uint32_t &PRBS_state)
 {
@@ -88,29 +96,93 @@ uint8_t get_PRBS_byte (uint32_t &PRBS_state)
 }
 
 
+/* fill a buffer with PRBS words and return the CRC-32 of the payload */
+uint32_t PRBS_fill_buffer (uint8_t *buffer, const ap_uint<BUFFER_LENGTH_BITS> length)
+{
+  uint32_t crc = 0xFFFFFFFF;
+  for (int n=0;n<length*AXIS_WORD_SIZE;n++)
+   {
+	 uint8_t b;
+	 b = get_PRBS_byte(PRBS_state);
+ 	 buffer[n] = b;
+	 crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ b];
+   }
+  return crc ^ 0xFFFFFFFF;
+}
+
+
+/* fill a stream with PRBS words and return the CRC-32 of the payload */
+uint32_t PRBS_fill_stream (hls::stream<axis_t> &stream, const ap_uint<BUFFER_LENGTH_BITS> length)
+{
+  uint32_t crc = 0xFFFFFFFF;
+  for (int n=0; n<length; n++)
+   {
+	 axis_t data=0;
+	 for (int i=0;i<sizeof(data);i++)
+	  {
+	   uint8_t b;
+	   b = get_PRBS_byte(PRBS_state);
+	   data |= ((axis_t)b)<<(i*BITS_PER_BYTE);
+	   crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ b];
+	  }
+	 stream << data;
+   }
+  return crc ^ 0xFFFFFFFF;
+}
+
+/* retrieve a word stream and calculate the CRC-32 of the payload */
+uint32_t get_stream_CRC (hls::stream<axis_t> &stream, const ap_uint<BUFFER_LENGTH_BITS> length)
+{
+  uint32_t crc = 0xFFFFFFFF;
+
+  for (int n=0; n<length; n++)
+   {
+	 axis_t data;
+	 stream >> data;
+     for (int i=0;i<sizeof(data);i++)
+	  {
+	    uint8_t b;
+		b = data >> (i*BITS_PER_BYTE);
+		crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ b];
+	  }
+   }
+  return crc ^ 0xFFFFFFFF;
+}
+
+
+/* return the CRC-32 of a buffer of words */
+uint32_t get_buffer_CRC (const uint8_t *buffer, const ap_uint<BUFFER_LENGTH_BITS> length)
+{
+  uint32_t crc = 0xFFFFFFFF;
+  for (int n=0; n<length*AXIS_WORD_SIZE; n++) crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ buffer[n]];
+  return crc ^ 0xFFFFFFFF;
+}
+
+
 int main (void)
 {
   hls::stream<axis_t> data_rx("data_rx");
   hls::stream<axis_t> data_tx("data_tx");
   ap_uint<BUFFER_LENGTH_BITS> tx_buffer_length;
   ap_uint<BUFFER_LENGTH_BITS> rx_buffer_length;
-  uint32_t PRBS_state;
   int errors=0;
 
   uint32_t tx_buffer_crc;
   uint32_t rx_stream_crc;
   uint32_t crc;
-  void *RAM;
-  axi_t *tx_buffer;
-  axi_t *rx_buffer;
+  ap_uint<BUFFER_COUNT_BITS> last_buffer;
+  ap_uint<BITS_PER_BOOL> increment_buffer;
 
-  std::cout << "Test Parameters:" << std::endl;
+  std::cout << std::endl << "*** Test Parameters ***" << std::endl;
 
-  std::cout << "TX_PRBS_STATE=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << TX_PRBS_STATE << std::endl;
-  std::cout << "TX_TRANSFER_LENGTH=" << std::dec << TX_TRANSFER_LENGTH << std::endl;
+  std::cout << "PRBS_STATE_SEED=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << PRBS_STATE_SEED << std::endl;
+  std::cout << "TX_TRANSFER_LENGTH_1=" << std::dec << TX_TRANSFER_LENGTH_1 << std::endl;
+  std::cout << "RX_TRANSFER_LENGTH_1=" << std::dec << RX_TRANSFER_LENGTH_1 << std::endl;
+  std::cout << "TX_TRANSFER_LENGTH_2=" << std::dec << TX_TRANSFER_LENGTH_2 << std::endl;
+  std::cout << "RX_TRANSFER_LENGTH_2=" << std::dec << RX_TRANSFER_LENGTH_2 << std::endl;
 
-  std::cout << "RX_PRBS_STATE=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << RX_PRBS_STATE << std::endl;
-  std::cout << "RX_TRANSFER_LENGTH=" << std::dec << RX_TRANSFER_LENGTH << std::endl;
+  std::cout << "BUFFER_COUNT_BITS=" << std::dec << BUFFER_COUNT_BITS << std::endl;
+  std::cout << "BUFFER_COUNT=" << std::dec << BUFFER_COUNT << std::endl;
 
   std::cout << "AXI_WORD_LOG2_BYTES=" << std::dec << AXI_WORD_LOG2_BYTES << std::endl;
   std::cout << "AXI_WORD_SIZE=" << std::dec << AXI_WORD_SIZE << std::endl;
@@ -137,80 +209,74 @@ int main (void)
   std::cout << "CACHE_LENGTH=" << std::dec << CACHE_LENGTH << std::endl;
   std::cout << "BUFFER_LENGTH_BITS=" << std::dec << BUFFER_LENGTH_BITS << std::endl;
 
-  std::cout << "Allocating " << std::dec << BUFFER_SIZE  << " byte transmit buffer... ";
-  tx_buffer = (axi_t *)malloc(BUFFER_SIZE);
-  if (NULL==tx_buffer) { std::cout << "SUCCESS" << std::endl; return EXIT_FAILURE; }
-  else std::cout << "SUCCESS" << std::endl;
+  increment_buffer = BOOL_TRUE;
 
-  std::cout << "Allocating " << std::dec << BUFFER_SIZE << " byte receive buffer... ";
-  rx_buffer = (axi_t *)malloc(BUFFER_SIZE);
-  if (NULL==rx_buffer) { std::cout << "SUCCESS" << std::endl; return EXIT_FAILURE; }
-  else std::cout << "SUCCESS" << std::endl;
+  /*** PASS 1 ***/
+  std::cout << std::endl << "*** PASS 1 ***" << std::endl;
 
   /* write bytes to transmit buffer */
-  PRBS_state = TX_PRBS_STATE;
-  tx_buffer_length = TX_TRANSFER_LENGTH;
-  tx_buffer_crc = 0xFFFFFFFF;
-  for (int n=0;n<TX_TRANSFER_LENGTH*AXIS_WORD_SIZE;n++)
-  {
-	uint8_t b;
-	b = get_PRBS_byte(PRBS_state);
-	((uint8_t *)tx_buffer)[n] = b;
-	tx_buffer_crc = (tx_buffer_crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)tx_buffer_crc ^ b];
-  }
-  tx_buffer_crc ^= 0xFFFFFFFF;
+  tx_buffer_length = TX_TRANSFER_LENGTH_1;
+  tx_buffer_crc = PRBS_fill_buffer ((uint8_t *)tx_buffer[0], tx_buffer_length);
   std::cout << "tx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)tx_buffer_crc << std::endl;
 
   /* send words to receiver */
-  PRBS_state = RX_PRBS_STATE;
-  rx_buffer_length = RX_TRANSFER_LENGTH;
-  rx_stream_crc = 0xFFFFFFFF;
-  for (int n=0; n<RX_TRANSFER_LENGTH; n++)
-   {
-	 axis_t data=0;
-	 for (int i=0;i<sizeof(data);i++)
-	  {
-		uint8_t b;
-	    b = get_PRBS_byte(PRBS_state);
-	    data |= ((axis_t)b)<<(i*BITS_PER_BYTE);
-	    rx_stream_crc = (rx_stream_crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)rx_stream_crc ^ b];
-	  }
-	 data_rx << data;
-   }
-  rx_stream_crc^= 0xFFFFFFFF;
+  rx_buffer_length = RX_TRANSFER_LENGTH_1;
+  rx_stream_crc = PRBS_fill_stream (data_rx, rx_buffer_length);
   std::cout << "rx_stream crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)rx_stream_crc << std::endl;
 
-  std::cout << "Testing data_mover()..." << std::endl;
-  data_mover_32b64b(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length);
+  std::cout << "tx_buffer_length=" << std::dec << (unsigned)tx_buffer_length << std::endl;
+  std::cout << "rx_buffer_length=" << std::dec << (unsigned)rx_buffer_length << std::endl;
+  std::cout << "increment_buffer=" << std::dec << increment_buffer << std::endl;
+
+  std::cout << "Testing data_mover_32b64b()..." << std::endl;
+  data_mover_32b64b(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length, &last_buffer, &increment_buffer);
+
+  std::cout << "last_buffer=" << std::dec << (unsigned)last_buffer << std::endl;
+  if (0 != last_buffer) errors++;
 
   /* check transmit stream */
-  crc = 0xFFFFFFFF; /* setup CRC working register */
-  for (int n=0; n<TX_TRANSFER_LENGTH; n++)
-  {
-	axis_t data;
-	data_tx >> data;
-	for (int i=0;i<sizeof(data);i++)
-	 {
-	   uint8_t b;
-	   b = data >> (i*BITS_PER_BYTE);
-	   crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ b]; /* update crc for data byte transmitted */
-	 }
-  }
-  crc ^= 0xFFFFFFFF; /* return final CRC-32 value */
-
+  crc = get_stream_CRC (data_tx, tx_buffer_length);
   std::cout << "data_tx crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
   if (crc != tx_buffer_crc) errors++;
 
   /* check receive buffer */
-  crc = 0xFFFFFFFF; /* setup CRC working register */
-  for (int n=0; n<RX_TRANSFER_LENGTH*AXIS_WORD_SIZE; n++)
-   {
-	 crc = (crc >> CRC_DATA_WORD_BITS) ^ crc32_table[(uint8_t)crc ^ ((uint8_t *)rx_buffer)[n]]; /* update crc for data byte received */
-   }
-  crc ^= 0xFFFFFFFF; /* return final CRC-32 value */
-
+  crc = get_buffer_CRC ((uint8_t *)rx_buffer[last_buffer], rx_buffer_length);
   std::cout << "rx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
   if (crc != rx_stream_crc) errors++;
+
+  /*** PASS 2 ***/
+  std::cout << std::endl << "*** PASS 2 ***" << std::endl;
+
+  /* write bytes to transmit buffer */
+  tx_buffer_length = TX_TRANSFER_LENGTH_2;
+  tx_buffer_crc = PRBS_fill_buffer ((uint8_t *)tx_buffer[1], tx_buffer_length);
+  std::cout << "tx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)tx_buffer_crc << std::endl;
+
+  /* send words to receiver */
+  rx_buffer_length = RX_TRANSFER_LENGTH_2;
+  rx_stream_crc = PRBS_fill_stream (data_rx, rx_buffer_length);
+  std::cout << "rx_stream crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)rx_stream_crc << std::endl;
+
+  std::cout << "tx_buffer_length=" << std::dec << (unsigned)tx_buffer_length << std::endl;
+  std::cout << "rx_buffer_length=" << std::dec << (unsigned)rx_buffer_length << std::endl;
+  std::cout << "increment_buffer=" << std::dec << increment_buffer << std::endl;
+
+  std::cout << "Testing data_mover_32b64b()..." << std::endl;
+  data_mover_32b64b(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length, &last_buffer, &increment_buffer);
+
+  std::cout << "last_buffer=" << std::dec << (unsigned)last_buffer << std::endl;
+  if (1 != last_buffer) errors++;
+
+  /* check transmit stream */
+  crc = get_stream_CRC (data_tx, tx_buffer_length);
+  std::cout << "data_tx crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
+  if (crc != tx_buffer_crc) errors++;
+
+  /* check receive buffer */
+  crc = get_buffer_CRC ((uint8_t *)rx_buffer[last_buffer], rx_buffer_length);
+  std::cout << "rx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
+  if (crc != rx_stream_crc) errors++;
+
 
   if (errors) { std::cout << "FAILED! with " << std::dec << errors << " errors." << std::endl; return EXIT_FAILURE; }
   return EXIT_SUCCESS;

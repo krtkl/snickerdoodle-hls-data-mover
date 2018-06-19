@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'dataflow_in_loop'
 ================================================================
-* Date:           Mon Jun 11 19:35:37 2018
+* Date:           Tue Jun 19 00:08:20 2018
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -20,7 +20,7 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      5.77|        2.00|
+    |ap_clk  |   6.50|      5.66|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
@@ -34,13 +34,13 @@
 
     + Detail: 
         * Instance: 
-        +--------------------+-----------------+------+------+------+------+---------+
-        |                    |                 |   Latency   |   Interval  | Pipeline|
-        |      Instance      |      Module     |  min |  max |  min |  max |   Type  |
-        +--------------------+-----------------+------+------+------+------+---------+
-        |rx_axis_words25_U0  |rx_axis_words25  |  1027|  1027|  1027|  1027|   none  |
-        |write_burst_U0      |write_burst      |   520|   520|   520|   520|   none  |
-        +--------------------+-----------------+------+------+------+------+---------+
+        +----------------------+-------------------+------+------+------+------+---------+
+        |                      |                   |   Latency   |   Interval  | Pipeline|
+        |       Instance       |       Module      |  min |  max |  min |  max |   Type  |
+        +----------------------+-------------------+------+------+------+------+---------+
+        |rx_axis_words7131_U0  |rx_axis_words7131  |  1027|  1027|  1027|  1027|   none  |
+        |write_burst_U0        |write_burst        |   520|   520|   520|   520|   none  |
+        +----------------------+-------------------+------+------+------+------+---------+
 
         * Loop: 
         N/A
@@ -56,13 +56,13 @@
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
 |Expression       |        -|      -|       0|     14|
-|FIFO             |        0|      -|       5|     41|
-|Instance         |        -|      -|     240|    504|
+|FIFO             |        0|      -|      10|     57|
+|Instance         |        -|      -|     238|    522|
 |Memory           |        2|      -|       0|      0|
 |Multiplexer      |        -|      -|       -|     18|
 |Register         |        -|      -|       2|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        2|      0|     247|    577|
+|Total            |        2|      0|     250|    611|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -71,14 +71,14 @@
 
 + Detail: 
     * Instance: 
-    +--------------------+-----------------+---------+-------+-----+-----+
-    |      Instance      |      Module     | BRAM_18K| DSP48E|  FF | LUT |
-    +--------------------+-----------------+---------+-------+-----+-----+
-    |rx_axis_words25_U0  |rx_axis_words25  |        0|      0|  120|  293|
-    |write_burst_U0      |write_burst      |        0|      0|  120|  211|
-    +--------------------+-----------------+---------+-------+-----+-----+
-    |Total               |                 |        0|      0|  240|  504|
-    +--------------------+-----------------+---------+-------+-----+-----+
+    +----------------------+-------------------+---------+-------+-----+-----+
+    |       Instance       |       Module      | BRAM_18K| DSP48E|  FF | LUT |
+    +----------------------+-------------------+---------+-------+-----+-----+
+    |rx_axis_words7131_U0  |rx_axis_words7131  |        0|      0|  118|  302|
+    |write_burst_U0        |write_burst        |        0|      0|  120|  220|
+    +----------------------+-------------------+---------+-------+-----+-----+
+    |Total                 |                   |        0|      0|  238|  522|
+    +----------------------+-------------------+---------+-------+-----+-----+
 
     * DSP48: 
     N/A
@@ -93,14 +93,15 @@
     +-----------+----------------------+---------+---+----+------+-----+------+-------------+
 
     * FIFO: 
-    +------------------------+---------+---+----+------+-----+---------+
-    |          Name          | BRAM_18K| FF| LUT| Depth| Bits| Size:D*B|
-    +------------------------+---------+---+----+------+-----+---------+
-    |buffer_offset_V_U       |        0|  0|   0|     2|   22|       44|
-    |rx_buffer_V_offset_c_U  |        0|  5|  41|     2|   29|       58|
-    +------------------------+---------+---+----+------+-----+---------+
-    |Total                   |        0|  5|  41|     4|   51|      102|
-    +------------------------+---------+---+----+------+-----+---------+
+    +--------------------------+---------+---+----+------+-----+---------+
+    |           Name           | BRAM_18K| FF| LUT| Depth| Bits| Size:D*B|
+    +--------------------------+---------+---+----+------+-----+---------+
+    |buffer_offset_V_U         |        0|  0|   0|     2|   20|       40|
+    |rx_buffer_V_offset_c_2_U  |        0|  5|  41|     2|   29|       58|
+    |rx_buffer_V_offset_c_U    |        0|  5|  16|     2|    1|        2|
+    +--------------------------+---------+---+----+------+-----+---------+
+    |Total                     |        0| 10|  57|     6|   50|      100|
+    +--------------------------+---------+---+----+------+-----+---------+
 
     * Expression: 
     +---------------------------------------+----------+-------+---+----+------------+------------+
@@ -109,7 +110,7 @@
     |ap_channel_done_buffer_offset_V        |    and   |      0|  0|   2|           1|           1|
     |ap_channel_done_cache_V                |    and   |      0|  0|   2|           1|           1|
     |ap_idle                                |    and   |      0|  0|   2|           1|           1|
-    |rx_axis_words25_U0_ap_continue         |    and   |      0|  0|   2|           1|           1|
+    |rx_axis_words7131_U0_ap_continue       |    and   |      0|  0|   2|           1|           1|
     |write_burst_U0_ap_start                |    and   |      0|  0|   2|           1|           1|
     |ap_sync_channel_write_buffer_offset_V  |    or    |      0|  0|   2|           1|           1|
     |ap_sync_channel_write_cache_V          |    or    |      0|  0|   2|           1|           1|
@@ -156,11 +157,11 @@
 |axis_V_V_TDATA               |  in |   32|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TVALID              |  in |    1|    axis    |       axis_V_V       |    pointer   |
 |axis_V_V_TREADY              | out |    1|    axis    |       axis_V_V       |    pointer   |
-|loop_count_V                 |  in |   14|   ap_none  |     loop_count_V     |    scalar    |
+|loop_count_V                 |  in |   12|   ap_none  |     loop_count_V     |    scalar    |
 |loop_count_V_ap_vld          |  in |    1|   ap_none  |     loop_count_V     |    scalar    |
 |final_burst_length_V         |  in |   11|   ap_none  | final_burst_length_V |    scalar    |
 |final_burst_length_V_ap_vld  |  in |    1|   ap_none  | final_burst_length_V |    scalar    |
-|val_assign                   |  in |   14|   ap_none  |      val_assign      |    scalar    |
+|val_assign                   |  in |   12|   ap_none  |      val_assign      |    scalar    |
 |val_assign_ap_vld            |  in |    1|   ap_none  |      val_assign      |    scalar    |
 |m_axi_rx_buffer_V_AWVALID    | out |    1|    m_axi   |      rx_buffer_V     |    pointer   |
 |m_axi_rx_buffer_V_AWREADY    |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
@@ -209,5 +210,7 @@
 |m_axi_rx_buffer_V_BUSER      |  in |    1|    m_axi   |      rx_buffer_V     |    pointer   |
 |rx_buffer_V_offset           |  in |   29|   ap_none  |  rx_buffer_V_offset  |    scalar    |
 |rx_buffer_V_offset_ap_vld    |  in |    1|   ap_none  |  rx_buffer_V_offset  |    scalar    |
+|rx_buffer_V_offset1          |  in |    1|   ap_none  |  rx_buffer_V_offset1 |    scalar    |
+|rx_buffer_V_offset1_ap_vld   |  in |    1|   ap_none  |  rx_buffer_V_offset1 |    scalar    |
 +-----------------------------+-----+-----+------------+----------------------+--------------+
 

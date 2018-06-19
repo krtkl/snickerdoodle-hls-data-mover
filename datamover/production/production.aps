@@ -44,7 +44,7 @@
         </UIAutoSimConf>
     </UIConfigurations>
     <ExportDesign askAgain="true" evaluate="false" flow="true" flowChoice="impl" formatName="ip_catalog" rtl="verilog" rtlButton="true" rtlCombo="vhdl">
-        <Format description="32-bit AXIS to 64-bit AXI data mover" display_name="32-bit AXIS to 64-bit AXI data mover" formatName="ip_catalog" library="snickerdoodle" vendor="krtl" version="1.06" ipname="" driver_input_dir="" taxonomy=""/>
+        <Format description="32-bit AXIS to 64-bit AXI data mover" display_name="32-bit AXIS to 64-bit AXI data mover" formatName="ip_catalog" library="snickerdoodle" vendor="krtl" version="1.10" ipname="" driver_input_dir="" taxonomy=""/>
         <Format formatName="sysgen"/>
         <Format formatName="sysgen_ise"/>
         <Format formatName="syn_dcp"/>

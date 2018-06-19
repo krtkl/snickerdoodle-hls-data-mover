@@ -42,9 +42,12 @@ port (
     ap_ready              :in   STD_LOGIC;
     ap_idle               :in   STD_LOGIC;
     tx_buffer_V           :out  STD_LOGIC_VECTOR(31 downto 0);
-    tx_buffer_length_V    :out  STD_LOGIC_VECTOR(23 downto 0);
+    tx_buffer_length_V    :out  STD_LOGIC_VECTOR(21 downto 0);
     rx_buffer_V           :out  STD_LOGIC_VECTOR(31 downto 0);
-    rx_buffer_length_V    :out  STD_LOGIC_VECTOR(23 downto 0)
+    rx_buffer_length_V    :out  STD_LOGIC_VECTOR(21 downto 0);
+    last_buffer_V         :in   STD_LOGIC_VECTOR(0 downto 0);
+    last_buffer_V_ap_vld  :in   STD_LOGIC;
+    increment_buffer_V    :out  STD_LOGIC_VECTOR(0 downto 0)
 );
 end entity data_mover_32b64b_control_s_axi;
 
@@ -71,16 +74,26 @@ end entity data_mover_32b64b_control_s_axi;
 --        bit 31~0 - tx_buffer_V[31:0] (Read/Write)
 -- 0x14 : reserved
 -- 0x18 : Data signal of tx_buffer_length_V
---        bit 23~0 - tx_buffer_length_V[23:0] (Read/Write)
+--        bit 21~0 - tx_buffer_length_V[21:0] (Read/Write)
 --        others   - reserved
 -- 0x1c : reserved
 -- 0x20 : Data signal of rx_buffer_V
 --        bit 31~0 - rx_buffer_V[31:0] (Read/Write)
 -- 0x24 : reserved
 -- 0x28 : Data signal of rx_buffer_length_V
---        bit 23~0 - rx_buffer_length_V[23:0] (Read/Write)
+--        bit 21~0 - rx_buffer_length_V[21:0] (Read/Write)
 --        others   - reserved
 -- 0x2c : reserved
+-- 0x30 : Data signal of last_buffer_V
+--        bit 0  - last_buffer_V[0] (Read)
+--        others - reserved
+-- 0x34 : Control signal of last_buffer_V
+--        bit 0  - last_buffer_V_ap_vld (Read/COR)
+--        others - reserved
+-- 0x38 : Data signal of increment_buffer_V
+--        bit 0  - increment_buffer_V[0] (Read/Write)
+--        others - reserved
+-- 0x3c : reserved
 -- (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 architecture behave of data_mover_32b64b_control_s_axi is
@@ -100,6 +113,10 @@ architecture behave of data_mover_32b64b_control_s_axi is
     constant ADDR_RX_BUFFER_V_CTRL          : INTEGER := 16#24#;
     constant ADDR_RX_BUFFER_LENGTH_V_DATA_0 : INTEGER := 16#28#;
     constant ADDR_RX_BUFFER_LENGTH_V_CTRL   : INTEGER := 16#2c#;
+    constant ADDR_LAST_BUFFER_V_DATA_0      : INTEGER := 16#30#;
+    constant ADDR_LAST_BUFFER_V_CTRL        : INTEGER := 16#34#;
+    constant ADDR_INCREMENT_BUFFER_V_DATA_0 : INTEGER := 16#38#;
+    constant ADDR_INCREMENT_BUFFER_V_CTRL   : INTEGER := 16#3c#;
     constant ADDR_BITS         : INTEGER := 6;
 
     signal waddr               : UNSIGNED(ADDR_BITS-1 downto 0);
@@ -123,9 +140,12 @@ architecture behave of data_mover_32b64b_control_s_axi is
     signal int_ier             : UNSIGNED(1 downto 0) := (others => '0');
     signal int_isr             : UNSIGNED(1 downto 0) := (others => '0');
     signal int_tx_buffer_V     : UNSIGNED(31 downto 0) := (others => '0');
-    signal int_tx_buffer_length_V : UNSIGNED(23 downto 0) := (others => '0');
+    signal int_tx_buffer_length_V : UNSIGNED(21 downto 0) := (others => '0');
     signal int_rx_buffer_V     : UNSIGNED(31 downto 0) := (others => '0');
-    signal int_rx_buffer_length_V : UNSIGNED(23 downto 0) := (others => '0');
+    signal int_rx_buffer_length_V : UNSIGNED(21 downto 0) := (others => '0');
+    signal int_last_buffer_V   : UNSIGNED(0 downto 0) := (others => '0');
+    signal int_last_buffer_V_ap_vld : STD_LOGIC;
+    signal int_increment_buffer_V : UNSIGNED(0 downto 0) := (others => '0');
 
 
 begin
@@ -250,11 +270,17 @@ begin
                     when ADDR_TX_BUFFER_V_DATA_0 =>
                         rdata_data <= RESIZE(int_tx_buffer_V(31 downto 0), 32);
                     when ADDR_TX_BUFFER_LENGTH_V_DATA_0 =>
-                        rdata_data <= RESIZE(int_tx_buffer_length_V(23 downto 0), 32);
+                        rdata_data <= RESIZE(int_tx_buffer_length_V(21 downto 0), 32);
                     when ADDR_RX_BUFFER_V_DATA_0 =>
                         rdata_data <= RESIZE(int_rx_buffer_V(31 downto 0), 32);
                     when ADDR_RX_BUFFER_LENGTH_V_DATA_0 =>
-                        rdata_data <= RESIZE(int_rx_buffer_length_V(23 downto 0), 32);
+                        rdata_data <= RESIZE(int_rx_buffer_length_V(21 downto 0), 32);
+                    when ADDR_LAST_BUFFER_V_DATA_0 =>
+                        rdata_data <= RESIZE(int_last_buffer_V(0 downto 0), 32);
+                    when ADDR_LAST_BUFFER_V_CTRL =>
+                        rdata_data <= (0 => int_last_buffer_V_ap_vld, others => '0');
+                    when ADDR_INCREMENT_BUFFER_V_DATA_0 =>
+                        rdata_data <= RESIZE(int_increment_buffer_V(0 downto 0), 32);
                     when others =>
                         rdata_data <= (others => '0');
                     end case;
@@ -270,6 +296,7 @@ begin
     tx_buffer_length_V   <= STD_LOGIC_VECTOR(int_tx_buffer_length_V);
     rx_buffer_V          <= STD_LOGIC_VECTOR(int_rx_buffer_V);
     rx_buffer_length_V   <= STD_LOGIC_VECTOR(int_rx_buffer_length_V);
+    increment_buffer_V   <= STD_LOGIC_VECTOR(int_increment_buffer_V);
 
     process (ACLK)
     begin
@@ -412,7 +439,7 @@ begin
         if (ACLK'event and ACLK = '1') then
             if (ACLK_EN = '1') then
                 if (w_hs = '1' and waddr = ADDR_TX_BUFFER_LENGTH_V_DATA_0) then
-                    int_tx_buffer_length_V(23 downto 0) <= (UNSIGNED(WDATA(23 downto 0)) and wmask(23 downto 0)) or ((not wmask(23 downto 0)) and int_tx_buffer_length_V(23 downto 0));
+                    int_tx_buffer_length_V(21 downto 0) <= (UNSIGNED(WDATA(21 downto 0)) and wmask(21 downto 0)) or ((not wmask(21 downto 0)) and int_tx_buffer_length_V(21 downto 0));
                 end if;
             end if;
         end if;
@@ -434,7 +461,46 @@ begin
         if (ACLK'event and ACLK = '1') then
             if (ACLK_EN = '1') then
                 if (w_hs = '1' and waddr = ADDR_RX_BUFFER_LENGTH_V_DATA_0) then
-                    int_rx_buffer_length_V(23 downto 0) <= (UNSIGNED(WDATA(23 downto 0)) and wmask(23 downto 0)) or ((not wmask(23 downto 0)) and int_rx_buffer_length_V(23 downto 0));
+                    int_rx_buffer_length_V(21 downto 0) <= (UNSIGNED(WDATA(21 downto 0)) and wmask(21 downto 0)) or ((not wmask(21 downto 0)) and int_rx_buffer_length_V(21 downto 0));
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                int_last_buffer_V <= (others => '0');
+            elsif (ACLK_EN = '1') then
+                if (last_buffer_V_ap_vld = '1') then
+                    int_last_buffer_V <= UNSIGNED(last_buffer_V); -- clear on read
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ARESET = '1') then
+                int_last_buffer_V_ap_vld <= '0';
+            elsif (ACLK_EN = '1') then
+                if (last_buffer_V_ap_vld = '1') then
+                    int_last_buffer_V_ap_vld <= '1';
+                elsif (ar_hs = '1' and raddr = ADDR_LAST_BUFFER_V_CTRL) then
+                    int_last_buffer_V_ap_vld <= '0'; -- clear on read
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (ACLK)
+    begin
+        if (ACLK'event and ACLK = '1') then
+            if (ACLK_EN = '1') then
+                if (w_hs = '1' and waddr = ADDR_INCREMENT_BUFFER_V_DATA_0) then
+                    int_increment_buffer_V(0 downto 0) <= (UNSIGNED(WDATA(0 downto 0)) and wmask(0 downto 0)) or ((not wmask(0 downto 0)) and int_increment_buffer_V(0 downto 0));
                 end if;
             end if;
         end if;
