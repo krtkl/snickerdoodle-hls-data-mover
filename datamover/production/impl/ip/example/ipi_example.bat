@@ -8,4 +8,8 @@
 
 @echo off
 
+<<<<<<< HEAD
 C:/Xilinx/Vivado/2018.1/bin/vivado  -notrace -mode batch -source ipi_example.tcl -tclargs xc7z020clg400-3 ../krtl_snickerdoodle_data_mover_8b64b_1_06.zip
+=======
+C:/Xilinx/Vivado/2018.1/bin/vivado  -notrace -mode batch -source ipi_example.tcl -tclargs xc7z020clg400-3 ../krtl_snickerdoodle_data_mover_1_10.zip
+>>>>>>> master

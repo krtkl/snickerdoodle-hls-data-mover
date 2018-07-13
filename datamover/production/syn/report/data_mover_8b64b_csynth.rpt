@@ -3,7 +3,11 @@
 ================================================================
 == Vivado HLS Report for 'data_mover_8b64b'
 ================================================================
+<<<<<<< HEAD:datamover/production/syn/report/data_mover_8b64b_csynth.rpt
 * Date:           Mon Jun 11 11:44:29 2018
+=======
+* Date:           Sun Jun 17 00:08:16 2018
+>>>>>>> master:datamover/production/syn/report/data_mover_csynth.rpt
 
 * Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
 * Project:        datamover
@@ -25,22 +29,22 @@
 
 + Latency (clock cycles): 
     * Summary: 
-    +-----+----------+-----+----------+---------+
-    |     Latency    |    Interval    | Pipeline|
-    | min |    max   | min |    max   |   Type  |
-    +-----+----------+-----+----------+---------+
-    |  525|  16794127|  525|  16794127|   none  |
-    +-----+----------+-----+----------+---------+
+    +-----+---------+-----+---------+---------+
+    |    Latency    |    Interval   | Pipeline|
+    | min |   max   | min |   max   |   Type  |
+    +-----+---------+-----+---------+---------+
+    |  525|  8397327|  525|  8397327|   none  |
+    +-----+---------+-----+---------+---------+
 
     + Detail: 
         * Instance: 
-        +--------------------+---------+-----+----------+-----+----------+---------+
-        |                    |         |     Latency    |    Interval    | Pipeline|
-        |      Instance      |  Module | min |    max   | min |    max   |   Type  |
-        +--------------------+---------+-----+----------+-----+----------+---------+
-        |grp_rx_loop_fu_94   |rx_loop  |  522|  16794122|  522|  16794122|   none  |
-        |grp_tx_loop_fu_105  |tx_loop  |    4|  16794124|    4|  16794124|   none  |
-        +--------------------+---------+-----+----------+-----+----------+---------+
+        +--------------------+---------+-----+---------+-----+---------+---------+
+        |                    |         |    Latency    |    Interval   | Pipeline|
+        |      Instance      |  Module | min |   max   | min |   max   |   Type  |
+        +--------------------+---------+-----+---------+-----+---------+---------+
+        |grp_rx_loop_fu_121  |rx_loop  |  522|  8397322|  522|  8397322|   none  |
+        |grp_tx_loop_fu_133  |tx_loop  |    4|  8397324|    4|  8397324|   none  |
+        +--------------------+---------+-----+---------+-----+---------+---------+
 
         * Loop: 
         N/A
@@ -55,14 +59,14 @@
 |       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
-|Expression       |        -|      -|       0|    154|
+|Expression       |        -|      -|       0|    160|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        8|      -|    1547|   2714|
+|Instance         |        8|      -|    1558|   2744|
 |Memory           |        -|      -|       -|      -|
 |Multiplexer      |        -|      -|       -|    129|
-|Register         |        -|      -|     160|      -|
+|Register         |        -|      -|     162|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        8|      0|    1707|   2997|
+|Total            |        8|      0|    1720|   3033|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -71,6 +75,7 @@
 
 + Detail: 
     * Instance: 
+<<<<<<< HEAD:datamover/production/syn/report/data_mover_8b64b_csynth.rpt
     +----------------------------------+--------------------------------+---------+-------+-----+------+
     |             Instance             |             Module             | BRAM_18K| DSP48E|  FF |  LUT |
     +----------------------------------+--------------------------------+---------+-------+-----+------+
@@ -81,6 +86,18 @@
     +----------------------------------+--------------------------------+---------+-------+-----+------+
     |Total                             |                                |        8|      0| 1547|  2714|
     +----------------------------------+--------------------------------+---------+-------+-----+------+
+=======
+    +----------------------------+--------------------------+---------+-------+-----+------+
+    |          Instance          |          Module          | BRAM_18K| DSP48E|  FF |  LUT |
+    +----------------------------+--------------------------+---------+-------+-----+------+
+    |data_mover_DMA_m_axi_U      |data_mover_DMA_m_axi      |        4|      0|  566|   766|
+    |data_mover_control_s_axi_U  |data_mover_control_s_axi  |        0|      0|  186|   268|
+    |grp_rx_loop_fu_121          |rx_loop                   |        2|      0|  520|  1067|
+    |grp_tx_loop_fu_133          |tx_loop                   |        2|      0|  286|   643|
+    +----------------------------+--------------------------+---------+-------+-----+------+
+    |Total                       |                          |        8|      0| 1558|  2744|
+    +----------------------------+--------------------------+---------+-------+-----+------+
+>>>>>>> master:datamover/production/syn/report/data_mover_csynth.rpt
 
     * DSP48: 
     N/A
@@ -95,27 +112,32 @@
     +-------------------------------------+----------+-------+---+----+------------+------------+
     |            Variable Name            | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +-------------------------------------+----------+-------+---+----+------------+------------+
-    |tmp_9_i1_fu_210_p2                   |     +    |      0|  0|  20|           1|          13|
-    |tmp_9_i_fu_162_p2                    |     +    |      0|  0|  20|           1|          13|
+    |tmp_9_i1_fu_258_p2                   |     +    |      0|  0|  19|           1|          12|
+    |tmp_9_i_fu_210_p2                    |     +    |      0|  0|  19|           1|          12|
+    |current_buffer_V_loa_1_fu_177_p2     |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_load_A                 |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_load_B                 |    and   |      0|  0|   2|           1|           1|
     |data_tx_V_V_1_load_A                 |    and   |      0|  0|   2|           1|           1|
     |data_tx_V_V_1_load_B                 |    and   |      0|  0|   2|           1|           1|
+    |not_s_12_fu_294_p2                   |    and   |      0|  0|   2|           1|           1|
     |data_rx_V_V_0_state_cmp_full         |   icmp   |      0|  0|   8|           2|           1|
     |data_tx_V_V_1_state_cmp_full         |   icmp   |      0|  0|   8|           2|           1|
-    |tmp_i1_fu_190_p2                     |   icmp   |      0|  0|  13|          12|           1|
-    |tmp_i_fu_142_p2                      |   icmp   |      0|  0|  13|          12|           1|
+    |tmp_i1_fu_238_p2                     |   icmp   |      0|  0|  13|          12|           1|
+    |tmp_i_fu_190_p2                      |   icmp   |      0|  0|  13|          12|           1|
     |ap_block_state3_on_subcall_done      |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_rx_loop_fu_94_ap_done    |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_rx_loop_fu_94_ap_ready   |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_tx_loop_fu_105_ap_done   |    or    |      0|  0|   2|           1|           1|
-    |ap_sync_grp_tx_loop_fu_105_ap_ready  |    or    |      0|  0|   2|           1|           1|
-    |rx_final_burst_lengt_fu_216_p3       |  select  |      0|  0|  14|           1|          14|
-    |rx_loop_count_V_fu_225_p3            |  select  |      0|  0|  13|           1|          13|
-    |tx_final_burst_lengt_fu_168_p3       |  select  |      0|  0|  14|           1|          14|
-    |tx_loop_count_V_fu_177_p3            |  select  |      0|  0|  13|           1|          13|
+    |ap_sync_grp_rx_loop_fu_121_ap_done   |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_rx_loop_fu_121_ap_ready  |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_tx_loop_fu_133_ap_done   |    or    |      0|  0|   2|           1|           1|
+    |ap_sync_grp_tx_loop_fu_133_ap_ready  |    or    |      0|  0|   2|           1|           1|
+    |p_s_fu_288_p2                        |    or    |      0|  0|   2|           1|           1|
+    |rx_final_burst_lengt_fu_264_p3       |  select  |      0|  0|  14|           1|          14|
+    |rx_loop_count_V_fu_273_p3            |  select  |      0|  0|  12|           1|          12|
+    |tx_final_burst_lengt_fu_216_p3       |  select  |      0|  0|  14|           1|          14|
+    |tx_loop_count_V_fu_225_p3            |  select  |      0|  0|  12|           1|          12|
+    |not_increment_buffer_fu_171_p2       |    xor   |      0|  0|   2|           1|           2|
+    |not_s_fu_282_p2                      |    xor   |      0|  0|   2|           1|           2|
     +-------------------------------------+----------+-------+---+----+------------+------------+
-    |Total                                |          |      0|  0| 154|          43|          93|
+    |Total                                |          |      0|  0| 160|          48|          96|
     +-------------------------------------+----------+-------+---+----+------------+------------+
 
     * Multiplexer: 
@@ -142,10 +164,12 @@
     |                   Name                  | FF | LUT| Bits| Const Bits|
     +-----------------------------------------+----+----+-----+-----------+
     |ap_CS_fsm                                |   4|   0|    4|          0|
-    |ap_sync_reg_grp_rx_loop_fu_94_ap_done    |   1|   0|    1|          0|
-    |ap_sync_reg_grp_rx_loop_fu_94_ap_ready   |   1|   0|    1|          0|
-    |ap_sync_reg_grp_tx_loop_fu_105_ap_done   |   1|   0|    1|          0|
-    |ap_sync_reg_grp_tx_loop_fu_105_ap_ready  |   1|   0|    1|          0|
+    |ap_sync_reg_grp_rx_loop_fu_121_ap_done   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_rx_loop_fu_121_ap_ready  |   1|   0|    1|          0|
+    |ap_sync_reg_grp_tx_loop_fu_133_ap_done   |   1|   0|    1|          0|
+    |ap_sync_reg_grp_tx_loop_fu_133_ap_ready  |   1|   0|    1|          0|
+    |current_buffer_V                         |   1|   0|    1|          0|
+    |current_buffer_V_loa_1_reg_315           |   1|   0|    1|          0|
     |data_rx_V_V_0_payload_A                  |   8|   0|    8|          0|
     |data_rx_V_V_0_payload_B                  |   8|   0|    8|          0|
     |data_rx_V_V_0_sel_rd                     |   1|   0|    1|          0|
@@ -156,16 +180,18 @@
     |data_tx_V_V_1_sel_rd                     |   1|   0|    1|          0|
     |data_tx_V_V_1_sel_wr                     |   1|   0|    1|          0|
     |data_tx_V_V_1_state                      |   2|   0|    2|          0|
-    |grp_rx_loop_fu_94_ap_start_reg           |   1|   0|    1|          0|
-    |grp_tx_loop_fu_105_ap_start_reg          |   1|   0|    1|          0|
-    |rx_buffer_V3_reg_234                     |  29|   0|   29|          0|
-    |rx_final_burst_lengt_reg_254             |  13|   0|   13|          0|
-    |rx_loop_count_V_reg_259                  |  13|   0|   13|          0|
-    |tx_buffer_V1_reg_239                     |  29|   0|   29|          0|
-    |tx_final_burst_lengt_reg_244             |  13|   0|   13|          0|
-    |tx_loop_count_V_reg_249                  |  13|   0|   13|          0|
+    |grp_rx_loop_fu_121_ap_start_reg          |   1|   0|    1|          0|
+    |grp_tx_loop_fu_133_ap_start_reg          |   1|   0|    1|          0|
+    |not_s_12_reg_345                         |   1|   0|    1|          0|
+    |p_s_reg_341                              |   1|   0|    1|          0|
+    |rx_buffer_V3_reg_305                     |  29|   0|   29|          0|
+    |rx_final_burst_lengt_reg_331             |  13|   0|   13|          0|
+    |rx_loop_count_V_reg_336                  |  12|   0|   12|          0|
+    |tx_buffer_V1_reg_310                     |  29|   0|   29|          0|
+    |tx_final_burst_lengt_reg_321             |  13|   0|   13|          0|
+    |tx_loop_count_V_reg_326                  |  12|   0|   12|          0|
     +-----------------------------------------+----+----+-----+-----------+
-    |Total                                    | 160|   0|  160|          0|
+    |Total                                    | 162|   0|  162|          0|
     +-----------------------------------------+----+----+-----+-----------+
 
 

@@ -30,7 +30,11 @@
 /**
  * @description AXIS data mover
  * @author Jamil J. Weatherbee
+<<<<<<< HEAD
  * @version 2018-06-11T18:42:45Z
+=======
+ * @version 2018-06-17T04:26:31Z
+>>>>>>> master
  */
 
 #include "datamover.h"
@@ -71,7 +75,7 @@ void tx_axis_words (const axi_t cache[CACHE_WORDS],
 
 
 /* function containing main data flow loop for transmit */
-void tx_loop (hls::stream<axis_t> &axis,
+bool tx_loop (hls::stream<axis_t> &axis,
 			  const axi_t tx_buffer[BUFFER_WORDS],
 			  const ap_uint<LOOP_TRIP_COUNT_BITS> loop_count,
 			  const ap_uint<CACHE_LENGTH_BITS> final_burst_length)
@@ -86,6 +90,7 @@ void tx_loop (hls::stream<axis_t> &axis,
 	 read_burst (tx_buffer, n, loop_count, final_burst_length, cache, data_length);
      tx_axis_words (cache, data_length, axis);
    }
+  return true;
 }
 
 
@@ -137,7 +142,7 @@ void write_burst (const axi_t cache[CACHE_WORDS],
 
 
 /* function containing main data flow loop for receive */
-void rx_loop (hls::stream<axis_t> &axis,
+bool rx_loop (hls::stream<axis_t> &axis,
 			  const ap_uint<LOOP_TRIP_COUNT_BITS> loop_count,
 			  const ap_uint<CACHE_LENGTH_BITS> final_burst_length,
 			  axi_t rx_buffer[BUFFER_WORDS])
@@ -152,6 +157,7 @@ void rx_loop (hls::stream<axis_t> &axis,
 	 rx_axis_words (axis, loop_count, final_burst_length, n, cache, buffer_offset);
 	 write_burst (cache, buffer_offset, rx_buffer);
    }
+  return true;
 }
 
 
@@ -174,12 +180,23 @@ void get_loop_parameters (const ap_uint<BUFFER_LENGTH_BITS> data_length,
 
 
 /* main body of the data mover implementation */
+<<<<<<< HEAD
 void data_mover_8b64b (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
 				       hls::stream<axis_t> &data_tx, /* AXIS master interface */
 				       const axi_t tx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
 				       const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
 				       axi_t rx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
 				       const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length) /* number of AXIS words to write to the rx buffer */
+=======
+void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
+				 hls::stream<axis_t> &data_tx, /* AXIS master interface */
+				 const axi_t tx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
+				 const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
+				 axi_t rx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
+				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length, /* number of AXIS words to write to the rx buffer */
+				 ap_uint<BUFFER_COUNT_BITS> *last_buffer, /* returns buffer number last used */
+				 const ap_uint<BITS_PER_BOOL> *increment_buffer) /* if set target buffer is post-incremented, if clear buffer 0 always used */
+>>>>>>> master
 {
 #pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE axis register both port=data_rx
@@ -193,19 +210,36 @@ void data_mover_8b64b (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
 #pragma HLS INTERFACE s_axilite port=rx_buffer bundle=control
 #pragma HLS INTERFACE s_axilite port=rx_buffer_length bundle=control
 
+#pragma HLS INTERFACE s_axilite port=last_buffer bundle=control
+#pragma HLS INTERFACE s_axilite port=increment_buffer bundle=control
+
+  /* persistent state variables */
+  static ap_uint<BUFFER_COUNT_BITS> current_buffer = 0; /* buffer number to use */
+#pragma HLS RESET variable=current_buffer
+
   /* local variables */
   ap_uint<LOOP_TRIP_COUNT_BITS> tx_loop_count; /* iterator for tx loop data flow process */
   ap_uint<CACHE_LENGTH_BITS> tx_final_burst_length; /* length of the final block of tx data loaded into the cache */
   ap_uint<LOOP_TRIP_COUNT_BITS> rx_loop_count; /* iterator for rx loop data flow process */
   ap_uint<CACHE_LENGTH_BITS> rx_final_burst_length; /* length of the final block of rx data loaded into the cache */
+  bool tx_done = false;
+  bool rx_done = false;
+
+  if (BOOL_FALSE == *increment_buffer) current_buffer = 0; /* if buffer is not set to increment then always use first buffer */
 
   /* setup tx and rx loop parameters */
   get_loop_parameters (*tx_buffer_length, tx_loop_count, tx_final_burst_length);
   get_loop_parameters (*rx_buffer_length, rx_loop_count, rx_final_burst_length);
 
   /* Transmit Section */
-  tx_loop (data_tx, tx_buffer, tx_loop_count, tx_final_burst_length);
+  tx_done = tx_loop (data_tx, tx_buffer[current_buffer], tx_loop_count, tx_final_burst_length);
 
   /* Receive Section */
-  rx_loop (data_rx, rx_loop_count, rx_final_burst_length, rx_buffer);
+  rx_done = rx_loop (data_rx, rx_loop_count, rx_final_burst_length, rx_buffer[current_buffer]);
+
+  if (tx_done && rx_done) /* this condition blocks writes to the last_buffer until the transfers are complete */
+   {
+     *last_buffer = current_buffer; /* return the buffer just used for transmit and receive */
+     if (BOOL_TRUE == *increment_buffer) current_buffer++; /* increment buffer to use (rolls over to zero) */
+   }
 }

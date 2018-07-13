@@ -4,17 +4,21 @@ Implementation tool: Xilinx Vivado v.2018.1
 Project:             datamover
 Solution:            production
 Device target:       xc7z020clg400-3
+<<<<<<< HEAD:datamover/production/impl/report/vhdl/data_mover_8b64b_export.rpt
 Report date:         Mon Jun 11 12:15:27 -0700 2018
+=======
+Report date:         Sun Jun 17 00:41:12 -0700 2018
+>>>>>>> master:datamover/production/impl/report/vhdl/data_mover_export.rpt
 
 #=== Post-Implementation Resource usage ===
-SLICE:          666
-LUT:           1510
-FF:            2356
+SLICE:          634
+LUT:           1462
+FF:            2355
 DSP:              0
 BRAM:            12
 SRL:             41
 #=== Final timing ===
 CP required:    6.500
-CP achieved post-synthesis:    4.531
-CP achieved post-implementation:    5.018
+CP achieved post-synthesis:    4.280
+CP achieved post-implementation:    4.608
 Timing met

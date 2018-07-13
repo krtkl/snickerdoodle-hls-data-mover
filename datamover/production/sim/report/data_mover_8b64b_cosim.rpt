@@ -1,4 +1,8 @@
+<<<<<<< HEAD:datamover/production/sim/report/data_mover_8b64b_cosim.rpt
 Report time       : Mon Jun 11 11:59:47 PDT 2018.
+=======
+Report time       : Sun Jun 17 00:34:52 PDT 2018.
+>>>>>>> master:datamover/production/sim/report/data_mover_cosim.rpt
 Solution          : production.
 Simulation tool   : xsim.
 
@@ -7,6 +11,6 @@ Simulation tool   : xsim.
 +   RTL    +  Status  +-----------------------------------------------+-----------------------------------------------+
 |          |          |      min      |      avg      |      max      |      min      |      avg      |      max      |
 +----------+----------+-----------------------------------------------+-----------------------------------------------+
-|      VHDL|      Pass|        1054237|        1054237|        1054237|             NA|             NA|             NA|
+|      VHDL|      Pass|          97819|         576030|        1054242|          97819|         576030|        1054242|
 |   Verilog|        NA|             NA|             NA|             NA|             NA|             NA|             NA|
 +----------+----------+-----------------------------------------------+-----------------------------------------------+

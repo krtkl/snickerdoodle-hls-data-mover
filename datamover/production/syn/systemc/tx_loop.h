@@ -11,12 +11,12 @@
 #include "systemc.h"
 #include "AESL_pkg.h"
 
-#include "dataflow_in_loop59.h"
+#include "dataflow_in_loop66.h"
 
 namespace ap_rtl {
 
 struct tx_loop : public sc_module {
-    // Port declarations 61
+    // Port declarations 63
     sc_out< sc_lv<8> > axis_V_V_TDATA;
     sc_out< sc_logic > m_axi_tx_buffer_V_AWVALID;
     sc_in< sc_logic > m_axi_tx_buffer_V_AWREADY;
@@ -64,11 +64,13 @@ struct tx_loop : public sc_module {
     sc_in< sc_lv<1> > m_axi_tx_buffer_V_BID;
     sc_in< sc_lv<1> > m_axi_tx_buffer_V_BUSER;
     sc_in< sc_lv<29> > tx_buffer_V_offset;
-    sc_in< sc_lv<13> > loop_count_V;
+    sc_in< sc_lv<1> > tx_buffer_V_offset1;
+    sc_in< sc_lv<12> > loop_count_V;
     sc_in< sc_lv<13> > final_burst_length_V;
     sc_in_clk ap_clk;
     sc_in< sc_logic > ap_rst;
     sc_in< sc_logic > tx_buffer_V_offset_ap_vld;
+    sc_in< sc_logic > tx_buffer_V_offset1_ap_vld;
     sc_in< sc_logic > loop_count_V_ap_vld;
     sc_in< sc_logic > final_burst_length_V_ap_vld;
     sc_out< sc_logic > axis_V_V_TVALID;
@@ -91,61 +93,61 @@ struct tx_loop : public sc_module {
 
     sc_trace_file* mVcdFile;
 
-    dataflow_in_loop59* dataflow_in_loop59_U0;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWVALID;
-    sc_signal< sc_lv<32> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWADDR;
-    sc_signal< sc_lv<1> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWID;
-    sc_signal< sc_lv<32> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWLEN;
-    sc_signal< sc_lv<3> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWSIZE;
-    sc_signal< sc_lv<2> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWBURST;
-    sc_signal< sc_lv<2> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWLOCK;
-    sc_signal< sc_lv<4> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWCACHE;
-    sc_signal< sc_lv<3> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWPROT;
-    sc_signal< sc_lv<4> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWQOS;
-    sc_signal< sc_lv<4> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWREGION;
-    sc_signal< sc_lv<1> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_AWUSER;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_m_axi_tx_buffer_V_WVALID;
-    sc_signal< sc_lv<64> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_WDATA;
-    sc_signal< sc_lv<8> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_WSTRB;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_m_axi_tx_buffer_V_WLAST;
-    sc_signal< sc_lv<1> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_WID;
-    sc_signal< sc_lv<1> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_WUSER;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARVALID;
-    sc_signal< sc_lv<32> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARADDR;
-    sc_signal< sc_lv<1> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARID;
-    sc_signal< sc_lv<32> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARLEN;
-    sc_signal< sc_lv<3> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARSIZE;
-    sc_signal< sc_lv<2> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARBURST;
-    sc_signal< sc_lv<2> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARLOCK;
-    sc_signal< sc_lv<4> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARCACHE;
-    sc_signal< sc_lv<3> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARPROT;
-    sc_signal< sc_lv<4> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARQOS;
-    sc_signal< sc_lv<4> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARREGION;
-    sc_signal< sc_lv<1> > dataflow_in_loop59_U0_m_axi_tx_buffer_V_ARUSER;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_m_axi_tx_buffer_V_RREADY;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_m_axi_tx_buffer_V_BREADY;
-    sc_signal< sc_lv<8> > dataflow_in_loop59_U0_axis_V_V_TDATA;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_axis_V_V_TVALID;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_ap_done;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_ap_start;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_ap_ready;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_ap_idle;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_ap_continue;
+    dataflow_in_loop66* dataflow_in_loop66_U0;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWVALID;
+    sc_signal< sc_lv<32> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWADDR;
+    sc_signal< sc_lv<1> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWID;
+    sc_signal< sc_lv<32> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWLEN;
+    sc_signal< sc_lv<3> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWSIZE;
+    sc_signal< sc_lv<2> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWBURST;
+    sc_signal< sc_lv<2> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWLOCK;
+    sc_signal< sc_lv<4> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWCACHE;
+    sc_signal< sc_lv<3> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWPROT;
+    sc_signal< sc_lv<4> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWQOS;
+    sc_signal< sc_lv<4> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWREGION;
+    sc_signal< sc_lv<1> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_AWUSER;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_m_axi_tx_buffer_V_WVALID;
+    sc_signal< sc_lv<64> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_WDATA;
+    sc_signal< sc_lv<8> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_WSTRB;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_m_axi_tx_buffer_V_WLAST;
+    sc_signal< sc_lv<1> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_WID;
+    sc_signal< sc_lv<1> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_WUSER;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARVALID;
+    sc_signal< sc_lv<32> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARADDR;
+    sc_signal< sc_lv<1> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARID;
+    sc_signal< sc_lv<32> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARLEN;
+    sc_signal< sc_lv<3> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARSIZE;
+    sc_signal< sc_lv<2> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARBURST;
+    sc_signal< sc_lv<2> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARLOCK;
+    sc_signal< sc_lv<4> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARCACHE;
+    sc_signal< sc_lv<3> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARPROT;
+    sc_signal< sc_lv<4> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARQOS;
+    sc_signal< sc_lv<4> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARREGION;
+    sc_signal< sc_lv<1> > dataflow_in_loop66_U0_m_axi_tx_buffer_V_ARUSER;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_m_axi_tx_buffer_V_RREADY;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_m_axi_tx_buffer_V_BREADY;
+    sc_signal< sc_lv<8> > dataflow_in_loop66_U0_axis_V_V_TDATA;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_axis_V_V_TVALID;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_ap_done;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_ap_start;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_ap_ready;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_ap_idle;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_ap_continue;
     sc_signal< sc_logic > ap_sync_continue;
     sc_signal< sc_logic > ap_sync_done;
     sc_signal< sc_logic > ap_sync_ready;
     sc_signal< sc_logic > loop_dataflow_enable;
-    sc_signal< sc_lv<13> > loop_dataflow_input_count;
-    sc_signal< sc_lv<13> > loop_dataflow_output_count;
+    sc_signal< sc_lv<12> > loop_dataflow_input_count;
+    sc_signal< sc_lv<12> > loop_dataflow_output_count;
     sc_signal< sc_logic > loop_dataflow_busy;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_start_full_n;
-    sc_signal< sc_logic > dataflow_in_loop59_U0_start_write;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_start_full_n;
+    sc_signal< sc_logic > dataflow_in_loop66_U0_start_write;
     static const sc_lv<8> ap_const_lv8_0;
     static const sc_logic ap_const_logic_0;
     static const sc_logic ap_const_logic_1;
     static const bool ap_const_boolean_1;
-    static const sc_lv<13> ap_const_lv13_0;
-    static const sc_lv<13> ap_const_lv13_1;
+    static const sc_lv<12> ap_const_lv12_0;
+    static const sc_lv<12> ap_const_lv12_1;
     static const sc_lv<2> ap_const_lv2_0;
     static const sc_lv<2> ap_const_lv2_1;
     static const sc_lv<1> ap_const_lv1_0;
@@ -167,10 +169,10 @@ struct tx_loop : public sc_module {
     void thread_ap_sync_ready();
     void thread_axis_V_V_TDATA();
     void thread_axis_V_V_TVALID();
-    void thread_dataflow_in_loop59_U0_ap_continue();
-    void thread_dataflow_in_loop59_U0_ap_start();
-    void thread_dataflow_in_loop59_U0_start_full_n();
-    void thread_dataflow_in_loop59_U0_start_write();
+    void thread_dataflow_in_loop66_U0_ap_continue();
+    void thread_dataflow_in_loop66_U0_ap_start();
+    void thread_dataflow_in_loop66_U0_start_full_n();
+    void thread_dataflow_in_loop66_U0_start_write();
     void thread_m_axi_tx_buffer_V_ARADDR();
     void thread_m_axi_tx_buffer_V_ARBURST();
     void thread_m_axi_tx_buffer_V_ARCACHE();
