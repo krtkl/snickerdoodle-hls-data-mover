@@ -1,7 +1,7 @@
 <profile>
 
 <ReportVersion>
-<Version>2018.1</Version>
+<Version>2018.2</Version>
 </ReportVersion>
 
 <UserAssignments>
@@ -17,7 +17,7 @@
 <PipelineType>none</PipelineType>
 <SummaryOfTimingAnalysis>
 <unit>ns</unit>
-<EstimatedClockPeriod>3.20</EstimatedClockPeriod>
+<EstimatedClockPeriod>3.197</EstimatedClockPeriod>
 </SummaryOfTimingAnalysis>
 <SummaryOfOverallLatency>
 <unit>clock cycles</unit>

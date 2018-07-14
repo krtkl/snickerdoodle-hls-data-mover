@@ -3,13 +3,9 @@
 ================================================================
 == Vivado HLS Report for 'tx_axis_words'
 ================================================================
-<<<<<<< HEAD
-* Date:           Mon Jun 11 11:44:26 2018
-=======
-* Date:           Sun Jun 17 00:08:13 2018
->>>>>>> master
+* Date:           Fri Jul 13 14:50:41 2018
 
-* Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
+* Version:        2018.2 (Build 2258646 on Thu Jun 14 20:25:20 MDT 2018)
 * Project:        datamover
 * Solution:       production
 * Product family: zynq
@@ -24,7 +20,7 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      3.20|        2.00|
+    |ap_clk  |   6.50|     3.197|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
@@ -89,11 +85,11 @@
     +---------------------------+----------+-------+---+-----+------------+------------+
     |       Variable Name       | Operation| DSP48E| FF| LUT | Bitwidth P0| Bitwidth P1|
     +---------------------------+----------+-------+---+-----+------------+------------+
-    |i_fu_91_p2                 |     +    |      0|  0|   20|          13|           1|
+    |i_fu_92_p2                 |     +    |      0|  0|   20|          13|           1|
     |ap_block_pp0_stage0_11001  |    and   |      0|  0|    2|           1|           1|
     |ap_block_state4_io         |    and   |      0|  0|    2|           1|           1|
-    |exitcond_i_fu_86_p2        |   icmp   |      0|  0|   13|          13|          13|
-    |tmp_8_i_fu_127_p2          |   lshr   |      0|  0|  182|          64|          64|
+    |exitcond_i_fu_87_p2        |   icmp   |      0|  0|   13|          13|          13|
+    |tmp_8_i_fu_128_p2          |   lshr   |      0|  0|  182|          64|          64|
     |ap_block_state1            |    or    |      0|  0|    2|           1|           1|
     |ap_enable_pp0              |    xor   |      0|  0|    2|           1|           2|
     |ap_enable_reg_pp0_iter1    |    xor   |      0|  0|    2|           2|           1|
@@ -111,7 +107,7 @@
     |ap_enable_reg_pp0_iter2         |   9|          2|    1|          2|
     |ap_sig_ioackin_axis_V_V_TREADY  |   9|          2|    1|          2|
     |axis_V_V_TDATA_blk_n            |   9|          2|    1|          2|
-    |i_i_reg_75                      |   9|          2|   13|         26|
+    |i_i_reg_76                      |   9|          2|   13|         26|
     +--------------------------------+----+-----------+-----+-----------+
     |Total                           |  75|         16|   19|         40|
     +--------------------------------+----+-----------+-----+-----------+
@@ -126,12 +122,12 @@
     |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
     |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
     |ap_reg_ioackin_axis_V_V_TREADY    |   1|   0|    1|          0|
-    |axi_word_V_reg_161                |  64|   0|   64|          0|
-    |exitcond_i_reg_142                |   1|   0|    1|          0|
-    |exitcond_i_reg_142_pp0_iter1_reg  |   1|   0|    1|          0|
-    |i_i_reg_75                        |  13|   0|   13|          0|
-    |tmp_reg_156                       |   3|   0|    3|          0|
-    |tmp_reg_156_pp0_iter1_reg         |   3|   0|    3|          0|
+    |axi_word_V_reg_162                |  64|   0|   64|          0|
+    |exitcond_i_reg_143                |   1|   0|    1|          0|
+    |exitcond_i_reg_143_pp0_iter1_reg  |   1|   0|    1|          0|
+    |i_i_reg_76                        |  13|   0|   13|          0|
+    |tmp_reg_157                       |   3|   0|    3|          0|
+    |tmp_reg_157_pp0_iter1_reg         |   3|   0|    3|          0|
     +----------------------------------+----+----+-----+-----------+
     |Total                             |  93|   0|   93|          0|
     +----------------------------------+----+----+-----+-----------+

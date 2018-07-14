@@ -30,11 +30,7 @@
 /**
  * @description AXIS data mover
  * @author Jamil J. Weatherbee
-<<<<<<< HEAD
- * @version 2018-06-11T18:42:45Z
-=======
  * @version 2018-06-17T04:26:31Z
->>>>>>> master
  */
 
 #include "datamover.h"
@@ -180,23 +176,14 @@ void get_loop_parameters (const ap_uint<BUFFER_LENGTH_BITS> data_length,
 
 
 /* main body of the data mover implementation */
-<<<<<<< HEAD
 void data_mover_8b64b (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
-				       hls::stream<axis_t> &data_tx, /* AXIS master interface */
-				       const axi_t tx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
-				       const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
-				       axi_t rx_buffer[BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
-				       const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length) /* number of AXIS words to write to the rx buffer */
-=======
-void data_mover (hls::stream<axis_t> &data_rx, /* AXIS slave interface */
-				 hls::stream<axis_t> &data_tx, /* AXIS master interface */
-				 const axi_t tx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
-				 const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
-				 axi_t rx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
-				 const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length, /* number of AXIS words to write to the rx buffer */
-				 ap_uint<BUFFER_COUNT_BITS> *last_buffer, /* returns buffer number last used */
-				 const ap_uint<BITS_PER_BOOL> *increment_buffer) /* if set target buffer is post-incremented, if clear buffer 0 always used */
->>>>>>> master
+				 	   hls::stream<axis_t> &data_tx, /* AXIS master interface */
+					   const axi_t tx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to read data to transmit from */
+					   const ap_uint<BUFFER_LENGTH_BITS> *tx_buffer_length, /* number of AXIS words to read from the tx buffer */
+					   axi_t rx_buffer[BUFFER_COUNT][BUFFER_WORDS], /* AXI memory mapped DDR buffer to write received data to */
+					   const ap_uint<BUFFER_LENGTH_BITS> *rx_buffer_length, /* number of AXIS words to write to the rx buffer */
+					   ap_uint<BUFFER_COUNT_BITS> *last_buffer, /* returns buffer number last used */
+					   const ap_uint<BITS_PER_BOOL> *increment_buffer) /* if set target buffer is post-incremented, if clear buffer 0 always used */
 {
 #pragma HLS INTERFACE s_axilite port=return bundle=control
 #pragma HLS INTERFACE axis register both port=data_rx

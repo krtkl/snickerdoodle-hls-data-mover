@@ -3,13 +3,9 @@
 ================================================================
 == Vivado HLS Report for 'write_burst'
 ================================================================
-<<<<<<< HEAD
-* Date:           Mon Jun 11 11:44:28 2018
-=======
-* Date:           Sun Jun 17 00:08:14 2018
->>>>>>> master
+* Date:           Fri Jul 13 14:50:43 2018
 
-* Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
+* Version:        2018.2 (Build 2258646 on Thu Jun 14 20:25:20 MDT 2018)
 * Project:        datamover
 * Solution:       production
 * Product family: zynq
@@ -24,7 +20,7 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      4.50|        2.00|
+    |ap_clk  |   6.50|     4.500|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
@@ -89,11 +85,11 @@
     +-------------------------------+----------+-------+---+----+------------+------------+
     |         Variable Name         | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +-------------------------------+----------+-------+---+----+------------+------------+
-    |indvar_next_i_i_i_i_fu_193_p2  |     +    |      0|  0|  17|          10|           1|
-    |sum_i_i_fu_171_p2              |     +    |      0|  0|  37|          30|          30|
+    |indvar_next_i_i_i_i_fu_194_p2  |     +    |      0|  0|  17|          10|           1|
+    |sum_i_i_fu_172_p2              |     +    |      0|  0|  37|          30|          30|
     |ap_block_pp0_stage0_11001      |    and   |      0|  0|   2|           1|           1|
     |ap_block_state5_io             |    and   |      0|  0|   2|           1|           1|
-    |exitcond_i_i_i_i_fu_187_p2     |   icmp   |      0|  0|  13|          10|          11|
+    |exitcond_i_i_i_i_fu_188_p2     |   icmp   |      0|  0|  13|          10|          11|
     |ap_block_state1                |    or    |      0|  0|   2|           1|           1|
     |ap_enable_pp0                  |    xor   |      0|  0|   2|           1|           2|
     |ap_enable_reg_pp0_iter1        |    xor   |      0|  0|   2|           2|           1|
@@ -111,7 +107,7 @@
     |ap_enable_reg_pp0_iter2                   |   9|          2|    1|          2|
     |ap_sig_ioackin_m_axi_rx_buffer_V_AWREADY  |   9|          2|    1|          2|
     |ap_sig_ioackin_m_axi_rx_buffer_V_WREADY   |   9|          2|    1|          2|
-    |indvar_i_i_i_i_reg_144                    |   9|          2|   10|         20|
+    |indvar_i_i_i_i_reg_145                    |   9|          2|   10|         20|
     |rx_buffer_V_blk_n_AW                      |   9|          2|    1|          2|
     |rx_buffer_V_blk_n_B                       |   9|          2|    1|          2|
     |rx_buffer_V_blk_n_W                       |   9|          2|    1|          2|
@@ -132,11 +128,11 @@
     |ap_enable_reg_pp0_iter2                   |   1|   0|    1|          0|
     |ap_reg_ioackin_m_axi_rx_buffer_V_AWREADY  |   1|   0|    1|          0|
     |ap_reg_ioackin_m_axi_rx_buffer_V_WREADY   |   1|   0|    1|          0|
-    |cache_V_load_reg_229                      |  64|   0|   64|          0|
-    |exitcond_i_i_i_i_reg_215                  |   1|   0|    1|          0|
-    |exitcond_i_i_i_i_reg_215_pp0_iter1_reg    |   1|   0|    1|          0|
-    |indvar_i_i_i_i_reg_144                    |  10|   0|   10|          0|
-    |sum_i_i_reg_204                           |  30|   0|   30|          0|
+    |cache_V_load_reg_230                      |  64|   0|   64|          0|
+    |exitcond_i_i_i_i_reg_216                  |   1|   0|    1|          0|
+    |exitcond_i_i_i_i_reg_216_pp0_iter1_reg    |   1|   0|    1|          0|
+    |indvar_i_i_i_i_reg_145                    |  10|   0|   10|          0|
+    |sum_i_i_reg_205                           |  30|   0|   30|          0|
     +------------------------------------------+----+----+-----+-----------+
     |Total                                     | 120|   0|  120|          0|
     +------------------------------------------+----+----+-----+-----------+

@@ -25,17 +25,11 @@
   },
   "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 6.500 [get_ports ap_clk]"]},
   "Ipx": {
-    "Vendor": "krtl",
+    "Vendor": "krtkl",
     "Library": "snickerdoodle",
-<<<<<<< HEAD
     "Name": "data_mover_8b64b",
-    "Version": "1.06",
-    "DisplayName": "8-bit AXIS to 64-bit AXI data mover",
-=======
-    "Name": "data_mover",
     "Version": "1.10",
-    "DisplayName": "data mover",
->>>>>>> master
+    "DisplayName": "8-bit AXIS to 64-bit AXI data mover",
     "Revision": "",
     "Description": "8-bit AXIS to 64-bit AXI data mover",
     "Taxonomy": "\/VIVADO_HLS_IP"
@@ -85,25 +79,14 @@
       "impl\/verilog\/data_mover_8b64b.v"
     ],
     "SwDriver": [
-<<<<<<< HEAD
-      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/data\/data_mover_8b64b.mdd",
-      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/data\/data_mover_8b64b.tcl",
-      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/Makefile",
-      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b.c",
-      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b.h",
-      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b_hw.h",
-      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b_linux.c",
-      "impl\/misc\/drivers\/data_mover_8b64b_v1_06\/src\/xdata_mover_8b64b_sinit.c"
-=======
-      "impl\/misc\/drivers\/data_mover_v1_10\/data\/data_mover.mdd",
-      "impl\/misc\/drivers\/data_mover_v1_10\/data\/data_mover.tcl",
-      "impl\/misc\/drivers\/data_mover_v1_10\/src\/Makefile",
-      "impl\/misc\/drivers\/data_mover_v1_10\/src\/xdata_mover.c",
-      "impl\/misc\/drivers\/data_mover_v1_10\/src\/xdata_mover.h",
-      "impl\/misc\/drivers\/data_mover_v1_10\/src\/xdata_mover_hw.h",
-      "impl\/misc\/drivers\/data_mover_v1_10\/src\/xdata_mover_linux.c",
-      "impl\/misc\/drivers\/data_mover_v1_10\/src\/xdata_mover_sinit.c"
->>>>>>> master
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_10\/data\/data_mover_8b64b.mdd",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_10\/data\/data_mover_8b64b.tcl",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_10\/src\/Makefile",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_10\/src\/xdata_mover_8b64b.c",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_10\/src\/xdata_mover_8b64b.h",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_10\/src\/xdata_mover_8b64b_hw.h",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_10\/src\/xdata_mover_8b64b_linux.c",
+      "impl\/misc\/drivers\/data_mover_8b64b_v1_10\/src\/xdata_mover_8b64b_sinit.c"
     ],
     "Misc": ["impl\/misc\/logo.png"]
   },
@@ -1133,7 +1116,7 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "4.50"
+          "Estimate": "4.500"
         },
         "Loops": [{
             "Name": "memcpy.gep.tx_buffer.V",
@@ -1163,7 +1146,7 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "3.20"
+          "Estimate": "3.197"
         },
         "Loops": [{
             "Name": "Loop 1",
@@ -1195,12 +1178,12 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "4.50"
+          "Estimate": "4.500"
         },
         "Area": {
           "BRAM_18K": "2",
-          "FF": "260",
-          "LUT": "587",
+          "FF": "265",
+          "LUT": "612",
           "DSP48E": "0"
         }
       },
@@ -1218,7 +1201,7 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "4.50"
+          "Estimate": "4.500"
         },
         "Loops": [{
             "Name": "Loop 1",
@@ -1233,8 +1216,8 @@
           }],
         "Area": {
           "BRAM_18K": "2",
-          "FF": "286",
-          "LUT": "643",
+          "FF": "291",
+          "LUT": "668",
           "DSP48E": "0"
         }
       },
@@ -1250,7 +1233,7 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "4.67"
+          "Estimate": "4.666"
         },
         "Loops": [{
             "Name": "Loop 1",
@@ -1278,7 +1261,7 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "4.50"
+          "Estimate": "4.500"
         },
         "Loops": [{
             "Name": "memcpy.rx_buffer.V.gep",
@@ -1306,12 +1289,12 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "6.38"
+          "Estimate": "6.376"
         },
         "Area": {
           "BRAM_18K": "2",
-          "FF": "494",
-          "LUT": "1011",
+          "FF": "499",
+          "LUT": "1043",
           "DSP48E": "0"
         }
       },
@@ -1329,7 +1312,7 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "6.38"
+          "Estimate": "6.376"
         },
         "Loops": [{
             "Name": "Loop 1",
@@ -1344,8 +1327,8 @@
           }],
         "Area": {
           "BRAM_18K": "2",
-          "FF": "520",
-          "LUT": "1067",
+          "FF": "525",
+          "LUT": "1099",
           "DSP48E": "0"
         }
       },
@@ -1363,25 +1346,26 @@
         "Timing": {
           "Target": "6.50",
           "Uncertainty": "2.00",
-          "Estimate": "6.38"
+          "Estimate": "6.376"
         },
         "Area": {
           "BRAM_18K": "8",
-          "FF": "1720",
-          "LUT": "3033",
+          "FF": "1730",
+          "LUT": "3090",
           "DSP48E": "0"
         }
       }
     }
   },
+  "Sdx": {
+    "Target": "none",
+    "ProfileOption": "0",
+    "ProfileType": "none"
+  },
   "GenData": {
     "DataVersion": "0.1",
-<<<<<<< HEAD
-    "Time": "2018-06-11 12:10:41 -0700",
-=======
-    "Time": "2018-06-17 00:36:26 -0700",
->>>>>>> master
+    "Time": "2018-07-14 13:30:14 -0700",
     "ToolName": "vivado_hls",
-    "ToolVersion": "2018.1"
+    "ToolVersion": "2018.2"
   }
 }

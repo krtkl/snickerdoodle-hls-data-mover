@@ -30,11 +30,7 @@
 /**
  * @description AXIS data mover test bench
  * @author Jamil J. Weatherbee
-<<<<<<< HEAD
- * @version 2018-06-11T18:42:45Z
-=======
  * @version 2018-06-17T04:26:31Z
->>>>>>> master
  */
 
 #include <stdlib.h>
@@ -233,11 +229,7 @@ int main (void)
   std::cout << "increment_buffer=" << std::dec << increment_buffer << std::endl;
 
   std::cout << "Testing data_mover()..." << std::endl;
-<<<<<<< HEAD
-  data_mover_8b64b(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length);
-=======
-  data_mover(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length, &last_buffer, &increment_buffer);
->>>>>>> master
+  data_mover_8b64b(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length, &last_buffer, &increment_buffer);
 
   std::cout << "last_buffer=" << std::dec << (unsigned)last_buffer << std::endl;
   if (0 != last_buffer) errors++;
@@ -270,7 +262,7 @@ int main (void)
   std::cout << "increment_buffer=" << std::dec << increment_buffer << std::endl;
 
   std::cout << "Testing data_mover()..." << std::endl;
-  data_mover(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length, &last_buffer, &increment_buffer);
+  data_mover_8b64b(data_rx, data_tx, tx_buffer, &tx_buffer_length, rx_buffer, &rx_buffer_length, &last_buffer, &increment_buffer);
 
   std::cout << "last_buffer=" << std::dec << (unsigned)last_buffer << std::endl;
   if (1 != last_buffer) errors++;
@@ -284,7 +276,6 @@ int main (void)
   crc = get_buffer_CRC ((uint8_t *)rx_buffer[last_buffer], rx_buffer_length);
   std::cout << "rx_buffer crc=0x" << std::hex << std::uppercase << std::noshowbase << std::internal << std::setfill('0') << std::setw(8) << (unsigned)crc << std::endl;
   if (crc != rx_stream_crc) errors++;
-
 
   if (errors) { std::cout << "FAILED! with " << std::dec << errors << " errors." << std::endl; return EXIT_FAILURE; }
   return EXIT_SUCCESS;

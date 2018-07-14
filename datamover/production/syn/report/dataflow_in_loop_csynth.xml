@@ -1,7 +1,7 @@
 <profile>
 
 <ReportVersion>
-<Version>2018.1</Version>
+<Version>2018.2</Version>
 </ReportVersion>
 
 <UserAssignments>
@@ -17,7 +17,7 @@
 <PipelineType>dataflow</PipelineType>
 <SummaryOfTimingAnalysis>
 <unit>ns</unit>
-<EstimatedClockPeriod>6.38</EstimatedClockPeriod>
+<EstimatedClockPeriod>6.376</EstimatedClockPeriod>
 </SummaryOfTimingAnalysis>
 <SummaryOfOverallLatency>
 <unit>clock cycles</unit>
@@ -33,8 +33,8 @@
 <AreaEstimates>
 <Resources>
 <BRAM_18K>2</BRAM_18K>
-<FF>494</FF>
-<LUT>1011</LUT>
+<FF>499</FF>
+<LUT>1043</LUT>
 <DSP48E>0</DSP48E>
 </Resources>
 <AvailableResources>

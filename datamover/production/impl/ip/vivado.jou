@@ -1,14 +1,9 @@
 #-----------------------------------------------------------
-# Vivado v2018.1 (64-bit)
-# SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
-# IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-<<<<<<< HEAD
-# Start of session at: Mon Jun 11 12:10:45 2018
-# Process ID: 4088
-=======
-# Start of session at: Sun Jun 17 00:36:31 2018
-# Process ID: 1648
->>>>>>> master
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Sat Jul 14 13:33:31 2018
+# Process ID: 5692
 # Current directory: C:/git/snickerdoodle-hls-data-mover/datamover/production/impl/ip
 # Command line: vivado.exe -notrace -mode batch -source run_ippack.tcl
 # Log file: C:/git/snickerdoodle-hls-data-mover/datamover/production/impl/ip/vivado.log

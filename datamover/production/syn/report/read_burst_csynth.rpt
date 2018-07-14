@@ -3,13 +3,9 @@
 ================================================================
 == Vivado HLS Report for 'read_burst'
 ================================================================
-<<<<<<< HEAD
-* Date:           Mon Jun 11 11:44:26 2018
-=======
-* Date:           Sun Jun 17 00:08:12 2018
->>>>>>> master
+* Date:           Fri Jul 13 14:50:40 2018
 
-* Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
+* Version:        2018.2 (Build 2258646 on Thu Jun 14 20:25:20 MDT 2018)
 * Project:        datamover
 * Solution:       production
 * Product family: zynq
@@ -24,7 +20,7 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      4.50|        2.00|
+    |ap_clk  |   6.50|     4.500|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
@@ -89,15 +85,15 @@
     +-----------------------------------+----------+-------+---+----+------------+------------+
     |           Variable Name           | Operation| DSP48E| FF| LUT| Bitwidth P0| Bitwidth P1|
     +-----------------------------------+----------+-------+---+----+------------+------------+
-    |indvar_next_i_i_fu_188_p2          |     +    |      0|  0|  17|          10|           1|
-    |r_V_fu_202_p2                      |     +    |      0|  0|  20|          13|           2|
-    |sum_i_fu_166_p2                    |     +    |      0|  0|  37|          30|          30|
+    |indvar_next_i_i_fu_189_p2          |     +    |      0|  0|  17|          10|           1|
+    |r_V_fu_203_p2                      |     +    |      0|  0|  20|          13|           2|
+    |sum_i_fu_167_p2                    |     +    |      0|  0|  37|          30|          30|
     |ap_block_pp0_stage0_11001          |    and   |      0|  0|   2|           1|           1|
     |ap_block_state10_pp0_stage0_iter1  |    and   |      0|  0|   2|           1|           1|
-    |exitcond_i_i_fu_182_p2             |   icmp   |      0|  0|  13|          10|          11|
-    |tmp_3_i_i_fu_211_p2                |   icmp   |      0|  0|  13|          13|          13|
+    |exitcond_i_i_fu_183_p2             |   icmp   |      0|  0|  13|          10|          11|
+    |tmp_3_i_i_fu_212_p2                |   icmp   |      0|  0|  13|          13|          13|
     |ap_block_state1                    |    or    |      0|  0|   2|           1|           1|
-    |data_length_V_write_s_fu_217_p3    |  select  |      0|  0|  14|           1|          13|
+    |data_length_V_write_s_fu_218_p3    |  select  |      0|  0|  14|           1|          13|
     |ap_enable_pp0                      |    xor   |      0|  0|   2|           1|           2|
     |ap_enable_reg_pp0_iter1            |    xor   |      0|  0|   2|           2|           1|
     +-----------------------------------+----------+-------+---+----+------------+------------+
@@ -112,10 +108,10 @@
     |ap_done                                   |   9|          2|    1|          2|
     |ap_enable_reg_pp0_iter1                   |   9|          2|    1|          2|
     |ap_enable_reg_pp0_iter2                   |   9|          2|    1|          2|
-    |ap_phi_mux_indvar_i_i_phi_fu_136_p4       |   9|          2|   10|         20|
+    |ap_phi_mux_indvar_i_i_phi_fu_137_p4       |   9|          2|   10|         20|
     |ap_return                                 |   9|          2|   13|         26|
     |ap_sig_ioackin_m_axi_tx_buffer_V_ARREADY  |   9|          2|    1|          2|
-    |indvar_i_i_reg_132                        |   9|          2|   10|         20|
+    |indvar_i_i_reg_133                        |   9|          2|   10|         20|
     |tx_buffer_V_blk_n_AR                      |   9|          2|    1|          2|
     |tx_buffer_V_blk_n_R                       |   9|          2|    1|          2|
     +------------------------------------------+----+-----------+-----+-----------+
@@ -133,14 +129,14 @@
     |ap_enable_reg_pp0_iter2                   |   1|   0|    1|          0|
     |ap_reg_ioackin_m_axi_tx_buffer_V_ARREADY  |   1|   0|    1|          0|
     |ap_return_preg                            |  13|   0|   13|          0|
-    |exitcond_i_i_reg_250                      |   1|   0|    1|          0|
-    |exitcond_i_i_reg_250_pp0_iter1_reg        |   1|   0|    1|          0|
-    |indvar_i_i_reg_132                        |  10|   0|   10|          0|
-    |indvar_i_i_reg_132_pp0_iter1_reg          |  10|   0|   10|          0|
-    |indvar_next_i_i_reg_254                   |  10|   0|   10|          0|
-    |sum_i_reg_229                             |  30|   0|   30|          0|
-    |tmp_reg_224                               |  11|   0|   11|          0|
-    |tx_buffer_V_addr_rea_reg_259              |  64|   0|   64|          0|
+    |exitcond_i_i_reg_251                      |   1|   0|    1|          0|
+    |exitcond_i_i_reg_251_pp0_iter1_reg        |   1|   0|    1|          0|
+    |indvar_i_i_reg_133                        |  10|   0|   10|          0|
+    |indvar_i_i_reg_133_pp0_iter1_reg          |  10|   0|   10|          0|
+    |indvar_next_i_i_reg_255                   |  10|   0|   10|          0|
+    |sum_i_reg_230                             |  30|   0|   30|          0|
+    |tmp_reg_225                               |  11|   0|   11|          0|
+    |tx_buffer_V_addr_rea_reg_260              |  64|   0|   64|          0|
     +------------------------------------------+----+----+-----+-----------+
     |Total                                     | 165|   0|  165|          0|
     +------------------------------------------+----+----+-----+-----------+

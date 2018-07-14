@@ -1,8 +1,4 @@
-<<<<<<< HEAD:datamover/production/sim/report/data_mover_8b64b_cosim.rpt
-Report time       : Mon Jun 11 11:59:47 PDT 2018.
-=======
-Report time       : Sun Jun 17 00:34:52 PDT 2018.
->>>>>>> master:datamover/production/sim/report/data_mover_cosim.rpt
+Report time       : Fri Jul 13 15:26:25 PDT 2018.
 Solution          : production.
 Simulation tool   : xsim.
 

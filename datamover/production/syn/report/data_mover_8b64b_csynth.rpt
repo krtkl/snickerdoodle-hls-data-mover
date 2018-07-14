@@ -3,13 +3,9 @@
 ================================================================
 == Vivado HLS Report for 'data_mover_8b64b'
 ================================================================
-<<<<<<< HEAD:datamover/production/syn/report/data_mover_8b64b_csynth.rpt
-* Date:           Mon Jun 11 11:44:29 2018
-=======
-* Date:           Sun Jun 17 00:08:16 2018
->>>>>>> master:datamover/production/syn/report/data_mover_csynth.rpt
+* Date:           Fri Jul 13 14:50:44 2018
 
-* Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
+* Version:        2018.2 (Build 2258646 on Thu Jun 14 20:25:20 MDT 2018)
 * Project:        datamover
 * Solution:       production
 * Product family: zynq
@@ -24,7 +20,7 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      6.38|        2.00|
+    |ap_clk  |   6.50|     6.376|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
@@ -61,12 +57,12 @@
 |DSP              |        -|      -|       -|      -|
 |Expression       |        -|      -|       0|    160|
 |FIFO             |        -|      -|       -|      -|
-|Instance         |        8|      -|    1558|   2744|
+|Instance         |        8|      -|    1568|   2801|
 |Memory           |        -|      -|       -|      -|
 |Multiplexer      |        -|      -|       -|    129|
 |Register         |        -|      -|     162|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        8|      0|    1720|   3033|
+|Total            |        8|      0|    1730|   3090|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -75,29 +71,16 @@
 
 + Detail: 
     * Instance: 
-<<<<<<< HEAD:datamover/production/syn/report/data_mover_8b64b_csynth.rpt
     +----------------------------------+--------------------------------+---------+-------+-----+------+
     |             Instance             |             Module             | BRAM_18K| DSP48E|  FF |  LUT |
     +----------------------------------+--------------------------------+---------+-------+-----+------+
     |data_mover_8b64b_DMA_m_axi_U      |data_mover_8b64b_DMA_m_axi      |        4|      0|  566|   766|
-    |data_mover_8b64b_control_s_axi_U  |data_mover_8b64b_control_s_axi  |        0|      0|  174|   268|
-    |grp_rx_loop_fu_94                 |rx_loop                         |        2|      0|  518|  1034|
-    |grp_tx_loop_fu_105                |tx_loop                         |        2|      0|  289|   646|
+    |data_mover_8b64b_control_s_axi_U  |data_mover_8b64b_control_s_axi  |        0|      0|  186|   268|
+    |grp_rx_loop_fu_121                |rx_loop                         |        2|      0|  525|  1099|
+    |grp_tx_loop_fu_133                |tx_loop                         |        2|      0|  291|   668|
     +----------------------------------+--------------------------------+---------+-------+-----+------+
-    |Total                             |                                |        8|      0| 1547|  2714|
+    |Total                             |                                |        8|      0| 1568|  2801|
     +----------------------------------+--------------------------------+---------+-------+-----+------+
-=======
-    +----------------------------+--------------------------+---------+-------+-----+------+
-    |          Instance          |          Module          | BRAM_18K| DSP48E|  FF |  LUT |
-    +----------------------------+--------------------------+---------+-------+-----+------+
-    |data_mover_DMA_m_axi_U      |data_mover_DMA_m_axi      |        4|      0|  566|   766|
-    |data_mover_control_s_axi_U  |data_mover_control_s_axi  |        0|      0|  186|   268|
-    |grp_rx_loop_fu_121          |rx_loop                   |        2|      0|  520|  1067|
-    |grp_tx_loop_fu_133          |tx_loop                   |        2|      0|  286|   643|
-    +----------------------------+--------------------------+---------+-------+-----+------+
-    |Total                       |                          |        8|      0| 1558|  2744|
-    +----------------------------+--------------------------+---------+-------+-----+------+
->>>>>>> master:datamover/production/syn/report/data_mover_csynth.rpt
 
     * DSP48: 
     N/A

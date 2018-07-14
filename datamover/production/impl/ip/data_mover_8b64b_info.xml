@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <core name="" type="" target="">
-<<<<<<< HEAD:datamover/production/impl/ip/data_mover_8b64b_info.xml
-    <kernel name="data_mover_8b64b" language="c" vlnv="krtl:snickerdoodle:data_mover_8b64b:1.06" attributes="" hash="" preferredWorkGroupSizeMultiple="0" workGroupSize="1" debug="false">
-=======
-    <kernel name="data_mover" language="c" vlnv="krtl:snickerdoodle:data_mover:1.10" attributes="" hash="" preferredWorkGroupSizeMultiple="0" workGroupSize="1" debug="false">
->>>>>>> master:datamover/production/impl/ip/data_mover_info.xml
+    <kernel name="data_mover_8b64b" language="c" vlnv="krtkl:snickerdoodle:data_mover_8b64b:1.10" attributes="" hash="" preferredWorkGroupSizeMultiple="0" workGroupSize="1" debug="false">
       <port name="M_AXI_DMA" mode="master" range="0xFFFFFFFF" dataWidth="64" portType="addressable" base="0x00000000"/>
       <port name="S_AXI_CONTROL" mode="slave" range="0x1000" dataWidth="32" portType="addressable" base="0x00000000"/>
       <arg name="tx_buffer_V" addressQualifier="1" id="0" port="M_AXI_DMA" size="0x4" offset="0x10" hostOffset="0x0" hostSize="0x4" type=""/>
