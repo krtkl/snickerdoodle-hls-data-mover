@@ -1,7 +1,7 @@
 <profile>
 
 <ReportVersion>
-<Version>2018.1</Version>
+<Version>2018.2.1</Version>
 </ReportVersion>
 
 <UserAssignments>
@@ -17,24 +17,24 @@
 <PipelineType>dataflow</PipelineType>
 <SummaryOfTimingAnalysis>
 <unit>ns</unit>
-<EstimatedClockPeriod>6.38</EstimatedClockPeriod>
+<EstimatedClockPeriod>6.321</EstimatedClockPeriod>
 </SummaryOfTimingAnalysis>
 <SummaryOfOverallLatency>
 <unit>clock cycles</unit>
-<Best-caseLatency>4620</Best-caseLatency>
-<Average-caseLatency>4620</Average-caseLatency>
-<Worst-caseLatency>4620</Worst-caseLatency>
-<DataflowPipelineThroughput>4100</DataflowPipelineThroughput>
-<Interval-min>4100</Interval-min>
-<Interval-max>4100</Interval-max>
+<Best-caseLatency>2572</Best-caseLatency>
+<Average-caseLatency>2572</Average-caseLatency>
+<Worst-caseLatency>2572</Worst-caseLatency>
+<DataflowPipelineThroughput>2052</DataflowPipelineThroughput>
+<Interval-min>2052</Interval-min>
+<Interval-max>2052</Interval-max>
 </SummaryOfOverallLatency>
 </PerformanceEstimates>
 
 <AreaEstimates>
 <Resources>
 <BRAM_18K>2</BRAM_18K>
-<FF>490</FF>
-<LUT>976</LUT>
+<FF>364</FF>
+<LUT>782</LUT>
 <DSP48E>0</DSP48E>
 </Resources>
 <AvailableResources>
@@ -131,7 +131,7 @@
 <IOProtocol>axis</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>8</Bits>
+<Bits>16</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -164,7 +164,7 @@
 <IOProtocol>ap_none</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>13</Bits>
+<Bits>12</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -186,7 +186,7 @@
 <IOProtocol>ap_none</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>13</Bits>
+<Bits>12</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -208,7 +208,7 @@
 <IOProtocol>ap_none</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>13</Bits>
+<Bits>12</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -731,6 +731,28 @@
 <RtlPorts>
 <name>rx_buffer_V_offset_ap_vld</name>
 <Object>rx_buffer_V_offset</Object>
+<Type>scalar</Type>
+<Scope></Scope>
+<IOProtocol>ap_none</IOProtocol>
+<IOConfig></IOConfig>
+<Dir>in</Dir>
+<Bits>1</Bits>
+<Attribute>control</Attribute>
+</RtlPorts>
+<RtlPorts>
+<name>rx_buffer_V_offset1</name>
+<Object>rx_buffer_V_offset1</Object>
+<Type>scalar</Type>
+<Scope></Scope>
+<IOProtocol>ap_none</IOProtocol>
+<IOConfig></IOConfig>
+<Dir>in</Dir>
+<Bits>1</Bits>
+<Attribute>data</Attribute>
+</RtlPorts>
+<RtlPorts>
+<name>rx_buffer_V_offset1_ap_vld</name>
+<Object>rx_buffer_V_offset1</Object>
 <Type>scalar</Type>
 <Scope></Scope>
 <IOProtocol>ap_none</IOProtocol>

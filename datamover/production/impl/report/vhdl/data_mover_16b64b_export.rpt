@@ -1,0 +1,20 @@
+
+
+Implementation tool: Xilinx Vivado v.2018.2.1
+Project:             datamover
+Solution:            production
+Device target:       xc7z020clg400-3
+Report date:         Wed Aug 29 11:41:10 -0700 2018
+
+#=== Post-Implementation Resource usage ===
+SLICE:          645
+LUT:           1394
+FF:            2243
+DSP:              0
+BRAM:            12
+SRL:             41
+#=== Final timing ===
+CP required:    6.500
+CP achieved post-synthesis:    4.761
+CP achieved post-implementation:    5.137
+Timing met

@@ -1,7 +1,7 @@
 <profile>
 
 <ReportVersion>
-<Version>2018.1</Version>
+<Version>2018.2.1</Version>
 </ReportVersion>
 
 <UserAssignments>
@@ -17,28 +17,28 @@
 <PipelineType>none</PipelineType>
 <SummaryOfTimingAnalysis>
 <unit>ns</unit>
-<EstimatedClockPeriod>3.20</EstimatedClockPeriod>
+<EstimatedClockPeriod>3.197</EstimatedClockPeriod>
 </SummaryOfTimingAnalysis>
 <SummaryOfOverallLatency>
 <unit>clock cycles</unit>
 <Best-caseLatency>2</Best-caseLatency>
 <Average-caseLatency>undef</Average-caseLatency>
-<Worst-caseLatency>4099</Worst-caseLatency>
+<Worst-caseLatency>2051</Worst-caseLatency>
 <Interval-min>2</Interval-min>
-<Interval-max>4099</Interval-max>
+<Interval-max>2051</Interval-max>
 </SummaryOfOverallLatency>
 <SummaryOfLoopLatency>
 <Loop1>
 <TripCount>
 <range>
 <min>0</min>
-<max>4096</max>
+<max>2048</max>
 </range>
 </TripCount>
 <Latency>
 <range>
 <min>0</min>
-<max>4097</max>
+<max>2049</max>
 </range>
 </Latency>
 <PipelineII>1</PipelineII>
@@ -49,8 +49,8 @@
 
 <AreaEstimates>
 <Resources>
-<FF>93</FF>
-<LUT>300</LUT>
+<FF>90</FF>
+<LUT>299</LUT>
 <BRAM_18K>0</BRAM_18K>
 <DSP48E>0</DSP48E>
 </Resources>
@@ -181,7 +181,7 @@
 <IOProtocol>ap_none</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>in</Dir>
-<Bits>13</Bits>
+<Bits>12</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>
@@ -192,7 +192,7 @@
 <IOProtocol>axis</IOProtocol>
 <IOConfig></IOConfig>
 <Dir>out</Dir>
-<Bits>8</Bits>
+<Bits>16</Bits>
 <Attribute>data</Attribute>
 </RtlPorts>
 <RtlPorts>

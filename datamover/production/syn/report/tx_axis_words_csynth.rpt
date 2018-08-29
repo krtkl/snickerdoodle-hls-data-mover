@@ -3,9 +3,9 @@
 ================================================================
 == Vivado HLS Report for 'tx_axis_words'
 ================================================================
-* Date:           Mon Jun 11 01:41:07 2018
+* Date:           Wed Aug 29 10:55:47 2018
 
-* Version:        2018.1 (Build 2188600 on Wed Apr 04 19:04:02 MDT 2018)
+* Version:        2018.2.1 (Build 2288704 on Thu Jul 26 18:46:41 MDT 2018)
 * Project:        datamover
 * Solution:       production
 * Product family: zynq
@@ -20,7 +20,7 @@
     +--------+-------+----------+------------+
     |  Clock | Target| Estimated| Uncertainty|
     +--------+-------+----------+------------+
-    |ap_clk  |   6.50|      3.20|        2.00|
+    |ap_clk  |   6.50|     3.197|        2.00|
     +--------+-------+----------+------------+
 
 + Latency (clock cycles): 
@@ -29,7 +29,7 @@
     |   Latency  |  Interval  | Pipeline|
     | min |  max | min |  max |   Type  |
     +-----+------+-----+------+---------+
-    |    2|  4099|    2|  4099|   none  |
+    |    2|  2051|    2|  2051|   none  |
     +-----+------+-----+------+---------+
 
     + Detail: 
@@ -41,7 +41,7 @@
         |          |   Latency  | Iteration|  Initiation Interval  |   Trip   |          |
         | Loop Name| min |  max |  Latency |  achieved |   target  |   Count  | Pipelined|
         +----------+-----+------+----------+-----------+-----------+----------+----------+
-        |- Loop 1  |    0|  4097|         3|          1|          1| 0 ~ 4096 |    yes   |
+        |- Loop 1  |    0|  2049|         3|          1|          1| 0 ~ 2048 |    yes   |
         +----------+-----+------+----------+-----------+-----------+----------+----------+
 
 
@@ -54,14 +54,14 @@
 |       Name      | BRAM_18K| DSP48E|   FF   |  LUT  |
 +-----------------+---------+-------+--------+-------+
 |DSP              |        -|      -|       -|      -|
-|Expression       |        -|      -|       0|    225|
+|Expression       |        -|      -|       0|    224|
 |FIFO             |        -|      -|       -|      -|
 |Instance         |        -|      -|       -|      -|
 |Memory           |        -|      -|       -|      -|
 |Multiplexer      |        -|      -|       -|     75|
-|Register         |        -|      -|      93|      -|
+|Register         |        -|      -|      90|      -|
 +-----------------+---------+-------+--------+-------+
-|Total            |        0|      0|      93|    300|
+|Total            |        0|      0|      90|    299|
 +-----------------+---------+-------+--------+-------+
 |Available        |      280|    220|  106400|  53200|
 +-----------------+---------+-------+--------+-------+
@@ -85,16 +85,16 @@
     +---------------------------+----------+-------+---+-----+------------+------------+
     |       Variable Name       | Operation| DSP48E| FF| LUT | Bitwidth P0| Bitwidth P1|
     +---------------------------+----------+-------+---+-----+------------+------------+
-    |i_fu_91_p2                 |     +    |      0|  0|   20|          13|           1|
+    |i_fu_92_p2                 |     +    |      0|  0|   19|          12|           1|
     |ap_block_pp0_stage0_11001  |    and   |      0|  0|    2|           1|           1|
     |ap_block_state4_io         |    and   |      0|  0|    2|           1|           1|
-    |exitcond_i_fu_86_p2        |   icmp   |      0|  0|   13|          13|          13|
-    |tmp_8_i_fu_127_p2          |   lshr   |      0|  0|  182|          64|          64|
+    |exitcond_i_fu_87_p2        |   icmp   |      0|  0|   13|          12|          12|
+    |tmp_9_i_fu_128_p2          |   lshr   |      0|  0|  182|          64|          64|
     |ap_block_state1            |    or    |      0|  0|    2|           1|           1|
     |ap_enable_pp0              |    xor   |      0|  0|    2|           1|           2|
     |ap_enable_reg_pp0_iter1    |    xor   |      0|  0|    2|           2|           1|
     +---------------------------+----------+-------+---+-----+------------+------------+
-    |Total                      |          |      0|  0|  225|          96|          84|
+    |Total                      |          |      0|  0|  224|          94|          83|
     +---------------------------+----------+-------+---+-----+------------+------------+
 
     * Multiplexer: 
@@ -107,9 +107,9 @@
     |ap_enable_reg_pp0_iter2         |   9|          2|    1|          2|
     |ap_sig_ioackin_axis_V_V_TREADY  |   9|          2|    1|          2|
     |axis_V_V_TDATA_blk_n            |   9|          2|    1|          2|
-    |i_i_reg_75                      |   9|          2|   13|         26|
+    |i_i_reg_76                      |   9|          2|   12|         24|
     +--------------------------------+----+-----------+-----+-----------+
-    |Total                           |  75|         16|   19|         40|
+    |Total                           |  75|         16|   18|         38|
     +--------------------------------+----+-----------+-----+-----------+
 
     * Register: 
@@ -122,14 +122,14 @@
     |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
     |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
     |ap_reg_ioackin_axis_V_V_TREADY    |   1|   0|    1|          0|
-    |axi_word_V_reg_161                |  64|   0|   64|          0|
-    |exitcond_i_reg_142                |   1|   0|    1|          0|
-    |exitcond_i_reg_142_pp0_iter1_reg  |   1|   0|    1|          0|
-    |i_i_reg_75                        |  13|   0|   13|          0|
-    |tmp_reg_156                       |   3|   0|    3|          0|
-    |tmp_reg_156_pp0_iter1_reg         |   3|   0|    3|          0|
+    |axi_word_V_reg_162                |  64|   0|   64|          0|
+    |exitcond_i_reg_143                |   1|   0|    1|          0|
+    |exitcond_i_reg_143_pp0_iter1_reg  |   1|   0|    1|          0|
+    |i_i_reg_76                        |  12|   0|   12|          0|
+    |tmp_reg_157                       |   2|   0|    2|          0|
+    |tmp_reg_157_pp0_iter1_reg         |   2|   0|    2|          0|
     +----------------------------------+----+----+-----+-----------+
-    |Total                             |  93|   0|   93|          0|
+    |Total                             |  90|   0|   90|          0|
     +----------------------------------+----+----+-----+-----------+
 
 
@@ -151,8 +151,8 @@
 |cache_V_address0  | out |    9|  ap_memory |    cache_V    |     array    |
 |cache_V_ce0       | out |    1|  ap_memory |    cache_V    |     array    |
 |cache_V_q0        |  in |   64|  ap_memory |    cache_V    |     array    |
-|p_read            |  in |   13|   ap_none  |     p_read    |    scalar    |
-|axis_V_V_TDATA    | out |    8|    axis    |    axis_V_V   |    pointer   |
+|p_read            |  in |   12|   ap_none  |     p_read    |    scalar    |
+|axis_V_V_TDATA    | out |   16|    axis    |    axis_V_V   |    pointer   |
 |axis_V_V_TVALID   | out |    1|    axis    |    axis_V_V   |    pointer   |
 |axis_V_V_TREADY   |  in |    1|    axis    |    axis_V_V   |    pointer   |
 +------------------+-----+-----+------------+---------------+--------------+
